@@ -14,7 +14,7 @@ Earth (`BioP_End002`) is not a galaxy map destination; it follows Cronos Station
 
 `SFXGame.BioPlanet.CanBeInteractedWith` (export 13300) is a script **event** that returns `BioWorldInfo.CheckConditional(PlanetLandCondition)`. A decompile of every SFXGame function under GalaxyMap/BioPlanet/SFXSystem/SFXCluster found no script caller, so the native galaxy map calls it as an event through `UObject::ProcessEvent`, which the bridge already hooks. `CheckConditional` (export 18047) is native.
 
-## Proposed gate (not implemented)
+## Gate (implemented in bridge 0.2.1-delivery-dev, not runtime-tested)
 
 After the original `CanBeInteractedWith` returns, if the planet's `MapName` is `BioP_End001`, the loaded save is AP-bound with a nonzero intel requirement, and delivered intel is below that requirement, return false. Vanilla conditional 78 still applies (logical AND). Unbound careers are untouched. Intel count and requirement live in the save's owned integer block so the gate holds while the client is disconnected.
 

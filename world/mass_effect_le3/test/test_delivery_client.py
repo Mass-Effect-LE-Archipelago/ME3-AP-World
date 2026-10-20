@@ -15,6 +15,8 @@ class FakeWire:
         self.calls = []
         self.lose_reply = False
         self.readonly = False
+        self.gate = False
+        self.intel = 0
 
     def __enter__(self): return self
     def __exit__(self, *_): pass
@@ -22,7 +24,8 @@ class FakeWire:
         self.calls.append(text)
         words = text.split()
         if words[0] == "CAPS":
-            return "readonly DEV_SESSION" if self.readonly else "delivery_dev DEV_SESSION DEV_BIND DEV_TXN"
+            if self.readonly: return "readonly DEV_SESSION"
+            return "delivery_dev DEV_SESSION DEV_BIND DEV_TXN" + (" DEV_GATE LANDING_GATE" if self.gate else "")
         if words[0] == "DEV_SESSION":
             if self.identity is None: return "1 research_only unbound 0"
             return f"1 research_only {self.identity} {self.history} {self.cursor}"
@@ -35,7 +38,9 @@ class FakeWire:
             index = int(words[3])
             if index < self.cursor: return f"{self.cursor} 0 done"
             if index > self.cursor: raise BridgeError(f"ERR gap {self.cursor}")
+            if words[4] == "INTEL" and not self.gate: raise BridgeError("ERR badrequest")
             delta = int(words[5]) if words[4] == "CREDITS" else 0
+            self.intel += words[4] == "INTEL"
             self.credits += delta
             self.cursor += 1
             if self.lose_reply:
@@ -68,6 +73,17 @@ class TestResearchDelivery(unittest.TestCase):
         wire.credits = wire.cursor = 0
         self.assertEqual(self.sync(wire, items), 2)
         self.assertEqual((wire.credits, wire.cursor), (1000, 2))
+
+    def test_gate_bridge_counts_intel_and_older_bridge_does_not(self):
+        items = [data.ITEM_NAME_TO_ID[data.INTEL], data.ITEM_NAME_TO_ID[data.CREDITS], data.ITEM_NAME_TO_ID[data.INTEL]]
+        gated = FakeWire()
+        gated.gate = True
+        self.assertEqual(self.sync(gated, items), 3)
+        self.assertEqual((gated.intel, gated.credits), (2, 1000))
+        older = FakeWire()
+        self.assertEqual(self.sync(older, items), 3)
+        self.assertEqual(older.intel, 0)
+        self.assertFalse(any(call.endswith(" INTEL") for call in older.calls))
 
     def test_lost_reply_resumes_from_native_cursor(self):
         wire = FakeWire()

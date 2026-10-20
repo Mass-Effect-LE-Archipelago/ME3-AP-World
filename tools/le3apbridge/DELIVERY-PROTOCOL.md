@@ -13,6 +13,9 @@ The pipe/read-only requests remain compatible with the observation helper. New c
 | `DEV_BIND <identity64hex> <history64hex> RESEARCH_ONLY` | `bound research_only` |
 | `DEV_TXN <identity64hex> <history64hex> <index> CREDITS <amount>` | `<committed_cursor> <actual_credit_delta> applied`, or `<cursor> 0 done` |
 | `DEV_TXN <identity64hex> <history64hex> <index> COUNTER` | same cursor reply, zero credit delta |
+| `DEV_TXN <identity64hex> <history64hex> <index> INTEL` | same cursor reply; also adds one Crucible Intel (0.2.1+) |
+| `DEV_BIND <identity64hex> <history64hex> RESEARCH_ONLY <required>` | optional intel requirement 0..1000 for the landing gate (0.2.1+) |
+| `DEV_GATE` | `<required> <received> open|closed`, or `0 0 unbound` (0.2.1+) |
 
 Digests must contain exactly 64 hex characters and must not be all zero. Amount is 1..1,000,000; item index is 0..999,999. Unsupported operations and extra tokens are refused. This interface has no generic plot setter, arbitrary resource grant or finale gate.
 
@@ -34,7 +37,9 @@ Owned sparse integer-map keys: `0x4D336000` through `0x4D336017` (1295212544..12
 | 3 | research-only mode1 |
 | 4..11 | all eight SHA-256 seed/team/slot identity words, preserving signed bit patterns |
 | 12..19 | all eight history digest words |
-| 20..23 | reserved, must remain zero |
+| 20 | Cerberus HQ intel requirement (0 = no gate), set at binding (0.2.1+) |
+| 21 | Crucible Intel received, never above the cursor (0.2.1+) |
+| 22..23 | reserved, must remain zero |
 
 The chosen range had zero plot-database, typed IntProperty, function-export, native-executable or config hits in the supplied official game/DLC data. Audit scanned 4,454 PCCs and the executable with no errors; 42 raw byte matches belonged to mesh/material/shader/movie/audio data and no matching typed integer properties. All 21 supplied coalesced files were checked. Summary and raw review: `research/le3_delivery_storage_audit_summary.json`, `le3_delivery_storage_audit.jsonl`, `le3_delivery_storage_review.jsonl`. Dynamic arithmetic and third-party mods are outside this bounded audit. Runtime high-key serialization is now supported by the new-save byte evidence in `research/delivery_persistence_recovered_01.json`. The development build helper requires this audit to match the header's range.
 
@@ -53,3 +58,7 @@ python tools/le3apbridge/delivery_probe.py credits research/delivery_credit_01.j
 The credits command deliberately retries the same index and records wallet/source inventories before/after. It never contacts AP. Then create a **new** manual save, reload it, inspect again and retry index0: credits/cursor/identity must persist and the retry must grant nothing. Loading the backed-up pre-binding save should show unbound state and its original balance. Wrong-seed requests must fail without mutation.
 
 Native tests (35 assertions) cover those transaction policies with a fake host, including high-bit digest words, state collisions, missing pawn, capped rewards, malformed requests, post-write failure rollback and save-switch identity validation. They do not establish actual engine calls or save serialization. Build logs and real pipe receipts distinguish these evidence levels.
+
+## Cerberus HQ landing gate (0.2.1-delivery-dev, built 2026-10-20, not runtime-tested)
+
+The bridge post-processes the native `BioPlanet.CanBeInteractedWith` event. When the planet's `MapName` is `BioP_End001` and the loaded save is bound with requirement > 0 and fewer intel received, the event's return value is forced false. Vanilla's own condition still applies; unbound careers are untouched; an unreadable table or inconsistent bound block fails closed. Bridges 0.2.0 reject saves with nonzero slots 20/21 as `storage_reserved`, which is the safe direction. CAPS advertises `DEV_GATE LANDING_GATE`; the AP delivery client sends `INTEL` only to such bridges. Build SHA256 `65f9aab9d0e843b15377c94977f6ac0b613bd9c016c004b41a6ca9baef0fef52` is not pinned or installed. Evidence: `research/le3_mission_gate.md`.

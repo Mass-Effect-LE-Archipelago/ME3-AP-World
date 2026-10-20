@@ -89,6 +89,29 @@ int main() {
             Delivery::Request request;
             require(!Delivery::parse(text, request).empty(), "malformed/unsupported command refused");
         }
+        // Cerberus HQ gate: requirement set at bind, intel counted per indexed item.
+        auto intel = [](int index) { return parse("DEV_TXN " + Seed + " " + History + " " + std::to_string(index) + " INTEL"); };
+        Host fresh;
+        require(!Delivery::gateBlocks(fresh) && Delivery::execute(parse("DEV_GATE"), fresh) == "OK 0 0 unbound", "unbound career never gated");
+        require(!Delivery::gateBlocks(host), "research binding without requirement is open");
+        require(Delivery::execute(parse("DEV_BIND " + Seed + " " + History + " RESEARCH_ONLY 2"), fresh) == "OK bound research_only", "bind with requirement");
+        require(Delivery::gateBlocks(fresh) && Delivery::execute(parse("DEV_GATE"), fresh) == "OK 2 0 closed", "gate starts closed");
+        require(Delivery::execute(intel(0), fresh) == "OK 1 0 applied", "first intel");
+        require(Delivery::execute(intel(0), fresh) == "OK 1 0 done" && Delivery::load(fresh).received == 1, "intel retry not double counted");
+        require(Delivery::gateBlocks(fresh), "one of two intel still closed");
+        auto oneIntel = fresh;
+        require(Delivery::execute(credit(1), fresh) == "OK 2 1000 applied", "credits do not count as intel");
+        require(Delivery::execute(intel(2), fresh) == "OK 3 0 applied" && !Delivery::gateBlocks(fresh), "enough intel opens gate");
+        require(Delivery::execute(parse("DEV_GATE"), fresh) == "OK 2 2 open", "gate reports open");
+        require(Delivery::gateBlocks(oneIntel), "older save keeps its own intel count");
+        fresh.failCursor = true;
+        require(throws([&] { Delivery::execute(intel(3), fresh); }), "intel commit failure surfaced");
+        require(Delivery::load(fresh).received == 2 && Delivery::load(fresh).cursor == 3, "failed intel rolled back");
+        Host corrupt = oneIntel; corrupt.ints[Delivery::IntelReceived] = 5;
+        require(Delivery::gateBlocks(corrupt), "inconsistent gate state fails closed");
+        Delivery::Request request;
+        require(!Delivery::parse("DEV_BIND " + Seed + " " + History + " RESEARCH_ONLY 1001", request).empty(), "oversized requirement refused");
+        require(!Delivery::parse("DEV_GATE extra", request).empty(), "gate query takes no arguments");
         std::cout << "DeliveryTests: " << checks << " checks passed\n";
         return 0;
     } catch (std::exception const& error) { std::cerr << "FAILED: " << error.what() << '\n'; return 1; }

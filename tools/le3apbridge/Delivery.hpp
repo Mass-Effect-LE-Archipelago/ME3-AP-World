@@ -14,14 +14,17 @@ namespace Delivery {
 constexpr int Base = 0x4D336000; // Sparse integer-map keys, never bool-array indices.
 constexpr int Slots = 24;
 constexpr int Marker = 0x4D334150;
+// Cerberus HQ gate fields in formerly reserved slots; zero means no gate.
+constexpr int IntelRequired = Base + 20, IntelReceived = Base + 21;
+constexpr int MaxIntel = 1000;
 using Digest = std::array<std::uint32_t, 8>;
-enum class Op { Session, Wallet, Bind, Counter, Credits };
+enum class Op { Session, Wallet, Gate, Bind, Counter, Credits, Intel };
 struct Request {
     Op op = Op::Session;
     Digest identity{}, history{};
-    int index = 0, amount = 0;
+    int index = 0, amount = 0, required = 0;
 };
-struct State { bool bound = false; Digest identity{}, history{}; int cursor = 0; };
+struct State { bool bound = false; Digest identity{}, history{}; int cursor = 0, required = 0, received = 0; };
 struct Wallet { int credits, maximum; };
 
 inline bool digest(std::string const& text, Digest& result) {
@@ -52,21 +55,25 @@ inline std::string parse(std::string const& text, Request& request) {
     for (std::string word; stream >> word;) words.push_back(word);
     if (words.size() == 1 && words[0] == "DEV_SESSION") { request.op = Op::Session; return ""; }
     if (words.size() == 1 && words[0] == "DEV_WALLET") { request.op = Op::Wallet; return ""; }
-    if (words.size() == 4 && words[0] == "DEV_BIND" && words[3] == "RESEARCH_ONLY") {
+    if (words.size() == 1 && words[0] == "DEV_GATE") { request.op = Op::Gate; return ""; }
+    if ((words.size() == 4 || words.size() == 5) && words[0] == "DEV_BIND" && words[3] == "RESEARCH_ONLY") {
         request.op = Op::Bind;
+        // Optional Crucible Intel requirement for the Cerberus HQ gate; omitted means no gate.
+        if (words.size() == 5 && (!number(words[4], request.required) || request.required > MaxIntel)) return "ERR requirement";
         return digest(words[1], request.identity) && digest(words[2], request.history) ? "" : "ERR digest";
     }
     if ((words.size() == 5 || words.size() == 6) && words[0] == "DEV_TXN") {
         if (!digest(words[1], request.identity) || !digest(words[2], request.history)) return "ERR digest";
         if (!number(words[3], request.index) || request.index >= 1000000) return "ERR index";
         if (words.size() == 5 && words[4] == "COUNTER") { request.op = Op::Counter; return ""; }
+        if (words.size() == 5 && words[4] == "INTEL") { request.op = Op::Intel; return ""; }
         if (words.size() == 6 && words[4] == "CREDITS" && number(words[5], request.amount)
             && request.amount >= 1 && request.amount <= 1000000) { request.op = Op::Credits; return ""; }
     }
     return "ERR badrequest";
 }
 inline bool writes(Request const& request) {
-    return request.op != Op::Session && request.op != Op::Wallet;
+    return request.op != Op::Session && request.op != Op::Wallet && request.op != Op::Gate;
 }
 
 // Host operations execute synchronously on the game thread. write() must read
@@ -78,8 +85,11 @@ template<class Host> State load(Host& host) {
     if (empty) return {};
     if (values[0] != Marker || values[1] != 1 || values[3] != 1 || values[2] < 0 || values[2] > 1000000)
         throw std::runtime_error("storage_collision_or_partial_binding");
-    for (int i = 20; i < Slots; ++i) if (values[i] != 0) throw std::runtime_error("storage_reserved");
+    for (int i = 22; i < Slots; ++i) if (values[i] != 0) throw std::runtime_error("storage_reserved");
+    if (values[20] < 0 || values[20] > MaxIntel || values[21] < 0 || values[21] > values[2])
+        throw std::runtime_error("storage_gate");
     State state; state.bound = true; state.cursor = values[2];
+    state.required = values[20]; state.received = values[21];
     for (int i = 0; i < 8; ++i) {
         state.identity[i] = std::bit_cast<std::uint32_t>(values[4 + i]);
         state.history[i] = std::bit_cast<std::uint32_t>(values[12 + i]);
@@ -88,12 +98,26 @@ template<class Host> State load(Host& host) {
     return state;
 }
 
+// True when landing on Cerberus HQ must be refused for the loaded save.
+// Unbound careers are never gated; unreadable bound state fails closed.
+template<class Host> bool gateBlocks(Host& host) {
+    try {
+        auto state = load(host);
+        return state.bound && state.required > 0 && state.received < state.required;
+    } catch (...) { return true; }
+}
+
 template<class Host> std::string execute(Request const& request, Host& host) {
     if (request.op == Op::Wallet) {
         auto wallet = host.wallet();
         return "OK " + std::to_string(wallet.credits) + " " + std::to_string(wallet.maximum);
     }
     auto state = load(host);
+    if (request.op == Op::Gate) {
+        if (!state.bound) return "OK 0 0 unbound";
+        return "OK " + std::to_string(state.required) + " " + std::to_string(state.received)
+            + (state.required > 0 && state.received < state.required ? " closed" : " open");
+    }
     if (request.op == Op::Session) {
         if (!state.bound) return "OK 1 research_only unbound 0";
         return "OK 1 research_only " + hex(state.identity) + " " + hex(state.history) + " " + std::to_string(state.cursor);
@@ -106,6 +130,7 @@ template<class Host> std::string execute(Request const& request, Host& host) {
                 host.write(Base + 4 + i, std::bit_cast<int>(request.identity[i]));
                 host.write(Base + 12 + i, std::bit_cast<int>(request.history[i]));
             }
+            if (request.required) host.write(IntelRequired, request.required);
             host.write(Base + 1, 1); host.write(Base + 3, 1);
             host.write(Base, Marker); // Valid binding marker is committed last.
         } catch (...) {
@@ -131,6 +156,15 @@ template<class Host> std::string execute(Request const& request, Host& host) {
             host.write(Base + 2, state.cursor + 1);
         } catch (...) {
             host.restoreCredits(wallet.credits);
+            host.write(Base + 2, state.cursor);
+            throw;
+        }
+    } else if (request.op == Op::Intel) {
+        try {
+            host.write(IntelReceived, state.received + 1);
+            host.write(Base + 2, state.cursor + 1);
+        } catch (...) {
+            host.write(IntelReceived, state.received);
             host.write(Base + 2, state.cursor);
             throw;
         }

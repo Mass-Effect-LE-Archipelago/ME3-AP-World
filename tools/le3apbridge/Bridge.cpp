@@ -40,6 +40,17 @@ std::shared_ptr<Pending> Next;
 using ProcessEvent = void(UObject*, UFunction*, void*, void*);
 ProcessEvent* Original = nullptr;
 thread_local bool InRead = false;
+// Resolve a hot-path function at most once per second until it exists, so an
+// early or missing name never turns every ProcessEvent into an object scan.
+UFunction* Resolve(UFunction*& cached, ULONGLONG& retry, wchar_t const* name) {
+    if (!cached && GetTickCount64() >= retry) {
+        cached = UObject::FindObject<UFunction>(name);
+        retry = GetTickCount64() + 1000;
+    }
+    return cached;
+}
+// Last HUD world, refreshed every frame on the game thread; used by the landing gate.
+ABioWorldInfo* FrameWorld = nullptr;
 
 bool Live(UObject* object) {
     return object && !Common::IsDefaultObject(object) && !Common::IsDestroyed(object);
@@ -110,6 +121,24 @@ struct DeliveryHost {
         playerInventory()->Credits = value;
     }
 };
+
+#if LE3AP_DELIVERY_DEV
+// Cerberus HQ landing gate. Galaxy map calls the BioPlanet.CanBeInteractedWith
+// event natively (no script caller); vanilla's own condition still applies.
+bool CerberusLandingBlocked(UObject* context) {
+    auto* planet = context ? context->Cast<UBioPlanet>() : nullptr;
+    if (!planet || planet->MapName.Empty() || _wcsicmp(planet->MapName.Chars(), L"BioP_End001") != 0) return false;
+    static UFunction* getTable = UObject::FindObject<UFunction>(L"Function SFXGame.BioWorldInfo.GetGlobalVariables");
+    static UFunction* getInt = UObject::FindObject<UFunction>(L"Function SFXGame.BioGlobalVariableTable.GetInt");
+    // Without a readable plot table the save's AP state is unknown: fail closed.
+    if (!Live(FrameWorld) || !getTable || !getInt || !(getTable->FunctionFlags & 0x400) || !(getInt->FunctionFlags & 0x400)) return true;
+    struct TableResult { UBioGlobalVariableTable* value = nullptr; } table;
+    Original(FrameWorld, getTable, &table, nullptr);
+    if (!table.value || Common::IsDestroyed(table.value)) return true;
+    DeliveryHost host{FrameWorld, table.value, getInt};
+    return Delivery::gateBlocks(host);
+}
+#endif
 
 std::string Read(Pending const& request, ABioWorldInfo* world) {
     if (!Live(world)) return "ERR noworld";
@@ -201,9 +230,14 @@ void Hook(UObject* context, UFunction* function, void* parameters, void* result)
 #endif
     // Only the HUD frame callback drains requests. Other engine threads and SDK
     // re-entrancy cannot run the game-facing readers.
+    static UFunction* frame = nullptr;
+    static ULONGLONG frameRetry = 0;
+    if (function) Resolve(frame, frameRetry, L"Function SFXGame.BioHUD.PostRender");
+    if (function && function == frame && Live(context)) {
+        auto* actor = context->Cast<AActor>();
+        FrameWorld = actor && Live(actor->WorldInfo) ? actor->WorldInfo->Cast<ABioWorldInfo>() : nullptr;
+    }
     if (HasPending.load() && !InRead && function) {
-        static UFunction* frame = nullptr;
-        if (!frame) frame = UObject::FindObject<UFunction>(L"Function SFXGame.BioHUD.PostRender");
         if (function == frame && Live(context)) {
             auto* actor = context->Cast<AActor>();
             if (actor) {
@@ -223,6 +257,18 @@ void Hook(UObject* context, UFunction* function, void* parameters, void* result)
         }
     }
     Original(context, function, parameters, result);
+#if LE3AP_DELIVERY_DEV
+    static UFunction* landing = nullptr;
+    static ULONGLONG landingRetry = 0;
+    if (function) Resolve(landing, landingRetry, L"Function SFXGame.BioPlanet.CanBeInteractedWith");
+    if (function && function == landing && parameters && function->ReturnValueOffset >= 0) {
+        auto* allowed = reinterpret_cast<unsigned long*>(static_cast<char*>(parameters) + function->ReturnValueOffset);
+        if (*allowed) {
+            try { if (CerberusLandingBlocked(context)) *allowed = 0; }
+            catch (...) { *allowed = 0; }
+        }
+    }
+#endif
 }
 
 std::string Parse(std::string const& message, Pending& request) {
@@ -259,11 +305,11 @@ std::string Parse(std::string const& message, Pending& request) {
     auto const& op = request.operation;
     if (op == "PING" && !count) return "OK pong";
     if (op == "VER" && !count) return LE3AP_CAREER_TRACE ? "OK 0.3.0-career-trace"
-        : LE3AP_DELIVERY_DEV ? "OK 0.2.0-delivery-dev" : "OK 0.2.0-research";
+        : LE3AP_DELIVERY_DEV ? "OK 0.2.1-delivery-dev" : "OK 0.2.0-research";
     if (op == "CAPS" && !count && LE3AP_CAREER_TRACE)
         return "OK readonly CAREER_TRACE GETB GETBS GETI GETIS MAP GAW USES PLOTINFO DEV_SESSION DEV_WALLET";
     if (op == "CAPS" && !count) return LE3AP_DELIVERY_DEV
-        ? "OK delivery_dev GETB GETBS GETI GETIS MAP GAW USES PLOTINFO DEV_SESSION DEV_WALLET DEV_BIND DEV_TXN"
+        ? "OK delivery_dev GETB GETBS GETI GETIS MAP GAW USES PLOTINFO DEV_SESSION DEV_WALLET DEV_GATE DEV_BIND DEV_TXN LANDING_GATE"
         : "OK readonly GETB GETBS GETI GETIS MAP GAW USES PLOTINFO DEV_SESSION DEV_WALLET";
     if (op == "HELLO" && count == 1) return request.indices[0] == 1 ? "OK 1 LE3 readonly" : "ERR protocol";
     if ((op == "MAP" || op == "GAW" || op == "PLOTINFO") && !count) return "";

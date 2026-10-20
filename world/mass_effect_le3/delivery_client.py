@@ -104,6 +104,9 @@ def synchronize_research_delivery(identity: str, received_ids: Sequence[int], *,
         if session.identity != identity or session.history != RESEARCH_HISTORY:
             raise IdentityMismatch("Research save belongs to another seed/slot or history; never rebind it")
         if session.cursor > len(operations): raise BridgeError("Save cursor is ahead of the server's received list")
+        # Gate-capable bridges count Crucible Intel natively; older ones only advance the cursor.
+        if "LANDING_GATE" in capabilities:
+            operations = [("INTEL", 0) if operation == "COUNTER" else (operation, amount) for operation, amount in operations]
         cursor = session.cursor
         while cursor < len(operations):
             operation, amount = operations[cursor]
