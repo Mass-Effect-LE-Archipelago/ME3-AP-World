@@ -1,0 +1,22 @@
+# Development-only: native identity/history/delivery/finale enforcement is not implemented yet.
+name: ME3Developer
+game: Mass Effect Legendary Edition 3
+requires:
+  version: 0.6.8
+Mass Effect Legendary Edition 3:
+  progression_balancing: 50
+  accessibility: minimal
+  crucible_intel_total: 16
+  crucible_intel_required: 12
+  objective_checks: true
+  credit_checks: true
+  supply_checks: true
+  armor_checks: true
+  mod_checks: true
+  weapon_checks: false
+  exploration_checks: true
+  enabled_dlc:
+    - From Ashes
+    - Leviathan
+    - Omega
+    - Citadel

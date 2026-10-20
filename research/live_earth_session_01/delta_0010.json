@@ -1,0 +1,18 @@
+{
+  "before_map": "Biop_End001",
+  "after_map": "Biop_End001",
+  "bools": {
+    "20333": {
+      "before": 0,
+      "after": 1
+    },
+    "20335": {
+      "before": 0,
+      "after": 1
+    }
+  },
+  "ints": {},
+  "gaw": {},
+  "used_guids_added": [],
+  "used_guids_removed": []
+}

@@ -1,0 +1,35 @@
+15:55:09.542  Attached...
+LEBinkProxy by d00telemental/ME3Tweaks
+Version="2.0.0.11", built="Oct 14 2026 09:33:15", config="RELEASE"
+Only trust distributions installed by ME3Tweaks Mod Manager 7.0+.
+15:55:09.542  ..AssociateWindowTitle: using new (less strict) window name match
+15:55:09.542  ..AssociateWindowTitle: detected game index = 3
+15:55:09.542  ..Initialize: cmd line =  -NoHomeDir -SeekFreeLoadingPCConsole -locale {locale} -Subtitles 20 -language=INT  "C:\Steam\steamapps\common\Mass Effect Legendary Edition\Game\Launcher\MassEffectLauncher.exe" -locale {locale}  
+15:55:09.542  ..Initialize: exe path = C:\Steam\steamapps\common\Mass Effect Legendary Edition\Game\ME3\Binaries\Win64\MassEffect3.exe
+15:55:09.542  ..Initialize: exe name = MassEffect3.exe
+15:55:09.542  ..Initialize: win title = Mass Effect 3
+15:55:09.542  OnAttach: instanced the SPI! (ver = 3)
+15:55:09.542  directoryExists_: entered. Searching C:\Steam\steamapps\common\Mass Effect Legendary Edition\Game\ME3\Binaries\Win64\ASI...
+15:55:09.543  directoryExists_: true
+15:55:09.543  AsiLoaderModule.Activate: loading LE3APBridge.asi...
+15:55:09.544  registerLoadInfo_: all SPI procs were found!
+15:55:09.544  registerLoadInfo_: provided info: 'LE3APBridge' (ver 0.1.0) by 'APWorldMaker', supported games (bitset) = 8, min ver = 3
+15:55:09.544  AsiLoaderModule.Activate:   successfully registered the load info.
+15:55:09.544  OnAttach: got to preload / 0x000000BBA2D8F700
+15:55:09.801  WaitForDRMv3 - found the pattern in 1 iteration(s), stopping the poll.
+15:55:09.802  findOffsets_: found UFunction::Bind at 00007FF62CA0A830.
+15:55:09.802  findOffsets_: found NewGetName at 00007FF62C9DF0F0.
+15:55:09.802  detourOffsets_: installing 00007FF81AC86DD0 into 00007FF62CA0A830, preserving into 00007FF81ACE2968
+15:55:09.802  HookManager.Install: created hook [UFunctionBind]
+15:55:09.863  HookManager.Install: installed hook [UFunctionBind]
+15:55:09.863  dispatchAttach_: got IsAsyncAttachMode (= 1)
+15:55:09.863  PostLoad: OnAttach dispatch succeeded [LE3APBridge.asi] (mode = 1)
+15:55:09.864  SharedHookMngr.Install: created [LE3APBridge_UObject::ProcessEvent] 0x00007FF62CA34F80 -> 0x00007FF8001EE4F0
+15:55:09.926  SharedHookMngr.Install: enabled [LE3APBridge_UObject::ProcessEvent] 0x00007FF62CA34F80
+15:55:10.709  UFunctionBind (LE3): IsShippingPCBuild (pFunction = 0x0000022B4A2BE0A0).
+15:55:10.709  UFunctionBind (LE3): IsFinalReleaseDebugConsoleBuild (pFunction = 0x0000022B4A2BE640).
+15:55:10.709  UFunctionBind (LE3): IsShippingBuild (pFunction = 0x0000022B4A2BE760).
+15:55:10.711  UFunctionBind (LE3): IsShip (pFunction = 0x0000022B4A34A600).
+15:57:54.408  OnDetach: entered...
+15:57:54.408  AsiLoaderModule.Deactivate: all pluginLoadInfos_:
+15:57:54.408  AsiLoaderModule.Deactivate:   - [00007FF8001E0000] {SPI} LE3APBridge.asi

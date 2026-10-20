@@ -1,0 +1,113 @@
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.68
+{
+  "source": "Legendary Explorer\\LegendaryExplorerCore.dll",
+  "dll_sha256": "d7a5bbdc0e8a1bc604e7a021a3921ec4b647c2191ff27d5817200838560a2eff",
+  "le3_json_sha256": "13e2c78dc9003551539dcc563da27a51d349abb0739af2a30f5f805136a854dd",
+  "database_counts": {
+    "bools": 15978,
+    "ints": 1696,
+    "floats": 80,
+    "conditionals": 3769,
+    "transitions": 6402,
+    "organizational": 2736
+  },
+  "state_rows": 17754,
+  "legacy_import_rows": 10329,
+  "nonlegacy_state_rows": 7425,
+  "candidate_rows": 2068,
+  "overlapping_candidate_tags": {
+    "completion_hint": 360,
+    "codex": 167,
+    "collectible": 53,
+    "pickup_hint": 85,
+    "social": 724,
+    "store": 296,
+    "war_asset_related": 26,
+    "intel": 26,
+    "text_messages": 202,
+    "combat_simulator": 200,
+    "journal": 1
+  },
+  "warning": "Heuristic discovery only. Counts overlap and include branches, dead content and non-check states. No runtime verification."
+}
+ME2 bool-range collisions: 900
+{
+  "source_count": 5,
+  "declaration_count": 371,
+  "asset_declarations": 268,
+  "distinct_asset_ids": 268,
+  "asset_types": {
+    "GAWAssetType_Military": 120,
+    "GAWAssetType_Modifier": 96,
+    "GAWAssetType_Artifact": 12,
+    "GAWAssetType_Salvage": 24,
+    "GAWAssetType_Intel": 13,
+    "GAWAssetType_MIlitary": 2,
+    "GAWAssetType_Quest": 1
+  },
+  "modifier_declarations": 96,
+  "exploration_asset_declarations": 72,
+  "level_reward_declarations": 49,
+  "treasure_entry_declarations": 426,
+  "treasure_entries_by_kind": {
+    "Treasure": 276,
+    "ConditionalGAWAssets": 129,
+    "UndetectableGAWAssets": 21
+  },
+  "casefold_duplicate_entries_in_same_list": 57,
+  "warning": "Definitions are not checks. Mount precedence, source interactions, unlock semantics and reachability remain to verify."
+}
+Finished 5 packages; 4095 matching exports; 0 errors
+{
+  "asset_candidates": 268,
+  "modifier_target_edges": 106,
+  "negative_modifier_edges": 29,
+  "unresolved_modifier_targets": 1,
+  "assets_with_nonzero_emitted_bools": 28,
+  "assets_with_resolved_names": 174,
+  "winning_local_map": "ME3LE Backup/BioGame/DLC/DLC_METR_Patch01/CookedPCConsole/BioD_Nor_203aGalaxyMap.pcc",
+  "winning_map_priority": 4000,
+  "exploration_source_candidates": 77,
+  "unique_exploration_asset_names": 77,
+  "unresolved_exploration_assets": 1,
+  "named_resolved_exploration_candidates": 76,
+  "exploration_types": {
+    "GAWAssetType_Intel": 7,
+    "GAWAssetType_Modifier": 7,
+    "GAWAssetType_Military": 37,
+    "GAWAssetType_Salvage": 12,
+    "GAWAssetType_Artifact": 12,
+    "": 1,
+    "GAWAssetType_Quest": 1
+  },
+  "warning": "Local official-backup mount precedence only. No runtime evidence; conditions, defaults and mutually exclusive content remain to trace."
+}
+{
+  "raw_reward_objects": 1752,
+  "mounted_reward_objects": 1457,
+  "mounted_counts": {
+    "SFXArmorUseModule": 27,
+    "SFXTreasureNode": 136,
+    "SFXTreasureUseModule": 320,
+    "SFXWeaponUseModule": 23,
+    "SFXWeaponModUseModule": 70,
+    "BioSeqAct_GiveMissionXP": 632,
+    "SFXSeqAct_AwardGAWAsset_Silent": 167,
+    "SFXSeqAct_AwardGAWAssetsForLevel": 61,
+    "SFXSeqAct_GiveWeapon": 18,
+    "SFXSeqAct_AwardGAWAsset": 1,
+    "SFXWeaponUseModule_BonusWeapon": 2
+  },
+  "use_module_sources": 442,
+  "distinct_world_use_guids": 423,
+  "shared_guid_groups": 0,
+  "use_modules_without_explicit_valid_guid": 19,
+  "gaw_award_nodes": 229,
+  "objective_xp_nodes": 632,
+  "warning": "These are mounted source candidates. Inherited defaults, reachability, GUID persistence, successful-use semantics and sequence flow require validation; do not sum into a check count."
+}

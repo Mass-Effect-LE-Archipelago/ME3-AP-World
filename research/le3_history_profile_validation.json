@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "scope": "offline_profile_compilation_not_runtime_initialization",
+  "game_contacted": false,
+  "server_contacted": false,
+  "preview": "build/history-custom-preview-01.json",
+  "profile_digest": "f4f9d73213409aed6097753f53311e7aa4024f179ec69d0ef5a08218d3a69edb",
+  "source_sha256": {
+    "world/mass_effect_le3/history_profile.py": "32833265020943c369ab57e3146b7904e4cb53d370d006c832172153f290d4aa",
+    "world/mass_effect_le3/history_bundles.json": "6ae79a78be3b260c55503e3866a9ac4248c73f97beede5016332a57268d2889f",
+    "tools/preview_history.py": "de32a253e491acba5bf1ca929976eb94ab9760198ae0171fd87984cbdf0f8f95"
+  },
+  "tests_log": "le3_history_profile_tests.log",
+  "custom_history": {
+    "me1.virmire_survivor": "kaidan",
+    "me1.romance": "liara",
+    "me2.romance": "thane",
+    "me2.squad.thane.survived": false,
+    "me2.squad.thane.loyal": true
+  },
+  "source_mapped_facts": 7,
+  "unmapped_facts": 44,
+  "executable": false
+}

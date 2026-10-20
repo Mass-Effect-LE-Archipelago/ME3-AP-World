@@ -1,0 +1,30 @@
+{
+  "world_tests": 41,
+  "generation_subtests": 102,
+  "all_subtests": 132,
+  "test_log": "le3_history_profile_tests.log",
+  "tested_ap_version": "0.6.9",
+  "package_sha256": "fa44d879e24488622ac33f59d56ef1f221bbe01d319256ffd4e17746b4159dc6",
+  "native_status": "Research identity and indexed credits/retry tested live; reload owner-confirmed with 20 persisted fields recovered from disk; history/gates unfinished",
+  "network_receipt": "le3_local_multiworld_receipt.json",
+  "seed_archive": "build\\development_seed\\AP_41961810824680882422.zip",
+  "delivery_runtime_receipt": "delivery_runtime_validation.json",
+  "delivery_only_network_receipt": "le3_delivery_only_multiworld_receipt.json",
+  "history_selector_status": "51-fact offline schema/resolver/compiler implemented; seven default decision families mapped, 44 facts unmapped; native initialization, full story compatibility and availability logic unfinished",
+  "history_mapping_receipt": "le3_history_mapping_validation.json",
+  "history_readback_tests": 8,
+  "history_digest_tests": {
+    "passed": 3,
+    "log_scope": "included in full 41-test suite; 132 total subtests including 102 generation subtests"
+  },
+  "history_transition_catalog": "le3_genesis_transition_catalog.json",
+  "history_transition_status": "48 retained vanilla bundles extracted; 16 annotated choices; native substate metadata retained; runtime executor and full profile composition not implemented",
+  "history_profile_tests": {
+    "tests": 7,
+    "mapped_combination_checks": 256,
+    "default_facts": 51,
+    "default_source_mapped": 7,
+    "default_unmapped": 44,
+    "executable": false
+  }
+}

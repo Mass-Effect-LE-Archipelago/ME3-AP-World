@@ -1,0 +1,57 @@
+{
+  "status": "OBSERVED_PICKUP_TRANSITION_AND_SAVE_RELOAD",
+  "bridge_version": "0.1.2-research",
+  "user_witness": "cain and med kit grabbed",
+  "before": "live_baseline_01.json",
+  "after": "live_earth_after_pickups_01.json",
+  "persistence": {
+    "user_report": "New save created and reloaded",
+    "reloaded_snapshot": "research/live_earth_reloaded_01.json",
+    "both_guids_retained": true,
+    "packaged_detector_replay": "research/le3_live_detector_replay.json",
+    "save_bytes_evidence": "research/le3_pickup_save_bytes.json",
+    "fresh_process_reload_tested": false,
+    "separate_map_reload_tested": false
+  },
+  "server_contacted": false,
+  "locations": [
+    {
+      "id": 1295192353,
+      "name": "Earth Finale: AAGun - Heavy Cain 2",
+      "guid": "-596417730:1180263863:1152395409:-954766686",
+      "source": {
+        "source": "ME3LE Backup/BioGame/CookedPCConsole/BioD_End001_200AAGun.pcc",
+        "export": "3165",
+        "object_path": "TheWorld.PersistentLevel.SFXWeaponNode_0.WeaponUseModule0",
+        "candidate_key": "use:-596417730:1180263863:1152395409:-954766686",
+        "guid": "-596417730:1180263863:1152395409:-954766686",
+        "class_name": "SFXWeaponUseModule",
+        "explicit_reward_type": "<inherited>",
+        "weapon_class": "{\"index\": 53, \"path\": \"SFXGameContent.SFXWeapon_Heavy_Cain\"}",
+        "weapon_mod_class": "{}",
+        "armor": "\"\"",
+        "world_instance": "True",
+        "status": "SAVED_GUID_CANDIDATE"
+      }
+    },
+    {
+      "id": 1295192584,
+      "name": "Earth Finale: Rooftop - Supply Cache",
+      "guid": "942894881:1233733615:171160246:1774900978",
+      "source": {
+        "source": "ME3LE Backup/BioGame/CookedPCConsole/BioD_End001_230Rooftop.pcc",
+        "export": "8613",
+        "object_path": "TheWorld.PersistentLevel.SFXMedkit_0.TreasureModule0",
+        "candidate_key": "use:942894881:1233733615:171160246:1774900978",
+        "guid": "942894881:1233733615:171160246:1774900978",
+        "class_name": "SFXTreasureUseModule",
+        "explicit_reward_type": "<inherited>",
+        "weapon_class": "{}",
+        "weapon_mod_class": "{}",
+        "armor": "\"\"",
+        "world_instance": "True",
+        "status": "SAVED_GUID_CANDIDATE"
+      }
+    }
+  ]
+}

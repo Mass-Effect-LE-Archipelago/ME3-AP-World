@@ -1,0 +1,24 @@
+{
+  "asset_candidates": 268,
+  "modifier_target_edges": 106,
+  "negative_modifier_edges": 29,
+  "unresolved_modifier_targets": 1,
+  "assets_with_nonzero_emitted_bools": 28,
+  "assets_with_resolved_names": 174,
+  "winning_local_map": "ME3LE Backup/BioGame/DLC/DLC_METR_Patch01/CookedPCConsole/BioD_Nor_203aGalaxyMap.pcc",
+  "winning_map_priority": 4000,
+  "exploration_source_candidates": 77,
+  "unique_exploration_asset_names": 77,
+  "unresolved_exploration_assets": 1,
+  "named_resolved_exploration_candidates": 76,
+  "exploration_types": {
+    "GAWAssetType_Intel": 7,
+    "GAWAssetType_Modifier": 7,
+    "GAWAssetType_Military": 37,
+    "GAWAssetType_Salvage": 12,
+    "GAWAssetType_Artifact": 12,
+    "": 1,
+    "GAWAssetType_Quest": 1
+  },
+  "warning": "Local official-backup mount precedence only. No runtime evidence; conditions, defaults and mutually exclusive content remain to trace."
+}

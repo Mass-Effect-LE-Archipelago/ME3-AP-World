@@ -1,0 +1,54 @@
+{
+  "game": "C:\\Steam\\steamapps\\common\\Mass Effect Legendary Edition\\Game\\ME3",
+  "status": "installed",
+  "original_sha256": "653247e35db8d6453e83a008c805a877fd2d56a1d844282f9065ce2f34388fec",
+  "loader_sha256": "d493e88ed8bcf726f819ff94a1c07101dbc4c062811bcfaae81b5e089cf78cb3",
+  "bridge_sha256": "5a645f7a3e623e1c3c45988043dadc13e2fe04eded1ab8fab75f23073dffce81",
+  "loader_source_commit": "1c435d8df0367642d9fc8572b67b6ae92295967e",
+  "installed_utc": "2026-10-14T13:36:08.217859+00:00",
+  "runtime_verified": false,
+  "previous_bridge_hashes": [
+    "549cc50e611231f0c66504f859c903b69495cb85d3774b574bf4b5b50a187a44",
+    "56878ec42fc0a0bf07af31e007271bb6717fbc40c56edde62662df115c95e1fe",
+    "20b6c351d742920d94660a1531e64944eb31f04828fded025a3f8db85b676efa",
+    "0138523b56a27ab9a77c1ddc638ad34f8a2d47166fdedb0ac516f331bfe8b614"
+  ],
+  "updated_utc": "2026-10-20T06:09:07.138412+00:00",
+  "runtime_validation": {
+    "bridge_version": "0.1.2-research",
+    "baseline": "research/live_baseline_01.json",
+    "handshake": true,
+    "hud_dispatch": true,
+    "map": true,
+    "plot_bools": true,
+    "plot_ints": true,
+    "gaw_inventory": true,
+    "uses_command": true,
+    "uses_transition": true,
+    "save_reload_persistence": true,
+    "playable_archipelago": false,
+    "verified_pickup_ids": [
+      1295192353,
+      1295192584
+    ],
+    "persistent_guid_bytes_in_new_save": true,
+    "research_identity_binding": true,
+    "indexed_credit_delivery": true,
+    "credit_duplicate_suppression": true,
+    "wrong_identity_rejection": true,
+    "delivery_save_reload_owner_confirmed": true,
+    "delivery_disk_serialization_recovered": true,
+    "delivery_evidence": "research/delivery_runtime_validation.json"
+  },
+  "bridge_profile": "career-trace",
+  "baseline_history": [
+    {
+      "loader_sha256": "7d624513bb112aa436105b41179d44433ad9c12376cb2c0df42bea9440fa4dc6",
+      "original_sha256": "653247e35db8d6453e83a008c805a877fd2d56a1d844282f9065ce2f34388fec",
+      "replaced_utc": "2026-10-20T06:09:06.916673+00:00",
+      "archived_receipt": "live_install_receipt.before-rebaseline-20261020T060906Z.json"
+    }
+  ],
+  "current_original_sha256": "59db3ee4dc7ff3a4cb74bbf4261baf24b40c4109f23883e81061164ed904a04a",
+  "current_original_backup": "build\\live-original\\bink2w64_original_59db3ee4dc7ff3a4cb74bbf4261baf24b40c4109f23883e81061164ed904a04a.dll"
+}

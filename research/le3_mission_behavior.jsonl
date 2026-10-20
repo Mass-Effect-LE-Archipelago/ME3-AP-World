@@ -1,0 +1,2 @@
+{"source":"ME3LE Backup/BioGame/CookedPCConsole/SFXGame.pcc","export":27474,"function":"SFXGame.OnGameCompleted","text":"public function OnGameCompleted(int nEndID)\n{\n    Class\u0027BioSFHandler_Options\u0027.static.SendTelemetryDump(\u0027TelemetryHook_Option_GameCompletion\u0027);\n}"}
+{"source":"ME3LE Backup/BioGame/CookedPCConsole/SFXGame.pcc","export":27497,"function":"SFXGame.AwardXP","text":"public function bool AwardXP(int Amount, optional string Level = \u0022\u0022, optional bool bShowNotifications = TRUE);\n"}

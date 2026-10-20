@@ -1,0 +1,2 @@
+{"source":"ME3LE Backup/BioGame/CookedPCConsole/SFXGame.pcc","export":10640,"function":"SFXSimpleUseModule.OnUsed","text":"public delegate function OnUsed(Actor User);\n"}
+{"source":"ME3LE Backup/BioGame/CookedPCConsole/SFXGame.pcc","export":24071,"function":"SFXModule_SavedUse.OnUsed","text":"public function OnUsed(Actor User)\n{\n    Used(User);\n}"}

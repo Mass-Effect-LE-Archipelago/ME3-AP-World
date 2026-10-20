@@ -1,0 +1,37 @@
+-- Selecting Windows SDK version 10.0.26100.0 to target Windows 10.0.26200.
+-- The CXX compiler identification is MSVC 19.51.36244.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: C:/Program Files (x86)/Microsoft Visual Studio/18/BuildTools/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/cl.exe - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Environment selected preset: VisualStudio
+-- Detected supported generator: Visual Studio 18 2026
+-- Configured output path: C:/Users/unowi/Documents/APWorldMaker/ME3 LE Randomizer/tools/le3apbridge/Build/$<CONFIG>
+-- No build type selected, default to Release
+-- Found Python3: C:/Python314/python.exe (found version "3.14.5") found components: Interpreter
+-- Python found, we are going to amalgamate.py.
+-- The tests are disabled.
+-- The benchmarks can be enabled by setting SIMDUTF_BENCHMARKS, e.g., -D SIMDUTF_BENCHMARKS=ON.
+-- Compiling using the C++ standard:11
+grep and nm are unavailable on this system.
+-- Build spdlog: 1.14.1
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
+-- Looking for pthread_create in pthreads
+-- Looking for pthread_create in pthreads - not found
+-- Looking for pthread_create in pthread
+-- Looking for pthread_create in pthread - not found
+-- Found Threads: TRUE
+-- Build type: Release
+-- Configuring done (3.8s)
+-- Generating done (1.9s)
+-- Build files have been written to: C:/Users/unowi/Documents/APWorldMaker/ME3 LE Randomizer/tools/le3apbridge/build
+MSBuild version 18.6.3+84d3e95b4 for .NET Framework
+
+  LESDK-LE3.vcxproj -> C:\Users\unowi\Documents\APWorldMaker\ME3 LE Randomizer\tools\le3apbridge\Build\Release\LESDK-LE3.lib
+  spdlog.vcxproj -> C:\Users\unowi\Documents\APWorldMaker\ME3 LE Randomizer\tools\le3apbridge\Build\Release\spdlog.lib
+  Common-LE3.vcxproj -> C:\Users\unowi\Documents\APWorldMaker\ME3 LE Randomizer\tools\le3apbridge\Build\Release\Common-LE3.lib
+  Bridge.cpp
+     Creating library C:/Users/unowi/Documents/APWorldMaker/ME3 LE Randomizer/tools/le3apbridge/build/Release/LE3APBridge.lib and object C:/Users/unowi/Documents/APWorldMaker/ME3 LE Randomizer/tools/le3apbridge/build/Release/LE3APBridge.exp
+  APBridge-LE3.vcxproj -> C:\Users\unowi\Documents\APWorldMaker\ME3 LE Randomizer\tools\le3apbridge\build\bin\Release\LE3APBridge.asi

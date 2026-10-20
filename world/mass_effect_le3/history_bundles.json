@@ -1,0 +1,426 @@
+{
+  "schema": 1,
+  "status": "source_mapped_runtime_unverified",
+  "required_map": "PlotManagerAutoDLC_CON_DH1.StateTransitionMap",
+  "source": {
+    "source": "ME3LE Backup/BioGame/DLC/DLC_CON_DH1/CookedPCConsole/Startup_CON_DH1_INT.pcc",
+    "export": 3,
+    "object_path": "PlotManagerAutoDLC_CON_DH1.StateTransitionMap"
+  },
+  "source_sha256": {
+    "research\\le3_history_state_events.jsonl": "a18a0aa864fbc05f941f10d9b0de81dbdff905489cc7b5575d97cf36995da056",
+    "research\\le3_genesis_chapters.jsonl": "42b1c4dce4406d8fae33c858c8f5b809cd5fdba654da96bba92e7e23944354f0",
+    "research\\le3_genesis_all_texts.jsonl": "d1a81a40e3ac7a2dd5f51739b6f26e135f35b2fc2d0d5130dbe992eac181213a",
+    "research\\le3_plot_inventory.csv": "52bb79a25a5d962f9a446aaab553b9f9b08a258887712cd8d967b32747079905"
+  },
+  "recipes": {
+    "me1.romance": {
+      "ashley": {
+        "transition": 5597,
+        "elements": [
+          {
+            "GlobalBool": 14281,
+            "NewState": true,
+            "UseParam": false,
+            "InstanceVersion": 0,
+            "Type": 0
+          },
+          {
+            "GlobalInt": 10017,
+            "NewValue": 4,
+            "UseParam": false,
+            "Increment": false,
+            "InstanceVersion": 1,
+            "Type": 4
+          }
+        ]
+      },
+      "kaidan": {
+        "transition": 5598,
+        "elements": [
+          {
+            "GlobalBool": 13960,
+            "NewState": true,
+            "UseParam": false,
+            "InstanceVersion": 0,
+            "Type": 0
+          },
+          {
+            "GlobalInt": 10015,
+            "NewValue": 4,
+            "UseParam": false,
+            "Increment": false,
+            "InstanceVersion": 1,
+            "Type": 4
+          }
+        ]
+      },
+      "liara": {
+        "transition": 5599,
+        "elements": [
+          {
+            "GlobalBool": 14169,
+            "NewState": true,
+            "UseParam": false,
+            "InstanceVersion": 0,
+            "Type": 0
+          },
+          {
+            "GlobalInt": 10016,
+            "NewValue": 4,
+            "UseParam": false,
+            "Increment": false,
+            "InstanceVersion": 1,
+            "Type": 4
+          }
+        ]
+      },
+      "none": {
+        "transition": 5600,
+        "elements": [
+          {
+            "GlobalBool": 14281,
+            "NewState": false,
+            "UseParam": false,
+            "InstanceVersion": 0,
+            "Type": 0
+          },
+          {
+            "GlobalBool": 13960,
+            "NewState": false,
+            "UseParam": false,
+            "InstanceVersion": 0,
+            "Type": 0
+          },
+          {
+            "GlobalBool": 14169,
+            "NewState": false,
+            "UseParam": false,
+            "InstanceVersion": 0,
+            "Type": 0
+          }
+        ]
+      }
+    },
+    "me1.rachni": {
+      "killed": {
+        "transition": 5610,
+        "elements": [
+          {
+            "GlobalBool": 12588,
+            "NewState": true,
+            "UseParam": false,
+            "ParentTypeOr": true,
+            "ParentIndex": 12586,
+            "SiblingIndices": [
+              12587
+            ],
+            "InstanceVersion": 0,
+            "Type": 8
+          },
+          {
+            "GlobalBool": 12587,
+            "NewState": false,
+            "UseParam": false,
+            "ParentTypeOr": true,
+            "ParentIndex": 12586,
+            "SiblingIndices": [
+              12588
+            ],
+            "InstanceVersion": 0,
+            "Type": 8
+          }
+        ]
+      },
+      "saved": {
+        "transition": 5611,
+        "elements": [
+          {
+            "GlobalBool": 12588,
+            "NewState": false,
+            "UseParam": false,
+            "ParentTypeOr": true,
+            "ParentIndex": 12586,
+            "SiblingIndices": [
+              12587
+            ],
+            "InstanceVersion": 0,
+            "Type": 8
+          },
+          {
+            "GlobalBool": 12587,
+            "NewState": true,
+            "UseParam": false,
+            "ParentTypeOr": true,
+            "ParentIndex": 12586,
+            "SiblingIndices": [
+              12588
+            ],
+            "InstanceVersion": 0,
+            "Type": 8
+          }
+        ]
+      }
+    },
+    "me1.wrex": {
+      "dead": {
+        "transition": 5612,
+        "elements": [
+          {
+            "GlobalBool": 13029,
+            "NewState": true,
+            "UseParam": false,
+            "ParentTypeOr": true,
+            "ParentIndex": 13021,
+            "SiblingIndices": [
+              13028,
+              15543
+            ],
+            "InstanceVersion": 0,
+            "Type": 8
+          },
+          {
+            "GlobalBool": 13942,
+            "NewState": false,
+            "UseParam": false,
+            "InstanceVersion": 0,
+            "Type": 0
+          }
+        ]
+      },
+      "alive": {
+        "transition": 5613,
+        "elements": [
+          {
+            "GlobalBool": 13029,
+            "NewState": false,
+            "UseParam": false,
+            "ParentTypeOr": true,
+            "ParentIndex": 13021,
+            "SiblingIndices": [
+              13028,
+              15543
+            ],
+            "InstanceVersion": 0,
+            "Type": 8
+          },
+          {
+            "GlobalBool": 13942,
+            "NewState": true,
+            "UseParam": false,
+            "InstanceVersion": 0,
+            "Type": 0
+          }
+        ]
+      }
+    },
+    "me1.virmire_survivor": {
+      "kaidan": {
+        "transition": 5614,
+        "elements": [
+          {
+            "GlobalBool": 13827,
+            "NewState": false,
+            "UseParam": false,
+            "InstanceVersion": 0,
+            "Type": 0
+          },
+          {
+            "GlobalBool": 13828,
+            "NewState": true,
+            "UseParam": false,
+            "InstanceVersion": 0,
+            "Type": 0
+          },
+          {
+            "GlobalBool": 13940,
+            "NewState": false,
+            "UseParam": false,
+            "InstanceVersion": 0,
+            "Type": 0
+          },
+          {
+            "GlobalBool": 13939,
+            "NewState": true,
+            "UseParam": false,
+            "InstanceVersion": 0,
+            "Type": 0
+          }
+        ]
+      },
+      "ashley": {
+        "transition": 5615,
+        "elements": [
+          {
+            "GlobalBool": 13827,
+            "NewState": true,
+            "UseParam": false,
+            "InstanceVersion": 0,
+            "Type": 0
+          },
+          {
+            "GlobalBool": 13828,
+            "NewState": false,
+            "UseParam": false,
+            "InstanceVersion": 0,
+            "Type": 0
+          },
+          {
+            "GlobalBool": 13940,
+            "NewState": true,
+            "UseParam": false,
+            "InstanceVersion": 0,
+            "Type": 0
+          },
+          {
+            "GlobalBool": 13939,
+            "NewState": false,
+            "UseParam": false,
+            "InstanceVersion": 0,
+            "Type": 0
+          }
+        ]
+      }
+    },
+    "me1.council": {
+      "saved": {
+        "transition": 5616,
+        "elements": [
+          {
+            "GlobalBool": 13002,
+            "NewState": false,
+            "UseParam": false,
+            "ParentTypeOr": true,
+            "ParentIndex": 13000,
+            "SiblingIndices": [
+              13001
+            ],
+            "InstanceVersion": 0,
+            "Type": 8
+          },
+          {
+            "GlobalBool": 13001,
+            "NewState": true,
+            "UseParam": false,
+            "ParentTypeOr": true,
+            "ParentIndex": 13000,
+            "SiblingIndices": [
+              13002
+            ],
+            "InstanceVersion": 0,
+            "Type": 8
+          }
+        ]
+      },
+      "sacrificed": {
+        "transition": 5617,
+        "elements": [
+          {
+            "GlobalBool": 13002,
+            "NewState": true,
+            "UseParam": false,
+            "ParentTypeOr": true,
+            "ParentIndex": 13000,
+            "SiblingIndices": [
+              13001
+            ],
+            "InstanceVersion": 0,
+            "Type": 8
+          },
+          {
+            "GlobalBool": 13001,
+            "NewState": false,
+            "UseParam": false,
+            "ParentTypeOr": true,
+            "ParentIndex": 13000,
+            "SiblingIndices": [
+              13002
+            ],
+            "InstanceVersion": 0,
+            "Type": 8
+          }
+        ]
+      }
+    },
+    "me1.human_councilor": {
+      "udina": {
+        "transition": 5618,
+        "elements": [
+          {
+            "GlobalBool": 15434,
+            "NewState": true,
+            "UseParam": false,
+            "InstanceVersion": 0,
+            "Type": 0
+          },
+          {
+            "GlobalBool": 15435,
+            "NewState": false,
+            "UseParam": false,
+            "InstanceVersion": 0,
+            "Type": 0
+          }
+        ]
+      },
+      "anderson": {
+        "transition": 5619,
+        "elements": [
+          {
+            "GlobalBool": 15434,
+            "NewState": false,
+            "UseParam": false,
+            "InstanceVersion": 0,
+            "Type": 0
+          },
+          {
+            "GlobalBool": 15435,
+            "NewState": true,
+            "UseParam": false,
+            "InstanceVersion": 0,
+            "Type": 0
+          }
+        ]
+      }
+    },
+    "me2.collector_base": {
+      "preserved": {
+        "transition": 5763,
+        "elements": [
+          {
+            "GlobalBool": 1831,
+            "NewState": false,
+            "UseParam": false,
+            "InstanceVersion": 0,
+            "Type": 0
+          },
+          {
+            "GlobalBool": 1832,
+            "NewState": true,
+            "UseParam": false,
+            "InstanceVersion": 0,
+            "Type": 0
+          }
+        ]
+      },
+      "destroyed": {
+        "transition": 5764,
+        "elements": [
+          {
+            "GlobalBool": 1831,
+            "NewState": true,
+            "UseParam": false,
+            "InstanceVersion": 0,
+            "Type": 0
+          },
+          {
+            "GlobalBool": 1832,
+            "NewState": false,
+            "UseParam": false,
+            "InstanceVersion": 0,
+            "Type": 0
+          }
+        ]
+      }
+    }
+  }
+}

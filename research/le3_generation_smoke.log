@@ -1,0 +1,3 @@
+C:\Users\unowi\Documents\APWorldMaker\ME3 LE Randomizer\Archipelago-main\NetUtils.py:568: UserWarning: _speedups not available. Falling back to pure python LocationStore. Install a matching C++ compiler for your platform to compile _speedups.
+  warnings.warn("_speedups not available. Falling back to pure python LocationStore. "
+Generated development seed 314159 for 1 player(s). Native game integration remains incomplete.

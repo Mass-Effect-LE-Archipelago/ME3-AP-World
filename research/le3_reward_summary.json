@@ -1,0 +1,24 @@
+{
+  "raw_reward_objects": 1752,
+  "mounted_reward_objects": 1457,
+  "mounted_counts": {
+    "SFXArmorUseModule": 27,
+    "SFXTreasureNode": 136,
+    "SFXTreasureUseModule": 320,
+    "SFXWeaponUseModule": 23,
+    "SFXWeaponModUseModule": 70,
+    "BioSeqAct_GiveMissionXP": 632,
+    "SFXSeqAct_AwardGAWAsset_Silent": 167,
+    "SFXSeqAct_AwardGAWAssetsForLevel": 61,
+    "SFXSeqAct_GiveWeapon": 18,
+    "SFXSeqAct_AwardGAWAsset": 1,
+    "SFXWeaponUseModule_BonusWeapon": 2
+  },
+  "use_module_sources": 442,
+  "distinct_world_use_guids": 423,
+  "shared_guid_groups": 0,
+  "use_modules_without_explicit_valid_guid": 19,
+  "gaw_award_nodes": 229,
+  "objective_xp_nodes": 632,
+  "warning": "These are mounted source candidates. Inherited defaults, reachability, GUID persistence, successful-use semantics and sequence flow require validation; do not sum into a check count."
+}

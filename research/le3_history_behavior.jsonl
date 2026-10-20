@@ -1,0 +1,3 @@
+{"source":"ME3LE Backup/BioGame/CookedPCConsole/SFXGame.pcc","export":7683,"function":"BioGlobalVariableTable.ApplyCanonPlots","text":"public final native function ApplyCanonPlots(array\u003CNewGameCanonPlot\u003E aCanonPlotVariables);\n"}
+{"source":"ME3LE Backup/BioGame/CookedPCConsole/SFXGame.pcc","export":7694,"function":"BioGlobalVariableTable.DoME2PlotImport","text":"public final native function DoME2PlotImport(SFXSaveGame LegacyImportSaveGame);\n"}
+{"source":"ME3LE Backup/BioGame/CookedPCConsole/SFXGame.pcc","export":7696,"function":"BioGlobalVariableTable.FixME1PlotsDuringME2PlotImport","text":"public final native function FixME1PlotsDuringME2PlotImport();\n"}

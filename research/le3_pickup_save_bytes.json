@@ -1,0 +1,37 @@
+{
+  "method": "exact little-endian signed-int32 GUID byte search; not a full save-format parser",
+  "files": [
+    {
+      "path": "C:\\Users\\unowi\\Documents\\BioWare\\Mass Effect Legendary Edition\\Save\\ME3\\Tom_31_Soldier_050621_4b588ba\\Save_0060.pcsav",
+      "sha256": "46af0da9c51991c29446b5ff4df23955e4307e820275ead49dbedf6327c496e7",
+      "length": 50297,
+      "header_hex": "3b00000000000000",
+      "guid_offsets": {
+        "942894881:1233733615:171160246:1774900978": 50252,
+        "-596417730:1180263863:1152395409:-954766686": 50268
+      },
+      "guid_block_contiguous": true,
+      "preceding_uint32": 2
+    },
+    {
+      "path": "C:\\Users\\unowi\\Documents\\BioWare\\Mass Effect Legendary Edition\\Save\\ME3\\Tom_31_Soldier_050621_4b588ba\\ChapterSave.pcsav",
+      "sha256": "6a62bc18d30e72d00da90a9921226f8d8bca6994a4828dee203dbf1a192f900e",
+      "length": 50028,
+      "header_hex": "3b00000000000000",
+      "guid_offsets": {
+        "942894881:1233733615:171160246:1774900978": -1,
+        "-596417730:1180263863:1152395409:-954766686": -1
+      }
+    },
+    {
+      "path": "C:\\Users\\unowi\\Documents\\BioWare\\Mass Effect Legendary Edition\\Save\\ME3\\Tom_31_Soldier_050621_4b588ba\\Save_0055.pcsav",
+      "sha256": "0d4707c4142c1452621aaf67cc453a03e94f117d33461b5cd0c98d28f276ccb3",
+      "length": 47599,
+      "header_hex": "3b00000000000000",
+      "guid_offsets": {
+        "942894881:1233733615:171160246:1774900978": -1,
+        "-596417730:1180263863:1152395409:-954766686": -1
+      }
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "server_contacted": false,
+  "tests": [
+    {
+      "test": "wrong_seed",
+      "reply": "ERR identity",
+      "expected": "ERR identity"
+    },
+    {
+      "test": "wrong_history",
+      "reply": "ERR identity",
+      "expected": "ERR identity"
+    },
+    {
+      "test": "gap",
+      "reply": "ERR gap 1",
+      "expected": "ERR gap 1"
+    }
+  ],
+  "before": {
+    "DEV_SESSION": "1 research_only 491883538a2bbf973ffe4f5c5f15ff7d8fd7247f183225348040a41c325f6b61 9bfcd8ee209c2ca23a58958f5faa782b33184997ed25e0eee7a102f03f014c5e 1",
+    "DEV_WALLET": "1021 9999999",
+    "USES 0 128": "2 942894881:1233733615:171160246:1774900978 -596417730:1180263863:1152395409:-954766686"
+  },
+  "after": {
+    "DEV_SESSION": "1 research_only 491883538a2bbf973ffe4f5c5f15ff7d8fd7247f183225348040a41c325f6b61 9bfcd8ee209c2ca23a58958f5faa782b33184997ed25e0eee7a102f03f014c5e 1",
+    "DEV_WALLET": "1021 9999999",
+    "USES 0 128": "2 942894881:1233733615:171160246:1774900978 -596417730:1180263863:1152395409:-954766686"
+  },
+  "state_unchanged": true
+}

@@ -1,0 +1,27 @@
+# Supplied game data, third-party tools and reference checkouts: local only.
+/ME3LE Backup/
+/Archipelago-main/
+/Legendary Explorer/
+/ME3Explorer/
+/ME3TweaksModManager/
+/Trilogy Save Editor/
+/other randomizers/
+/ME_Archipelago_Background/
+/tools/vendor/
+
+# Build outputs, packaged archives, save backups and installer backups.
+/build/
+/tools/le3apbridge/build*/
+bin/
+obj/
+*.exe
+*.exe.config
+*.dll
+*.esp
+*.apworld
+*.pcsav
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/

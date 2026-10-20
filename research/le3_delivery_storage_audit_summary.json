@@ -1,0 +1,35 @@
+{
+  "candidate_int_block": [
+    1295212544,
+    1295212567
+  ],
+  "storage_type": "sparse int map; no bool-array allocation",
+  "package_and_executable_scan": {
+    "kind": "summary",
+    "first": 1295212544,
+    "count": 24,
+    "files": 4455,
+    "bytes": 68271184651,
+    "hits": 42,
+    "errors": 0
+  },
+  "raw_hit_classes": {
+    "StaticMeshComponent": 14,
+    "Material": 1,
+    "SkeletalMesh": 9,
+    "MaterialInstanceConstant": 2,
+    "WwiseBank": 4,
+    "ShaderCache": 1,
+    "TextureMovie": 4
+  },
+  "typed_int_property_hits": [],
+  "script_function_export_hits": [],
+  "native_executable_hits": [],
+  "config_files": 21,
+  "config_sections": 1817,
+  "config_hits": [],
+  "database_int_hits": [],
+  "scope": "supplied vanilla backup and official DLC only; dynamic arithmetic and third-party mods not proven",
+  "runtime_serialization_tested": true,
+  "runtime_evidence": "delivery_persistence_recovered_01.json"
+}

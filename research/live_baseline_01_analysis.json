@@ -1,0 +1,249 @@
+{
+  "status": "baseline presence only; no transition or AP reporting",
+  "snapshot": "research\\live_baseline_01.json",
+  "bridge_version": "0.1.2-research",
+  "bools_read": 21,
+  "ints_read": 8,
+  "gaw_entries": 69,
+  "zero_strength_entries": 23,
+  "used_guid_entries": 0,
+  "plot_info_unchanged": true,
+  "matching_by_kind": {
+    "gaw_asset": 1,
+    "bool": 17,
+    "int_positive": 8
+  },
+  "observed_candidates": [
+    {
+      "id": 1295192097,
+      "name": "Minos Wasteland: Fortis / Pietas - Fusion Drive Parts",
+      "detector": {
+        "kind": "gaw_asset",
+        "asset_id": 88
+      }
+    },
+    {
+      "id": 1295192140,
+      "name": "Mars: Objective - Go To Base",
+      "detector": {
+        "kind": "bool",
+        "index": 19954
+      }
+    },
+    {
+      "id": 1295192141,
+      "name": "Mars: Objective - Access Elevator",
+      "detector": {
+        "kind": "bool",
+        "index": 19968
+      }
+    },
+    {
+      "id": 1295192142,
+      "name": "Mars: Objective - Go To Garage Exit",
+      "detector": {
+        "kind": "bool",
+        "index": 19970
+      }
+    },
+    {
+      "id": 1295192144,
+      "name": "Mars: Objective - Access Airlock",
+      "detector": {
+        "kind": "bool",
+        "index": 19974
+      }
+    },
+    {
+      "id": 1295192145,
+      "name": "Mars: Objective - Go To Cafeteria",
+      "detector": {
+        "kind": "bool",
+        "index": 19976
+      }
+    },
+    {
+      "id": 1295192146,
+      "name": "Mars: Objective - Access Env Ctrl",
+      "detector": {
+        "kind": "bool",
+        "index": 19978
+      }
+    },
+    {
+      "id": 1295192147,
+      "name": "Mars: Objective - Go To Trams",
+      "detector": {
+        "kind": "bool",
+        "index": 19980
+      }
+    },
+    {
+      "id": 1295192148,
+      "name": "Mars: Objective - Access Trams",
+      "detector": {
+        "kind": "bool",
+        "index": 19982
+      }
+    },
+    {
+      "id": 1295192149,
+      "name": "Mars: Objective - Attack Cerberus",
+      "detector": {
+        "kind": "bool",
+        "index": 19984
+      }
+    },
+    {
+      "id": 1295192150,
+      "name": "Mars: Objective - Go To Core",
+      "detector": {
+        "kind": "bool",
+        "index": 19986
+      }
+    },
+    {
+      "id": 1295192151,
+      "name": "Mars: Objective - Attack Eva",
+      "detector": {
+        "kind": "bool",
+        "index": 19988
+      }
+    },
+    {
+      "id": 1295192152,
+      "name": "Mars: Objective - Attack Garage",
+      "detector": {
+        "kind": "bool",
+        "index": 19999
+      }
+    },
+    {
+      "id": 1295192153,
+      "name": "Mars: Objective - Go To Cover",
+      "detector": {
+        "kind": "bool",
+        "index": 20175
+      }
+    },
+    {
+      "id": 1295192154,
+      "name": "Mars: Objective - Attack From Cover",
+      "detector": {
+        "kind": "bool",
+        "index": 20177
+      }
+    },
+    {
+      "id": 1295192155,
+      "name": "Mars: Objective - Access Train",
+      "detector": {
+        "kind": "bool",
+        "index": 20215
+      }
+    },
+    {
+      "id": 1295192158,
+      "name": "Priority: Citadel II - Complete",
+      "detector": {
+        "kind": "bool",
+        "index": 19453
+      }
+    },
+    {
+      "id": 1295192159,
+      "name": "Priority: Mars - Complete",
+      "detector": {
+        "kind": "bool",
+        "index": 20552
+      }
+    },
+    {
+      "id": 1295192160,
+      "name": "Priority: Geth Dreadnought - Complete",
+      "detector": {
+        "kind": "int_positive",
+        "index": 10172
+      }
+    },
+    {
+      "id": 1295192161,
+      "name": "Priority: Rannoch - Complete",
+      "detector": {
+        "kind": "int_positive",
+        "index": 10173
+      }
+    },
+    {
+      "id": 1295192162,
+      "name": "Priority: Sur'Kesh - Complete",
+      "detector": {
+        "kind": "int_positive",
+        "index": 10178
+      }
+    },
+    {
+      "id": 1295192163,
+      "name": "Priority: Tuchanka - Complete",
+      "detector": {
+        "kind": "int_positive",
+        "index": 10179
+      }
+    },
+    {
+      "id": 1295192164,
+      "name": "Priority: Thessia - Complete",
+      "detector": {
+        "kind": "int_positive",
+        "index": 10184
+      }
+    },
+    {
+      "id": 1295192165,
+      "name": "Priority: Cerberus Headquarters - Complete",
+      "detector": {
+        "kind": "int_positive",
+        "index": 10185
+      }
+    },
+    {
+      "id": 1295192166,
+      "name": "Priority: Horizon - Complete",
+      "detector": {
+        "kind": "int_positive",
+        "index": 10188
+      }
+    },
+    {
+      "id": 1295192167,
+      "name": "Priority: Palaven - Complete",
+      "detector": {
+        "kind": "int_positive",
+        "index": 10213
+      }
+    }
+  ],
+  "unobserved_plot_candidates": [
+    {
+      "name": "Mars: Objective - Access Security",
+      "detector": {
+        "kind": "bool",
+        "index": 19972
+      }
+    },
+    {
+      "name": "Mars: Objective - Attack Sniper",
+      "detector": {
+        "kind": "bool",
+        "index": 20218
+      }
+    },
+    {
+      "name": "Priority: Earth - Escape",
+      "detector": {
+        "kind": "bool",
+        "index": 18075
+      }
+    }
+  ]
+}

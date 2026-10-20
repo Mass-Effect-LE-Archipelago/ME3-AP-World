@@ -1,0 +1,177 @@
+{
+  "status": "observed live transitions; no AP check reporting",
+  "session": "research\\live_earth_session_01",
+  "completed": {
+    "finished_utc": "2026-10-15T20:10:48.230261+00:00",
+    "changed_states_saved": 10,
+    "read_errors": 0
+  },
+  "transitions": [
+    {
+      "source": "delta_0002.json",
+      "from_map": "BioP_Nor",
+      "to_map": "Biop_End001",
+      "plots": [],
+      "gaw": {},
+      "used_guids_added": [],
+      "used_guids_removed": []
+    },
+    {
+      "source": "delta_0003.json",
+      "from_map": "Biop_End001",
+      "to_map": "Biop_End001",
+      "plots": [
+        {
+          "family": "bools",
+          "index": 22737,
+          "path": "LE3.End_Game.End001.Writer_States.End001_Journal_Update",
+          "before": 0,
+          "after": 1
+        }
+      ],
+      "gaw": {},
+      "used_guids_added": [],
+      "used_guids_removed": []
+    },
+    {
+      "source": "delta_0004.json",
+      "from_map": "Biop_End001",
+      "to_map": "Biop_End001",
+      "plots": [
+        {
+          "family": "bools",
+          "index": 19738,
+          "path": "LE3.End_Game.End001.AAGun.Rubble.Combat_Started",
+          "before": 0,
+          "after": 1
+        },
+        {
+          "family": "bools",
+          "index": 22209,
+          "path": "LE3.End_Game.End001.Saving_Disabled",
+          "before": 0,
+          "after": 1
+        },
+        {
+          "family": "bools",
+          "index": 19739,
+          "path": "LE3.End_Game.End001.AAGun.Rubble.Combat_Start_Autosave_Done",
+          "before": 0,
+          "after": 1
+        }
+      ],
+      "gaw": {},
+      "used_guids_added": [],
+      "used_guids_removed": []
+    },
+    {
+      "source": "delta_0005.json",
+      "from_map": "Biop_End001",
+      "to_map": "Biop_End001",
+      "plots": [
+        {
+          "family": "ints",
+          "index": 10372,
+          "path": "LE3.End_Game.End001.Current_Objective",
+          "before": 0,
+          "after": 1
+        }
+      ],
+      "gaw": {},
+      "used_guids_added": [],
+      "used_guids_removed": []
+    },
+    {
+      "source": "delta_0006.json",
+      "from_map": "Biop_End001",
+      "to_map": "Biop_End001",
+      "plots": [
+        {
+          "family": "bools",
+          "index": 19734,
+          "path": "LE3.End_Game.End001.AAGun.Rubble.Shuttle_Lifted_Off",
+          "before": 0,
+          "after": 1
+        }
+      ],
+      "gaw": {},
+      "used_guids_added": [],
+      "used_guids_removed": []
+    },
+    {
+      "source": "delta_0007.json",
+      "from_map": "Biop_End001",
+      "to_map": "Biop_End001",
+      "plots": [
+        {
+          "family": "bools",
+          "index": 19765,
+          "path": "LE3.End_Game.End001.AAGun.Rubble.Enemies_Fell_Back_to_Defend_Stairs",
+          "before": 0,
+          "after": 1
+        }
+      ],
+      "gaw": {},
+      "used_guids_added": [],
+      "used_guids_removed": []
+    },
+    {
+      "source": "delta_0008.json",
+      "from_map": "Biop_End001",
+      "to_map": "Biop_End001",
+      "plots": [
+        {
+          "family": "bools",
+          "index": 20886,
+          "path": "LE3.End_Game.End001.AAGun.Rubble.Enemies_Fell_Back_to_Street",
+          "before": 0,
+          "after": 1
+        }
+      ],
+      "gaw": {},
+      "used_guids_added": [],
+      "used_guids_removed": []
+    },
+    {
+      "source": "delta_0009.json",
+      "from_map": "Biop_End001",
+      "to_map": "Biop_End001",
+      "plots": [
+        {
+          "family": "bools",
+          "index": 19741,
+          "path": "LE3.End_Game.End001.AAGun.Street.Combat_Start_Autosave_Done",
+          "before": 0,
+          "after": 1
+        }
+      ],
+      "gaw": {},
+      "used_guids_added": [],
+      "used_guids_removed": []
+    },
+    {
+      "source": "delta_0010.json",
+      "from_map": "Biop_End001",
+      "to_map": "Biop_End001",
+      "plots": [
+        {
+          "family": "bools",
+          "index": 20333,
+          "path": "LE3.End_Game.End001.AAGun.Street.Reinforcement_Wave_1_Done",
+          "before": 0,
+          "after": 1
+        },
+        {
+          "family": "bools",
+          "index": 20335,
+          "path": "LE3.End_Game.End001.AAGun.Street.Reinforcement_Flank_Guard_Done",
+          "before": 0,
+          "after": 1
+        }
+      ],
+      "gaw": {},
+      "used_guids_added": [],
+      "used_guids_removed": []
+    }
+  ]
+}

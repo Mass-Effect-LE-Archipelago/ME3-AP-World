@@ -1,0 +1,10 @@
+{
+  "server": "real Archipelago loopback",
+  "native_bridge": "fake protocol; no in-game claim",
+  "received_items": 2,
+  "native_cursor": 2,
+  "credits": 1000,
+  "location_checks": 0,
+  "client_goal_sent": false,
+  "research_binding_matches_room_seed": true
+}

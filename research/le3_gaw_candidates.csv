@@ -1,0 +1,269 @@
+candidate_key,asset_id,asset_name,display_name,type,exploration,emitted_bools,emitted_bool_paths,modifier_values,source,status
+gaw:0,0,GAWAsset_AllianceEngineeringCorp,Alliance Engineering Corps,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:1,1,GAWAsset_103rdMarineDivision,103rd Marine Division,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:2,2,GAWAsset_AdmiralMikhailovich,Admiral Mikhailovich,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:3,3,GAWAsset_Alliance1stFleet,Alliance First Fleet,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:4,4,GAWAsset_Alliance3rdFleet,Alliance Third Fleet,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:6,6,GAWAsset_TerminusFleet,Terminus Fleet,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:7,7,GAWAsset_BloodPackFlotilla,,gawassettype_modifier,False,,,50,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:8,8,GAWAsset_BlueSunsFlotilla,,gawassettype_modifier,False,,,50,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:9,9,GAWAsset_EclipseFlotilla,,gawassettype_modifier,False,,,50,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:10,10,GAWAsset_BannerOfThe1stRegiment,Banner of the 1st Regiment,gawassettype_artifact,True,21455,LE3.Citadel.CitHub.Fetch_Quests.Artifact_Fetch_Banner.Banner_Got,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:11,11,GAWAsset_TurianFlotilla,Turian 79th Flotilla,gawassettype_military,True,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:12,12,GAWAsset_Turian6thFleet,Turian Sixth Fleet,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:13,13,GAWAsset_FusionReactor,,gawassettype_salvage,True,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:14,14,GAWAsset_DataCache,,gawassettype_salvage,True,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:15,15,GAWAsset_FuelStorageDepot,,gawassettype_salvage,True,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:16,16,GAWAsset_AllianceFrigateAgrincourt,Alliance Frigate Agincourt,gawassettype_modifier,True,,,15,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:17,17,GAWAsset_AllianceSpecOpsTeamEcho,Special Ops Team Zeta,gawassettype_modifier,True,,,20,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:18,18,GAWAsset_AdvancedStarshipFuel,Advanced Starship Fuel,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:20,20,GAWAsset_PillarsOfStrength,Pillars of Strength,gawassettype_artifact,True,21458,LE3.Citadel.CitHub.Fetch_Quests.Artifact_Fetch_Pillars.Pillars_Got,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:21,21,GAWAsset_ProcessingVIs,,gawassettype_salvage,True,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:22,22,GAWAsset_BattleFootage,Weapon Upgrade Kit,gawassettype_intel,True,21531,LE3.Global.Stores.Intel_Rewards.Battle_Footage_Acquired,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:24,24,GAWAsset_MajorKirrahe,Major Kirrahe,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:25,25,GAWAsset_SalarianSTG1,Salarian Special Tasks Group,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:28,28,GAWAsset_KhaleeSanders,Kahlee Sanders,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:29,29,GAWAsset_BioticCompany,Biotic Company,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:30,30,GAWAsset_Jack,Jack,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:31,31,GAWAsset_CerberusResearch,Cerberus Research Data,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:32,32,GAWAsset_ElementZeroCore,Element Zero Cache,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:34,34,GAWAsset_ProtheanObelisk,Prothean Obelisk,gawassettype_artifact,True,21461,LE3.Citadel.CitHub.Fetch_Quests.Artifact_Fetch_Prothean_Obelisk.Prothean_Obelisk_Got,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:35,35,GAWAsset_WeaponsCache,,gawassettype_salvage,True,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:36,36,GAWAsset_SecurityVI,,gawassettype_salvage,True,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:37,37,GAWAsset_AllianceCruiserLondon,Alliance Cruiser Nairobi,gawassettype_modifier,True,,,25,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:38,38,GAWAsset_AdvancedFighterSquadron,Advanced Fighter Squadron,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:41,41,GAWAsset_Salarian1stFleet,Salarian First Fleet,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:42,42,GAWAsset_Turian43rdMarineDivision,Turian 43rd Marine Division,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:43,43,GAWAsset_Turian7thFleet,Turian Seventh Fleet,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:44,44,GAWAsset_TurianBlackwatch1,Turian Blackwatch,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:45,45,GAWAsset_TurianEngineeringCorp,Turian Engineering Corps,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:46,46,GAWAsset_Wreav,Urdnot Wreav,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:47,47,GAWAsset_Wrex,Urdnot Wrex,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:48,48,GAWAsset_Grunt,Grunt,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:49,49,GAWAsset_AralahkCompany,Aralakh Company,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:52,52,GAWAsset_RachniiWorkers,Rachni Workers,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:53,53,GAWAsset_WeaponCache,,gawassettype_salvage,True,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:54,54,GAWAsset_JavelinMissileLaunchers,Javelin Missile Launchers,gawassettype_military,True,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:55,55,GAWAsset_IntelligenceArchives,Volus Intelligence Archives,gawassettype_intel,True,21541,LE3.Global.Stores.Intel_Rewards.Intelligence_Archives_Acquired,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:56,56,GAWAsset_FabricationUnits,Volus Fabrication Units,gawassettype_military,True,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:57,57,GAWAsset_BookOfPlenix,Book of Plenix,gawassettype_artifact,True,21464,LE3.Citadel.CitHub.Fetch_Quests.Artifact_Fetch_Plenix.Plenix_Got,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:58,58,GAWAsset_VolusDreadnaughtKwunu,Volus Dreadnought Kwunu,gawassettype_military,True,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:59,59,GAWAsset_VolusEngineeringTeam,Volus Engineering Team,gawassettype_military,True,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:63,63,GAWAsset_Arcturus1stDivision,Arcturus First Division,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:64,64,GAWAsset_BattleofArcturusIntel,Intel from Battle of Arcturus,gawassettype_intel,True,21533,LE3.Global.Stores.Intel_Rewards.Battle_of_Arcturus_Acquired,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:65,65,GAWAsset_InterfermetricArray,Interferometric Array,gawassettype_military,True,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:66,66,GAWAsset_ExoGeniScientists,ExoGeni Scientists,gawassettype_military,True,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:68,68,GAWAsset_AllianceSpecOpsTeamDelta,Alliance Spec Ops Team Delta,gawassettype_military,True,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:69,69,GAWAsset_AllianceCruiserShanghai,Alliance Cruiser Shanghai,gawassettype_military,True,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:70,70,GAWAsset_DestroyedMiniReaper,Remains of Reaper Destroyer,gawassettype_intel,True,21537,LE3.Global.Stores.Intel_Rewards.Destroyed_Mini_Reaper_Acquired,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:71,71,GAWAsset_NavalEngineeringFlotilla,Alliance Naval Exploration Flotilla,gawassettype_military,True,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:72,72,GAWAsset_ProtheanDataFiles,Prothean Data Files,gawassettype_military,True,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:73,73,GAWAsset_ShadowBrokerShipTech,Shadow Broker Starship Tech,gawassettype_military,True,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:74,74,GAWAsset_LifeSupportPods,,gawassettype_salvage,True,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:75,75,GAWAsset_TerminusFreighters,Terminus Freighters,gawassettype_military,True,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:76,76,GAWAsset_ShadowBrokerSupportTeam,Shadow Broker Support Team,gawassettype_military,True,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:77,77,GAWAsset_AsariScienceTeam,Asari Science Team,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:78,78,GAWAsset_Asari2ndFleet,Asari Second Fleet,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:79,79,GAWAsset_Asari6thFleet,Asari Sixth Fleet,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:80,80,GAWAsset_DestinyAscension,The Destiny Ascension,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:83,83,GAWAsset_Krogan1stDivision,Krogan First Division,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:84,84,GAWAsset_CerberusScienceTeam,Ex-Cerberus Scientists,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:85,85,GAWAsset_DrBrynnCole,Dr. Brynn Cole,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:86,86,GAWAsset_DrGavinArcher,Dr. Gavin Archer,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:87,87,GAWAsset_Jacob,Jacob Taylor,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:88,88,GAWAsset_EngineParts,,gawassettype_salvage,True,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:89,89,GAWAsset_LibraryOfAsha,Library of Asha,gawassettype_artifact,True,21467,LE3.Citadel.CitHub.Fetch_Quests.Artifact_Fetch_Library.Library_Got,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:91,91,GAWAsset_AsariCommandoTeam4,Asari Commandos,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:92,92,GAWAsset_Samara,Samara,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:93,93,GAWAsset_IntactReaperGun,Intact Reaper Weapon,gawassettype_intel,True,21539,LE3.Global.Stores.Intel_Rewards.Intact_Reaper_Gun_Acquired,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:94,94,GAWAsset_EezoConverter,Element Zero Converter,gawassettype_military,True,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:95,95,GAWAsset_ProtheanDataDrives,Prothean Data Drives,gawassettype_artifact,True,21470,LE3.Citadel.CitHub.Fetch_Quests.Artifact_Fetch_DataDrives.DataDrives_Got,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:96,96,GAWAsset_FuelPods,Emergency Fuel Pods,gawassettype_military,True,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:97,97,GAWAsset_AdvancedPowerRelays,Advanced Power Relays,gawassettype_military,True,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:98,98,GAWAsset_FossilizedKaklisaur,Fossilized Kakliosaur,gawassettype_artifact,True,21473,LE3.Citadel.CitHub.Fetch_Quests.Artifact_Fetch_Dino.Dino_Got,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:99,99,GAWAsset_HaptiveOpticsArray,Haptic Optics Array,gawassettype_military,True,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:100,100,GAWAsset_TurianSpecOpsTeam,Turian Spec Ops Team,gawassettype_military,True,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:101,101,GAWAsset_AdmiralZaelKoris,Admiral Zaal'Koris,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:102,102,GAWAsset_GethArmyCorp,Geth Corps,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:103,103,GAWAsset_GethFleet,Geth Fleet,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:104,104,GAWAsset_GethPrimeC13Unit,Geth Prime Platoon,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:105,105,GAWAsset_QuarianCivilianFleet,Quarian Civilian Fleet,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:106,106,GAWAsset_QuarianHeavyFleet,Quarian Heavy Fleet,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:107,107,GAWAsset_QuarianPatrolFleet,Quarian Patrol Fleet,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:108,108,GAWAsset_AllianceFrigateHongKong,Alliance Frigate Hong Kong,gawassettype_modifier,True,,,15,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:109,109,GAWAsset_ProtheanSphere,Prothean Sphere,gawassettype_artifact,True,21479,LE3.Citadel.CitHub.Fetch_Quests.Artifact_Fetch_Sphere.Sphere_Got,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:110,110,GAWAsset_AllianceFrigateLeipzig,Alliance Frigate Leipzig,gawassettype_modifier,True,,,15,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:111,111,GAWAsset_ObeliskOfKarza,Obelisk of Karza,gawassettype_artifact,True,21476,LE3.Citadel.CitHub.Fetch_Quests.Artifact_Fetch_ObKarza.ObKarza_Got,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:112,112,GAWAsset_ElcorFlotilla,Elcor Flotilla,gawassettype_military,True,22572,LE3.Citadel.CitHub.Presidium_Flavor.Elcor_Strike_Team.Found_elcor_strike_team,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:113,113,GAWAsset_CodeOfTheAncients,Code of the Ancients,gawassettype_artifact,True,21482,LE3.Citadel.CitHub.Fetch_Quests.Artifact_Fetch_ElcorCode.ElcorCode_Got,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:114,114,GAWAsset_CommnicationsArray,Communications Arrays,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:115,115,GAWAsset_AsariScientist,Dr. Jelize,gawassettype_military,True,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:116,116,GAWAsset_AsariCommandoUnit1,Armali Sniper Unit,gawassettype_military,True,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:117,117,GAWAsset_AsariCommandoUnit2,Serrice Guard,gawassettype_military,True,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:118,118,GAWAsset_EezoTanker,,gawassettype_salvage,True,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:119,119,GAWAsset_RingsOfAlune,Rings of Alune,gawassettype_artifact,True,21485,LE3.Citadel.CitHub.Fetch_Quests.Artifact_Fetch_RingsAlune.RingsAlune_Got,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:120,120,GAWAsset_AsariCruiser1,Asari Cruiser Nefrane,gawassettype_military,True,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:121,121,GAWAsset_AsariResearchShips,Asari Research Ships,gawassettype_military,True,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:122,122,GAWAsset_AsariCruiser2,Asari Cruiser Cybaen,gawassettype_military,True,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:123,123,GAWAsset_AsariEngineeringTeam,Asari Engineers,gawassettype_military,True,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:124,124,GAWAsset_HesperiaPeriodStatue,Hesperia Period Statue,gawassettype_artifact,True,21488,LE3.Citadel.CitHub.Fetch_Quests.Artifact_Fetch_HesperiaStatue.HesperiaStatue_Got,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:125,125,GAWAsset_BioticResearchData,Research Data from Pragia,gawassettype_intel,True,21535,LE3.Global.Stores.Intel_Rewards.Biotic_Research_Data_Acquired,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:126,126,GAWAsset_AllianceMarineRecon,Alliance Marine Recon Unit,gawassettype_modifier,True,,,25,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:127,127,GAWAsset_AllianceFrigateTrafalger,Alliance Frigate Trafalgar,gawassettype_modifier,True,,,15,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:128,128,GAWAsset_Alliance6thFleet,Alliance Sixth Fleet,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:129,129,GAWAsset_ReaperBrain,Reaper Brain,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:130,130,GAWAsset_ReaperHeart,Reaper Heart,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:131,131,GAWAsset_DrChakwas,Dr. Karin Chakwas,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:132,132,GAWAsset_OptimizedEezoCapacitors,Optimized Eezo Capacitors,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:133,133,GAWAsset_CerberusExPatriots,Ex-Cerberus Engineers,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:134,134,GAWAsset_RogueFighterSquadron,Rogue Fighter Pilots,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:138,138,GAWAsset_BioticSupport,,gawassettype_modifier,False,,,50,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:139,139,GAWAsset_SavedTheCouncilInME1,,gawassettype_modifier,False,,,-25;-25;-25;-25,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:140,140,GAWAsset_ArrivalNotCompleted,,gawassettype_modifier,False,,,-50,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:141,141,GAWAsset_KroganClans,Krogan Clans,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:142,142,GAWAsset_ClanTurmoil,,gawassettype_modifier,False,,,-50,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:143,143,GAWAsset_MassiveExplosion,Massive Explosion,gawassettype_modifier,False,,,-250,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:144,144,GAWAsset_ClanUrdnot,Clan Urdnot,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:145,145,GAWAsset_UrdnotBetrayal,,gawassettype_modifier,False,,,-30;-300,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:146,146,GAWAsset_MordinSolus,Dr. Mordin Solus,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:147,147,GAWAsset_ShadowBrokerWetSquad,Shadow Broker Wet Squad,gawassettype_military,False,22571,LE3.Citadel.CitHub.Barla_Von.Found_Shadow_Broker_Team,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:148,148,GAWAsset_GruntAlive,,gawassettype_modifier,False,,,25,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:149,149,GAWAsset_GruntLoyal,,gawassettype_modifier,False,,,25,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:150,150,GAWAsset_SaveQueen,,gawassettype_modifier,False,,,-75,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:151,151,GAWAsset_KirraheSavesSalarianCaptain,,gawassettype_modifier,False,,,-20,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:152,152,GAWAsset_STGTaskForce,STG Task Force,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:154,154,GAWAsset_AdmiralDies,,gawassettype_modifier,False,,,-75,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:155,155,GAWAsset_GethFighters,,gawassettype_modifier,False,,,-25,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:156,156,GAWAsset_SupportRaanAgainstHanJorel,,gawassettype_modifier,False,,,-10,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:157,157,GAWAsset_SupportHanJorelAgainstRaan,,gawassettype_modifier,False,,,25,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:159,159,GAWAsset_AdvancedAIRelays,Advanced AI Relays,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:163,163,GAWAsset_BreederQueenBetrayal,Breeder Queen Betrayal,gawassettype_modifier,False,,,-100,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:167,167,GAWAsset_MassiveExplosionA,,gawassettype_modifier,False,,,-250,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:171,171,GAWAsset_Salarian3rdFleet,Salarian Third Fleet,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:172,172,GAWAsset_Miranda,Miranda Lawson,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:173,173,GAWAsset_Alliance5thFleet,Alliance Fifth Fleet,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:174,174,GAWAsset_KroganMercenaries,Krogan Mercenaries,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:175,175,GAWAsset_KeepXenAlive,,gawassettype_modifier,False,,,25,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:176,176,GAWAsset_LegionIntel1,Improved Geth Resistors,gawassettype_intel,False,21543,LE3.Global.Stores.Intel_Rewards.Legion_Intel_1_Acquired,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:177,177,GAWAsset_LegionIntel2,Miniaturized Armor Capacitors,gawassettype_intel,False,21545,LE3.Global.Stores.Intel_Rewards.Legion_Intel_2_Acquired,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:178,178,GAWAsset_AdvancedBioticAmps,Advanced Biotic Implants,gawassettype_intel,False,22421,LE3.Global.Stores.Intel_Rewards.Biotic_Amps_Acquired,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:179,179,GAWAsset_SpectreTeam,Spectre Unit,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:180,180,GAWAsset_Kasumi,Kasumi Goto,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:181,181,GAWAsset_Zaeed,Zaeed Massani,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:182,182,GAWAsset_VolusBombingFleet,Volus Bombing Fleet,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:183,183,GAWAsset_DarkEnergyDissertation,Dark Energy Dissertation,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:184,184,GAWAsset_DarkEnergyDissertationUpgrade,,gawassettype_modifier,False,,,4,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:185,185,GAWAsset_HanarAndDrellForces,Hanar and Drell Forces,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:186,186,GAWAsset_DianaAllers,Diana Allers,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:187,187,GAWAsset_Normandy,Alliance Frigate Normandy SR-2,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:188,188,GAWAsset_UpgradedThanix,,gawassettype_modifier,False,,,15,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:190,190,GAWAsset_CerberusAttack,,gawassettype_modifier,False,,,-10,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:191,191,GAWAsset_TurianMedigel,,gawassettype_modifier,False,,,5,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:192,192,GAWAsset_AsariCommandos,,gawassettype_modifier,False,,,25,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:193,193,GAWAsset_BatarianFleet,Batarian Fleet,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:194,194,GAWAsset_SabotagedAllianceShips,,gawassettype_modifier,False,,,-10,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:195,195,GAWAsset_CommanderKahairalBalak,,gawassettype_modifier,False,,,15,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:199,199,GAWAsset_UpgradedHeavyShipArmor,,gawassettype_modifier,False,,,25,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:200,200,GAWAsset_UpgradedShield,,gawassettype_modifier,False,,,25,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:201,201,GAWAsset_TechStudentsRescued,,gawassettype_modifier,False,,,5,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:202,202,GAWAsset_SandersArcherUpgrade,,gawassettype_modifier,False,,,10,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:203,203,GAWAsset_MineralResources,Mineral Resources,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:264,264,GAWAsset_MineralResources2,Mineral Resources,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:265,265,GAWAsset_MineralResources3,Mineral Resources,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:204,204,GAWAsset_PrejekPaddlefish,Prejek Paddlefish,gawassettype_intel,False,21549,LE3.Global.Stores.Intel_Rewards.Fish_Aquired,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:205,205,GAWAsset_MatriarchGallaesElectronicSignature,Gallae's Electronic Signature,gawassettype_intel,False,21547,LE3.Global.Stores.Intel_Rewards.Samara_Mission_Acquired,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:206,206,GAWAsset_ShialaAndZhusHopeColonists,Zhu's Hope Colonists,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:207,207,GAWAsset_CitadelDefenseForce,Citadel Defense Force,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:208,208,GAWAsset_Ashley,Ashley Williams,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:209,209,GAWAsset_Kaiden,Kaidan Alenko,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:215,215,GAWAsset_KhalisahBintSinanAlJilani,Khalisah Bint Sinan al-Jilani,gawassettype_military,False,,,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:266,266,GAWAsset_NeverPunchedReporter,,gawassettype_modifier,False,,,5,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:214,214,GAWAsset_FeronIntel,Armor Modkit,gawassettype_intel,False,22419,LE3.Global.Stores.Intel_Rewards.Feron_Acquired,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:210,210,GAWAsset_GethHereticsSaved,,gawassettype_modifier,False,,,-50;-50;-50;150,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:216,216,GAWAsset_GethHereticsDestroyed,,gawassettype_modifier,False,,,50;50;50;-150,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:217,217,GAWAsset_ProKroganInterview,,gawassettype_modifier,False,,,5,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:218,218,GAWAsset_ProKroganInterviewNeedTurians,,gawassettype_modifier,False,,,5,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:219,219,GAWAsset_ProSecurityInterview,,gawassettype_modifier,False,,,5,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:220,220,GAWAsset_AntiCerberusInterview,,gawassettype_modifier,False,,,5,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:221,221,GAWAsset_GethInterviewCooperation,,gawassettype_modifier,False,,,5,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:222,222,GAWAsset_GethInterviewGethKickAss,,gawassettype_modifier,False,,,5,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:223,223,GAWAsset_QuarianInterviewReadiness,,gawassettype_modifier,False,,,5,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:224,224,GAWAsset_QuarianInterviewMilitary,,gawassettype_modifier,False,,,5,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:225,225,GAWAsset_SupportedCitadelRefugees,,gawassettype_modifier,False,,,-2,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:226,226,GAWAsset_CivilianMedicalVolunteers,,gawassettype_modifier,False,,,5,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:227,227,GAWAsset_ReassuredArguingCouple,,gawassettype_modifier,False,,,0,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:228,228,GAWAsset_AsariPatientSuicide,,gawassettype_modifier,False,,,-4,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:229,229,GAWAsset_ImproveCivilianMorale,,gawassettype_modifier,False,,,8,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:230,230,GAWAsset_AllianceFleetLosses,,gawassettype_modifier,False,,,-4,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:231,231,GAWAsset_LoweredCrime,,gawassettype_modifier,False,,,7,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:232,232,GAWAsset_FewerRefugees,,gawassettype_modifier,False,,,7,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:233,233,GAWAsset_SmugglerContacts,,gawassettype_modifier,False,,,7,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:234,234,GAWAsset_MedicalSuppliesReleased,,gawassettype_modifier,False,,,7,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:235,235,GAWAsset_IncreasedSurveillance,,gawassettype_modifier,False,,,7,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:236,236,GAWAsset_CivilianMilitia,,gawassettype_modifier,False,,,7,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:237,237,GAWAsset_IncreasedCrimeRate,,gawassettype_modifier,False,,,-4,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:238,238,GAWAsset_GrissomStudentHousing,,gawassettype_modifier,False,,,5,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:239,239,GAWAsset_ImprovedTargetingVIs,,gawassettype_modifier,False,,,5,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:240,240,GAWAsset_EnforceEveryLaw,,gawassettype_modifier,False,,,-2,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:241,241,GAWAsset_CrackDownOnTerror,,gawassettype_modifier,False,,,5,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:242,242,GAWAsset_CivilianDonations,,gawassettype_modifier,False,,,5,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:243,243,GAWAsset_CuredTurianGeneral,,gawassettype_modifier,False,,,8,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:244,244,GAWAsset_ReaperCodeFragment,,gawassettype_modifier,False,,,8,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:245,245,GAWAsset_GethJammingFrequencies,,gawassettype_modifier,False,,,8,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:246,246,GAWAsset_CerberusTurretSchematics,,gawassettype_modifier,False,,,8,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:247,247,GAWAsset_ImprovedAsariAmps,,gawassettype_modifier,False,,,8,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:248,248,GAWAsset_ImprovedHanarMedicalTech,,gawassettype_modifier,False,,,8,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:249,249,GAWAsset_CerberusCiphers,,gawassettype_modifier,False,,,8,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:250,250,GAWAsset_SalarianColonySupport,,gawassettype_modifier,False,,,8,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:251,251,GAWAsset_ChemicalBurnTreatments,,gawassettype_modifier,False,,,8,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:252,252,GAWAsset_KroganPowerGrids,,gawassettype_modifier,False,,,8,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:253,253,GAWAsset_Bannerofthe1stRegimentBonus,,gawassettype_modifier,False,,,40,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:254,254,GAWAsset_PillarsOfStrengthBonus,,gawassettype_modifier,False,,,40,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:255,255,GAWAsset_BookOfPlenixBonus,,gawassettype_modifier,False,,,40,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:256,256,GAWAsset_ImprovedHuntressTraining,,gawassettype_modifier,False,,,40,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:257,257,GAWAsset_ProtheanDataDrivesBonus,,gawassettype_modifier,False,,,40,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:258,258,GAWAsset_KaklisaurSkull,,gawassettype_modifier,False,,,40,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:259,259,GAWAsset_ObeliskOfKarzaBonus,,gawassettype_modifier,False,,,40,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:260,260,GAWAsset_ProtheanSphereBonus,,gawassettype_modifier,False,,,40,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:261,261,GAWAsset_CodeOfTheAncientsBonus,,gawassettype_modifier,False,,,40,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:262,262,GAWAsset_RingsOfAluneBonus,,gawassettype_modifier,False,,,40,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:263,263,GAWAsset_HesperiaPeriodStatueBonus,,gawassettype_modifier,False,,,40,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:267,267,GAWAsset_BlackMarketArtifacts,Black Market Artifacts,gawassettype_quest,False,22573,LE3.Citadel.CitHub.Aria2.Found_Blue_Suns_Artifact,,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:268,268,GAWAsset_DestroyTheGeth,,gawassettype_modifier,False,,,-60,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:269,269,GAWAsset_DestroyTheQuarians,,gawassettype_modifier,False,,,-25,ME3LE Backup/BioGame/CookedPCConsole/Coalesced.bin,CONFIG_ONLY
+gaw:602,602,GAWAsset_Exp1_Lev002,Leviathan Reward,gawassettype_salvage,False,,,,ME3LE Backup/BioGame/DLC/DLC_EXP_Pack001/CookedPCConsole/Default_DLC_EXP_Pack001.bin,CONFIG_ONLY
+gaw:603,603,GAWAsset_Exp1_Lev002_1A,Leviathan Reward,gawassettype_salvage,False,,,,ME3LE Backup/BioGame/DLC/DLC_EXP_Pack001/CookedPCConsole/Default_DLC_EXP_Pack001.bin,CONFIG_ONLY
+gaw:604,604,GAWAsset_Exp1_Lev002_1B,Leviathan Reward,gawassettype_salvage,False,,,,ME3LE Backup/BioGame/DLC/DLC_EXP_Pack001/CookedPCConsole/Default_DLC_EXP_Pack001.bin,CONFIG_ONLY
+gaw:605,605,GAWAsset_Exp1_Lev002_2A,Leviathan Reward,gawassettype_salvage,False,,,,ME3LE Backup/BioGame/DLC/DLC_EXP_Pack001/CookedPCConsole/Default_DLC_EXP_Pack001.bin,CONFIG_ONLY
+gaw:606,606,GAWAsset_Exp1_Lev002_2B,Leviathan Reward,gawassettype_salvage,False,,,,ME3LE Backup/BioGame/DLC/DLC_EXP_Pack001/CookedPCConsole/Default_DLC_EXP_Pack001.bin,CONFIG_ONLY
+gaw:607,607,GAWAsset_Exp1_Lev002_3A,Leviathan Reward,gawassettype_salvage,False,,,,ME3LE Backup/BioGame/DLC/DLC_EXP_Pack001/CookedPCConsole/Default_DLC_EXP_Pack001.bin,CONFIG_ONLY
+gaw:608,608,GAWAsset_Exp1_Lev002_3B,Leviathan Reward,gawassettype_salvage,False,,,,ME3LE Backup/BioGame/DLC/DLC_EXP_Pack001/CookedPCConsole/Default_DLC_EXP_Pack001.bin,CONFIG_ONLY
+gaw:615,615,GAWAsset_Exp1_Lev003,Leviathan Reward,gawassettype_salvage,False,,,,ME3LE Backup/BioGame/DLC/DLC_EXP_Pack001/CookedPCConsole/Default_DLC_EXP_Pack001.bin,CONFIG_ONLY
+gaw:616,616,GAWAsset_Exp1_Lev003_1,Leviathan Reward,gawassettype_salvage,False,,,,ME3LE Backup/BioGame/DLC/DLC_EXP_Pack001/CookedPCConsole/Default_DLC_EXP_Pack001.bin,CONFIG_ONLY
+gaw:617,617,GAWAsset_Exp1_Lev003_2,Leviathan Reward,gawassettype_salvage,False,,,,ME3LE Backup/BioGame/DLC/DLC_EXP_Pack001/CookedPCConsole/Default_DLC_EXP_Pack001.bin,CONFIG_ONLY
+gaw:620,620,GAWAsset_Exp1_Lev004,Leviathan Reward,gawassettype_salvage,False,,,,ME3LE Backup/BioGame/DLC/DLC_EXP_Pack001/CookedPCConsole/Default_DLC_EXP_Pack001.bin,CONFIG_ONLY
+gaw:621,621,GAWAsset_Exp1_Lev004_1,Leviathan Reward,gawassettype_salvage,False,,,,ME3LE Backup/BioGame/DLC/DLC_EXP_Pack001/CookedPCConsole/Default_DLC_EXP_Pack001.bin,CONFIG_ONLY
+gaw:622,622,GAWAsset_Exp1_Lev004_2,Leviathan Reward,gawassettype_salvage,False,,,,ME3LE Backup/BioGame/DLC/DLC_EXP_Pack001/CookedPCConsole/Default_DLC_EXP_Pack001.bin,CONFIG_ONLY
+gaw:625,625,GAWAsset_SynDiamondHeatSinks,Synthdiamond Heat Sinks,gawassettype_military,True,,,,ME3LE Backup/BioGame/DLC/DLC_EXP_Pack001/CookedPCConsole/Default_DLC_EXP_Pack001.bin,CONFIG_ONLY
+gaw:626,626,GAWAsset_DoomedEscapeShip,Ill-Fated Escape Ship,gawassettype_salvage,True,,,,ME3LE Backup/BioGame/DLC/DLC_EXP_Pack001/CookedPCConsole/Default_DLC_EXP_Pack001.bin,CONFIG_ONLY
+gaw:627,627,GAWAsset_GovGrothanPazness,Governor Grothan Pazness,gawassettype_military,True,,,,ME3LE Backup/BioGame/DLC/DLC_EXP_Pack001/CookedPCConsole/Default_DLC_EXP_Pack001.bin,CONFIG_ONLY
+gaw:628,628,GAWAsset_VoidDevils,Void Devils Fighter Wing,gawassettype_military,True,,,,ME3LE Backup/BioGame/DLC/DLC_EXP_Pack001/CookedPCConsole/Default_DLC_EXP_Pack001.bin,CONFIG_ONLY
+gaw:629,629,GAWAsset_VorchaLaborTeam,Vorcha Labor Team,gawassettype_military,True,,,,ME3LE Backup/BioGame/DLC/DLC_EXP_Pack001/CookedPCConsole/Default_DLC_EXP_Pack001.bin,CONFIG_ONLY
+gaw:630,630,GAWAsset_LiquidAssets,Liquid Assets,gawassettype_military,True,,,,ME3LE Backup/BioGame/DLC/DLC_EXP_Pack001/CookedPCConsole/Default_DLC_EXP_Pack001.bin,CONFIG_ONLY
+gaw:631,631,GAWAsset_JovianDIssertation,Jovian Dissertation,gawassettype_military,True,,,,ME3LE Backup/BioGame/DLC/DLC_EXP_Pack001/CookedPCConsole/Default_DLC_EXP_Pack001.bin,CONFIG_ONLY
+gaw:632,632,GAWAsset_CrucibleShieldingSheath,Radiation Shielding Sheath,gawassettype_military,True,,,,ME3LE Backup/BioGame/DLC/DLC_EXP_Pack001/CookedPCConsole/Default_DLC_EXP_Pack001.bin,CONFIG_ONLY
+gaw:633,633,GAWAsset_HuskNeuralMap,Husk Neural Map,gawassettype_military,True,,,,ME3LE Backup/BioGame/DLC/DLC_EXP_Pack001/CookedPCConsole/Default_DLC_EXP_Pack001.bin,CONFIG_ONLY
+gaw:634,634,GAWAsset_DextroRations,Dextro Rations,gawassettype_military,True,,,,ME3LE Backup/BioGame/DLC/DLC_EXP_Pack001/CookedPCConsole/Default_DLC_EXP_Pack001.bin,CONFIG_ONLY
+gaw:635,635,GAWAsset_DrAnnBryson,Dr. Ann Bryson,gawassettype_military,False,,,,ME3LE Backup/BioGame/DLC/DLC_EXP_Pack001/CookedPCConsole/Default_DLC_EXP_Pack001.bin,CONFIG_ONLY
+gaw:636,636,GAWAsset_LeviathanEnthrallmentTeam,Leviathan Enthrallment Team,gawassettype_military,False,,,,ME3LE Backup/BioGame/DLC/DLC_EXP_Pack001/CookedPCConsole/Default_DLC_EXP_Pack001.bin,CONFIG_ONLY
+gaw:700,700,GAWAsset_OmegaEezoHoard,Omega Eezo Hoard,gawassettype_military,False,,,,ME3LE Backup/BioGame/DLC/DLC_EXP_Pack002/CookedPCConsole/Default_DLC_EXP_Pack002.bin,CONFIG_ONLY
+gaw:701,701,GAWAsset_OmegaRaidingFleet,Omega Raiding Fleet,gawassettype_military,False,,,,ME3LE Backup/BioGame/DLC/DLC_EXP_Pack002/CookedPCConsole/Default_DLC_EXP_Pack002.bin,CONFIG_ONLY
+gaw:702,702,GAWAsset_GeneralOlegPetrovsky,General Oleg Petrovsky,gawassettype_military,False,,,,ME3LE Backup/BioGame/DLC/DLC_EXP_Pack002/CookedPCConsole/Default_DLC_EXP_Pack002.bin,CONFIG_ONLY
+gaw:704,704,GAWAsset_GeneralOlegPetrovskyDead,General Oleg Petrovsky,gawassettype_modifier,False,,,30,ME3LE Backup/BioGame/DLC/DLC_EXP_Pack002/CookedPCConsole/Default_DLC_EXP_Pack002.bin,CONFIG_ONLY
+gaw:800,800,GAWAsset_NormandyRepairs,Normandy Repairs,gawassettype_modifier,False,,,35,ME3LE Backup/BioGame/DLC/DLC_EXP_Pack003/CookedPCConsole/Default_DLC_EXP_Pack003.bin,CONFIG_ONLY
+gaw:801,801,GAWAsset_TeamSpirit,Team Spirit,gawassettype_modifier,False,,,35,ME3LE Backup/BioGame/DLC/DLC_EXP_Pack003/CookedPCConsole/Default_DLC_EXP_Pack003.bin,CONFIG_ONLY
+gaw:803,803,GAWAsset_KhansNetworkExposed,Khan's Network Exposed,gawassettype_intel,False,24828,LE3.DLC_EXP_Pack003.Gameplay.GAW.Khans_Network_Exposed_Acquired,,ME3LE Backup/BioGame/DLC/DLC_EXP_Pack003/CookedPCConsole/Default_DLC_EXP_Pack003.bin,CONFIG_ONLY
+gaw:500,500,GAWAsset_EdenPrimeSupport,Eden Prime Support,gawassettype_military,False,,,,ME3LE Backup/BioGame/DLC/DLC_HEN_PR/CookedPCConsole/Default_DLC_HEN_PR.bin,CONFIG_ONLY
+gaw:501,501,GAWAsset_EdenPrimeSupport_Mod1,,gawassettype_modifier,False,,,25,ME3LE Backup/BioGame/DLC/DLC_HEN_PR/CookedPCConsole/Default_DLC_HEN_PR.bin,CONFIG_ONLY
+gaw:502,502,GAWAsset_EdenPrimeSupport_Mod2,,gawassettype_modifier,False,,,25,ME3LE Backup/BioGame/DLC/DLC_HEN_PR/CookedPCConsole/Default_DLC_HEN_PR.bin,CONFIG_ONLY
+gaw:503,503,GAWAsset_EdenPrimeSupport_Mod3,,gawassettype_modifier,False,,,25,ME3LE Backup/BioGame/DLC/DLC_HEN_PR/CookedPCConsole/Default_DLC_HEN_PR.bin,CONFIG_ONLY

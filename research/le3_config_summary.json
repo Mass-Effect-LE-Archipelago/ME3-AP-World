@@ -1,0 +1,26 @@
+{
+  "source_count": 5,
+  "declaration_count": 371,
+  "asset_declarations": 268,
+  "distinct_asset_ids": 268,
+  "asset_types": {
+    "GAWAssetType_Military": 120,
+    "GAWAssetType_Modifier": 96,
+    "GAWAssetType_Artifact": 12,
+    "GAWAssetType_Salvage": 24,
+    "GAWAssetType_Intel": 13,
+    "GAWAssetType_MIlitary": 2,
+    "GAWAssetType_Quest": 1
+  },
+  "modifier_declarations": 96,
+  "exploration_asset_declarations": 72,
+  "level_reward_declarations": 49,
+  "treasure_entry_declarations": 426,
+  "treasure_entries_by_kind": {
+    "Treasure": 276,
+    "ConditionalGAWAssets": 129,
+    "UndetectableGAWAssets": 21
+  },
+  "casefold_duplicate_entries_in_same_list": 57,
+  "warning": "Definitions are not checks. Mount precedence, source interactions, unlock semantics and reachability remain to verify."
+}

@@ -1,0 +1,11 @@
+{
+  "preset": "custom",
+  "choices": {
+    "me1.virmire_survivor": "kaidan",
+    "me1.romance": "liara",
+    "me2.romance": "thane",
+    "me2.squad.thane.survived": false,
+    "me2.squad.thane.loyal": true,
+    "me2.maelon_data": "saved"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "utc": "2026-10-15T20:37:27.388712+00:00",
+  "action": "credits",
+  "research_only": true,
+  "server_contacted": false,
+  "identity": "491883538a2bbf973ffe4f5c5f15ff7d8fd7247f183225348040a41c325f6b61",
+  "history": "9bfcd8ee209c2ca23a58958f5faa782b33184997ed25e0eee7a102f03f014c5e",
+  "version": "0.2.0-delivery-dev",
+  "session_before": "1 research_only 491883538a2bbf973ffe4f5c5f15ff7d8fd7247f183225348040a41c325f6b61 9bfcd8ee209c2ca23a58958f5faa782b33184997ed25e0eee7a102f03f014c5e 0",
+  "wallet_before": [
+    21,
+    9999999
+  ],
+  "first_reply": "1 1000 applied",
+  "wallet_after_first": [
+    1021,
+    9999999
+  ],
+  "retry_reply": "1 0 done",
+  "wallet_after_retry": [
+    1021,
+    9999999
+  ],
+  "retry_balance_unchanged": true,
+  "actual_credit_delta": 1000,
+  "used_guids_before": [
+    "942894881:1233733615:171160246:1774900978",
+    "-596417730:1180263863:1152395409:-954766686"
+  ],
+  "used_guids_after": [
+    "942894881:1233733615:171160246:1774900978",
+    "-596417730:1180263863:1152395409:-954766686"
+  ],
+  "gaw_unchanged": true,
+  "source_guids_unchanged": true,
+  "cursor_reply_valid": true,
+  "grant_delta_valid": true,
+  "session_after": "1 research_only 491883538a2bbf973ffe4f5c5f15ff7d8fd7247f183225348040a41c325f6b61 9bfcd8ee209c2ca23a58958f5faa782b33184997ed25e0eee7a102f03f014c5e 1",
+  "wallet_after": [
+    1021,
+    9999999
+  ]
+}

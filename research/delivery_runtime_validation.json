@@ -1,0 +1,36 @@
+{
+  "native_delivery": {
+    "evidence": "delivery_credit_01.json",
+    "credit_before": 21,
+    "credit_after": 1021,
+    "cursor_before": 0,
+    "cursor_after": 1,
+    "same_index_retry_granted": 0,
+    "pickup_guids_unchanged": true,
+    "gaw_unchanged": true
+  },
+  "rejections": {
+    "evidence": "delivery_rejection_01.json",
+    "wrong_seed": true,
+    "wrong_history": true,
+    "out_of_order": true,
+    "state_unchanged": true
+  },
+  "reload": {
+    "result": "owner confirmed success before interruption",
+    "tool_post_reload_receipt_available": false,
+    "disk_evidence": "delivery_persistence_recovered_01.json",
+    "expected_persistent_pairs": 20,
+    "new_save_pairs_found": 20,
+    "old_save_pairs_found": 0,
+    "fresh_process_reload_logged": false
+  },
+  "new_ap_delivery_client": {
+    "evidence": "le3_delivery_only_multiworld_receipt.json",
+    "server": "real localhost AP",
+    "native_endpoint": "fake protocol",
+    "real_server_to_real_game_test_logged": false,
+    "location_goal_reporting_enabled": false
+  },
+  "normal_randomized_campaign_playable": false
+}

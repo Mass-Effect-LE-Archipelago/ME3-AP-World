@@ -1,0 +1,130 @@
+{
+  "schema": 1,
+  "status": "offline_source_mapping_verified_not_runtime_initialization",
+  "readers": [
+    {
+      "function": "BioGlobalVariableTable.MajorPlot_ME1_RachniiQueenSaved",
+      "export": 7715,
+      "bools": [
+        12587
+      ],
+      "ints": []
+    },
+    {
+      "function": "BioGlobalVariableTable.MajorPlot_ME1_VirmireSurvivor_IsAsh",
+      "export": 7717,
+      "bools": [
+        13827
+      ],
+      "ints": []
+    },
+    {
+      "function": "BioGlobalVariableTable.MajorPlot_ME1_WrexStatus",
+      "export": 7722,
+      "bools": [
+        13942,
+        13028,
+        13029,
+        15543
+      ],
+      "ints": []
+    },
+    {
+      "function": "BioGlobalVariableTable.MajorPlot_ME1_SavedTheCouncil",
+      "export": 7724,
+      "bools": [
+        13001
+      ],
+      "ints": []
+    },
+    {
+      "function": "BioGlobalVariableTable.MajorPlot_ME2_DestroyedMaelonsData",
+      "export": 7726,
+      "bools": [
+        2677
+      ],
+      "ints": []
+    },
+    {
+      "function": "BioGlobalVariableTable.MajorPlot_ME2_SavedMaelonsData",
+      "export": 7728,
+      "bools": [
+        2676
+      ],
+      "ints": []
+    },
+    {
+      "function": "BioGlobalVariableTable.MajorPlot_ME2_HerteticsStatus",
+      "export": 7733,
+      "bools": [
+        757,
+        759
+      ],
+      "ints": []
+    },
+    {
+      "function": "BioGlobalVariableTable.MajorPlot_ME2_CollectorBaseStatus",
+      "export": 7738,
+      "bools": [
+        1832,
+        1831
+      ],
+      "ints": []
+    },
+    {
+      "function": "BioGlobalVariableTable.MajorPlot_ME2_NumberOfSuicideMissionSurvivors",
+      "export": 7741,
+      "bools": [
+        33,
+        34,
+        42,
+        39,
+        44,
+        37,
+        40,
+        35,
+        38,
+        43,
+        41,
+        36
+      ],
+      "ints": []
+    },
+    {
+      "function": "BioGlobalVariableTable.MajorPolt_ME1_Romance",
+      "export": 7744,
+      "bools": [
+        14281,
+        13960,
+        14169
+      ],
+      "ints": [
+        10017,
+        10015,
+        10016
+      ]
+    },
+    {
+      "function": "BioGlobalVariableTable.MajorPlot_ME2_Romance",
+      "export": 7747,
+      "bools": [],
+      "ints": [
+        266,
+        270,
+        267,
+        271,
+        213,
+        272
+      ]
+    }
+  ],
+  "virmire_setter_export": 20374,
+  "required_bool_count": 33,
+  "required_int_count": 9,
+  "source_sha256": {
+    "research\\le3_history_config.jsonl": "7f501987c1ce175d5d28cbbc343f4616f18c6df12294a0812a64dcb162b39f4a",
+    "research\\le3_history_callers.jsonl": "d9883eaae6b38e057a511bfc1e1ae6a7ec813419d7e45c30df13e3f633101eda",
+    "research\\le3_plot_inventory.csv": "52bb79a25a5d962f9a446aaab553b9f9b08a258887712cd8d967b32747079905",
+    "world\\mass_effect_le3\\history.py": "d00358cde1f530b3c7547c4d0bff616734cde44898b30a2787b30f015b97db0f"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "utc": "2026-10-15T20:37:22.159616+00:00",
+  "action": "bind-test-save",
+  "research_only": true,
+  "server_contacted": false,
+  "identity": "491883538a2bbf973ffe4f5c5f15ff7d8fd7247f183225348040a41c325f6b61",
+  "history": "9bfcd8ee209c2ca23a58958f5faa782b33184997ed25e0eee7a102f03f014c5e",
+  "version": "0.2.0-delivery-dev",
+  "session_before": "1 research_only unbound 0",
+  "wallet_before": [
+    21,
+    9999999
+  ],
+  "test_save_markers_matched": true,
+  "reply": "bound research_only",
+  "session_after": "1 research_only 491883538a2bbf973ffe4f5c5f15ff7d8fd7247f183225348040a41c325f6b61 9bfcd8ee209c2ca23a58958f5faa782b33184997ed25e0eee7a102f03f014c5e 0",
+  "wallet_after": [
+    21,
+    9999999
+  ]
+}

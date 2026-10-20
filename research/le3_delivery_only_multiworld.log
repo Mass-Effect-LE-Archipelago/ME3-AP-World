@@ -1,0 +1,13 @@
+C:\Users\unowi\Documents\APWorldMaker\ME3 LE Randomizer\Archipelago-main\NetUtils.py:568: UserWarning: _speedups not available. Falling back to pure python LocationStore. Install a matching C++ compiler for your platform to compile _speedups.
+  warnings.warn("_speedups not available. Falling back to pure python LocationStore. "
+Disconnected from multiworld server
+{
+  "server": "real Archipelago loopback",
+  "native_bridge": "fake protocol; no in-game claim",
+  "received_items": 2,
+  "native_cursor": 2,
+  "credits": 1000,
+  "location_checks": 0,
+  "client_goal_sent": false,
+  "research_binding_matches_room_seed": true
+}

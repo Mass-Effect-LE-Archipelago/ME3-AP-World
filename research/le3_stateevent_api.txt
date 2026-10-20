@@ -1,0 +1,28 @@
+LegendaryExplorerCore.Unreal.EBioConversationType
+LegendaryExplorerCore.Unreal.BinaryConverters.BioStateEventMap
+Void .ctor()
+LegendaryExplorerCore.Unreal.BinaryConverters.BioStateEventMap Create()
+System.Collections.Generic.List`1[System.ValueTuple`2[LegendaryExplorerCore.Unreal.NameReference,System.String]] GetNames(LegendaryExplorerCore.Packages.MEGame)
+LegendaryExplorerCore.Unreal.BinaryConverters.BioStateEventMap+BioStateEvent
+Void .ctor()
+LegendaryExplorerCore.Unreal.BinaryConverters.BioStateEventMap+BioStateEventElementType
+LegendaryExplorerCore.Unreal.BinaryConverters.BioStateEventMap+BioStateEventElement
+Void .ctor()
+LegendaryExplorerCore.Unreal.BinaryConverters.BioStateEventMap+BioStateEventElementBool
+Void .ctor()
+LegendaryExplorerCore.Unreal.BinaryConverters.BioStateEventMap+BioStateEventElementConsequence
+Void .ctor()
+LegendaryExplorerCore.Unreal.BinaryConverters.BioStateEventMap+BioStateEventElementFloat
+Void .ctor()
+LegendaryExplorerCore.Unreal.BinaryConverters.BioStateEventMap+BioStateEventElementFunction
+Void .ctor()
+LegendaryExplorerCore.Unreal.BinaryConverters.BioStateEventMap+BioStateEventElementInt
+Void .ctor()
+LegendaryExplorerCore.Unreal.BinaryConverters.BioStateEventMap+BioStateEventElementLocalBool
+Void .ctor()
+LegendaryExplorerCore.Unreal.BinaryConverters.BioStateEventMap+BioStateEventElementLocalFloat
+Void .ctor()
+LegendaryExplorerCore.Unreal.BinaryConverters.BioStateEventMap+BioStateEventElementLocalInt
+Void .ctor()
+LegendaryExplorerCore.Unreal.BinaryConverters.BioStateEventMap+BioStateEventElementSubstate
+Void .ctor()

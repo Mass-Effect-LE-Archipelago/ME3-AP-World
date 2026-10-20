@@ -1,0 +1,15 @@
+{
+  "verification": "actual snapshots replayed through packaged source detector",
+  "server_contacted": false,
+  "items_delivered": false,
+  "save_reload_verified": true,
+  "fresh_process_reload_verified": false,
+  "newly_observed_ids": [
+    1295192353,
+    1295192584
+  ],
+  "newly_observed_names": [
+    "Earth Finale: AAGun - Heavy Cain 2",
+    "Earth Finale: Rooftop - Supply Cache"
+  ]
+}

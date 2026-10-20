@@ -1,0 +1,43 @@
+{
+  "game": "C:\\Steam\\steamapps\\common\\Mass Effect Legendary Edition\\Game\\ME3",
+  "status": "installed",
+  "original_sha256": "653247e35db8d6453e83a008c805a877fd2d56a1d844282f9065ce2f34388fec",
+  "loader_sha256": "7d624513bb112aa436105b41179d44433ad9c12376cb2c0df42bea9440fa4dc6",
+  "bridge_sha256": "0138523b56a27ab9a77c1ddc638ad34f8a2d47166fdedb0ac516f331bfe8b614",
+  "loader_source_commit": "1c435d8df0367642d9fc8572b67b6ae92295967e",
+  "installed_utc": "2026-10-14T13:36:08.217859+00:00",
+  "runtime_verified": false,
+  "previous_bridge_hashes": [
+    "549cc50e611231f0c66504f859c903b69495cb85d3774b574bf4b5b50a187a44",
+    "56878ec42fc0a0bf07af31e007271bb6717fbc40c56edde62662df115c95e1fe",
+    "20b6c351d742920d94660a1531e64944eb31f04828fded025a3f8db85b676efa"
+  ],
+  "updated_utc": "2026-10-15T20:32:32.940933+00:00",
+  "runtime_validation": {
+    "bridge_version": "0.1.2-research",
+    "baseline": "research/live_baseline_01.json",
+    "handshake": true,
+    "hud_dispatch": true,
+    "map": true,
+    "plot_bools": true,
+    "plot_ints": true,
+    "gaw_inventory": true,
+    "uses_command": true,
+    "uses_transition": true,
+    "save_reload_persistence": true,
+    "playable_archipelago": false,
+    "verified_pickup_ids": [
+      1295192353,
+      1295192584
+    ],
+    "persistent_guid_bytes_in_new_save": true,
+    "research_identity_binding": true,
+    "indexed_credit_delivery": true,
+    "credit_duplicate_suppression": true,
+    "wrong_identity_rejection": true,
+    "delivery_save_reload_owner_confirmed": true,
+    "delivery_disk_serialization_recovered": true,
+    "delivery_evidence": "research/delivery_runtime_validation.json"
+  },
+  "bridge_profile": "delivery-dev"
+}
