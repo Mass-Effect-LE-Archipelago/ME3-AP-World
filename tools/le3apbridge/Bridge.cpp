@@ -42,15 +42,18 @@ ProcessEvent* Original = nullptr;
 thread_local bool InRead = false;
 // Resolve a hot-path function at most once per second until it exists, so an
 // early or missing name never turns every ProcessEvent into an object scan.
-UFunction* Resolve(UFunction*& cached, ULONGLONG& retry, wchar_t const* name) {
-    if (!cached && GetTickCount64() >= retry) {
-        cached = UObject::FindObject<UFunction>(name);
-        retry = GetTickCount64() + 1000;
-    }
-    return cached;
+// Atomic publication: ProcessEvent can run on several engine threads.
+UFunction* Resolve(std::atomic<UFunction*>& cached, std::atomic<ULONGLONG>& retry, wchar_t const* name) {
+    if (auto* found = cached.load()) return found;
+    ULONGLONG const now = GetTickCount64();
+    ULONGLONG due = retry.load();
+    if (now < due || !retry.compare_exchange_strong(due, now + 1000)) return nullptr;
+    auto* found = UObject::FindObject<UFunction>(name);
+    if (found) cached.store(found);
+    return found;
 }
 // Last HUD world, refreshed every frame on the game thread; used by the landing gate.
-ABioWorldInfo* FrameWorld = nullptr;
+std::atomic<ABioWorldInfo*> FrameWorld{nullptr};
 
 bool Live(UObject* object) {
     return object && !Common::IsDefaultObject(object) && !Common::IsDestroyed(object);
@@ -131,11 +134,12 @@ bool CerberusLandingBlocked(UObject* context) {
     static UFunction* getTable = UObject::FindObject<UFunction>(L"Function SFXGame.BioWorldInfo.GetGlobalVariables");
     static UFunction* getInt = UObject::FindObject<UFunction>(L"Function SFXGame.BioGlobalVariableTable.GetInt");
     // Without a readable plot table the save's AP state is unknown: fail closed.
-    if (!Live(FrameWorld) || !getTable || !getInt || !(getTable->FunctionFlags & 0x400) || !(getInt->FunctionFlags & 0x400)) return true;
+    auto* world = FrameWorld.load();
+    if (!Live(world) || !getTable || !getInt || !(getTable->FunctionFlags & 0x400) || !(getInt->FunctionFlags & 0x400)) return true;
     struct TableResult { UBioGlobalVariableTable* value = nullptr; } table;
-    Original(FrameWorld, getTable, &table, nullptr);
+    Original(world, getTable, &table, nullptr);
     if (!table.value || Common::IsDestroyed(table.value)) return true;
-    DeliveryHost host{FrameWorld, table.value, getInt};
+    DeliveryHost host{world, table.value, getInt};
     return Delivery::gateBlocks(host);
 }
 #endif
@@ -230,15 +234,15 @@ void Hook(UObject* context, UFunction* function, void* parameters, void* result)
 #endif
     // Only the HUD frame callback drains requests. Other engine threads and SDK
     // re-entrancy cannot run the game-facing readers.
-    static UFunction* frame = nullptr;
-    static ULONGLONG frameRetry = 0;
-    if (function) Resolve(frame, frameRetry, L"Function SFXGame.BioHUD.PostRender");
-    if (function && function == frame && Live(context)) {
+    static std::atomic<UFunction*> frameCache{nullptr};
+    static std::atomic<ULONGLONG> frameRetry{0};
+    UFunction* const frame = function ? Resolve(frameCache, frameRetry, L"Function SFXGame.BioHUD.PostRender") : nullptr;
+    if (frame && function == frame && Live(context)) {
         auto* actor = context->Cast<AActor>();
-        FrameWorld = actor && Live(actor->WorldInfo) ? actor->WorldInfo->Cast<ABioWorldInfo>() : nullptr;
+        FrameWorld.store(actor && Live(actor->WorldInfo) ? actor->WorldInfo->Cast<ABioWorldInfo>() : nullptr);
     }
     if (HasPending.load() && !InRead && function) {
-        if (function == frame && Live(context)) {
+        if (frame && function == frame && Live(context)) {
             auto* actor = context->Cast<AActor>();
             if (actor) {
                 std::shared_ptr<Pending> request;
@@ -258,10 +262,10 @@ void Hook(UObject* context, UFunction* function, void* parameters, void* result)
     }
     Original(context, function, parameters, result);
 #if LE3AP_DELIVERY_DEV
-    static UFunction* landing = nullptr;
-    static ULONGLONG landingRetry = 0;
-    if (function) Resolve(landing, landingRetry, L"Function SFXGame.BioPlanet.CanBeInteractedWith");
-    if (function && function == landing && parameters && function->ReturnValueOffset >= 0) {
+    static std::atomic<UFunction*> landingCache{nullptr};
+    static std::atomic<ULONGLONG> landingRetry{0};
+    UFunction* const landing = function ? Resolve(landingCache, landingRetry, L"Function SFXGame.BioPlanet.CanBeInteractedWith") : nullptr;
+    if (landing && function == landing && parameters && function->ReturnValueOffset >= 0) {
         auto* allowed = reinterpret_cast<unsigned long*>(static_cast<char*>(parameters) + function->ReturnValueOffset);
         if (*allowed) {
             try { if (CerberusLandingBlocked(context)) *allowed = 0; }
