@@ -10,3 +10,7 @@
 ## Import test 01
 
 Edits `research/me2_import_test_01_edits.json`: Collector Base destroyed -> saved; Virmire Ashley -> Kaidan in both the ME1 table and ME2's own copy (1540/1541). Output SHA256 `b0fd2108c65f04ab9829cc74eaf47da15770ff9a7c75920ac7db7007b9009459`, placed as a new career folder `Save/ME2/Vector_22_Sentinel_241026_a9e0001/Save_0001.pcsav` (no existing file touched). Expected after ME3 import: 13827=0, 13828=1, 13939=1, 13940=0, 1831=0, 1832=1.
+
+### Result (2026-10-24, live)
+
+Owner imported the edited career; ME3 accepted it and reached `Biop_ProEar` with no Genesis comic. Live readback: 13827=0, 13828=1, 13939=1, 13940=0, 1831=0, 1832=1, exactly as expected, confirming the ME2 same-index and ME1 +10000 mappings. History readers (`research/me2_import_test_01_history.json`): Kaidan, Collector Base preserved, ME1 Ashley romance, Tali, 12 squad, no warnings. Trace (`research/career_trace_02_import.json`): FinalCommit origin 2 (ME2 import), SetPlotChoices skipped as the source predicts.
