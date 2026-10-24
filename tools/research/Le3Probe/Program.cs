@@ -9,8 +9,12 @@ using LegendaryExplorerCore.GameFilesystem;
 
 // Export tables only; never save, patch, or load gameplay state.
 MEPackageHandler.Initialize();
-LegendaryExplorerCore.Compression.OodleHelper.LoadOodleDll(
-    Path.GetFullPath("ME3LE Backup/Binaries/Win64/oo2core_8_win64.dll"));
+// Supplied backup first, then LE3_OODLE_DLL, then the installed game's copy.
+LegendaryExplorerCore.Compression.OodleHelper.LoadOodleDll(new[] {
+        Path.GetFullPath("ME3LE Backup/Binaries/Win64/oo2core_8_win64.dll"),
+        Environment.GetEnvironmentVariable("LE3_OODLE_DLL") ?? "",
+        @"C:\Steam\steamapps\common\Mass Effect Legendary Edition\Game\ME3\Binaries\Win64\oo2core_8_win64.dll" }
+    .First(path => path.Length > 0 && File.Exists(path)));
 if (args.Length > 1 && args[0] == "--state-events")
 {
     // Binary state-event data is not exposed by ExportEntry.GetProperties().
