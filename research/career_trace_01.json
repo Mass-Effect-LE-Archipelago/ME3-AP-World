@@ -1,0 +1,490 @@
+{
+  "schema": 1,
+  "utc": "2026-10-24T19:02:51.718405+00:00",
+  "read_only": true,
+  "history_initialized": false,
+  "server_contacted": false,
+  "bridge_version": "0.3.0-career-trace",
+  "trace": {
+    "target_mask": 31,
+    "oldest": 1,
+    "latest": 16,
+    "gap": null,
+    "records": [
+      {
+        "sequence": 1,
+        "invocation": 1,
+        "thread": 57036,
+        "route": 2,
+        "method": 1,
+        "leaving": 0,
+        "depth": 1,
+        "origin": 0,
+        "table": 1,
+        "valid": 15,
+        "values": 0
+      },
+      {
+        "sequence": 2,
+        "invocation": 2,
+        "thread": 57036,
+        "route": 1,
+        "method": 1,
+        "leaving": 0,
+        "depth": 2,
+        "origin": 0,
+        "table": 1,
+        "valid": 15,
+        "values": 0
+      },
+      {
+        "sequence": 3,
+        "invocation": 3,
+        "thread": 57036,
+        "route": 2,
+        "method": 3,
+        "leaving": 0,
+        "depth": 2,
+        "origin": 0,
+        "table": 1,
+        "valid": 15,
+        "values": 0
+      },
+      {
+        "sequence": 4,
+        "invocation": 3,
+        "thread": 57036,
+        "route": 2,
+        "method": 3,
+        "leaving": 1,
+        "depth": 2,
+        "origin": 0,
+        "table": 1,
+        "valid": 15,
+        "values": 0
+      },
+      {
+        "sequence": 5,
+        "invocation": 4,
+        "thread": 57036,
+        "route": 2,
+        "method": 4,
+        "leaving": 0,
+        "depth": 2,
+        "origin": 0,
+        "table": 2,
+        "valid": 15,
+        "values": 0
+      },
+      {
+        "sequence": 6,
+        "invocation": 4,
+        "thread": 57036,
+        "route": 2,
+        "method": 4,
+        "leaving": 1,
+        "depth": 2,
+        "origin": 0,
+        "table": 2,
+        "valid": 15,
+        "values": 1
+      },
+      {
+        "sequence": 7,
+        "invocation": 5,
+        "thread": 57036,
+        "route": 2,
+        "method": 2,
+        "leaving": 0,
+        "depth": 2,
+        "origin": 0,
+        "table": 1,
+        "valid": 15,
+        "values": 1
+      },
+      {
+        "sequence": 8,
+        "invocation": 6,
+        "thread": 57036,
+        "route": 1,
+        "method": 2,
+        "leaving": 0,
+        "depth": 2,
+        "origin": 0,
+        "table": 1,
+        "valid": 15,
+        "values": 1
+      },
+      {
+        "sequence": 9,
+        "invocation": 6,
+        "thread": 57036,
+        "route": 1,
+        "method": 2,
+        "leaving": 1,
+        "depth": 2,
+        "origin": 0,
+        "table": 1,
+        "valid": 15,
+        "values": 1
+      },
+      {
+        "sequence": 10,
+        "invocation": 5,
+        "thread": 57036,
+        "route": 2,
+        "method": 2,
+        "leaving": 1,
+        "depth": 2,
+        "origin": 0,
+        "table": 1,
+        "valid": 15,
+        "values": 1
+      },
+      {
+        "sequence": 11,
+        "invocation": 7,
+        "thread": 57036,
+        "route": 2,
+        "method": 5,
+        "leaving": 0,
+        "depth": 2,
+        "origin": 0,
+        "table": 1,
+        "valid": 15,
+        "values": 1
+      },
+      {
+        "sequence": 12,
+        "invocation": 8,
+        "thread": 57036,
+        "route": 1,
+        "method": 5,
+        "leaving": 0,
+        "depth": 2,
+        "origin": 0,
+        "table": 1,
+        "valid": 15,
+        "values": 1
+      },
+      {
+        "sequence": 13,
+        "invocation": 8,
+        "thread": 57036,
+        "route": 1,
+        "method": 5,
+        "leaving": 1,
+        "depth": 2,
+        "origin": 0,
+        "table": 1,
+        "valid": 15,
+        "values": 1
+      },
+      {
+        "sequence": 14,
+        "invocation": 7,
+        "thread": 57036,
+        "route": 2,
+        "method": 5,
+        "leaving": 1,
+        "depth": 2,
+        "origin": 0,
+        "table": 1,
+        "valid": 15,
+        "values": 1
+      },
+      {
+        "sequence": 15,
+        "invocation": 2,
+        "thread": 57036,
+        "route": 1,
+        "method": 1,
+        "leaving": 1,
+        "depth": 2,
+        "origin": 0,
+        "table": 1,
+        "valid": 15,
+        "values": 1
+      },
+      {
+        "sequence": 16,
+        "invocation": 1,
+        "thread": 57036,
+        "route": 2,
+        "method": 1,
+        "leaving": 1,
+        "depth": 1,
+        "origin": 0,
+        "table": 1,
+        "valid": 15,
+        "values": 1
+      }
+    ]
+  },
+  "analysis": {
+    "commits": [
+      {
+        "thread": 57036,
+        "origin": 0,
+        "events": [
+          {
+            "sequence": 1,
+            "invocation": 1,
+            "method": "FinalCommit",
+            "route": "call_function",
+            "phase": "enter",
+            "table": "world_accessor",
+            "plots": {
+              "13827": false,
+              "13828": false,
+              "13940": false,
+              "13939": false
+            }
+          },
+          {
+            "sequence": 2,
+            "invocation": 2,
+            "method": "FinalCommit",
+            "route": "internal",
+            "phase": "enter",
+            "table": "world_accessor",
+            "plots": {
+              "13827": false,
+              "13828": false,
+              "13940": false,
+              "13939": false
+            }
+          },
+          {
+            "sequence": 3,
+            "invocation": 3,
+            "method": "CreateCareer",
+            "route": "call_function",
+            "phase": "enter",
+            "table": "world_accessor",
+            "plots": {
+              "13827": false,
+              "13828": false,
+              "13940": false,
+              "13939": false
+            }
+          },
+          {
+            "sequence": 4,
+            "invocation": 3,
+            "method": "CreateCareer",
+            "route": "call_function",
+            "phase": "leave",
+            "table": "world_accessor",
+            "plots": {
+              "13827": false,
+              "13828": false,
+              "13940": false,
+              "13939": false
+            }
+          },
+          {
+            "sequence": 5,
+            "invocation": 4,
+            "method": "SetNewGamePlotStates",
+            "route": "call_function",
+            "phase": "enter",
+            "table": "default_context",
+            "plots": {
+              "13827": false,
+              "13828": false,
+              "13940": false,
+              "13939": false
+            }
+          },
+          {
+            "sequence": 6,
+            "invocation": 4,
+            "method": "SetNewGamePlotStates",
+            "route": "call_function",
+            "phase": "leave",
+            "table": "default_context",
+            "plots": {
+              "13827": true,
+              "13828": false,
+              "13940": false,
+              "13939": false
+            }
+          },
+          {
+            "sequence": 7,
+            "invocation": 5,
+            "method": "SetPlotChoices",
+            "route": "call_function",
+            "phase": "enter",
+            "table": "world_accessor",
+            "plots": {
+              "13827": true,
+              "13828": false,
+              "13940": false,
+              "13939": false
+            }
+          },
+          {
+            "sequence": 8,
+            "invocation": 6,
+            "method": "SetPlotChoices",
+            "route": "internal",
+            "phase": "enter",
+            "table": "world_accessor",
+            "plots": {
+              "13827": true,
+              "13828": false,
+              "13940": false,
+              "13939": false
+            }
+          },
+          {
+            "sequence": 9,
+            "invocation": 6,
+            "method": "SetPlotChoices",
+            "route": "internal",
+            "phase": "leave",
+            "table": "world_accessor",
+            "plots": {
+              "13827": true,
+              "13828": false,
+              "13940": false,
+              "13939": false
+            }
+          },
+          {
+            "sequence": 10,
+            "invocation": 5,
+            "method": "SetPlotChoices",
+            "route": "call_function",
+            "phase": "leave",
+            "table": "world_accessor",
+            "plots": {
+              "13827": true,
+              "13828": false,
+              "13940": false,
+              "13939": false
+            }
+          },
+          {
+            "sequence": 11,
+            "invocation": 7,
+            "method": "UpdatePlayerSaveRecord",
+            "route": "call_function",
+            "phase": "enter",
+            "table": "world_accessor",
+            "plots": {
+              "13827": true,
+              "13828": false,
+              "13940": false,
+              "13939": false
+            }
+          },
+          {
+            "sequence": 12,
+            "invocation": 8,
+            "method": "UpdatePlayerSaveRecord",
+            "route": "internal",
+            "phase": "enter",
+            "table": "world_accessor",
+            "plots": {
+              "13827": true,
+              "13828": false,
+              "13940": false,
+              "13939": false
+            }
+          },
+          {
+            "sequence": 13,
+            "invocation": 8,
+            "method": "UpdatePlayerSaveRecord",
+            "route": "internal",
+            "phase": "leave",
+            "table": "world_accessor",
+            "plots": {
+              "13827": true,
+              "13828": false,
+              "13940": false,
+              "13939": false
+            }
+          },
+          {
+            "sequence": 14,
+            "invocation": 7,
+            "method": "UpdatePlayerSaveRecord",
+            "route": "call_function",
+            "phase": "leave",
+            "table": "world_accessor",
+            "plots": {
+              "13827": true,
+              "13828": false,
+              "13940": false,
+              "13939": false
+            }
+          },
+          {
+            "sequence": 15,
+            "invocation": 2,
+            "method": "FinalCommit",
+            "route": "internal",
+            "phase": "leave",
+            "table": "world_accessor",
+            "plots": {
+              "13827": true,
+              "13828": false,
+              "13940": false,
+              "13939": false
+            }
+          },
+          {
+            "sequence": 16,
+            "invocation": 1,
+            "method": "FinalCommit",
+            "route": "call_function",
+            "phase": "leave",
+            "table": "world_accessor",
+            "plots": {
+              "13827": true,
+              "13828": false,
+              "13940": false,
+              "13939": false
+            }
+          }
+        ],
+        "complete": true,
+        "order": [
+          "FinalCommit:enter",
+          "CreateCareer:enter",
+          "CreateCareer:leave",
+          "SetNewGamePlotStates:enter",
+          "SetNewGamePlotStates:leave",
+          "SetPlotChoices:enter",
+          "SetPlotChoices:leave",
+          "UpdatePlayerSaveRecord:enter",
+          "UpdatePlayerSaveRecord:leave",
+          "FinalCommit:leave"
+        ],
+        "routes": [
+          "CreateCareer:call_function",
+          "FinalCommit:call_function",
+          "FinalCommit:internal",
+          "SetNewGamePlotStates:call_function",
+          "SetPlotChoices:call_function",
+          "SetPlotChoices:internal",
+          "UpdatePlayerSaveRecord:call_function",
+          "UpdatePlayerSaveRecord:internal"
+        ],
+        "seam_observed": true,
+        "virmire_after_plot_choices": {
+          "13827": true,
+          "13828": false,
+          "13940": false,
+          "13939": false
+        }
+      }
+    ],
+    "preview_tables_initialized": 0,
+    "findings": []
+  }
+}

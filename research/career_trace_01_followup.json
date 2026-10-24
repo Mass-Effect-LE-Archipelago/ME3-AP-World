@@ -1,0 +1,15 @@
+{
+  "schema": 1,
+  "utc": "2026-10-24T19:03:57.572631+00:00",
+  "read_only": true,
+  "owner_report": "New Career, not import; owner chose Kaidan as Virmire survivor; Earth prologue playing",
+  "trace_receipt": "research/career_trace_01.json",
+  "live_readback_after_prologue_start": {
+    "map": "Biop_ProEar",
+    "13827_rescued_ash": 0,
+    "13828_rescued_kaidan": 1,
+    "13940_humanfemale_in_party": 0,
+    "13939_humanmale_in_party": 1
+  },
+  "finding": "FinalCommit order matches source (CreateCareer, SetNewGamePlotStates, SetPlotChoices, UpdatePlayerSaveRecord). But at FinalCommit exit only 13827 was set (by SetNewGamePlotStates); SetPlotChoices changed nothing. The owner's Kaidan choice was applied by some later writer before the prologue. The candidate seam after SetPlotChoices is therefore NOT the last vanilla writer of history; AP history written there would be overwritten."
+}
