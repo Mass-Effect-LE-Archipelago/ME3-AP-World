@@ -1,0 +1,92 @@
+Areas,Name,ID,Requirements,Traits,Rank,Fake Items
+Rabanastre,Vaan,_1,,,0,Vaan
+Giza Plains Dry,Penelo,_2,,,0,Penelo
+Dreadnought Leviathan,Dreadnought Leviathan Guest,_3,,,1,Guest
+Dreadnought Leviathan,Ashe,_4,I(8076),,1,Ashe
+Dreadnought Leviathan,Defeat Judge Ghis,_5,I(8076),,1,Defeat Ghis
+Royal Palace,Escape Characters,_6,,,1,Balthier|Fran|Guest
+Barheim Passage Story,Barheim Guest,_7,,,1,Guest
+Tomb of Raithwall,Defeat Vossler,_8,,,3,Defeat Vossler
+Mt. Bur-Omisace,Defeat Bergan,_9,I(808B),,3,Defeat Bergan
+Dalmasca Westersand,Defeat Earth Tyrant,_10,AND(I(80B1)|I(80B2)|I(Defeat Vossler)),,4,Defeat Earth Tyrant
+Draklor Laboratory,Defeat Cid,_11,I(809E),,5,Defeat Cid
+Rabanastre,Hunt 1: Rogue Tomato,_12,A(Dalmasca Estersand),,1,Hunt
+Rabanastre,Hunt 2: Thextera,_13,A(Dalmasca Westersand),,1,Hunt
+Dalmasca Estersand,Hunt 3: Flowering Cactoid,_14,I(8073),,1,Hunt
+Lowtown,Hunt 4: Wraith,_15,A(Garamsythe Waterway),,1,Hunt
+Bhujerba,Hunt 5: Nidhogg,_16,A(Lhusu Mines),,1,Hunt
+Rabanastre,Hunt 6: White Mousse,_17,AND(I(80AE)|A(Garamsythe Waterway)),,5,Hunt
+Lowtown,Hunt 7: Ring Wyrm,_18,A(Dalmasca Westersand),,5,Hunt
+Rabanastre,Hunt 8: Wyvern Lord,_19,A(Nam-Yensa Sandsea),,2,Hunt
+Rabanastre,Hunt 9: Marilith,_20,AND(I(808E)|A(Zertinan Caverns NE)),,5,Hunt
+Jahara,Hunt 10: Enkelados,_21,AND(I(8086)|A(Ozmone Plain)),,2,Hunt
+Giza Plains Rains,Hunt 11: Croakadile,_22,AND(I(807C)|I(80E0)),,2,Hunt
+Jahara,Hunt 12: Ixtab,_23,A(Ozmone Plain),,2,Hunt
+Mt. Bur-Omisace,Hunt 13: Feral Retriever,_24,A(Paramina Rift),,3,Hunt
+Eruyt Village,Hunt 14: Vorpal Bunny,_25,AND(A(Golmore Jungle S)|I(8087)),,3,Hunt
+Jahara,Hunt 15: Mindflayer,_26,A(Henne Mines),,4,Hunt
+Dalmasca Estersand,Hunt 16: Bloodwing,_27,A(Barheim Passage),,5,Hunt
+Nalbina Fortress,Hunt 17: Atomos,_28,A(Mosphoran Highwaste),,3,Hunt|Jovy
+Nalbina Fortress,Hunt 18: Roblon,_29,A(Nabreus Deadlands),,6,Hunt|Jovy
+Mosphoran Highwaste,Hunt 19: Braegh,_30,A(Salikawood NW),,4,Hunt
+Archades,Hunt 20: Darksteel,_31,A(Sochen Cave Palace Middle),,4,Hunt
+Balfonheim,Hunt 21: Vyraal,_32,AND(I(809B)|A(Cerobi Steppe)),,5,Hunt
+Old Archades,Hunt 22: Lindwyrm,_33,AND(A(Tchita Uplands)|I(808A)),,5,Hunt
+Archades,Hunt 23: Overlord,_34,A(Sochen Cave Palace S),,6,Hunt
+Nalbina Fortress,Hunt 24: Goliath,_35,A(Necrohol of Nabudis),,6,Hunt|Jovy
+Nalbina Fortress,Hunt 25: Deathscythe,_36,A(Necrohol of Nabudis),,6,Hunt|Jovy
+Skyferry,Hunt 26: Deathgaze,_37,,,7,Hunt
+Bhujerba,Hunt 27: Diabolos,_38,AND(I(807E)|I(807F)|A(Lhusu Mines)),,7,Hunt
+Mt. Bur-Omisace,Hunt 28: Piscodaemon,_39,A(Giruvegan),,5,Hunt
+Eruyt Village,Hunt 29: Wild Malboro,_40,A(Feywood),,6,Hunt
+Jahara,Hunt 30: Catoblepas,_41,A(Zertinan Caverns Center),,6,Hunt
+Mt. Bur-Omisace,Hunt 31: Fafnir,_42,AND(A(Paramina Rift)|I(809A)),,7,Hunt
+Balfonheim,Hunt 32: Pylraster,_43,A(Ridorana Cataract),,7,Hunt
+Giza Plains Dry,Hunt 33: Cluckatrice,_44,I(8071),,1,Hunt
+Bhujerba,Hunt 34: Rocktoise,_45,AND(I(8071)|A(Lhusu Mines)),,1,Hunt
+Lowtown,Hunt 35: Orthros,_46,AND(I(8071)|I(8092)|I(Fran)|I(Ashe)|I(Penelo)|A(Garamsythe Waterway)),,5,Hunt
+Giza Plains Dry,Hunt 36: Gil Snapper,_47,AND(I(8071)|I(807D)|A(Giza Plains Rains)),,3,Hunt
+Mt. Bur-Omisace,Hunt 37: Trickster,_48,AND(A(Paramina Rift)|I(8071)),,5,Hunt
+Bhujerba,Hunt 38: Antlion,_49,AND(I(8071)|I(807E)|A(Lhusu Mines)),,5,Hunt
+Aerodrome,Hunt 39: Carrot,_50,AND(I(8071)|A(Salikawood)),,7,Hunt|Jovy
+Clan Hall,Hunt 40: Gilgamesh,_51,AND(I(8071)|I(807E)|I(807F)|A(Lhusu Mines)),,7,Hunt
+Clan Hall,Hunt 41: Belito,_52,AND(I(8071)|A(Nam-Yensa Sandsea Belito)),,5,Hunt
+Lowtown,Hunt 42: Behemoth King,_53,AND(A(Feywood)|I(8071)),,7,Hunt
+Balfonheim,Hunt 43: Ixion,_54,AND(I(8071)|A(Pharos of Ridorana Subterra)),,6,Hunt
+Clan Hall,Hunt 44: Shadowseer,_55,AND(I(8071)|A(Pharos of Ridorana Subterra)|I(2116|24)),,6,Hunt
+Clan Hall,Hunt 45: Yiazmat,_56,AND(I(8071)|A(Ridorana Cataract)),,8,Hunt
+Balfonheim,Reddas,_70,AND(I(Defeat Cid)|I(808C)),,0,Guest
+Lowtown,Basch,_71,I(8075),,0,Basch
+Phon Coast,Thalassinon - Shelled Trophy,_72,,,6,HuntClubStart
+Garamsythe Waterway,Gavial - Fur-scaled Trophy,_73,AND(I(80B8)|I(HuntClubStart)),,6,HuntClubKill
+Barheim Passage,Ishteen - Bony Trophy,_74,AND(I(80B8)|I(HuntClubStart)),,7,HuntClubKill
+Dalmasca Westersand,Kaiser Wolf - Fanged Trophy,_75,AND(I(80B8)|I(HuntClubStart)),,5,HuntClubKill
+Dalmasca Estersand,Terror Tyrant - Hide-covered Trophy,_76,AND(I(80B8)|I(HuntClubStart)),,7,HuntClubKill
+Giza Plains Dry,Nazarnir - Maned Trophy,_77,AND(I(80B8)|I(HuntClubStart)),,7,HuntClubKill
+Zertinan Caverns Center,Alteci - Fell Trophy,_78,AND(I(80B8)|I(HuntClubStart)),,5,HuntClubKill
+Lhusu Mines,Disma - Accursed Trophy,_79,AND(I(80B8)|I(807E)|I(807F)|I(HuntClubStart)),,7,HuntClubKill
+Ogir-Yensa Sandsea,Bull Chocobo - Beaked Trophy,_80,AND(I(80B8)|I(HuntClubStart)),,7,HuntClubKill
+Nam-Yensa Sandsea,Victanir - Maverick Trophy,_81,AND(I(80B8)|I(HuntClubStart)),,7,HuntClubKill
+Tomb of Raithwall,Zombie Lord - Soulless Trophy,_82,AND(I(80B8)|I(HuntClubStart)),,6,HuntClubKill
+Mosphoran Highwaste Upper,Dheed - Leathern Trophy,_83,AND(I(80B8)|I(HuntClubStart)),,7,HuntClubKill
+Salikawood NW,Rageclaw - Sickle Trophy,_84,AND(I(80B8)|I(HuntClubStart)),,5,HuntClubKill
+Nabreus Deadlands,Arioch - Vengeful Trophy,_85,AND(I(80B8)|I(HuntClubStart)),,7,HuntClubKill
+Necrohol of Nabudis,Vorres - Gravesoil Trophy,_86,AND(I(80B8)|I(HuntClubStart)),,7,HuntClubKill
+Ozmone Plain,Killbug - Metallic Trophy,_87,AND(I(80B8)|I(HuntClubStart)),,6,HuntClubKill
+Henne Mines,Melt - Slimy Trophy,_88,AND(I(80B8)|I(HuntClubStart)),,7,HuntClubKill
+Golmore Jungle S,Biding Mantis - Scythe Trophy,_89,AND(I(80B8)|I(HuntClubStart)),,6,HuntClubKill
+Feywood,Dreadguard - Feathered Trophy,_90,AND(I(80B8)|I(HuntClubStart)),,7,HuntClubKill
+Great Crystal,Crystal Knight - Skull Trophy,_91,AND(I(80B8)|I(HuntClubStart)),,5,HuntClubKill
+Paramina Rift,Ancbolder - Mind Trophy,_92,AND(I(80B8)|I(HuntClubStart)),,5,HuntClubKill
+Stilshrine of Miriam,Myath - Eternal Trophy,_93,AND(I(80B8)|I(HuntClubStart)|I(8078)),,5,HuntClubKill
+Phon Coast,Skullash - Clawed Trophy,_94,AND(I(80B8)|I(HuntClubStart)),,7,HuntClubKill
+Tchita Uplands,Kris - Odiferous Trophy,_95,AND(I(80B8)|I(HuntClubStart)),,7,HuntClubKill
+Tchita Uplands,Grimalkin - Whiskered Trophy,_96,AND(I(80B8)|I(HuntClubStart)),,7,HuntClubKill
+Sochen Cave Palace Middle,Wendice - Frigid Trophy,_97,AND(I(80B8)|I(HuntClubStart)),,5,HuntClubKill
+Sochen Cave Palace Middle,Anubys - Ensanguined Trophy,_98,AND(I(80B8)|I(HuntClubStart)),,7,HuntClubKill
+Cerobi Steppe,Bluesang - Cruel Trophy,_99,AND(I(80B8)|I(HuntClubStart)),,7,HuntClubKill
+Cerobi Steppe,Aspidochelon - Adamantine Trophy,_100,AND(I(80B8)|I(HuntClubStart)),,7,HuntClubKill
+Ridorana Cataract,Abelisk - Reptilian Trophy,_101,AND(I(80B8)|I(HuntClubStart)),,7,HuntClubKill
+Pharos of Ridorana,Avenger - Vile Trophy,_102,AND(I(80B8)|I(HuntClubStart)),,7,HuntClubKill
+Bahamut,Final Boss Victory,_103,,,8,Victory
+Jahara,Great-chief Elder After Defeating Vossler,_104,AND(I(Defeat Vossler)|I(8078)),,2,Guest

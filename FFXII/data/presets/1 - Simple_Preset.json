@@ -1,0 +1,209 @@
+{
+  "name": "1 - Simple",
+  "version": "0.8.0.13",
+  "flags": [
+    {
+      "FlagEnabled": false,
+      "FlagID": "EquipStats",
+      "FlagProperties": [
+        {
+          "Enabled": false,
+          "ID": "EquipHiddenStat"
+        }
+      ]
+    },
+    {
+      "FlagEnabled": false,
+      "FlagID": "EquipElem",
+      "FlagProperties": []
+    },
+    {
+      "FlagEnabled": false,
+      "FlagID": "EquipAug",
+      "FlagProperties": []
+    },
+    {
+      "FlagEnabled": false,
+      "FlagID": "EquipEff",
+      "FlagProperties": []
+    },
+    {
+      "FlagEnabled": true,
+      "FlagID": "Treasures",
+      "FlagProperties": [
+        {
+          "SelectedValues": [
+            "Defeat Cid 2 in Pharos",
+            "Find in Any Random Location"
+          ],
+          "ID": "WritGoals"
+        },
+        {
+          "SelectedValues": [],
+          "ID": "KeyItems"
+        },
+        {
+          "Value": 0,
+          "ID": "KeyChops"
+        },
+        {
+          "Value": 0,
+          "ID": "KeyBlackOrbs"
+        },
+        {
+          "Enabled": false,
+          "ID": "KeyStartingInv"
+        },
+        {
+          "Enabled": false,
+          "ID": "KeyPlaceTreas"
+        },
+        {
+          "Enabled": false,
+          "ID": "KeyPlaceHunt"
+        },
+        {
+          "Enabled": false,
+          "ID": "KeyPlaceRank"
+        },
+        {
+          "Enabled": false,
+          "ID": "KeyPlaceClanBoss"
+        },
+        {
+          "Enabled": false,
+          "ID": "KeyPlaceClanEsper"
+        },
+        {
+          "Enabled": false,
+          "ID": "KeyPlaceGrindy"
+        },
+        {
+          "Enabled": false,
+          "ID": "KeyPlaceHidden"
+        },
+        {
+          "SelectedValue": "Normal",
+          "ID": "KeyDepth"
+        },
+        {
+          "Enabled": true,
+          "ID": "KeyPlaceCharScale"
+        },
+        {
+          "Enabled": true,
+          "ID": "PlaceJunkScale"
+        },
+        {
+          "Value": 2,
+          "ID": "JunkRange"
+        },
+        {
+          "Enabled": false,
+          "ID": "ReplaceJunkAny"
+        }
+      ]
+    },
+    {
+      "FlagEnabled": true,
+      "FlagID": "Shops",
+      "FlagProperties": [
+        {
+          "Enabled": true,
+          "ID": "ShopsSameArea"
+        },
+        {
+          "Value": 20,
+          "ID": "ShopSize"
+        },
+        {
+          "Enabled": true,
+          "ID": "ShopJunkScale"
+        }
+      ]
+    },
+    {
+      "FlagEnabled": true,
+      "FlagID": "Bazaars",
+      "FlagProperties": []
+    },
+    {
+      "FlagEnabled": false,
+      "FlagID": "Seitengrat",
+      "FlagProperties": []
+    },
+    {
+      "FlagEnabled": true,
+      "FlagID": "StartingTpStone",
+      "FlagProperties": [
+        {
+          "Value": 50,
+          "ID": "TpStoneCount"
+        }
+      ]
+    },
+    {
+      "FlagEnabled": true,
+      "FlagID": "RandParty",
+      "FlagProperties": []
+    },
+    {
+      "FlagEnabled": true,
+      "FlagID": "RandBoards",
+      "FlagProperties": []
+    },
+    {
+      "FlagEnabled": false,
+      "FlagID": "StartBoards",
+      "FlagProperties": []
+    },
+    {
+      "FlagEnabled": true,
+      "FlagID": "HintsMain",
+      "FlagProperties": [
+        {
+          "SelectedValue": "Exact",
+          "ID": "HintsSpecific"
+        }
+      ]
+    },
+    {
+      "FlagEnabled": true,
+      "FlagID": "HintAbi",
+      "FlagProperties": []
+    },
+    {
+      "FlagEnabled": true,
+      "FlagID": "Music",
+      "FlagProperties": []
+    },
+    {
+      "FlagEnabled": true,
+      "FlagID": "EXPMult",
+      "FlagProperties": [
+        {
+          "Value": 200,
+          "ID": "EXPMultAmt"
+        },
+        {
+          "Value": 100,
+          "ID": "EXPMultBossAmt"
+        }
+      ]
+    },
+    {
+      "FlagEnabled": true,
+      "FlagID": "LPMult",
+      "FlagProperties": [
+        {
+          "Value": 150,
+          "ID": "LPMultAmt"
+        },
+        {
+          "Value": 100,
+          "ID": "LPMultBossAmt"
+        }
+      ]
+    }
+  ]
+}

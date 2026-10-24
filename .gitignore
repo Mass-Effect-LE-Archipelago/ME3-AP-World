@@ -25,3 +25,6 @@ obj/
 __pycache__/
 *.py[cod]
 .pytest_cache/
+
+# Owner-supplied save copies: local only.
+/ME2 Saves/

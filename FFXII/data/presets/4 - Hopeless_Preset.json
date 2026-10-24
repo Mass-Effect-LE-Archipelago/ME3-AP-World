@@ -1,0 +1,319 @@
+{
+  "name": "4 - Hopeless",
+  "version": "0.8.1.15",
+  "flags": [
+    {
+      "FlagEnabled": true,
+      "FlagID": "EquipStats",
+      "FlagProperties": [
+        {
+          "Enabled": true,
+          "ID": "EquipHiddenStat"
+        }
+      ]
+    },
+    {
+      "FlagEnabled": true,
+      "FlagID": "EquipElem",
+      "FlagProperties": []
+    },
+    {
+      "FlagEnabled": true,
+      "FlagID": "EquipAug",
+      "FlagProperties": []
+    },
+    {
+      "FlagEnabled": true,
+      "FlagID": "EquipEff",
+      "FlagProperties": []
+    },
+    {
+      "FlagEnabled": true,
+      "FlagID": "Treasures",
+      "FlagProperties": [
+        {
+          "SelectedValues": [
+            "Find on Random Max Sphere Location"
+          ],
+          "ID": "WritGoals"
+        },
+        {
+          "SelectedValues": [
+            "Accursed Trophy",
+            "Adamantine Trophy",
+            "Adrammelech Esper",
+            "Ageworn Key",
+            "Ann's Letter",
+            "Archades Aeropass",
+            "Balfonheim Aeropass",
+            "Barheim Key",
+            "Beaked Trophy",
+            "Belias Esper",
+            "Bhujerba Aeropass",
+            "Blackened Fragment",
+            "Bony Trophy",
+            "Broken Key",
+            "Cactus Flower",
+            "Chaos Esper",
+            "Clan Primer",
+            "Clawed Trophy",
+            "Crescent Stone",
+            "Cruel Trophy",
+            "Cuchulainn Esper",
+            "Dawn Shard",
+            "Dragon Scale",
+            "Dull Fragment",
+            "Dusty Letter",
+            "Ensanguined Trophy",
+            "Errmonea Leaf",
+            "Eternal Trophy",
+            "Exodus Esper",
+            "Famfrit Esper",
+            "Fanged Trophy",
+            "Feathered Trophy",
+            "Fell Trophy",
+            "Frigid Trophy",
+            "Fur-scaled Trophy",
+            "Goddess's Magicite",
+            "Gravesoil Trophy",
+            "Grimy Fragment",
+            "Hashmal Esper",
+            "Hide-covered Trophy",
+            "Lab Access Card",
+            "Leathern Trophy",
+            "Lente's Tear",
+            "Lusterless Medallion",
+            "Maned Trophy",
+            "Manufacted Nethicite",
+            "Mateus Esper",
+            "Maverick Trophy",
+            "Medallion of Bravery",
+            "Medallion of Love",
+            "Medallion of Might",
+            "Merchant's Armband",
+            "Metallic Trophy",
+            "Mind Trophy",
+            "Moonsilver Medallion",
+            "Nalbina Aeropass",
+            "No. 1 Brig Key",
+            "Odiferous Trophy",
+            "Pilika's Diary",
+            "Rabanastre Aeropass",
+            "Rabbit Tail",
+            "Rainstone",
+            "Reptilian Trophy",
+            "Ring of the Light",
+            "Ring of the Toad",
+            "Rusted Scrap of Armor",
+            "Sandalwood Chop",
+            "Scythe Trophy",
+            "Second Board",
+            "Serpentwyne Must",
+            "Shadestone",
+            "Shelled Trophy",
+            "Shemhazai Esper",
+            "Sickle Trophy",
+            "Silent Urn",
+            "Site 11 Key",
+            "Site 3 Key",
+            "Skull Trophy",
+            "Slimy Trophy",
+            "Sluice Gate Key",
+            "Soul Ward Key",
+            "Soulless Trophy",
+            "Stolen Articles",
+            "Stone of the Condemner",
+            "Sunstone",
+            "Sword of Kings",
+            "Sword of the Order",
+            "Systems Access Key",
+            "Treaty-Blade",
+            "Tube Fuse",
+            "Ultima Esper",
+            "Vengeful Trophy",
+            "Viera Rucksack",
+            "Vile Trophy",
+            "Whiskered Trophy",
+            "Wind Globe",
+            "Windvane",
+            "Zalera Esper",
+            "Zeromus Esper",
+            "Zodiark Esper"
+          ],
+          "ID": "KeyItems"
+        },
+        {
+          "Value": 28,
+          "ID": "KeyChops"
+        },
+        {
+          "Value": 24,
+          "ID": "KeyBlackOrbs"
+        },
+        {
+          "Enabled": true,
+          "ID": "KeyStartingInv"
+        },
+        {
+          "Enabled": true,
+          "ID": "KeyPlaceTreas"
+        },
+        {
+          "Enabled": true,
+          "ID": "KeyPlaceHunt"
+        },
+        {
+          "Enabled": true,
+          "ID": "KeyPlaceRank"
+        },
+        {
+          "Enabled": true,
+          "ID": "KeyPlaceClanBoss"
+        },
+        {
+          "Enabled": true,
+          "ID": "KeyPlaceClanEsper"
+        },
+        {
+          "Enabled": true,
+          "ID": "KeyPlaceGrindy"
+        },
+        {
+          "Enabled": false,
+          "ID": "KeyPlaceHidden"
+        },
+        {
+          "SelectedValue": "Hard+++",
+          "ID": "KeyDepth"
+        },
+        {
+          "Enabled": false,
+          "ID": "KeyPlaceCharScale"
+        },
+        {
+          "Enabled": true,
+          "ID": "PlaceJunkScale"
+        },
+        {
+          "Value": 8,
+          "ID": "JunkRange"
+        },
+        {
+          "Enabled": true,
+          "ID": "ReplaceJunkAny"
+        }
+      ]
+    },
+    {
+      "FlagEnabled": true,
+      "FlagID": "Shops",
+      "FlagProperties": [
+        {
+          "Enabled": false,
+          "ID": "ShopsSameArea"
+        },
+        {
+          "Value": 10,
+          "ID": "ShopSize"
+        },
+        {
+          "Enabled": true,
+          "ID": "ShopJunkScale"
+        }
+      ]
+    },
+    {
+      "FlagEnabled": true,
+      "FlagID": "Bazaars",
+      "FlagProperties": []
+    },
+    {
+      "FlagEnabled": false,
+      "FlagID": "Seitengrat",
+      "FlagProperties": []
+    },
+    {
+      "FlagEnabled": false,
+      "FlagID": "StartingTpStone",
+      "FlagProperties": [
+        {
+          "Value": 1,
+          "ID": "TpStoneCount"
+        }
+      ]
+    },
+    {
+      "FlagEnabled": true,
+      "FlagID": "RandBoards",
+      "FlagProperties": [
+        {
+          "SelectedValue": "Split",
+          "ID": "BoardType"
+        }
+      ]
+    },
+    {
+      "FlagEnabled": true,
+      "FlagID": "StartBoards",
+      "FlagProperties": []
+    },
+    {
+      "FlagEnabled": true,
+      "FlagID": "RandParty",
+      "FlagProperties": []
+    },
+    {
+      "FlagEnabled": true,
+      "FlagID": "HintsMain",
+      "FlagProperties": [
+        {
+          "SelectedValue": "Random",
+          "ID": "HintsSpecific"
+        }
+      ]
+    },
+    {
+      "FlagEnabled": true,
+      "FlagID": "HintAbi",
+      "FlagProperties": []
+    },
+    {
+      "FlagEnabled": true,
+      "FlagID": "Music",
+      "FlagProperties": []
+    },
+    {
+      "FlagEnabled": false,
+      "FlagID": "EXPMult",
+      "FlagProperties": [
+        {
+          "Value": 0,
+          "ID": "EXPMultAmt"
+        },
+        {
+          "Value": 0,
+          "ID": "EXPMultBossAmt"
+        }
+      ]
+    },
+    {
+      "FlagEnabled": false,
+      "FlagID": "LPMult",
+      "FlagProperties": [
+        {
+          "Value": 0,
+          "ID": "LPMultAmt"
+        },
+        {
+          "Value": 0,
+          "ID": "LPMultBossAmt"
+        }
+      ]
+    },
+    {
+      "FlagEnabled": false,
+      "FlagID": "TwoPageDesc",
+      "FlagProperties": []
+    }
+  ]
+}

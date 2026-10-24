@@ -1,0 +1,10 @@
+[
+  {"table": "me2", "kind": "bool", "index": 1831, "value": 0},
+  {"table": "me2", "kind": "bool", "index": 1832, "value": 1},
+  {"table": "me2", "kind": "bool", "index": 1540, "value": 1},
+  {"table": "me2", "kind": "bool", "index": 1541, "value": 0},
+  {"table": "me1", "kind": "bool", "index": 3827, "value": 0},
+  {"table": "me1", "kind": "bool", "index": 3828, "value": 1},
+  {"table": "me1", "kind": "bool", "index": 3939, "value": 1},
+  {"table": "me1", "kind": "bool", "index": 3940, "value": 0}
+]
