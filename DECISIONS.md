@@ -13,3 +13,7 @@ The selector must validate mutually exclusive outcomes, survivor/loyalty/romance
 User priority: “the most checks it can have” and minute options for check families. Catalog individual recoveries, rewards and reinforcement sources rather than stopping at mission completions. Optional finite milestones can supplement distinct interactions. Definitions and raw flags are research evidence, not approved checks.
 
 The user suggested Galactic Readiness as an additional check source. Investigate GAW assets, modifiers, discoveries, intel and military-strength milestones separately.
+
+## D3 — Apply seed history through a generated ME2 import save (proposed 2026-10-24)
+
+The owner proposed shipping a generated ME2 LE end-game save in the seed ZIP instead of writing history at ME3 career creation. Reason: the 2026-10-24 live trace (`research/career_trace_01*.json`) showed fresh non-import careers get their Virmire state from the Genesis comic after `FinalCommit`, so the planned post-`SetPlotChoices` seam is not the last writer. Importing runs ME3's own `CopyAndUpdateME2ImportData`/`SetNewGamePlotStates` path, skips Genesis and needs no native ME3 story writes. Pending feasibility: write a valid ME2 LE save (format/checksum), confirm ME3 imports an edited save, then map the history schema to ME2 plot state. Needs an owner-supplied post-Collector-Base ME2 save as a template; the original is never modified.
