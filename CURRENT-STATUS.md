@@ -2,6 +2,15 @@
 
 Update 2026-10-20 (Claude Code): `build.py --career-trace` builds the observer cleanly into `build-career` (/W4 /WX); 19 CareerTraceTests and 35 DeliveryTests pass. Pinned ASI SHA256 `5a645f7a3e623e1c3c45988043dadc13e2fe04eded1ab8fab75f23073dffce81`, copied to `build/live-original/`. `install_research.py --profile career-trace` and `career_trace_probe.py` (offline tests in `test_career_trace.py`; 12 Python tests pass with the installer tests) now exist. It is **not installed**: the live `bink2w64.dll` and `bink2w64_original.dll` were replaced on 2026-10-18 (ME3Tweaks LEBinkProxy 2.0.0.14) and a new `lemp.asi` appeared, so the receipt no longer matches and the installer correctly refuses updates until the owner approves a re-baseline. Mission gate source evidence: `research/le3_mission_gate.md`. Git: this folder has no repository of its own; it is an untracked 44 GB directory inside the APWorldMaker repo, so nothing here is committed yet.
 
+## Where things stand — 2026-10-26 (paused for the night)
+
+- History: D3 adopted. Seed history goes in through a generated ME2 import save (`tools/me2save`, `world/mass_effect_le3/history_save.py`). Import tests 01 and 02 passed live (40/40 flags). Player-record origin/notoriety bytes were added after test 02 and still need one live import.
+- Earth skip: `tools/le3mod` 0.0.1 (C#, LegendaryExplorerCore) rewires BioP_Char so imported careers fire Virmire-survivor + James squad transitions and load BioP_Nor. It was installed by plain folder copy into `BioGame/DLC/DLC_MOD_ArchipelagoME3` (receipt `research/le3mod_install_receipt.json`). **Not yet run in game**: next step is the owner importing a career and reporting (start OK? landed on Normandy? weapons? galaxy map?).
+- Mars: not landable in vanilla (Sol BioPlanet_3, no MapName). Planned le3mod step: give it `BioP_ProMar` plus an AP landing conditional in the galaxy map package. Map hand-offs are config (`SFXSeqAct_LeaveMission.LeaveMissionArray`): ProEar->ProMar->CitHub->Nor.
+- Gate fix: Cronos Station is `BioP_Cat004` (End001 is Earth). Bridge source gates both; not rebuilt/installed. The live ASI is still the read-only career-trace build.
+- D4: one C# setup app (owner chose C#) will install mod+bridge, write YAML, write the ME2 save, and launch the game; not started.
+- The 37 GB `ME3LE Backup` folder is missing (owner not yet asked back); tools fall back to the installed game, which has `DLC_MOD_LEMultiplayer`.
+
 ## User direction
 
 Build a Mass Effect 3 Legendary Edition Archipelago mod/world, prioritizing the largest practical catalog of granular optional checks. Updated2026-10-16: include a seed-creation history selector for major decisions, romance and related inherited story. Maximum-content remains a preset; custom history is now part of the intended release scope. See `HISTORY-SELECTOR.md` and revised decisionD1. Continue autonomously within this project. The owner explicitly confirmed the delivery bridge/reload test succeeded before the interruption: **do not repeat it just because the last receipt was not written**.
