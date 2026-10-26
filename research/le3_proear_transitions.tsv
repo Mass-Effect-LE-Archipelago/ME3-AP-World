@@ -1,0 +1,119 @@
+transition	fired_in	elements
+28	BioP_ProEar.pcc:PlaceOnce_SelectAndLoadHenchmen;BioQ_ProEAR_100.pcc:Video_Controller;BioQ_ProEAR_200.pcc:Video_Controller;BioQ_ProEAR_300.pcc:Video_Controller	b17665=0 LE3.Utility.Henchmen.In_Squad.Ashley | b17667=0 LE3.Utility.Henchmen.In_Squad.EDI | b17666=0 LE3.Utility.Henchmen.In_Squad.Garrus | b17664=0 LE3.Utility.Henchmen.In_Squad.Kaidan | b17663=0 LE3.Utility.Henchmen.In_Squad.Liara | b17692=0 LE3.Utility.Henchmen.In_Squad.Marine | b17668=0 LE3.Utility.Henchmen.In_Squad.Prothean | b17836=0 LE3.Utility.Henchmen.In_Squad.Tali
+29	BioP_ProEar.pcc:REF_SelectAndLoadHenchmen;BioQ_ProEAR_100.pcc:REF_SelectAndLoadHenchmen;BioQ_ProEAR_200.pcc:REF_SelectAndLoadHenchmen;BioQ_ProEAR_300.pcc:REF_SelectAndLoadHenchmen	b17677=1 LE3.Utility.Henchmen.Henchmen_Handled
+31	BioD_ProEar_500.pcc:Seq_Normandy_Conversation	b17679=1 LE3.Utility.Henchmen.In_Party.Kaidan | b17685=1 LE3.Utility.Henchmen.Is_Selectable.Kaidan
+32	BioD_ProEar_500.pcc:Seq_Normandy_Conversation	b17680=1 LE3.Utility.Henchmen.In_Party.Ashley | b17686=1 LE3.Utility.Henchmen.Is_Selectable.Ashley
+43	BioP_ProEar.pcc:SetPartySelectable;BioQ_ProEAR_100.pcc:SetPartySelectable;BioQ_ProEAR_200.pcc:SetPartySelectable;BioQ_ProEAR_300.pcc:SetPartySelectable	b17678=1 LE3.Utility.Henchmen.In_Party.Liara | b17684=1 LE3.Utility.Henchmen.Is_Selectable.Liara
+44	BioP_ProEar.pcc:SetPartySelectable;BioQ_ProEAR_100.pcc:SetPartySelectable;BioQ_ProEAR_200.pcc:SetPartySelectable;BioQ_ProEAR_300.pcc:SetPartySelectable	b17679=1 LE3.Utility.Henchmen.In_Party.Kaidan | b17685=1 LE3.Utility.Henchmen.Is_Selectable.Kaidan
+45	BioP_ProEar.pcc:SetPartySelectable;BioQ_ProEAR_100.pcc:SetPartySelectable;BioQ_ProEAR_200.pcc:SetPartySelectable;BioQ_ProEAR_300.pcc:SetPartySelectable	b17680=1 LE3.Utility.Henchmen.In_Party.Ashley | b17686=1 LE3.Utility.Henchmen.Is_Selectable.Ashley
+46	BioP_ProEar.pcc:SetPartySelectable;BioQ_ProEAR_100.pcc:SetPartySelectable;BioQ_ProEAR_200.pcc:SetPartySelectable;BioQ_ProEAR_300.pcc:SetPartySelectable	b17681=1 LE3.Utility.Henchmen.In_Party.Garrus | b17687=1 LE3.Utility.Henchmen.Is_Selectable.Garrus
+47	BioP_ProEar.pcc:SetPartySelectable;BioQ_ProEAR_100.pcc:SetPartySelectable;BioQ_ProEAR_200.pcc:SetPartySelectable;BioQ_ProEAR_300.pcc:SetPartySelectable	b17682=1 LE3.Utility.Henchmen.In_Party.EDI | b17688=1 LE3.Utility.Henchmen.Is_Selectable.EDI
+48	BioP_ProEar.pcc:SetPartySelectable;BioQ_ProEAR_100.pcc:SetPartySelectable;BioQ_ProEAR_200.pcc:SetPartySelectable;BioQ_ProEAR_300.pcc:SetPartySelectable	b17683=1 LE3.Utility.Henchmen.In_Party.Prothean | b17689=1 LE3.Utility.Henchmen.Is_Selectable.Prothean
+49	BioP_ProEar.pcc:SetPartySelectable;BioQ_ProEAR_100.pcc:SetPartySelectable;BioQ_ProEAR_200.pcc:SetPartySelectable;BioQ_ProEAR_300.pcc:SetPartySelectable	b17684=0 LE3.Utility.Henchmen.Is_Selectable.Liara
+50	BioP_ProEar.pcc:SetPartySelectable;BioQ_ProEAR_100.pcc:SetPartySelectable;BioQ_ProEAR_200.pcc:SetPartySelectable;BioQ_ProEAR_300.pcc:SetPartySelectable	b17685=0 LE3.Utility.Henchmen.Is_Selectable.Kaidan
+51	BioP_ProEar.pcc:SetPartySelectable;BioQ_ProEAR_100.pcc:SetPartySelectable;BioQ_ProEAR_200.pcc:SetPartySelectable;BioQ_ProEAR_300.pcc:SetPartySelectable	b17686=0 LE3.Utility.Henchmen.Is_Selectable.Ashley
+52	BioP_ProEar.pcc:SetPartySelectable;BioQ_ProEAR_100.pcc:SetPartySelectable;BioQ_ProEAR_200.pcc:SetPartySelectable;BioQ_ProEAR_300.pcc:SetPartySelectable	b17687=0 LE3.Utility.Henchmen.Is_Selectable.Garrus
+53	BioP_ProEar.pcc:SetPartySelectable;BioQ_ProEAR_100.pcc:SetPartySelectable;BioQ_ProEAR_200.pcc:SetPartySelectable;BioQ_ProEAR_300.pcc:SetPartySelectable	b17688=0 LE3.Utility.Henchmen.Is_Selectable.EDI
+54	BioP_ProEar.pcc:SetPartySelectable;BioQ_ProEAR_100.pcc:SetPartySelectable;BioQ_ProEAR_200.pcc:SetPartySelectable;BioQ_ProEAR_300.pcc:SetPartySelectable	b17689=0 LE3.Utility.Henchmen.Is_Selectable.Prothean
+56	BioP_ProEar.pcc:PlaceOnce_SelectAndLoadHenchmen	b17680=1 LE3.Utility.Henchmen.In_Party.Ashley | b17682=1 LE3.Utility.Henchmen.In_Party.EDI | b17681=1 LE3.Utility.Henchmen.In_Party.Garrus | b17679=1 LE3.Utility.Henchmen.In_Party.Kaidan | b17678=1 LE3.Utility.Henchmen.In_Party.Liara | b17694=1 LE3.Utility.Henchmen.In_Party.Marine | b17683=1 LE3.Utility.Henchmen.In_Party.Prothean | b17838=1 LE3.Utility.Henchmen.In_Party.Tali | b17686=1 LE3.Utility.Henchmen.Is_Selectable.Ashley | b17688=1 LE3.Utility.Henchmen.Is_Selectable.EDI | b17687=1 LE3.Utility.Henchmen.Is_Selectable.Garrus | b17685=1 LE3.Utility.Henchmen.Is_Selectable.Kaidan | b17684=1 LE3.Utility.Henchmen.Is_Selectable.Liara | b17695=1 LE3.Utility.Henchmen.Is_Selectable.Marine | b17689=1 LE3.Utility.Henchmen.Is_Selectable.Prothean | b17839=1 LE3.Utility.Henchmen.Is_Selectable.Tali
+64	BioD_ProEar_500.pcc:Seq_Normandy_Conversation	b17694=1 LE3.Utility.Henchmen.In_Party.Marine | b17695=1 LE3.Utility.Henchmen.Is_Selectable.Marine
+66	BioP_ProEar.pcc:SetPartySelectable;BioQ_ProEAR_100.pcc:SetPartySelectable;BioQ_ProEAR_200.pcc:SetPartySelectable;BioQ_ProEAR_300.pcc:SetPartySelectable	b17695=1 LE3.Utility.Henchmen.Is_Selectable.Marine
+67	BioP_ProEar.pcc:SetPartySelectable;BioQ_ProEAR_100.pcc:SetPartySelectable;BioQ_ProEAR_200.pcc:SetPartySelectable;BioQ_ProEAR_300.pcc:SetPartySelectable	b17695=0 LE3.Utility.Henchmen.Is_Selectable.Marine
+126	BioD_ProEar_200.pcc:SEQ_Tutorial_BasicShooting;BioD_ProEar_200.pcc:Seq_Tutorial_DropDown;BioD_ProEar_200.pcc:Seq_Tutorial_Jump;BioD_ProEar_200.pcc:Seq_Tutorials_Cover_and_Climbup;BioD_ProEar_200.pcc:S	i10209=0 LE3.Utility.Dialog.Line
+218	BioP_ProEar.pcc:ChapterSave	b17807=1 LE3.Utility.System.Chapter_Save
+219	BioP_ProEar.pcc:ChapterSave;BioP_ProEar.pcc:LoadHenchmen	b17807=0 LE3.Utility.System.Chapter_Save
+252	BioP_ProEar.pcc:SetPartySelectable;BioQ_ProEAR_100.pcc:SetPartySelectable;BioQ_ProEAR_200.pcc:SetPartySelectable;BioQ_ProEAR_300.pcc:SetPartySelectable	b17839=1 LE3.Utility.Henchmen.Is_Selectable.Tali
+253	BioP_ProEar.pcc:SetPartySelectable;BioQ_ProEAR_100.pcc:SetPartySelectable;BioQ_ProEAR_200.pcc:SetPartySelectable;BioQ_ProEAR_300.pcc:SetPartySelectable	b17839=0 LE3.Utility.Henchmen.Is_Selectable.Tali
+405	BioP_ProEar.pcc:Main_Sequence	b18005=1 LE3.Prologue.ProEar.Mission_Started
+407	BioD_ProEar_120WalkA.pcc:Seq_Anderson_Walk_And_Talk;BioD_ProEar_120WalkB.pcc:Seq_Anderson_Walk_And_Talk;BioD_ProEar_120WalkC.pcc:Seq_Anderson_Walk_And_Talk	b18006=1 E3.Prologue.ProEar.100_Introduction.Started_WalkAndTalk
+412	BioD_ProEar_125Elevator.pcc:Seq_ElevatorTalk_and_TrialTeleport	b18011=1 LE3.Prologue.ProEar.100_Introduction.UsedElevator
+413	BioD_ProEar_120WalkB.pcc:Seq_Anderson_Walk_And_Talk;BioD_ProEar_120WalkC.pcc:Seq_Anderson_Walk_And_Talk	b18012=1 .Prologue.ProEar.100_Introduction.AutoSaved_WalkAndTalk
+414	BioD_ProEar_130Trial.pcc:Seq_Teleport_To_Courtroom	b18013=1 LE3.Prologue.ProEar.100_Introduction.AutoSave_Trial
+415	BioD_ProEar_200.pcc:Seq_Tutorial_Run	b18016=1 ue.ProEar.200_RoofTopEscape.Tutorial_Run.RunTut_Started
+416	BioD_ProEar_200.pcc:Seq_Tutorial_Run	b18017=1 .ProEar.200_RoofTopEscape.Tutorial_Run.RunTut_Completed
+417	BioD_ProEar_200.pcc:Stream	b18018=1 LE3.Prologue.ProEar.200_RoofTopEscape.Ship_Crashed
+418	BioD_ProEar_200.pcc:Seq_Tutorial_Jump	b18020=1 .ProEar.200_RoofTopEscape.Tutorial_Jump.JumpTut_Started
+419	BioD_ProEar_200.pcc:Seq_Tutorial_Jump	b18021=1 roEar.200_RoofTopEscape.Tutorial_Jump.JumpTut_Completed
+420	BioD_ProEar_200.pcc:Seq_Reaper_Fighters_Flyby_Event	b18022=1 LE3.Prologue.ProEar.200_RoofTopEscape.Hostile_Flyby
+422	BioD_ProEar_200.pcc:Seq_Tutorials_Cover_and_Climbup	b18025=1 Ear.200_RoofTopEscape.Tutorial_Cover.CoverTut_Completed
+426	BioD_ProEar_200.pcc:Seq_Tutorials_Cover_and_Climbup	b18028=1 Ear.200_RoofTopEscape.Tutorial_Mount.MountTut_Completed
+427	BioD_ProEar_200.pcc:Seq_AndersonCallsAK	b18029=1 Prologue.ProEar.200_RoofTopEscape.Anderson_CheckingIn01
+428	BioD_ProEar_200.pcc:Seq_Tutorials_Ladder	b18031=1 Ear.200_RoofTopEscape.Tutorial_Ladder.LadderTut_Started
+429	BioD_ProEar_200.pcc:Seq_Tutorials_Ladder	b18032=1 r.200_RoofTopEscape.Tutorial_Ladder.LadderTut_Completed
+430	BioD_ProEar_200.pcc:SEQ_Tutorial_BasicShooting	b18033=1 LE3.Prologue.ProEar.200_RoofTopEscape.Zombies_Activated
+433	BioD_ProEar_200.pcc:SEQ_Tutorial_BasicShooting	b18037=1 roEar.200_RoofTopEscape.Tutorial_Shoot.ShootTut_Started
+434	BioD_ProEar_200.pcc:SEQ_Tutorial_BasicShooting	b18038=1 Ear.200_RoofTopEscape.Tutorial_Shoot.ShootTut_Completed
+436	BioD_ProEar_200.pcc:SEQ_Tutorial_BasicMelee	b18040=1 roEar.200_RoofTopEscape.Tutorial_Melee.MeleeTut_Started
+437	BioD_ProEar_200.pcc:SEQ_Tutorial_BasicMelee	b18041=1 Ear.200_RoofTopEscape.Tutorial_Melee.MeleeTut_Completed
+441	BioD_ProEar_300.pcc:Seq_Balcony_Door_Handler	b18044=1 .Prologue.ProEar.200_RoofTopEscape.Autosave_BalconyDoor
+442	BioD_ProEar_300.pcc:Seq_Zombie_Scare	b18046=1 e.ProEar.300_RuinedBuilding.Zombie_Scare.Zombie_Started
+443	BioD_ProEar_300.pcc:Seq_Zombie_Scare	b18047=1 .ProEar.300_RuinedBuilding.Zombie_Scare.Zombie_Complete
+444	BioD_ProEar_300.pcc:Seq_ReloadTutorial	b18051=1 uinedBuilding.Tutorial_AmmoPickup.AmmoPickupTut_Started
+445	BioD_ProEar_300.pcc:Seq_ReloadTutorial	b18052=1 nedBuilding.Tutorial_AmmoPickup.AmmoPickupTut_Completed
+446	BioD_ProEar_300.pcc:Seq_ReloadTutorial	b18054=1 ar.300_RuinedBuilding.Tutorial_Reload.ReloadTut_Started
+447	BioD_ProEar_300.pcc:Seq_ReloadTutorial	b18055=1 .300_RuinedBuilding.Tutorial_Reload.ReloadTut_Completed
+449	BioD_ProEar_000.pcc:Distant_Reapers_Walking	b18057=1 Prologue.ProEar.300_RuinedBuilding.Reaper_DistantReveal
+450	BioD_ProEar_200.pcc:Seq_Tutorial_DropDown	b18059=1 00_RuinedBuilding.Tutorial_DropDown.DropDownTut_Started
+451	BioD_ProEar_200.pcc:Seq_Tutorial_DropDown	b18060=1 _RuinedBuilding.Tutorial_DropDown.DropDownTut_Completed
+452	BioD_ProEar_300.pcc:Seq_LevelEvent_ReaperBreakHarbor	b18061=1 E3.Prologue.ProEar.300_RuinedBuilding.Reaper_NearReveal
+454	BioD_ProEar_310BigFall.pcc:SEQ_LevelEvent_NukeShip_and_Collapse	b18063=1 LE3.Prologue.ProEar.300_RuinedBuilding.Walkway_Collapse
+455	BioD_ProEar_400.pcc:Seq_Anderson_PostFall_SitRep	b18064=1 LE3.Prologue.ProEar.400_EarthFinale.Autosave_EndOfFall
+457	BioD_ProEar_400.pcc:Seq_Tutorial_Cover_And_Shoot	b18069=1 inale.Tutorial_FireFromCover.FireFromCoverTut_Completed
+458	BioD_ProEar_400.pcc:Seq_Last_Stand_CombatA	b18070=1 LE3.Prologue.ProEar.400_EarthFinale.Harvester_Flyin
+459	BioD_ProEar_400.pcc:Seq_Last_Stand_CombatA	b18071=1 LE3.Prologue.ProEar.400_EarthFinale.Harvester_FallBack
+460	BioD_ProEar_440Escape.pcc:Seq_Last_StandNormandyArrival	b18073=1 LE3.Prologue.ProEar.400_EarthFinale.Normandy_Entrance
+461	BioD_ProEar_440Escape.pcc:Seq_Last_StandNormandyArrival	b18074=1 LE3.Prologue.ProEar.400_EarthFinale.Normandy_InPosition
+462	BioD_ProEar_200.pcc:Seq_Initialize_Events	b18014=1 E3.Prologue.ProEar.200_RoofTopEscape.AutoSave_OnTheRoof
+463	BioD_ProEar_200.pcc:Seq_Conversation_AndersonChecksIn	b18076=1 3.Prologue.ProEar.200_RoofTopEscape.ShepAndy_ChitChat01
+464	BioD_ProEar_210Child.pcc:Seq_Anderson_Finds_Corpse	b18048=1 LE3.Prologue.ProEar.300_RuinedBuilding.Reached_Corpse
+465	BioD_ProEar_210Child.pcc:Seq_Anderson_Finds_Corpse	b18049=1 LE3.Prologue.ProEar.300_RuinedBuilding.Rubble_Cleared
+466	BioD_ProEar_300.pcc:Seq_AndersonChecksIn	b18077=1 ologue.ProEar.300_RuinedBuilding.Anderson_ChecksInAgain
+467	BioD_ProEar_400.pcc:Seq_Anderson_PostFall_SitRep	b18078=1 E3.Prologue.ProEar.400_EarthFinale.Anderson_FinalAKTalk
+478	BioD_ProEar_400.pcc:Seq_Tutorial_Cover_And_Shoot	b18087=1 LE3.Prologue.ProEar.400_EarthFinale.Cover_Reminder
+480	BioD_ProEar_400.pcc:Seq_Last_Stand_CombatA	b18089=1 E3.Prologue.ProEar.400_EarthFinale.AutoSave_FinalCombat
+549	BioD_ProEar_100Loading.pcc:Seq_Mass_Effect_3_Intro	b18122=1 LE3.Utility.System.SetMission_Modifier_Used
+863	BioD_ProEar_200.pcc:Seq_200_Anderson_Movement	b18513=1 200_RoofTopEscape.AndersonSection.Andy000_StartComplete
+864	BioD_ProEar_200.pcc:Seq_200_Anderson_Movement	b18515=1 .200_RoofTopEscape.AndersonSection.Andy010_JumpComplete
+865	BioD_ProEar_200.pcc:Seq_200_Anderson_Movement	b18516=1 _RoofTopEscape.AndersonSection.Andy020_PostJumpComplete
+867	BioD_ProEar_200.pcc:Seq_200_Anderson_Movement	b18518=1 oofTopEscape.AndersonSection.Andy040_PostLadderComplete
+868	BioD_ProEar_200.pcc:Seq_200_Anderson_Movement	b18519=1 oofTopEscape.AndersonSection.Andy050_PostMantleComplete
+869	BioD_ProEar_200.pcc:Seq_200_Anderson_Movement	b18520=1 _RoofTopEscape.AndersonSection.Andy060_PostRampComplete
+871	BioD_ProEar_200.pcc:Seq_200_Anderson_Movement	b18522=1 oofTopEscape.AndersonSection.Andy070_PostBridgeComplete
+1048	BioD_ProEar_300.pcc:Seq_300_Anderson_Movement	b18689=1 00_RuinedBuilding.AndersonSection.Andy000_StartComplete
+1049	BioD_ProEar_300.pcc:Seq_300_Anderson_Movement	b18690=1 0_RuinedBuilding.AndersonSection.Andy010_MantleComplete
+1050	BioD_ProEar_300.pcc:Seq_300_Anderson_Movement	b18691=1 nedBuilding.AndersonSection.Andy020_RubbleEventComplete
+1051	BioD_ProEar_300.pcc:Seq_300_Anderson_Movement	b18692=1 RuinedBuilding.AndersonSection.Andy030_DropDownComplete
+1052	BioD_ProEar_300.pcc:Seq_300_Anderson_Movement	b18693=1 _RuinedBuilding.AndersonSection.Andy040_GapJumpComplete
+1054	BioD_ProEar_400.pcc:Seq_400_Anderson_Movement	b18695=1 r.400_EarthFinale.AndersonSection.Andy000_StartComplete
+1055	BioD_ProEar_400.pcc:Seq_400_Anderson_Movement	b18696=1 400_EarthFinale.AndersonSection.Andy010_GapJumpComplete
+1056	BioD_ProEar_400.pcc:Seq_400_Anderson_Movement	b18697=1 .400_EarthFinale.AndersonSection.Andy020_CoverAComplete
+1057	BioD_ProEar_400.pcc:Seq_400_Anderson_Movement	b18698=1 .400_EarthFinale.AndersonSection.Andy030_CoverBComplete
+1058	BioD_ProEar_400.pcc:Seq_400_Anderson_Movement	b18699=1 r.400_EarthFinale.AndersonSection.Andy040_EnteredCombat
+1142	BioD_ProEar_400.pcc:Seq_Tutorial_Cover_And_Shoot	b18804=1 3.Prologue.ProEar.400_EarthFinale.Completed_CoverCombat
+1143	BioD_ProEar_410Survivors.pcc:Seq_Crashed_Chopper_Crew	b18805=1 LE3.Prologue.ProEar.400_EarthFinale.Heard_About_Chopper
+1144	BioD_ProEar_430FinalFight.pcc:Seq_Last_StandCombatB	b18806=1 .Prologue.ProEar.400_EarthFinale.Autosave_HoldOutForNor
+1145	BioD_ProEar_400.pcc:Seq_Last_Stand_CombatA	b18807=1 LE3.Prologue.ProEar.400_EarthFinale.Harvester_Escaped
+1159	BioP_ProEar.pcc:LoadHenchmen	b18821=0 LE3.Utility.Henchmen.Henchmen_Selected
+2098	BioP_ProEar.pcc:Update_Hench_Mission_Counts;BioQ_ProEAR_100.pcc:Update_Hench_Mission_Counts;BioQ_ProEAR_200.pcc:Update_Hench_Mission_Counts;BioQ_ProEAR_300.pcc:Update_Hench_Mission_Counts	i10328+=1 LE3.Global.Henchmen.Liara.Missions
+2099	BioP_ProEar.pcc:Update_Hench_Mission_Counts;BioQ_ProEAR_100.pcc:Update_Hench_Mission_Counts;BioQ_ProEAR_200.pcc:Update_Hench_Mission_Counts;BioQ_ProEAR_300.pcc:Update_Hench_Mission_Counts	i10329+=1 LE3.Global.Henchmen.Kaidan.Missions
+2100	BioP_ProEar.pcc:Update_Hench_Mission_Counts;BioQ_ProEAR_100.pcc:Update_Hench_Mission_Counts;BioQ_ProEAR_200.pcc:Update_Hench_Mission_Counts;BioQ_ProEAR_300.pcc:Update_Hench_Mission_Counts	i10330+=1 LE3.Global.Henchmen.Ashley.Missions
+2101	BioP_ProEar.pcc:Update_Hench_Mission_Counts;BioQ_ProEAR_100.pcc:Update_Hench_Mission_Counts;BioQ_ProEAR_200.pcc:Update_Hench_Mission_Counts;BioQ_ProEAR_300.pcc:Update_Hench_Mission_Counts	i10331+=1 LE3.Global.Henchmen.Garrus.Missions
+2102	BioP_ProEar.pcc:Update_Hench_Mission_Counts;BioQ_ProEAR_100.pcc:Update_Hench_Mission_Counts;BioQ_ProEAR_200.pcc:Update_Hench_Mission_Counts;BioQ_ProEAR_300.pcc:Update_Hench_Mission_Counts	i10332+=1 LE3.Global.Henchmen.EDI.Missions
+2103	BioP_ProEar.pcc:Update_Hench_Mission_Counts;BioQ_ProEAR_100.pcc:Update_Hench_Mission_Counts;BioQ_ProEAR_200.pcc:Update_Hench_Mission_Counts;BioQ_ProEAR_300.pcc:Update_Hench_Mission_Counts	i10333+=1 LE3.Global.Henchmen.Prothean.Missions
+2104	BioP_ProEar.pcc:Update_Hench_Mission_Counts;BioQ_ProEAR_100.pcc:Update_Hench_Mission_Counts;BioQ_ProEAR_200.pcc:Update_Hench_Mission_Counts;BioQ_ProEAR_300.pcc:Update_Hench_Mission_Counts	i10334+=1 LE3.Global.Henchmen.Marine.Missions
+2105	BioP_ProEar.pcc:Update_Hench_Mission_Counts;BioQ_ProEAR_100.pcc:Update_Hench_Mission_Counts;BioQ_ProEAR_200.pcc:Update_Hench_Mission_Counts;BioQ_ProEAR_300.pcc:Update_Hench_Mission_Counts	i10335+=1 LE3.Global.Henchmen.Tali.Missions
+2549	BioD_ProEar_430FinalFight.pcc:Seq_Last_StandCombatB	b20308=1 LE3.Prologue.ProEar.400_EarthFinale.FinalFightStarted
+2579	BioD_ProEar_500.pcc:Seq_Normandy_Conversation	b20329=1 LE3.Prologue.ProEar.400_EarthFinale.EnteredHangerBay
+2580	BioD_ProEar_500.pcc:Seq_Normandy_Conversation	b20330=1 LE3.Prologue.ProEar.400_EarthFinale.AutoSave_Hanger
+2582	BioP_ProEar.pcc:Main_Sequence	b13827=1 E3.ME1_Plots_for_ME3.CH2_Virmire.The_Choice.Rescued_Ash | b13828=0 ME1_Plots_for_ME3.CH2_Virmire.The_Choice.Rescued_Kaidan | b13939=0 E3.ME1_Plots_for_ME3.Utility.Henchman.InParty.HumanMale
+2583	BioP_ProEar.pcc:Main_Sequence	b13798=1 CH2_Feros.Frontier_Lost.asari_fate_decided_Killed_Asari | b12514=1 1_Plots_for_ME3.CH2_Feros.Frontier_Lost.Too_Many_Killed | b12588=1 _Noveria.Rachni_Queen.Queen_Dealt_With.Queen_eliminated | b12587=0 H2_Noveria.Rachni_Queen.Queen_Dealt_With.Queen_Released | b13029=1 irmire.Krogan_conundrum.Failure.Failure_KilledBy_Player | b13002=1 Citadel.Final_Choice.Choice_Is_Made.Destroy_the_Council | b15434=1 _for_ME3.CH4_Star_Citadel.Final_Choice.Chose_ambassador | b13943=1 LE3.ME1_Plots_for_ME3.Utility.Henchman.InParty.Asari | b13940=1 .ME1_Plots_for_ME3.Utility.Henchman.InParty.HumanFemale | b13939=1 E3.ME1_Plots_for_ME3.Utility.Henchman.InParty.HumanMale | b13942=0 LE3.ME1_Plots_for_ME3.Utility.Henchman.InParty.Krogan | b13944=1 LE3.ME1_Plots_for_ME3.Utility.Henchman.InParty.Quarian | b13941=1 LE3.ME1_Plots_for_ME3.Utility.Henchman.InParty.Turian
+2584	BioP_ProEar.pcc:Main_Sequence	b1831=1 LE3.ME2_Plots_for_ME3.Act_3.Final_Decision.Destroy_Base | b3632=1 .ME2_Plots_for_ME3.Global.Normandy.Engineer_Female.Dead | b3631=1 E3.ME2_Plots_for_ME3.Global.Normandy.Engineer_Male.Dead | b3629=1 LE3.ME2_Plots_for_ME3.Global.Normandy.Yeoman.Dead | b39=1 E3.ME2_Plots_for_ME3.Utility.Henchmen.In_Party.Assassin | b35=1 LE3.ME2_Plots_for_ME3.Utility.Henchmen.In_Party.Convict | b38=1 LE3.ME2_Plots_for_ME3.Utility.Henchmen.In_Party.Garrus | b36=0 LE3.ME2_Plots_for_ME3.Utility.Henchmen.In_Party.Geth | b42=0 LE3.ME2_Plots_for_ME3.Utility.Henchmen.In_Party.Grunt | b34=1 LE3.ME2_Plots_for_ME3.Utility.Henchmen.In_Party.Leading | b43=0 LE3.ME2_Plots_for_ME3.Utility.Henchmen.In_Party.Mystic | b41=1 3.ME2_Plots_for_ME3.Utility.Henchmen.In_Party.Professor | b40=1 LE3.ME2_Plots_for_ME3.Utility.Henchmen.In_Party.Tali | b33=1 LE3.ME2_Plots_for_ME3.Utility.Henchmen.In_Party.Vixen | b201=1 LE3.ME2_Plots_for_ME3.Utility.Henchmen.Is_Dead.Assassin | b197=1 LE3.ME2_Plots_for_ME3.Utility.Henchmen.Is_Dead.Convict
+2585	BioP_ProEar.pcc:Main_Sequence	b13827=0 E3.ME1_Plots_for_ME3.CH2_Virmire.The_Choice.Rescued_Ash | b13828=1 ME1_Plots_for_ME3.CH2_Virmire.The_Choice.Rescued_Kaidan | b13940=0 .ME1_Plots_for_ME3.Utility.Henchman.InParty.HumanFemale
+3117	BioD_ProEar_400.pcc:Seq_Handle_Debris_Bridge;BioD_ProEar_420Radio.pcc:Seq_Call_Normandy_From_Chopper	b20955=1 LE3.Prologue.ProEar.400_EarthFinale.Bridge_Destroyed
+3118	BioD_ProEar_400.pcc:Seq_Handle_Debris_Bridge;BioD_ProEar_410Survivors.pcc:Seq_Crashed_Chopper_Crew	b20954=1 LE3.Prologue.ProEar.400_EarthFinale.Bridge_Down
+3140	BioD_ProEar_000.pcc:Reaper_Dreadnaught_Battle;BioD_ProEar_200.pcc:Seq_AndersonCallsAK	b20990=1 LE3.Prologue.ProEar.200_RoofTopEscape.Reaper_Positioned
+3395	BioD_ProEar_200.pcc:Seq_Tutorial_Objectives	b21326=1 .200_RoofTopEscape.Tutorial_Objectives.ObjTut_Completed
+3396	BioD_ProEar_200.pcc:Seq_Tutorial_Objectives	b21325=1 ar.200_RoofTopEscape.Tutorial_Objectives.ObjTut_Started
+3469	BioD_ProEar_420Radio.pcc:Seq_Call_Normandy_From_Chopper	b21411=1 E3.Prologue.ProEar.400_EarthFinale.PickedUpAssaultRifle
+3476	BioD_ProEar_300.pcc:Collapsing_Platform	b21418=1 LE3.Prologue.ProEar.300_RuinedBuilding.PartialCollapse
+4527	BioD_ProEar_200.pcc:Seq_200_Anderson_Movement	b22586=1 RoofTopEscape.AndersonSection.Andy055_PostMountComplete
