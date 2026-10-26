@@ -130,7 +130,10 @@ struct DeliveryHost {
 // event natively (no script caller); vanilla's own condition still applies.
 bool CerberusLandingBlocked(UObject* context) {
     auto* planet = context ? context->Cast<UBioPlanet>() : nullptr;
-    if (!planet || planet->MapName.Empty() || _wcsicmp(planet->MapName.Chars(), L"BioP_End001") != 0) return false;
+    // Cronos Station (Cerberus HQ) is BioP_Cat004; Earth is BioP_End001. Gate both.
+    if (!planet || planet->MapName.Empty()) return false;
+    auto const* map = planet->MapName.Chars();
+    if (_wcsicmp(map, L"BioP_Cat004") != 0 && _wcsicmp(map, L"BioP_End001") != 0) return false;
     static UFunction* getTable = UObject::FindObject<UFunction>(L"Function SFXGame.BioWorldInfo.GetGlobalVariables");
     static UFunction* getInt = UObject::FindObject<UFunction>(L"Function SFXGame.BioGlobalVariableTable.GetInt");
     // Without a readable plot table the save's AP state is unknown: fail closed.
