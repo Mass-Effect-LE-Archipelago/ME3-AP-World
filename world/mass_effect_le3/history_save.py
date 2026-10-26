@@ -16,12 +16,14 @@ from typing import Iterable, Mapping
 Edit = tuple[str, str, int, int]  # (table "me1"/"me2", kind "bool"/"int", index, value)
 
 VERIFICATION = {
+    # "live": the edited flags were read back in ME3 after a real import
+    # (research/me2_import_test_01/02_*). Player-record origin/notoriety bytes
+    # were added after test 02 and still need one live import.
     "me1.virmire_survivor": "live", "me2.collector_base": "live",
-    "me1.wrex": "reader", "me1.rachni": "reader", "me1.council": "reader", "me1.romance": "reader",
-    "me2.heretics": "reader", "me2.maelon_data": "reader", "me2.romance": "reader",
-    "me2.squad": "reader",
-    "me1.human_councilor": "database", "me2.liara_relationship": "database",
-    "me2.crew_rescue": "database", "shepard": "database",
+    "me1.wrex": "live", "me1.rachni": "live", "me1.council": "live", "me1.romance": "live",
+    "me2.heretics": "live", "me2.maelon_data": "live", "me2.romance": "live",
+    "me2.squad": "live", "me1.human_councilor": "live", "me2.liara_relationship": "live",
+    "me2.crew_rescue": "live", "shepard": "plot flags live; player record pending",
 }
 UNSUPPORTED = {
     # Morinth needs Samara's death and the whole recruitment swap; not derivable
@@ -146,9 +148,11 @@ def plot_edits(choices: Mapping[str, str | bool], *, is_female: bool,
 
     origin, origin_flag = ORIGIN[choices["shepard.origin"]]
     edits.append(("me1", "int", 1, origin))
+    edits.append(("me2", "player", 0, origin))  # player record origin feeds ME3 CreateCareer
     edits += _bools("me2", {flag: flag == origin_flag for _, flag in ORIGIN.values()})
     notoriety, notoriety_flag = NOTORIETY[choices["shepard.service_history"]]
     edits.append(("me1", "int", 2, notoriety))
+    edits.append(("me2", "player", 1, notoriety))
     edits += _bools("me2", {flag: flag == notoriety_flag for _, flag in NOTORIETY.values()})
 
     return _deduplicate(edits)

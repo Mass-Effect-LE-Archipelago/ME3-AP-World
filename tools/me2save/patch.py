@@ -38,6 +38,10 @@ def apply(save: bytes, edits: list[Edit]) -> bytes:
             offset = table.bool_words_offset + 4 * word
             current = struct.unpack_from("<I", body, offset)[0]
             struct.pack_into("<I", body, offset, current | 1 << bit if edit.value else current & ~(1 << bit))
+        elif edit.kind == "player":  # index 0 = origin, 1 = notoriety (u8 enum)
+            if edit.index not in (0, 1) or not 1 <= edit.value <= 3:
+                raise ValueError(f"player edit out of range: {edit}")
+            body[layout.origin_offset if edit.index == 0 else layout.notoriety_offset] = edit.value
         elif edit.kind == "int":
             if edit.index >= table.ints:
                 raise ValueError(f"int edit out of range: {edit}")
@@ -48,7 +52,10 @@ def apply(save: bytes, edits: list[Edit]) -> bytes:
     check = parse(result)
     for edit in edits:
         table = check.plot if edit.table == "me2" else check.me1_plot
-        read = get_bool(result, table, edit.index) if edit.kind == "bool" else get_int(result, table, edit.index)
+        if edit.kind == "player":
+            read = result[check.origin_offset if edit.index == 0 else check.notoriety_offset]
+        else:
+            read = get_bool(result, table, edit.index) if edit.kind == "bool" else get_int(result, table, edit.index)
         if int(read) != edit.value:
             raise ValueError(f"readback mismatch: {edit}")
     return result

@@ -77,6 +77,8 @@ class Layout:
     end_game_state: int  # 0 not finished, 1 died, 2 lived
     first_name: str
     is_female: bool
+    origin_offset: int      # Player.origin u8 (1 spacer, 2 colonist, 3 earthborn)
+    notoriety_offset: int   # Player.notoriety u8 (1 survivor, 2 war hero, 3 ruthless)
     plot: PlotTableSpan      # ME2 plot table
     me1_plot: PlotTableSpan  # inherited ME1 plot table
     body_end: int            # offset of the trailing checksum
@@ -134,7 +136,8 @@ def parse(data: bytes) -> Layout:
     r.many(lambda: r.take(16))                                        # pawns
     # Player
     is_female = r.boolean(); r.string(); r.i32(); r.f32()
-    first_name = r.string(); r.i32(); r.u8(); r.u8(); r.i32()
+    first_name = r.string(); r.i32()
+    origin_offset = r.pos; r.u8(); notoriety_offset = r.pos; r.u8(); r.i32()
     r.string(); r.string(); r.string()
     r.u8(); r.take(4 * 13)                                            # appearance ids
     if r.boolean():
@@ -155,7 +158,8 @@ def parse(data: bytes) -> Layout:
     r.many(lambda: (r.i32(), r.string()))                             # dependent DLC
     if r.pos != len(data) - 4:
         raise SaveFormatError(f"layout ended at {r.pos}, expected {len(data) - 4}")
-    return Layout(version, base_level, end_game_state, first_name, is_female, plot, me1_plot, r.pos)
+    return Layout(version, base_level, end_game_state, first_name, is_female, origin_offset, notoriety_offset,
+                  plot, me1_plot, r.pos)
 
 
 def get_bool(data: bytes, table: PlotTableSpan, index: int) -> bool:
