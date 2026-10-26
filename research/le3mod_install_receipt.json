@@ -1,0 +1,14 @@
+{
+  "installed_utc": "2026-10-26T04:49:52.472572+00:00",
+  "method": "plain folder copy (no Mod Manager); TOC left to the installed AutoTOCLE-v2.asi",
+  "owner_approval": "2026-10-26 'Go to copy into ME3 DLC folder.'",
+  "target": "C:\\Steam\\steamapps\\common\\Mass Effect Legendary Edition\\Game\\ME3\\BioGame\\DLC\\DLC_MOD_ArchipelagoME3",
+  "version": "0.0.1",
+  "files_sha256": {
+    "CookedPCConsole/BioP_Char.pcc": "8041085581b95de83ccad7102592da461f08e6b018e950818e58b33baa72b5b8",
+    "CookedPCConsole/Mount.dlc": "803d664c7ab54b9cc02ab3b623fd76c06ce1fa0d6c3cebac4639ef7500c5944f",
+    "CookedPCConsole/DLC_MOD_ArchipelagoME3_INT.tlk": "5452b30016dc916b11285be6269faed78da710eb97f6ff081b0297feab7bc733"
+  },
+  "uninstall": "delete that one folder",
+  "runtime_verified": false
+}
