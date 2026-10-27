@@ -11,6 +11,12 @@ Update 2026-10-20 (Claude Code): `build.py --career-trace` builds the observer c
 - D4: one C# setup app (owner chose C#) will install mod+bridge, write YAML, write the ME2 save, and launch the game; not started.
 - The 37 GB `ME3LE Backup` folder is missing (owner not yet asked back); tools fall back to the installed game, which has `DLC_MOD_LEMultiplayer`.
 
+## Owner to-do list (le3mod / setup app)
+
+- Skip the mass relay jump cutscene when traveling between clusters (owner request 2026-10-27).
+- Mars: lock the squad to the Virmire survivor + James (Liara in squad appears to hang the load); hand over Earth's Avenger/Predator after the skip.
+- Isolate the audio pop/boom on focus (suspect the re-saved galaxy map packages).
+
 ## User direction
 
 Build a Mass Effect 3 Legendary Edition Archipelago mod/world, prioritizing the largest practical catalog of granular optional checks. Updated2026-10-16: include a seed-creation history selector for major decisions, romance and related inherited story. Maximum-content remains a preset; custom history is now part of the intended release scope. See `HISTORY-SELECTOR.md` and revised decisionD1. Continue autonomously within this project. The owner explicitly confirmed the delivery bridge/reload test succeeded before the interruption: **do not repeat it just because the last receipt was not written**.
