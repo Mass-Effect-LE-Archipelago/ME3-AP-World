@@ -109,6 +109,54 @@ static class Program
         return 0;
     }
 
+    // Mars on the galaxy map. Vanilla Sol BioPlanet_3 (Mars) has no MapName, so it cannot be landed on. Ours gets
+    // BioP_ProMar and a landing conditional from this DLC's own CND file (LE3 loads Conditionals<DLC folder>.cnd by
+    // name, as the vanilla DLCs do; only DLC_Shared needs a config line). Vanilla conditional ids end at 4232.
+    // Test build: Mars is landable until its mission completes (20552 ProMar.MissionComplete). The AP unlock item
+    // will be ANDed in once a safe plot bool range is audited.
+    const string GalaxyFile = "BioD_Nor_203aGalaxyMap.pcc";
+    const string MarsPath = "biog_galaxymap.GalaxyMap.SFXCluster_2.SFXSystem_0.BioPlanet_3";
+    const int MarsConditional = 43001;
+    const string MarsExpression = "(plot.bools[20552] == Bool false)";
+
+    static int Mars(string bioGame, string cooked)
+    {
+        var source = Winner(bioGame, GalaxyFile);
+        var outPcc = Path.Combine(cooked, GalaxyFile);
+        using (var pcc = MEPackageHandler.OpenMEPackage(source, forceLoadFromDisk: true))
+        {
+            var mars = pcc.FindExport(MarsPath);
+            if (pcc.Game != MEGame.LE3 || mars == null || mars.ClassName != "BioPlanet"
+                || !string.IsNullOrEmpty(mars.GetProperty<StrProperty>("MapName")?.Value) || mars.GetProperty<IntProperty>("PlanetLandCondition") != null)
+            {
+                Console.Error.WriteLine("refusing: Mars is missing or already has a mission in " + source);
+                return 1;
+            }
+            // Use the Earth planet's property types as the pattern for a landable mission planet.
+            mars.WriteProperty(new StrProperty("BioP_ProMar", "MapName"));
+            mars.WriteProperty(new IntProperty(MarsConditional, "PlanetLandCondition"));
+            using (var saved = pcc.SaveToStream(true, true, true)) File.WriteAllBytes(outPcc, saved.ToArray());
+        }
+        var cnd = new CNDFile { ConditionalEntries = [] };
+        var entry = new CNDFile.ConditionalEntry { ID = MarsConditional };
+        ME3ConditionalsCompiler.Compile(entry, MarsExpression);
+        cnd.ConditionalEntries.Add(entry);
+        var cndPath = Path.Combine(cooked, $"Conditionals{ModFolder}.cnd");
+        cnd.ToFile(cndPath);
+        using (var pcc = MEPackageHandler.OpenMEPackage(outPcc, forceLoadFromDisk: true))
+        {
+            var mars = pcc.FindExport(MarsPath);
+            var back = CNDFile.FromFile(cndPath).ConditionalEntries.Single();
+            bool ok = mars?.GetProperty<StrProperty>("MapName")?.Value == "BioP_ProMar"
+                && mars.GetProperty<IntProperty>("PlanetLandCondition")?.Value == MarsConditional
+                && back.ID == MarsConditional && ME3ConditionalsCompiler.Decompile(back) == MarsExpression;
+            Console.WriteLine($"validate: Mars MapName={mars?.GetProperty<StrProperty>("MapName")?.Value} land=C{mars?.GetProperty<IntProperty>("PlanetLandCondition")?.Value}; C{back.ID} = {ME3ConditionalsCompiler.Decompile(back)}");
+            if (!ok) { Console.Error.WriteLine("validation FAILED; staging left unchanged"); return 1; }
+        }
+        Console.WriteLine($"Mars landable (galaxy source {source})");
+        return 0;
+    }
+
     static int Build(string bioGame, string staging)
     {
         if (staging.StartsWith(bioGame, StringComparison.OrdinalIgnoreCase) || staging.Contains(@"\BioGame", StringComparison.OrdinalIgnoreCase))
@@ -127,6 +175,7 @@ static class Program
         var cooked = Path.Combine(tmp, ModFolder, "CookedPCConsole");
         Directory.CreateDirectory(cooked);
         if (OpenStart(bioGame, cooked) != 0) return 1;
+        if (Mars(bioGame, cooked) != 0) return 1;
         // Flags copied from a vanilla single-player DLC (Leviathan) so the mount type matches.
         var template = new MountFile(Path.Combine(bioGame, "DLC", "DLC_EXP_Pack001", "CookedPCConsole", "Mount.dlc"));
         new MountFile { Game = MEGame.LE3, MountPriority = MountPriority, TLKID = NameStrRef, MountFlags = template.MountFlags }
@@ -136,7 +185,7 @@ static class Program
         File.WriteAllText(Path.Combine(tmp, "moddesc.ini"),
             "[ModManager]\r\ncmmver = 8.0\r\n\r\n[ModInfo]\r\ngame = LE3\r\nmodname = Archipelago ME3 open start (TEST)\r\n" +
             "moddesc = Test build: an imported ME2 career skips the Earth prologue and starts on the Normandy.\r\n" +
-            "modver = 0.0.1\r\nmoddev = Jerrod\r\n\r\n[CUSTOMDLC]\r\nsourcedirs = " + ModFolder + "\r\ndestdirs = " + ModFolder + "\r\n");
+            "modver = 0.0.2\r\nmoddev = Jerrod\r\n\r\n[CUSTOMDLC]\r\nsourcedirs = " + ModFolder + "\r\ndestdirs = " + ModFolder + "\r\n");
         if (Directory.Exists(modRoot)) Directory.Delete(modRoot, true);
         Directory.Move(tmp, modRoot);
         Console.WriteLine($"staged {modRoot}");
@@ -251,6 +300,15 @@ static class Program
             ?? @"C:\Steam\steamapps\common\Mass Effect Legendary Edition\Game\ME3\Binaries\Win64\oo2core_8_win64.dll";
         OodleHelper.LoadOodleDll(oodle);
         MEPackageHandler.Initialize();
+        if (args.Length is 2 or 3 && args[0] == "cnd")
+        {
+            var cnd = CNDFile.FromFile(args[1]);
+            Console.WriteLine($"ids {cnd.ConditionalEntries.Min(e => e.ID)}..{cnd.ConditionalEntries.Max(e => e.ID)}");
+            foreach (var entry in cnd.ConditionalEntries.Where(e => args.Length < 3 || e.ID.ToString() == args[2]).Take(40))
+                Console.WriteLine($"{entry.ID}: {ME3ConditionalsCompiler.Decompile(entry)}");
+            Console.WriteLine($"({cnd.ConditionalEntries.Count} entries)");
+            return 0;
+        }
         if (args.Length == 1 && args[0] == "api")
         {
             foreach (var t in typeof(MEPackageHandler).Assembly.GetTypes().Where(t => t.Name is "MEPackage" or "IMEPackage" or "UnrealPackageFile" or "IMEPackageExtensions" || t.Name.Contains("PackageExtensions")))
