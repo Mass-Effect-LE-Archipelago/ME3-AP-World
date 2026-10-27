@@ -17,6 +17,7 @@ static class Program
     const string ModName = "ArchipelagoME3";
     const int NameStrRef = 43000000;
     const int MountPriority = 4300;   // above every installed LE3 DLC (checked at build time)
+    const int ModuleNumber = 4300;    // Engine.DLCModules id; vanilla LE3 uses 9..60
     const string Seq = "TheWorld.PersistentLevel.Main_Sequence";
     const string ImportCheck = Seq + ".SeqCond_CompareBool_1";      // ME2_Import (21554)
     const string ProEarArea = Seq + ".BioSeqAct_AreaTransition_1";   // Biop_ProEar
@@ -182,6 +183,34 @@ static class Program
             .WriteMountFile(Path.Combine(cooked, "Mount.dlc"));
         HuffmanCompression.SaveToTlkFile(Path.Combine(cooked, $"{ModFolder}_INT.tlk"),
             [new TLKStringRef(NameStrRef, "Archipelago ME3 (open start test)")]);
+        // LE3 reports a DLC folder without its Default_<DLC>.bin config as corrupt (seen 2026-10-27). Modeled on the
+        // smallest vanilla one (DLC_UPD_Patch01): the cooked path plus a DLC module number (vanilla uses 9..60).
+        var coalesced = new Dictionary<string, string>
+        {
+            ["BioEngine.xml"] = $"""
+                <?xml version="1.0" encoding="utf-8"?>
+                <CoalesceAsset id="BioEngine" name="bioengine.ini" source="..\..\biogame\config\bioengine.ini">
+                  <Sections>
+                    <Section name="core.system">
+                      <Property name="seekfreepcpaths" type="3">..\..\BIOGame\DLC\{ModFolder}\CookedPCConsole</Property>
+                    </Section>
+                    <Section name="engine.dlcmodules">
+                      <Property name="{ModFolder.ToLowerInvariant()}" type="0">{ModuleNumber}</Property>
+                    </Section>
+                  </Sections>
+                </CoalesceAsset>
+                """,
+        };
+        var binPath = Path.Combine(cooked, $"Default_{ModFolder}.bin");
+        using (var bin = LegendaryExplorerCore.Coalesced.CoalescedConverter.CompileFromMemory(coalesced))
+            File.WriteAllBytes(binPath, bin.ToArray());
+        using (var check = File.OpenRead(binPath))
+        {
+            var back = LegendaryExplorerCore.Coalesced.CoalescedConverter.DecompileGame3ToMemory(check);
+            bool ok = back.TryGetValue("BioEngine.xml", out var xml) && xml.Contains(ModFolder + @"\CookedPCConsole") && xml.Contains($">{ModuleNumber}<");
+            Console.WriteLine($"validate: Default_{ModFolder}.bin sections ok={ok}");
+            if (!ok) { Console.Error.WriteLine("validation FAILED: DLC config"); return 1; }
+        }
         // Every DLC folder carries its own PCConsoleTOC.bin; without one the game hangs at launch (seen 2026-10-27 with
         // AutoTOCLE-v2 stalling on a hand-copied 0.0.1). Mod Manager writes it on install; we write it ourselves.
         var dlcDir = Path.Combine(tmp, ModFolder);
@@ -315,6 +344,13 @@ static class Program
             foreach (var entry in cnd.ConditionalEntries.Where(e => args.Length < 3 || e.ID.ToString() == args[2]).Take(40))
                 Console.WriteLine($"{entry.ID}: {ME3ConditionalsCompiler.Decompile(entry)}");
             Console.WriteLine($"({cnd.ConditionalEntries.Count} entries)");
+            return 0;
+        }
+        if (args.Length == 2 && args[0] == "coal")
+        {
+            using var fs = File.OpenRead(args[1]);
+            foreach (var (name, xml) in LegendaryExplorerCore.Coalesced.CoalescedConverter.DecompileGame3ToMemory(fs))
+                Console.WriteLine($"=== {name}\n{xml}");
             return 0;
         }
         if (args.Length == 1 && args[0] == "api")
