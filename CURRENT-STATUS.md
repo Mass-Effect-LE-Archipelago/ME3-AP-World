@@ -14,7 +14,7 @@ Update 2026-10-20 (Claude Code): `build.py --career-trace` builds the observer c
 ## Owner to-do list (le3mod / setup app)
 
 - Skip the mass relay jump cutscene when traveling between clusters (owner request 2026-10-27).
-- D5: start with the Predator only; other guns as checks; any planet first.
+- D5: start with the Predator only; other guns as checks; any planet first. Bridge 0.2.2 WEAPON delivery (SFXEngine player variable per weapon class, 44 loadout weapons, Weapons.hpp ids) verified live 2026-10-27: Predator + Mantis delivered on the Normandy and offered in game instead of the Katana fallback. Next: AP items for weapons, Predator as start inventory, client mapping.
 - Mars fixed squad: DONE in le3mod 0.0.7 (BioP_Nor Check_Hench_Select + squad transitions 28/9|8/62), owner-verified 2026-10-27.
 - Skip non-interactive cutscenes with no dialogue choices (e.g. Normandy/shuttle approach before Mars).
 - Companions as items: selectability via the Is_Selectable transitions (49-54, 252/253 Tali, 66/67 James).
