@@ -26,6 +26,9 @@ static class Program
     // Earth's lasting squad outcome (research/le3_proear_transitions.tsv and the 2026-10-26 save diff):
     // the Virmire survivor joins (32 Ashley / 31 Kaidan: In_Party + Is_Selectable) and James (64 Marine).
     const int AshleyJoins = 32, KaidanJoins = 31, JamesJoins = 64;
+    // 49 = Is_Selectable.Liara false. Vanilla meets Liara on Mars; with her selectable before it, picking her for Mars
+    // hung the level load (2026-10-27). Mars itself makes her selectable when she joins.
+    const int LiaraNotSelectable = 49;
 
     // Imported careers (D3: every AP career) skip Earth: ME2_Import True -> survivor check -> squad transitions ->
     // a new AreaTransition to BioP_Nor. Non-import and NG+ routes keep Biop_ProEar. Fails closed on any unexpected shape.
@@ -75,6 +78,7 @@ static class Program
             var ashley = Transition(AshleyJoins);
             var kaidan = Transition(KaidanJoins);
             var james = Transition(JamesJoins);
+            var liara = Transition(LiaraNotSelectable);
             var normandy = Create("BioSeqAct_AreaTransition");
             normandy.WriteProperty(new NameProperty("BioP_Nor", "AreaName"));
             links[trueIdx].Clear();
@@ -84,7 +88,8 @@ static class Program
             Link(survivor, "False", kaidan);
             Link(ashley, "Out", james);
             Link(kaidan, "Out", james);
-            Link(james, "Out", normandy);
+            Link(james, "Out", liara);
+            Link(liara, "Out", normandy);
             using (var saved = pcc.SaveToStream(true, true, true)) File.WriteAllBytes(outPcc, saved.ToArray());
         }
         using (var pcc = MEPackageHandler.OpenMEPackage(outPcc, forceLoadFromDisk: true))
@@ -98,12 +103,12 @@ static class Program
             int Id(ExportEntry n) => n?.GetProperty<IntProperty>("m_nIndex")?.Value ?? -1;
             var a = sLinks[sNames.IndexOf("True")].Single().LinkedOp as ExportEntry;
             var k = sLinks[sNames.IndexOf("False")].Single().LinkedOp as ExportEntry;
-            var ja = Follow(a); var jk = Follow(k); var area = Follow(ja);
+            var ja = Follow(a); var jk = Follow(k); var li = Follow(ja); var area = Follow(li);
             bool ok = survivor.ClassName == "BioSeqAct_PMCheckState" && Id(survivor) == RescuedAshBool
-                && Id(a) == AshleyJoins && Id(k) == KaidanJoins && ja == jk && Id(ja) == JamesJoins
+                && Id(a) == AshleyJoins && Id(k) == KaidanJoins && ja == jk && Id(ja) == JamesJoins && Id(li) == LiaraNotSelectable
                 && area?.ClassName == "BioSeqAct_AreaTransition" && area.GetProperty<NameProperty>("AreaName")?.Value.Instanced == "BioP_Nor"
                 && pcc.FindExport(ProEarArea).GetProperty<NameProperty>("AreaName")?.Value.Instanced == "Biop_ProEar";
-            Console.WriteLine($"validate: ME2_Import True -> S{Id(survivor)} ? T{Id(a)} : T{Id(k)} -> T{Id(ja)} -> {area?.GetProperty<NameProperty>("AreaName")?.Value.Instanced}");
+            Console.WriteLine($"validate: ME2_Import True -> S{Id(survivor)} ? T{Id(a)} : T{Id(k)} -> T{Id(ja)} -> T{Id(li)} -> {area?.GetProperty<NameProperty>("AreaName")?.Value.Instanced}");
             if (!ok) { Console.Error.WriteLine("validation FAILED; staging left unchanged"); return 1; }
         }
         Console.WriteLine($"Earth skipped for imported careers (source {source})");
@@ -262,7 +267,7 @@ static class Program
         File.WriteAllText(Path.Combine(tmp, "moddesc.ini"),
             "[ModManager]\r\ncmmver = 8.0\r\n\r\n[ModInfo]\r\ngame = LE3\r\nmodname = Archipelago ME3 open start (TEST)\r\n" +
             "moddesc = Test build: an imported ME2 career skips the Earth prologue and starts on the Normandy.\r\n" +
-            "modver = 0.0.4\r\nmoddev = Jerrod\r\n\r\n[CUSTOMDLC]\r\nsourcedirs = " + ModFolder + "\r\ndestdirs = " + ModFolder + "\r\n");
+            "modver = 0.0.5\r\nmoddev = Jerrod\r\n\r\n[CUSTOMDLC]\r\nsourcedirs = " + ModFolder + "\r\ndestdirs = " + ModFolder + "\r\n");
         if (Directory.Exists(modRoot)) Directory.Delete(modRoot, true);
         Directory.Move(tmp, modRoot);
         Console.WriteLine($"staged {modRoot}");

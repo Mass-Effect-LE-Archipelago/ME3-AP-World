@@ -14,7 +14,8 @@ Update 2026-10-20 (Claude Code): `build.py --career-trace` builds the observer c
 ## Owner to-do list (le3mod / setup app)
 
 - Skip the mass relay jump cutscene when traveling between clusters (owner request 2026-10-27).
-- Mars: lock the squad to the Virmire survivor + James (Liara in squad appears to hang the load); hand over Earth's Avenger/Predator after the skip.
+- Mars: verified live 2026-10-27 (0.0.4) - lands, full opening plays, Mars gives Predator + Katana, loads with Kaidan + James (Liara picked = load hang). 0.0.5 staged: Liara not selectable before Mars (transition 49).
+- Weapons: Normandy start has none; harmless if Mars is first, but Menae etc. are offered before Mars. Either gate pre-Mars missions (AP logic) or grant Earth's Avenger/Predator.
 - Isolate the audio pop/boom on focus (suspect the re-saved galaxy map packages).
 
 ## User direction
