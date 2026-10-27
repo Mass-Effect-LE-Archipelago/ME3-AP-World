@@ -7,6 +7,7 @@ using LegendaryExplorerCore.Compression;
 using LegendaryExplorerCore.GameFilesystem;
 using LegendaryExplorerCore.Kismet;
 using LegendaryExplorerCore.Packages;
+using LegendaryExplorerCore.Packages.CloningImportingAndRelinking;
 using LegendaryExplorerCore.TLK;
 using LegendaryExplorerCore.TLK.ME2ME3;
 using LegendaryExplorerCore.Unreal;
@@ -112,6 +113,101 @@ static class Program
             if (!ok) { Console.Error.WriteLine("validation FAILED; staging left unchanged"); return 1; }
         }
         Console.WriteLine($"Earth skipped for imported careers (source {source})");
+        return 0;
+    }
+
+    // Fixed-squad missions. BioP_Nor's re_MapTransition runs Check_Hench_Select (and Check_Hench_Select_0 after
+    // streaming), a chain of map-name compares whose matches skip squad selection and the weapon screen (vanilla: the
+    // hubs). We put BioP_ProMar at the head of both chains. In the first one, the Mars branch also forces the story
+    // squad before leaving: 28 (clear In_Squad) -> Rescued Ash ? 9 (Ashley) : 8 (Kaidan) -> 62 (James). Picking Liara
+    // for Mars hung the load (2026-10-27).
+    static readonly string[] HenchChecks =
+        ["TheWorld.PersistentLevel.Main_Sequence.Area_transition.Check_Hench_Select",
+         "TheWorld.PersistentLevel.Main_Sequence.Area_transition.Check_Hench_Select_0"];
+    const string FixedSquadMap = "BioP_ProMar";
+    const int ClearSquad = 28, AshleyInSquad = 9, KaidanInSquad = 8, JamesInSquad = 62;
+
+    static int FixedSquad(string bioGame, string cooked)
+    {
+        var source = Winner(bioGame, "BioP_Nor.pcc");
+        var outPcc = Path.Combine(cooked, "BioP_Nor.pcc");
+        using (var pcc = MEPackageHandler.OpenMEPackage(source, forceLoadFromDisk: true))
+        {
+            for (int c = 0; c < HenchChecks.Length; c++)
+            {
+                var seq = pcc.FindExport(HenchChecks[c]);
+                var start = seq == null ? null : pcc.Exports.SingleOrDefault(e => e.Parent == seq && e.ClassName == "SeqEvent_SequenceActivated");
+                var first = start == null ? null : KismetHelper.GetOutputLinksOfNode(start)[0].SingleOrDefault()?.LinkedOp as ExportEntry;
+                if (first?.ClassName != "SeqCond_CompareName")
+                {
+                    Console.Error.WriteLine($"refusing: {HenchChecks[c]} does not start with a map-name compare");
+                    return 1;
+                }
+                var names = KismetHelper.GetOutputLinkNames(first);
+                var skip = KismetHelper.GetOutputLinksOfNode(first)[names.IndexOf("A == B")].Single().LinkedOp as ExportEntry;
+                var bLink = KismetHelper.GetVariableLinksOfNode(first).Single(v => v.LinkDesc == "B");
+                var ours = EntryCloner.CloneEntry(first);
+                var name = EntryCloner.CloneEntry((ExportEntry)bLink.LinkedNodes.Single());
+                name.WriteProperty(new NameProperty(FixedSquadMap, "NameValue"));
+                var vars = KismetHelper.GetVariableLinksOfNode(ours);
+                vars.Single(v => v.LinkDesc == "B").LinkedNodes = [name];
+                KismetHelper.WriteVariableLinksToNode(ours, vars);
+                // The clone carries the original's outputs; rewrite them: match -> (squad) -> skip, else -> original chain.
+                var outs = KismetHelper.GetOutputLinksOfNode(ours);
+                foreach (var l in outs) l.Clear();
+                KismetHelper.WriteOutputLinksToNode(ours, outs);
+                Link(ours, "A != B", first);
+                if (c == 0)
+                {
+                    ExportEntry T(int id)
+                    {
+                        var n = SequenceObjectCreator.CreateSequenceObject(pcc, "BioSeqAct_PMExecuteTransition", null, null);
+                        KismetHelper.AddObjectToSequence(n, seq, true);
+                        n.WriteProperty(new IntProperty(id, "m_nIndex"));
+                        return n;
+                    }
+                    var clear = T(ClearSquad);
+                    var survivor = SequenceObjectCreator.CreateSequenceObject(pcc, "BioSeqAct_PMCheckState", null, null);
+                    KismetHelper.AddObjectToSequence(survivor, seq, true);
+                    survivor.WriteProperty(new IntProperty(RescuedAshBool, "m_nIndex"));
+                    var ash = T(AshleyInSquad); var kai = T(KaidanInSquad); var james = T(JamesInSquad);
+                    Link(ours, "A == B", clear);
+                    Link(clear, "Out", survivor);
+                    Link(survivor, "True", ash);
+                    Link(survivor, "False", kai);
+                    Link(ash, "Out", james);
+                    Link(kai, "Out", james);
+                    Link(james, "Out", skip);
+                }
+                else Link(ours, "A == B", skip);
+                var startLinks = KismetHelper.GetOutputLinksOfNode(start);
+                startLinks[0].Clear();
+                KismetHelper.WriteOutputLinksToNode(start, startLinks);
+                Link(start, "Out", ours);
+            }
+            using (var saved = pcc.SaveToStream(true, true, true)) File.WriteAllBytes(outPcc, saved.ToArray());
+        }
+        using (var pcc = MEPackageHandler.OpenMEPackage(outPcc, forceLoadFromDisk: true))
+        {
+            foreach (var path in HenchChecks)
+            {
+                var seq = pcc.FindExport(path);
+                var start = pcc.Exports.Single(e => e.Parent == seq && e.ClassName == "SeqEvent_SequenceActivated");
+                var ours = KismetHelper.GetOutputLinksOfNode(start)[0].Single().LinkedOp as ExportEntry;
+                var b = KismetHelper.GetVariableLinksOfNode(ours).Single(v => v.LinkDesc == "B").LinkedNodes.Single() as ExportEntry;
+                var a = KismetHelper.GetVariableLinksOfNode(ours).Single(v => v.LinkDesc == "A").LinkedNodes.Single() as ExportEntry;
+                var names = KismetHelper.GetOutputLinkNames(ours);
+                var links = KismetHelper.GetOutputLinksOfNode(ours);
+                var match = links[names.IndexOf("A == B")].Single().LinkedOp as ExportEntry;
+                var other = links[names.IndexOf("A != B")].Single().LinkedOp as ExportEntry;
+                bool ok = ours.ClassName == "SeqCond_CompareName" && string.Equals(b.GetProperty<NameProperty>("NameValue")?.Value.Instanced, FixedSquadMap, StringComparison.OrdinalIgnoreCase)  // names are case-insensitive; the package already has "Biop_ProMar"
+                          && a.ClassName == "SeqVar_External" && other.ClassName == "SeqCond_CompareName"
+                          && (path == HenchChecks[0] ? match.GetProperty<IntProperty>("m_nIndex")?.Value == ClearSquad : match.ClassName is "SeqAct_FinishSequence" or "BioSeqAct_PMExecuteTransition");
+                Console.WriteLine($"validate: {path.Split('.').Last()} first compare = {b.GetProperty<NameProperty>("NameValue")?.Value.Instanced}; match -> {match.ObjectName.Instanced} {match.GetProperty<IntProperty>("m_nIndex")?.Value}; else -> {other.ObjectName.Instanced}");
+                if (!ok) { Console.Error.WriteLine("validation FAILED; staging left unchanged"); return 1; }
+            }
+        }
+        Console.WriteLine($"Mars uses its story squad without squad selection (source {source})");
         return 0;
     }
 
@@ -222,6 +318,7 @@ static class Program
         Directory.CreateDirectory(cooked);
         if (OpenStart(bioGame, cooked) != 0) return 1;
         if (!NoMars && Mars(bioGame, cooked) != 0) return 1;
+        if (FixedSquad(bioGame, cooked) != 0) return 1;
         // Flags copied from a vanilla single-player DLC (Leviathan) so the mount type matches.
         var template = new MountFile(Path.Combine(bioGame, "DLC", "DLC_EXP_Pack001", "CookedPCConsole", "Mount.dlc"));
         new MountFile { Game = MEGame.LE3, MountPriority = MountPriority, TLKID = NameStrRef, MountFlags = template.MountFlags }
@@ -267,7 +364,7 @@ static class Program
         File.WriteAllText(Path.Combine(tmp, "moddesc.ini"),
             "[ModManager]\r\ncmmver = 8.0\r\n\r\n[ModInfo]\r\ngame = LE3\r\nmodname = Archipelago ME3 open start (TEST)\r\n" +
             "moddesc = Test build: an imported ME2 career skips the Earth prologue and starts on the Normandy.\r\n" +
-            "modver = 0.0.5\r\nmoddev = Jerrod\r\n\r\n[CUSTOMDLC]\r\nsourcedirs = " + ModFolder + "\r\ndestdirs = " + ModFolder + "\r\n");
+            "modver = 0.0.6\r\nmoddev = Jerrod\r\n\r\n[CUSTOMDLC]\r\nsourcedirs = " + ModFolder + "\r\ndestdirs = " + ModFolder + "\r\n");
         if (Directory.Exists(modRoot)) Directory.Delete(modRoot, true);
         Directory.Move(tmp, modRoot);
         Console.WriteLine($"staged {modRoot}");
@@ -430,6 +527,32 @@ static class Program
                 foreach (var prop in e.GetProperties().Where(p => p.Name.Instanced is not ("ObjPosX" or "ObjPosY" or "ParentSequence" or "OutputLinks" or "VariableLinks" or "InputLinks" or "ObjInstanceVersion" or "m_aObjComment")))
                     Console.WriteLine($"   {prop.Name.Instanced} = {prop switch { IntProperty i => i.Value.ToString(), NameProperty n => n.Value.Instanced, StrProperty st => st.Value, BoolProperty b => b.Value.ToString(), ObjectProperty o => pcc.GetEntry(o.Value)?.InstancedFullPath, ArrayProperty<ObjectProperty> a => string.Join(",", a.Select(x => pcc.GetEntry(x.Value)?.InstancedFullPath)), _ => prop.GetType().Name }}");
             }
+            return 0;
+        }
+        if (args.Length == 4 && args[0] == "seqdump")
+        {
+            // seqdump <BioGame> <pkg> <sequence path>: every op directly in the sequence with its outputs and variables
+            using var pcc = MEPackageHandler.OpenMEPackage(File.Exists(args[2]) ? args[2] : Winner(Path.GetFullPath(args[1]), args[2]), forceLoadFromDisk: true);
+            var seq = pcc.FindExport(args[3]);
+            foreach (var e in pcc.Exports.Where(x => x.Parent == seq).OrderBy(x => x.UIndex))
+            {
+                var outs = e.GetProperty<ArrayProperty<StructProperty>>("OutputLinks") == null ? "" : string.Join(" ", KismetHelper.GetOutputLinkNames(e).Zip(KismetHelper.GetOutputLinksOfNode(e),
+                    (n, l) => $"[{n}->{string.Join(",", l.Select(x => x.LinkedOp?.ObjectName.Instanced))}]"));
+                var val = e.GetProperties().FirstOrDefault(x => x.Name.Instanced is "NameValue" or "bValue" or "IntValue" or "VariableLabel" or "m_nIndex" or "LinkDesc" or "OutputLabel" or "InputLabel");
+                Console.WriteLine($"{e.UIndex} {e.ClassName} {e.ObjectName.Instanced} {outs} {Describe(e).Split(' ', 4).ElementAtOrDefault(3)} {(val is NameProperty np ? "=" + np.Value.Instanced : val is StrProperty sp ? "=" + sp.Value : val is IntProperty ip ? "=" + ip.Value : "")}");
+            }
+            return 0;
+        }
+        if (args.Length == 4 && args[0] == "vars")
+        {
+            // vars <BioGame> <pkg> <export path>: each variable link with the linked variable's value
+            using var pcc = MEPackageHandler.OpenMEPackage(File.Exists(args[2]) ? args[2] : Winner(Path.GetFullPath(args[1]), args[2]), forceLoadFromDisk: true);
+            var e = pcc.FindExport(args[3]);
+            foreach (var v in KismetHelper.GetVariableLinksOfNode(e))
+                foreach (var linked in v.LinkedNodes.OfType<ExportEntry>())
+                    Console.WriteLine($"{v.LinkDesc}: {linked.InstancedFullPath} {string.Join(" ", linked.GetProperties().Where(p => p.Name.Instanced is "bValue" or "IntValue" or "m_nIndex" or "ObjValue" or "FindVarName" or "VarName").Select(p => p.Name.Instanced + "=" + p switch { IntProperty i => i.Value.ToString(), BoolProperty b => b.Value.ToString(), NameProperty n => n.Value.Instanced, ObjectProperty o => pcc.GetEntry(o.Value)?.InstancedFullPath, _ => p.ToString() }))}");
+            var refd = e.GetProperty<ObjectProperty>("oSequenceReference");
+            if (refd != null) Console.WriteLine("references " + pcc.GetEntry(refd.Value)?.InstancedFullPath);
             return 0;
         }
         if (args.Length == 4 && args[0] == "find")
