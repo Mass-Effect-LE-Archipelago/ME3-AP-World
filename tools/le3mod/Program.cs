@@ -130,10 +130,22 @@ static class Program
     // 2744 visible / 79 usable) to tell "our CND is not loaded" apart from "our galaxy map package is not loaded".
     static bool DiagVanilla;
 
+    // The galaxy map objects (biog_galaxymap.GalaxyMap...) exist in two packages. BioD_Nor_203CIC loads first and its
+    // copy is the one the game uses; patching only 203aGalaxyMap had no effect in game (2026-10-27 diagnostic).
+    static readonly string[] GalaxyPackages = ["BioD_Nor_203CIC.pcc", GalaxyFile];
+    static bool NoMars;
+
     static int Mars(string bioGame, string cooked)
     {
-        var source = Winner(bioGame, GalaxyFile);
-        var outPcc = Path.Combine(cooked, GalaxyFile);
+        foreach (var file in GalaxyPackages)
+            if (MarsPackage(bioGame, cooked, file) != 0) return 1;
+        return 0;
+    }
+
+    static int MarsPackage(string bioGame, string cooked, string file)
+    {
+        var source = Winner(bioGame, file);
+        var outPcc = Path.Combine(cooked, file);
         using (var pcc = MEPackageHandler.OpenMEPackage(source, forceLoadFromDisk: true))
         {
             var mars = pcc.FindExport(MarsPath);
@@ -204,7 +216,7 @@ static class Program
         var cooked = Path.Combine(tmp, ModFolder, "CookedPCConsole");
         Directory.CreateDirectory(cooked);
         if (OpenStart(bioGame, cooked) != 0) return 1;
-        if (Mars(bioGame, cooked) != 0) return 1;
+        if (!NoMars && Mars(bioGame, cooked) != 0) return 1;
         // Flags copied from a vanilla single-player DLC (Leviathan) so the mount type matches.
         var template = new MountFile(Path.Combine(bioGame, "DLC", "DLC_EXP_Pack001", "CookedPCConsole", "Mount.dlc"));
         new MountFile { Game = MEGame.LE3, MountPriority = MountPriority, TLKID = NameStrRef, MountFlags = template.MountFlags }
@@ -250,7 +262,7 @@ static class Program
         File.WriteAllText(Path.Combine(tmp, "moddesc.ini"),
             "[ModManager]\r\ncmmver = 8.0\r\n\r\n[ModInfo]\r\ngame = LE3\r\nmodname = Archipelago ME3 open start (TEST)\r\n" +
             "moddesc = Test build: an imported ME2 career skips the Earth prologue and starts on the Normandy.\r\n" +
-            "modver = 0.0.3\r\nmoddev = Jerrod\r\n\r\n[CUSTOMDLC]\r\nsourcedirs = " + ModFolder + "\r\ndestdirs = " + ModFolder + "\r\n");
+            "modver = 0.0.4\r\nmoddev = Jerrod\r\n\r\n[CUSTOMDLC]\r\nsourcedirs = " + ModFolder + "\r\ndestdirs = " + ModFolder + "\r\n");
         if (Directory.Exists(modRoot)) Directory.Delete(modRoot, true);
         Directory.Move(tmp, modRoot);
         Console.WriteLine($"staged {modRoot}");
@@ -389,7 +401,8 @@ static class Program
             return 0;
         }
         DiagVanilla = args.Contains("--diag-vanilla-conditionals");
-        args = args.Where(a => a != "--diag-vanilla-conditionals").ToArray();
+        NoMars = args.Contains("--no-mars");
+        args = args.Where(a => a != "--diag-vanilla-conditionals" && a != "--no-mars").ToArray();
         if (args.Length == 3 && args[0] == "openstart") return Build(Path.GetFullPath(args[1]), Path.GetFullPath(args[2]));
         if (args.Length == 4 && args[0] == "trace") return Trace(Path.GetFullPath(args[1]), args[2], args[3]);
         if (args.Length == 4 && args[0] == "props")
@@ -398,6 +411,19 @@ static class Program
             var e = pcc.FindExport(args[3]);
             foreach (var prop in e.GetProperties()) Console.WriteLine($"{prop.GetType().Name} {prop.Name.Instanced} = {prop switch { IntProperty i => i.Value.ToString(), NameProperty n => n.Value.Instanced, StrProperty st => st.Value, BoolProperty b => b.Value.ToString(), ObjectProperty o => pcc.GetEntry(o.Value)?.InstancedFullPath, EnumProperty en => en.EnumType.Instanced + "::" + en.Value.Instanced, _ => prop.ToString() }}");
             Console.WriteLine(Describe(e));
+            return 0;
+        }
+        if (args.Length == 4 && args[0] == "find")
+        {
+            // find <BioGame> <file pattern> <export full path>: which runtime-winning packages define that export
+            var root = Path.GetFullPath(args[1]);
+            foreach (var name in Directory.EnumerateFiles(root, args[2], SearchOption.AllDirectories).Select(Path.GetFileName)
+                         .Where(n => !n.Contains("_LOC_", StringComparison.OrdinalIgnoreCase)).Distinct(StringComparer.OrdinalIgnoreCase).Order())
+            {
+                using var pcc = MEPackageHandler.UnsafePartialLoad(Winner(root, name), e => e.InstancedFullPath.StartsWith(args[3], StringComparison.OrdinalIgnoreCase));
+                var hits = pcc.Exports.Where(e => e.InstancedFullPath.Equals(args[3], StringComparison.OrdinalIgnoreCase)).ToList();
+                if (hits.Count > 0) Console.WriteLine($"{name}: {string.Join(",", hits.Select(h => h.ClassName + "#" + h.UIndex))}");
+            }
             return 0;
         }
         if (args.Length == 3 && args[0] == "classes")
