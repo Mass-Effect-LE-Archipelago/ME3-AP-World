@@ -1,9 +1,9 @@
 {
-  "installed_utc": "2026-10-27T01:48:32.950804+00:00",
+  "installed_utc": "2026-10-27T01:57:40.866779+00:00",
   "method": "plain folder copy (no Mod Manager); TOC left to the installed AutoTOCLE-v2.asi",
   "owner_approval": "2026-10-26 'Go to copy into ME3 DLC folder.'",
   "target": "C:\\Steam\\steamapps\\common\\Mass Effect Legendary Edition\\Game\\ME3\\BioGame\\DLC\\DLC_MOD_ArchipelagoME3",
-  "version": "0.0.2b",
+  "version": "0.0.3",
   "files_sha256": {
     "PCConsoleTOC.bin": "bab36492eb1c2177fd98621d4011960e57c4478b381ee02edb9bd1d51b719cb7",
     "CookedPCConsole/BioP_Char.pcc": "8041085581b95de83ccad7102592da461f08e6b018e950818e58b33baa72b5b8",
@@ -35,7 +35,19 @@
         "CookedPCConsole/DLC_MOD_ArchipelagoME3_INT.tlk": "5452b30016dc916b11285be6269faed78da710eb97f6ff081b0297feab7bc733"
       },
       "outcome": "launched to main menu; game reported the DLC as corrupt (no Default_DLC_MOD_ArchipelagoME3.bin)"
+    },
+    {
+      "version": "0.0.2b",
+      "files_sha256": {
+        "PCConsoleTOC.bin": "bab36492eb1c2177fd98621d4011960e57c4478b381ee02edb9bd1d51b719cb7",
+        "CookedPCConsole/BioP_Char.pcc": "8041085581b95de83ccad7102592da461f08e6b018e950818e58b33baa72b5b8",
+        "CookedPCConsole/BioD_Nor_203aGalaxyMap.pcc": "632ae1611a55157136b14ce5bd9a6bbee7d018bd7c4388576bbd79e777dbf0a2",
+        "CookedPCConsole/ConditionalsDLC_MOD_ArchipelagoME3.cnd": "01d66002023f50610b526d5145a804dea322547a6d9bda699b67e4bc7210fd6b",
+        "CookedPCConsole/Mount.dlc": "803d664c7ab54b9cc02ab3b623fd76c06ce1fa0d6c3cebac4639ef7500c5944f",
+        "CookedPCConsole/DLC_MOD_ArchipelagoME3_INT.tlk": "5452b30016dc916b11285be6269faed78da710eb97f6ff081b0297feab7bc733"
+      },
+      "outcome": "live 2026-10-27: imported career landed on BioP_Nor; Kaidan+James in squad; galaxy map opened; Local Cluster hidden (vanilla C2752)"
     }
   ],
-  "note": "adds Default_DLC_MOD_ArchipelagoME3.bin (seekfree path + DLC module 4300); AutoTOC rewrites PCConsoleTOC.bin at launch, which is expected"
+  "note": "Local Cluster visible/usable until Mars is done (C43002); bridge swapped to read-only research 0.2.0 at the same time"
 }
