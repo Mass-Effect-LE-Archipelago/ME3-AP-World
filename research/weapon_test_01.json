@@ -1,0 +1,43 @@
+{
+  "utc": "2026-10-27T23:14:28.731777+00:00",
+  "identity": "03e9d1b926ccd96072ff75c9fad7ebc7e70ba1205bcf366dea8855b039e90241",
+  "history": "9bfcd8ee209c2ca23a58958f5faa782b33184997ed25e0eee7a102f03f014c5e",
+  "weapons": [
+    17,
+    35
+  ],
+  "log": [
+    {
+      "request": "CAPS",
+      "reply": "delivery_dev GETB GETBS GETI GETIS MAP GAW USES PLOTINFO DEV_SESSION DEV_WALLET DEV_GATE DEV_BIND DEV_TXN LANDING_GATE WEAPONS"
+    },
+    {
+      "request": "MAP",
+      "reply": "BioP_Nor"
+    },
+    {
+      "request": "DEV_SESSION",
+      "reply": "1 research_only unbound 0"
+    },
+    {
+      "request": "DEV_BIND 03e9d1b926ccd96072ff75c9fad7ebc7e70ba1205bcf366dea8855b039e90241 9bfcd8ee209c2ca23a58958f5faa782b33184997ed25e0eee7a102f03f014c5e RESEARCH_ONLY",
+      "reply": "bound research_only"
+    },
+    {
+      "request": "DEV_SESSION",
+      "reply": "1 research_only 03e9d1b926ccd96072ff75c9fad7ebc7e70ba1205bcf366dea8855b039e90241 9bfcd8ee209c2ca23a58958f5faa782b33184997ed25e0eee7a102f03f014c5e 0"
+    },
+    {
+      "request": "DEV_TXN 03e9d1b926ccd96072ff75c9fad7ebc7e70ba1205bcf366dea8855b039e90241 9bfcd8ee209c2ca23a58958f5faa782b33184997ed25e0eee7a102f03f014c5e 0 WEAPON 17",
+      "reply": "1 0 applied"
+    },
+    {
+      "request": "DEV_TXN 03e9d1b926ccd96072ff75c9fad7ebc7e70ba1205bcf366dea8855b039e90241 9bfcd8ee209c2ca23a58958f5faa782b33184997ed25e0eee7a102f03f014c5e 1 WEAPON 35",
+      "reply": "2 0 applied"
+    },
+    {
+      "request": "DEV_SESSION",
+      "reply": "1 research_only 03e9d1b926ccd96072ff75c9fad7ebc7e70ba1205bcf366dea8855b039e90241 9bfcd8ee209c2ca23a58958f5faa782b33184997ed25e0eee7a102f03f014c5e 2"
+    }
+  ]
+}
