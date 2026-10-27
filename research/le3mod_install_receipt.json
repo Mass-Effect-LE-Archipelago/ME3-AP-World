@@ -1,9 +1,9 @@
 {
-  "installed_utc": "2026-10-27T02:24:18.537241+00:00",
+  "installed_utc": "2026-10-27T02:44:19.103965+00:00",
   "method": "plain folder copy (no Mod Manager); TOC left to the installed AutoTOCLE-v2.asi",
   "owner_approval": "2026-10-26 'Go to copy into ME3 DLC folder.'",
   "target": "C:\\Steam\\steamapps\\common\\Mass Effect Legendary Edition\\Game\\ME3\\BioGame\\DLC\\DLC_MOD_ArchipelagoME3",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "files_sha256": {
     "CookedPCConsole/BioD_Nor_203CIC.pcc": "7656d6825f9296e5 (prefix)",
     "CookedPCConsole/BioD_Nor_203aGalaxyMap.pcc": "754c17e93862cfff (prefix)"
@@ -51,7 +51,11 @@
     {
       "version": "0.0.3-diag",
       "outcome": "Local Cluster still hidden with vanilla 2744/79 -> edited 203aGalaxyMap not used; loud boom then audio loss"
+    },
+    {
+      "version": "0.0.4",
+      "outcome": "live: Local Cluster + Mars landing work; Liara picked -> load hang; Kaidan+James -> Mars loads, full opening, Predator+Katana given; audio fine"
     }
   ],
-  "note": "patches galaxy map in BioD_Nor_203CIC and 203aGalaxyMap"
+  "note": "adds BioP_Nor: Mars skips squad/weapon select, forces survivor+James; Liara not selectable at start"
 }
