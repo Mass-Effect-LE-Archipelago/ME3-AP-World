@@ -94,6 +94,9 @@ def synchronize_research_delivery(identity: str, received_ids: Sequence[int], *,
         capabilities = set(pipe.request("CAPS").split())
         if not {"delivery_dev", "DEV_SESSION", "DEV_TXN"} <= capabilities:
             raise UnsupportedFeature("Install the explicit delivery-development bridge to receive test items")
+        # Refuse before any binding or partial delivery.
+        if any(operation == "WEAPON" for operation, _ in operations) and "WEAPONS" not in capabilities:
+            raise UnsupportedFeature("Installed bridge cannot deliver weapons; install bridge 0.2.2 or newer")
         session = parse_session(pipe.request("DEV_SESSION"))
         if session.identity is None:
             if not allow_bind:
@@ -111,11 +114,12 @@ def synchronize_research_delivery(identity: str, received_ids: Sequence[int], *,
         while cursor < len(operations):
             operation, amount = operations[cursor]
             command = f"DEV_TXN {identity} {RESEARCH_HISTORY} {cursor} {operation}"
-            if operation == "CREDITS": command += f" {amount}"
+            if operation in ("CREDITS", "WEAPON"): command += f" {amount}"
+            granted_limit = amount if operation == "CREDITS" else 0  # WEAPON's amount is a weapon id, not credits
             fields = pipe.request(command).split()
             try:
                 if (len(fields) != 3 or int(fields[0]) != cursor + 1 or fields[2] not in ("applied", "done")
-                        or not 0 <= int(fields[1]) <= amount or (fields[2] == "done" and fields[1] != "0")):
+                        or not 0 <= int(fields[1]) <= granted_limit or (fields[2] == "done" and fields[1] != "0")):
                     raise ValueError("Unexpected delivery acknowledgement")
             except ValueError as error: raise BridgeError("Malformed native delivery acknowledgement; resync before retry") from error
             cursor += 1

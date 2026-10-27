@@ -17,6 +17,7 @@ class FakeWire:
         self.readonly = False
         self.gate = False
         self.intel = 0
+        self.weapons = set()
 
     def __enter__(self): return self
     def __exit__(self, *_): pass
@@ -25,7 +26,7 @@ class FakeWire:
         words = text.split()
         if words[0] == "CAPS":
             if self.readonly: return "readonly DEV_SESSION"
-            return "delivery_dev DEV_SESSION DEV_BIND DEV_TXN" + (" DEV_GATE LANDING_GATE" if self.gate else "")
+            return "delivery_dev DEV_SESSION DEV_BIND DEV_TXN" + (" DEV_GATE LANDING_GATE WEAPONS" if self.gate else "")
         if words[0] == "DEV_SESSION":
             if self.identity is None: return "1 research_only unbound 0"
             return f"1 research_only {self.identity} {self.history} {self.cursor}"
@@ -38,7 +39,8 @@ class FakeWire:
             index = int(words[3])
             if index < self.cursor: return f"{self.cursor} 0 done"
             if index > self.cursor: raise BridgeError(f"ERR gap {self.cursor}")
-            if words[4] == "INTEL" and not self.gate: raise BridgeError("ERR badrequest")
+            if words[4] in ("INTEL", "WEAPON") and not self.gate: raise BridgeError("ERR badrequest")
+            if words[4] == "WEAPON": self.weapons.add(int(words[5]))
             delta = int(words[5]) if words[4] == "CREDITS" else 0
             self.intel += words[4] == "INTEL"
             self.credits += delta
@@ -84,6 +86,17 @@ class TestResearchDelivery(unittest.TestCase):
         self.assertEqual(self.sync(older, items), 3)
         self.assertEqual(older.intel, 0)
         self.assertFalse(any(call.endswith(" INTEL") for call in older.calls))
+
+    def test_weapons_need_a_weapon_capable_bridge(self):
+        items = [data.ITEM_NAME_TO_ID[data.STARTING_WEAPON], data.ITEM_NAME_TO_ID[data.CREDITS],
+                 data.ITEM_NAME_TO_ID["Mantis (Sniper Rifle)"]]
+        modern = FakeWire()
+        modern.gate = True
+        self.assertEqual(self.sync(modern, items), 3)
+        self.assertEqual((modern.weapons, modern.credits), ({17, 35}, 1000))
+        old = FakeWire()
+        with self.assertRaises(UnsupportedFeature): self.sync(old, items)
+        self.assertEqual(old.cursor, 0)
 
     def test_lost_reply_resumes_from_native_cursor(self):
         wire = FakeWire()

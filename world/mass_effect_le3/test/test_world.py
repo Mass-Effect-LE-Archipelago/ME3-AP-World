@@ -17,6 +17,18 @@ class TestWorldGeneration(unittest.TestCase):
                 self.assertEqual(len(world.itempool), count)
                 self.assertEqual(len(world.worlds[1].fill_slot_data()["locations"]), count)
 
+    def test_weapons_as_items_with_predator_start(self):
+        world = setup_multiworld(MassEffectLE3World, gen_steps, 3)
+        pool = [item.name for item in world.itempool]
+        self.assertEqual(world.precollected_items[1][0].name, data.STARTING_WEAPON)
+        self.assertNotIn(data.STARTING_WEAPON, pool)
+        self.assertEqual(sorted(n for n in pool if n in data.WEAPON_ITEMS),
+                         sorted(n for n in data.WEAPON_ITEMS if n != data.STARTING_WEAPON))
+        self.assertEqual(len(set(data.ITEM_NAME_TO_ID.values())), len(data.ITEM_NAME_TO_ID))
+        off = setup_multiworld(MassEffectLE3World, gen_steps, 3, {"weapon_items": False})
+        self.assertFalse(any(item.name in data.WEAPON_ITEMS for item in off.itempool))
+        self.assertFalse(off.precollected_items[1])
+
     def test_intel_opens_both_finale_regions(self):
         world = setup_multiworld(MassEffectLE3World, gen_steps, 1)
         required = world.worlds[1].intel_required

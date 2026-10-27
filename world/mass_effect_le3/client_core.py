@@ -87,6 +87,8 @@ def item_operation(item_id: int) -> tuple[str, int]:
         return "COUNTER", 0
     if item_id == data.ITEM_NAME_TO_ID[data.CREDITS]:
         return "CREDITS", 1000
+    if item_id in data.WEAPON_ID_TO_NATIVE:
+        return "WEAPON", data.WEAPON_ID_TO_NATIVE[item_id]
     raise ValueError(f"Unsupported ME3 item ID {item_id}; it was not consumed")
 
 

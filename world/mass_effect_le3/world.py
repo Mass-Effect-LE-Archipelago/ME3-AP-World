@@ -77,12 +77,23 @@ class MassEffectLE3World(World):
         regions["Earth Finale"].locations.append(goal)
 
     def create_item(self, name: str) -> ME3Item:
-        classification = ItemClassification.progression_skip_balancing if name == data.INTEL else ItemClassification.filler
+        classification = (ItemClassification.progression_skip_balancing if name == data.INTEL
+                           else ItemClassification.filler)
+        # Weapons stay filler: most locations are excluded (conservative missable audit), and a weapon is never
+        # required, so it may be placed anywhere. Only ~11 non-excluded slots would remain after intel otherwise.
         return ME3Item(name, classification, data.ITEM_NAME_TO_ID[name], self.player)
 
     def create_items(self) -> None:
         self.multiworld.itempool.extend(self.create_item(data.INTEL) for _ in range(self.intel_total))
-        self.multiworld.itempool.extend(self.create_item(data.CREDITS) for _ in range(len(self.selected) - self.intel_total))
+        weapons = []
+        if self.options.weapon_items:
+            self.multiworld.push_precollected(self.create_item(data.STARTING_WEAPON))
+            # Weapons replace credit filler only while slots remain; never displace intel.
+            room = len(self.selected) - self.intel_total
+            weapons = [name for name in data.WEAPON_ITEMS if name != data.STARTING_WEAPON][:room]
+        self.multiworld.itempool.extend(self.create_item(name) for name in weapons)
+        self.multiworld.itempool.extend(self.create_item(data.CREDITS)
+                                        for _ in range(len(self.selected) - self.intel_total - len(weapons)))
 
     def get_filler_item_name(self) -> str:
         return data.CREDITS
@@ -94,6 +105,7 @@ class MassEffectLE3World(World):
         return {"slot_data_version": data.SCHEMA_VERSION, "client_protocol": 1, "manifest_hash": data.MANIFEST_HASH,
                 "implementation_status": "experimental_not_playable", "history": data.HISTORY.copy(),
                 "crucible_intel_total": self.intel_total, "crucible_intel_required": self.intel_required,
+                "weapon_items": bool(self.options.weapon_items),
                 "enabled_dlc": sorted(self.options.enabled_dlc.value),
                 "locations": [entry.id for entry in self.selected],
                 "goal": {"kind": "bool", "index": data.GOAL_PLOT_BOOL},

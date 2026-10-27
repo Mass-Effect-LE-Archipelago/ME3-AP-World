@@ -16,6 +16,26 @@ INTEL = "Crucible Intel"
 CREDITS = "Credits (1000)"
 VICTORY = "Reapers Defeated"
 ITEM_NAME_TO_ID = {INTEL: ITEM_BASE, CREDITS: ITEM_BASE + 0x40}
+# Loadout weapons in bridge Weapons.hpp order (append-only; the index is the native WEAPON id).
+WEAPON_CLASSES = (
+    "AssaultRifle_Avenger", "AssaultRifle_Argus", "AssaultRifle_Cobra", "AssaultRifle_Collector",
+    "AssaultRifle_Falcon", "AssaultRifle_Geth", "AssaultRifle_Mattock", "AssaultRifle_Reckoning",
+    "AssaultRifle_Revenant", "AssaultRifle_Saber", "AssaultRifle_Valkyrie", "AssaultRifle_Vindicator",
+    "SMG_Shuriken", "SMG_Hornet", "SMG_Hurricane", "SMG_Locust", "SMG_Tempest",
+    "Pistol_Predator", "Pistol_Carnifex", "Pistol_Eagle", "Pistol_Ivory", "Pistol_Phalanx", "Pistol_Scorpion",
+    "Pistol_Talon", "Pistol_Thor",
+    "Shotgun_Katana", "Shotgun_Claymore", "Shotgun_Crusader", "Shotgun_Disciple", "Shotgun_Eviscerator",
+    "Shotgun_Geth", "Shotgun_Graal", "Shotgun_Raider", "Shotgun_Scimitar", "Shotgun_Striker",
+    "SniperRifle_Mantis", "SniperRifle_BlackWidow", "SniperRifle_Incisor", "SniperRifle_Indra",
+    "SniperRifle_Javelin", "SniperRifle_Raptor", "SniperRifle_Valiant", "SniperRifle_Viper", "SniperRifle_Widow",
+)
+_KINDS = {"AssaultRifle": "Assault Rifle", "SMG": "SMG", "Pistol": "Pistol", "Shotgun": "Shotgun",
+          "SniperRifle": "Sniper Rifle"}
+WEAPON_ITEMS = tuple(f"{cls.split('_', 1)[1]} ({_KINDS[cls.split('_', 1)[0]]})" for cls in WEAPON_CLASSES)
+WEAPON_ITEM_BASE = ITEM_BASE + 0x100
+STARTING_WEAPON = WEAPON_ITEMS[WEAPON_CLASSES.index("Pistol_Predator")]   # D5: the career starts with the Predator
+ITEM_NAME_TO_ID.update({name: WEAPON_ITEM_BASE + index for index, name in enumerate(WEAPON_ITEMS)})
+WEAPON_ID_TO_NATIVE = {WEAPON_ITEM_BASE + index: index for index in range(len(WEAPON_ITEMS))}
 DLC = frozenset({"From Ashes", "Leviathan", "Omega", "Citadel"})
 FINAL_REGIONS = frozenset({"Cerberus Headquarters", "Earth Finale"})
 GOAL_PLOT_BOOL = 22426  # End002: Made_Final_Decision; runtime observation pending.

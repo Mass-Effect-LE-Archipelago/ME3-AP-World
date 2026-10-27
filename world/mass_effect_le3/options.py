@@ -50,6 +50,11 @@ class WeaponChecks(Toggle):
     display_name = "Weapon Pickup Checks"
 
 
+class WeaponItems(DefaultOnToggle):
+    """D5: start with only the M3 Predator; every other loadout weapon is an item in the pool."""
+    display_name = "Weapons as Items"
+
+
 class ExplorationChecks(DefaultOnToggle):
     """Include the 76 named galaxy-map recoveries. Recovery and subsequent quest delivery are distinct actions."""
     display_name = "Exploration Recovery Checks"
@@ -73,4 +78,5 @@ class MassEffectLE3Options(PerGameCommonOptions):
     mod_checks: ModChecks
     weapon_checks: WeaponChecks
     exploration_checks: ExplorationChecks
+    weapon_items: WeaponItems
     enabled_dlc: EnabledDLC
