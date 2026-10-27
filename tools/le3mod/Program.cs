@@ -31,6 +31,73 @@ static class Program
     // hung the level load (2026-10-27). Mars itself makes her selectable when she joins.
     const int LiaraNotSelectable = 49;
 
+    // Inline bulk data (Wwise banks, package-stored texture mips) stores its own absolute file offset in the export
+    // binary as [.. sizeOnDisk][offsetInFile][data], with offsetInFile = the position right after that field. This LEC
+    // build re-saves those bytes unchanged even when the export moves, so the game read audio from the wrong place
+    // (Normandy "boom" and silence, 2026-10-27). After saving, rewrite every such self-offset from the vanilla source
+    // to the export's new position, save again (sizes are unchanged, so nothing moves) and verify.
+    // One save path everywhere (compressed, like vanilla), so the bulk-offset fix-up sees a stable layout.
+    static void SavePackage(IMEPackage pcc, string path)
+    {
+        using var saved = pcc.SaveToStream(true, true, true);
+        File.WriteAllBytes(path, saved.ToArray());
+    }
+
+    static int FixInlineBulkOffsets(string source, string saved)
+    {
+        // path -> (vanilla data offset, positions of self-offsets). Only spots LEC left stale (still the vanilla value
+        // after the export moved) are rewritten; LEC already updates texture mip offsets itself.
+        Dictionary<string, (int origin, List<int> hits)> spots;
+        using (var vanilla = MEPackageHandler.OpenMEPackage(source, forceLoadFromDisk: true))
+        {
+            spots = new();
+            // Only classes that carry inline bulk data (audio, texture mips, mesh buffers): a scan of every class also
+            // matched coincidental ints (a MaterialInstanceConstant, a BioPlanet). The 0.0.8 offline check found stale
+            // offsets in Texture2D, TextureFlipBook, StaticMesh and SkeletalMesh too, not only WwiseBank.
+            foreach (var e in vanilla.Exports.Where(x => x.ClassName.StartsWith("Wwise") || x.ClassName.Contains("Texture")
+                                                         || x.ClassName is "StaticMesh" or "SkeletalMesh"))
+            {
+                var data = e.Data;
+                var hits = new List<int>();
+                for (int i = 0; i + 4 <= data.Length; i += 1)
+                    if (BitConverter.ToInt32(data, i) == e.DataOffset + i + 4) hits.Add(i);
+                if (hits.Count > 0) spots[(e.ClassName + "|" + e.InstancedFullPath)] = (e.DataOffset, hits);
+            }
+        }
+        int patched = 0;
+        Dictionary<string, int> positions = new();
+        using (var pcc = MEPackageHandler.OpenMEPackage(saved, forceLoadFromDisk: true))
+        {
+            foreach (var e in pcc.Exports)
+            {
+                if (!spots.TryGetValue((e.ClassName + "|" + e.InstancedFullPath), out var spot)) continue;
+                var data = e.Data;
+                var stale = spot.hits.Where(i => i + 4 <= data.Length && BitConverter.ToInt32(data, i) == spot.origin + i + 4
+                                                 && e.DataOffset != spot.origin).ToList();
+                if (stale.Count == 0) continue;
+                foreach (var i in stale) BitConverter.GetBytes(e.DataOffset + i + 4).CopyTo(data, i);
+                patched += stale.Count;
+                e.Data = data;
+                positions[(e.ClassName + "|" + e.InstancedFullPath)] = e.DataOffset;
+                spot.hits.RemoveAll(i => !stale.Contains(i));
+            }
+            SavePackage(pcc, saved);
+        }
+        using (var pcc = MEPackageHandler.OpenMEPackage(saved, forceLoadFromDisk: true))
+        {
+            foreach (var e in pcc.Exports)
+            {
+                if (!positions.ContainsKey((e.ClassName + "|" + e.InstancedFullPath))) continue;
+                var data = e.Data;
+                if (e.DataOffset != positions[(e.ClassName + "|" + e.InstancedFullPath)] || spots[(e.ClassName + "|" + e.InstancedFullPath)].hits.Any(i => BitConverter.ToInt32(data, i) != e.DataOffset + i + 4))
+                    return Fail($"inline bulk offset still wrong in {(e.ClassName + "|" + e.InstancedFullPath)} ({e.ClassName}): offset {positions[(e.ClassName + "|" + e.InstancedFullPath)]} -> {e.DataOffset}, values [{string.Join(",", spots[(e.ClassName + "|" + e.InstancedFullPath)].hits.Select(i => BitConverter.ToInt32(data, i) - (e.DataOffset + i + 4)))}] (0 = correct)");
+            }
+        }
+        Console.WriteLine($"validate: {Path.GetFileName(saved)} stale inline bulk offsets rewritten: {patched} in {positions.Count} exports");
+        return 0;
+        static int Fail(string message) { Console.Error.WriteLine("validation FAILED: " + message); return 1; }
+    }
+
     // Imported careers (D3: every AP career) skip Earth: ME2_Import True -> survivor check -> squad transitions ->
     // a new AreaTransition to BioP_Nor. Non-import and NG+ routes keep Biop_ProEar. Fails closed on any unexpected shape.
     // This LEC build gives new sequence objects their class-default outputs, so link into an existing output by name
@@ -91,8 +158,9 @@ static class Program
             Link(kaidan, "Out", james);
             Link(james, "Out", liara);
             Link(liara, "Out", normandy);
-            using (var saved = pcc.SaveToStream(true, true, true)) File.WriteAllBytes(outPcc, saved.ToArray());
+            SavePackage(pcc, outPcc);
         }
+        if (FixInlineBulkOffsets(source, outPcc) != 0) return 1;
         using (var pcc = MEPackageHandler.OpenMEPackage(outPcc, forceLoadFromDisk: true))
         {
             var check = pcc.FindExport(ImportCheck);
@@ -189,8 +257,9 @@ static class Program
                 KismetHelper.WriteOutputLinksToNode(start, startLinks);
                 Link(start, "Out", ours);
             }
-            using (var saved = pcc.SaveToStream(true, true, true)) File.WriteAllBytes(outPcc, saved.ToArray());
+            SavePackage(pcc, outPcc);
         }
+        if (FixInlineBulkOffsets(source, outPcc) != 0) return 1;
         using (var pcc = MEPackageHandler.OpenMEPackage(outPcc, forceLoadFromDisk: true))
         {
             foreach (var path in HenchChecks)
@@ -274,8 +343,9 @@ static class Program
             cluster.WriteProperty(new IntProperty(DiagVanilla ? 2744 : LocalClusterConditional, "VisibleConditional"));
             cluster.WriteProperty(new IntProperty(DiagVanilla ? 79 : LocalClusterConditional, "UsableConditional"));
             if (DiagVanilla) mars.WriteProperty(new IntProperty(79, "PlanetLandCondition"));
-            using (var saved = pcc.SaveToStream(true, true, true)) File.WriteAllBytes(outPcc, saved.ToArray());
+            SavePackage(pcc, outPcc);
         }
+        if (FixInlineBulkOffsets(source, outPcc) != 0) return 1;
         var cnd = new CNDFile { ConditionalEntries = [] };
         foreach (var (id, expression) in new[] { (MarsConditional, MarsExpression), (LocalClusterConditional, LocalClusterExpression) })
         {
@@ -370,7 +440,7 @@ static class Program
         File.WriteAllText(Path.Combine(tmp, "moddesc.ini"),
             "[ModManager]\r\ncmmver = 8.0\r\n\r\n[ModInfo]\r\ngame = LE3\r\nmodname = Archipelago ME3 open start (TEST)\r\n" +
             "moddesc = Test build: an imported ME2 career skips the Earth prologue and starts on the Normandy.\r\n" +
-            "modver = 0.0.7\r\nmoddev = Jerrod\r\n\r\n[CUSTOMDLC]\r\nsourcedirs = " + ModFolder + "\r\ndestdirs = " + ModFolder + "\r\n");
+            "modver = 0.0.8\r\nmoddev = Jerrod\r\n\r\n[CUSTOMDLC]\r\nsourcedirs = " + ModFolder + "\r\ndestdirs = " + ModFolder + "\r\n");
         if (Directory.Exists(modRoot)) Directory.Delete(modRoot, true);
         Directory.Move(tmp, modRoot);
         Console.WriteLine($"staged {modRoot}");
@@ -489,7 +559,9 @@ static class Program
         var oodle = Environment.GetEnvironmentVariable("LE3_OODLE_DLL")
             ?? @"C:\Steam\steamapps\common\Mass Effect Legendary Edition\Game\ME3\Binaries\Win64\oo2core_8_win64.dll";
         OodleHelper.LoadOodleDll(oodle);
-        MEPackageHandler.Initialize();
+        // InitLib registers the package saver. SaveToStream alone skipped LEC's post-save offset fixups, so embedded
+        // Wwise bank data kept stale absolute offsets and Normandy audio broke (2026-10-27).
+        LegendaryExplorerCoreLib.InitLib(TaskScheduler.Default);
         if (args.Length is 2 or 3 && args[0] == "cnd")
         {
             var cnd = CNDFile.FromFile(args[1]);
@@ -534,6 +606,67 @@ static class Program
                 Console.WriteLine(e.InstancedFullPath + " :: " + Describe(e));
                 foreach (var prop in e.GetProperties().Where(p => p.Name.Instanced is not ("ObjPosX" or "ObjPosY" or "ParentSequence" or "OutputLinks" or "VariableLinks" or "InputLinks" or "ObjInstanceVersion" or "m_aObjComment")))
                     Console.WriteLine($"   {prop.Name.Instanced} = {prop switch { IntProperty i => i.Value.ToString(), NameProperty n => n.Value.Instanced, StrProperty st => st.Value, BoolProperty b => b.Value.ToString(), ObjectProperty o => pcc.GetEntry(o.Value)?.InstancedFullPath, ArrayProperty<ObjectProperty> a => string.Join(",", a.Select(x => pcc.GetEntry(x.Value)?.InstancedFullPath)), _ => prop.GetType().Name }}");
+            }
+            return 0;
+        }
+        if (args.Length == 3 && args[0] == "stale")
+        {
+            // stale <vanilla> <ours>: per class, self-offsets that still hold the vanilla value although the export moved
+            using var a = MEPackageHandler.OpenMEPackage(args[1], forceLoadFromDisk: true);
+            using var b = MEPackageHandler.OpenMEPackage(args[2], forceLoadFromDisk: true);
+            var theirs = b.Exports.GroupBy(e => e.InstancedFullPath).ToDictionary(g => g.Key, g => g.First());
+            var counts = new Dictionary<string, (int stale, int tracked)>();
+            foreach (var e in a.Exports)
+            {
+                if (!theirs.TryGetValue(e.InstancedFullPath, out var o) || o.DataOffset == e.DataOffset) continue;
+                var d = e.Data; var od = o.Data;
+                for (int i = 0; i + 4 <= d.Length && i + 4 <= od.Length; i++)
+                {
+                    if (BitConverter.ToInt32(d, i) != e.DataOffset + i + 4) continue;
+                    var c = counts.GetValueOrDefault(e.ClassName);
+                    if (BitConverter.ToInt32(od, i) == o.DataOffset + i + 4) c.tracked++; else if (BitConverter.ToInt32(od, i) == e.DataOffset + i + 4) c.stale++;
+                    counts[e.ClassName] = c;
+                }
+            }
+            foreach (var (cls, c) in counts.OrderBy(x => x.Key)) Console.WriteLine($"{cls}: stale={c.stale} tracked={c.tracked}");
+            return 0;
+        }
+        if (args.Length == 3 && args[0] == "cmpaudio")
+        {
+            // cmpaudio <vanilla pcc> <ours pcc>: compare every Wwise/sound export's serialized data by path
+            using var a = MEPackageHandler.OpenMEPackage(args[1], forceLoadFromDisk: true);
+            using var b = MEPackageHandler.OpenMEPackage(args[2], forceLoadFromDisk: true);
+            Console.WriteLine($"vanilla flags={a.Flags} compressed={a.IsCompressed} exports={a.ExportCount} | ours flags={b.Flags} compressed={b.IsCompressed} exports={b.ExportCount}");
+            var theirs = b.Exports.GroupBy(e => e.InstancedFullPath).ToDictionary(g => g.Key, g => g.First());
+            int same = 0, diff = 0, missing = 0;
+            foreach (var e in a.Exports.Where(e => e.ClassName.StartsWith("Wwise") || e.ClassName.Contains("Sound") || e.ClassName.Contains("Audio")))
+            {
+                if (!theirs.TryGetValue(e.InstancedFullPath, out var o)) { missing++; Console.WriteLine("MISSING " + e.InstancedFullPath); continue; }
+                if (e.Data.AsSpan().SequenceEqual(o.Data)) same++;
+                else { diff++; if (diff <= 10) Console.WriteLine($"DIFF {e.ClassName} {e.InstancedFullPath} {e.DataSize} vs {o.DataSize}"); }
+            }
+            Console.WriteLine($"audio exports: same={same} diff={diff} missing={missing}");
+            // Embedded bulk data uses absolute offsets inside the export binary; if an export moved but its bytes did
+            // not change, any self-referencing offset is now stale.
+            foreach (var e in a.Exports.Where(e => e.ClassName is "WwiseStream" or "WwiseBank" or "SoundNodeWave"))
+            {
+                var o = theirs[e.InstancedFullPath];
+                var data = e.Data;
+                bool selfRef = false;
+                for (int i = 0; i + 4 <= data.Length; i += 4)
+                {
+                    int v = BitConverter.ToInt32(data, i);
+                    if (v > 0 && v >= e.DataOffset && v < e.DataOffset + e.DataSize) { selfRef = true; break; }
+                }
+                bool oursSelf = false;
+                var od = o.Data;
+                for (int i = 0; i + 4 <= od.Length; i += 4)
+                {
+                    int v = BitConverter.ToInt32(od, i);
+                    if (v > 0 && v >= o.DataOffset && v < o.DataOffset + o.DataSize) { oursSelf = true; break; }
+                }
+                if (selfRef != oursSelf) Console.WriteLine($"STALE {e.ClassName} {e.ObjectName.Instanced} vanilla={e.DataOffset} ours={o.DataOffset}");
+                else if (selfRef) Console.WriteLine($"ok {e.ClassName} {e.ObjectName.Instanced} self-offset tracks its move ({e.DataOffset} -> {o.DataOffset})");
             }
             return 0;
         }

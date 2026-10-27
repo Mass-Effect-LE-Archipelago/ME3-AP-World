@@ -10,6 +10,9 @@
     <Reference Include="LegendaryExplorerCore">
       <HintPath>../../Legendary Explorer/LegendaryExplorerCore.dll</HintPath>
     </Reference>
+    <Reference Include="Serilog">
+      <HintPath>../../Legendary Explorer/Serilog.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>../../Legendary Explorer/Newtonsoft.Json.dll</HintPath>
     </Reference>
