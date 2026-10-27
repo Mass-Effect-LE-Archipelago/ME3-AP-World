@@ -9,7 +9,7 @@
     "CookedPCConsole/BioD_Nor_203aGalaxyMap.pcc": "754c17e93862cfff (prefix)"
   },
   "uninstall": "delete that one folder",
-  "runtime_verified": false,
+  "runtime_verified": true,
   "history": [
     {
       "version": "0.0.1",
@@ -66,5 +66,5 @@
     }
   ],
   "note": "inline bulk offsets rewritten after save (audio banks, textures, meshes)",
-  "verified": "2026-10-27 owner: Mars from Normandy skips squad select and loads with Virmire survivor + James"
+  "verified": "2026-10-27 owner: no audio pop on Normandy load with 0.0.8"
 }

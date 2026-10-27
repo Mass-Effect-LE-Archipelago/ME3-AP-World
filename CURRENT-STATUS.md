@@ -20,7 +20,7 @@ Update 2026-10-20 (Claude Code): `build.py --career-trace` builds the observer c
 - Companions as items: selectability via the Is_Selectable transitions (49-54, 252/253 Tali, 66/67 James).
 - Mars: verified live 2026-10-27 (0.0.4) - lands, full opening plays, Mars gives Predator + Katana, loads with Kaidan + James (Liara picked = load hang). 0.0.5 staged: Liara not selectable before Mars (transition 49).
 - Weapons: Normandy start has none; harmless if Mars is first, but Menae etc. are offered before Mars. Either gate pre-Mars missions (AP logic) or grant Earth's Avenger/Predator.
-- Isolate the audio pop/boom on focus (suspect the re-saved galaxy map packages).
+- Audio pop/boom: FIXED in le3mod 0.0.8 (stale inline bulk offsets after re-save), owner-verified 2026-10-27.
 
 ## User direction
 
