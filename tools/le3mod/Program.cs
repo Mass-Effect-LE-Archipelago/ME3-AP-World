@@ -126,6 +126,10 @@ static class Program
     const int LocalClusterConditional = 43002;
     const string LocalClusterExpression = "((plot.ints[10185] != i0) || (plot.bools[20552] == Bool false))";
 
+    // Diagnostic: point Mars/Local Cluster at vanilla conditionals that are true on the Normandy (Serpent Nebula's
+    // 2744 visible / 79 usable) to tell "our CND is not loaded" apart from "our galaxy map package is not loaded".
+    static bool DiagVanilla;
+
     static int Mars(string bioGame, string cooked)
     {
         var source = Winner(bioGame, GalaxyFile);
@@ -148,8 +152,9 @@ static class Program
                 Console.Error.WriteLine("refusing: Local Cluster conditionals are not the vanilla 2752/80");
                 return 1;
             }
-            cluster.WriteProperty(new IntProperty(LocalClusterConditional, "VisibleConditional"));
-            cluster.WriteProperty(new IntProperty(LocalClusterConditional, "UsableConditional"));
+            cluster.WriteProperty(new IntProperty(DiagVanilla ? 2744 : LocalClusterConditional, "VisibleConditional"));
+            cluster.WriteProperty(new IntProperty(DiagVanilla ? 79 : LocalClusterConditional, "UsableConditional"));
+            if (DiagVanilla) mars.WriteProperty(new IntProperty(79, "PlanetLandCondition"));
             using (var saved = pcc.SaveToStream(true, true, true)) File.WriteAllBytes(outPcc, saved.ToArray());
         }
         var cnd = new CNDFile { ConditionalEntries = [] };
@@ -166,6 +171,7 @@ static class Program
             var mars = pcc.FindExport(MarsPath);
             var cluster = pcc.FindExport(LocalClusterPath);
             var back = CNDFile.FromFile(cndPath).ConditionalEntries.ToDictionary(e => e.ID, e => ME3ConditionalsCompiler.Decompile(e));
+            if (DiagVanilla) return 0;
             bool ok = mars?.GetProperty<StrProperty>("MapName")?.Value == "BioP_ProMar"
                 && mars.GetProperty<IntProperty>("PlanetLandCondition")?.Value == MarsConditional
                 && cluster?.GetProperty<IntProperty>("VisibleConditional")?.Value == LocalClusterConditional
@@ -175,6 +181,7 @@ static class Program
             Console.WriteLine($"validate: Mars MapName={mars?.GetProperty<StrProperty>("MapName")?.Value} land=C{mars?.GetProperty<IntProperty>("PlanetLandCondition")?.Value}; Local Cluster C{cluster?.GetProperty<IntProperty>("VisibleConditional")?.Value}; {string.Join("; ", back.Select(kv => $"C{kv.Key} = {kv.Value}"))}");
             if (!ok) { Console.Error.WriteLine("validation FAILED; staging left unchanged"); return 1; }
         }
+        if (DiagVanilla) { Console.WriteLine("DIAGNOSTIC build: vanilla conditionals 2744/79 on Local Cluster and Mars"); return 0; }
         Console.WriteLine($"Mars landable (galaxy source {source})");
         return 0;
     }
@@ -381,19 +388,21 @@ static class Program
                     Console.WriteLine($"{t.Name}.{m.Name}({string.Join(", ", m.GetParameters().Select(p => p.ParameterType.Name + " " + p.Name))})");
             return 0;
         }
+        DiagVanilla = args.Contains("--diag-vanilla-conditionals");
+        args = args.Where(a => a != "--diag-vanilla-conditionals").ToArray();
         if (args.Length == 3 && args[0] == "openstart") return Build(Path.GetFullPath(args[1]), Path.GetFullPath(args[2]));
         if (args.Length == 4 && args[0] == "trace") return Trace(Path.GetFullPath(args[1]), args[2], args[3]);
         if (args.Length == 4 && args[0] == "props")
         {
-            using var pcc = MEPackageHandler.OpenMEPackage(Winner(Path.GetFullPath(args[1]), args[2]), forceLoadFromDisk: true);
+            using var pcc = MEPackageHandler.OpenMEPackage(File.Exists(args[2]) ? args[2] : Winner(Path.GetFullPath(args[1]), args[2]), forceLoadFromDisk: true);
             var e = pcc.FindExport(args[3]);
-            foreach (var prop in e.GetProperties()) Console.WriteLine($"{prop.GetType().Name} {prop.Name.Instanced} = {prop switch { IntProperty i => i.Value.ToString(), NameProperty n => n.Value.Instanced, StrProperty st => st.Value, BoolProperty b => b.Value.ToString(), ObjectProperty o => pcc.GetEntry(o.Value)?.InstancedFullPath, _ => prop.ToString() }}");
+            foreach (var prop in e.GetProperties()) Console.WriteLine($"{prop.GetType().Name} {prop.Name.Instanced} = {prop switch { IntProperty i => i.Value.ToString(), NameProperty n => n.Value.Instanced, StrProperty st => st.Value, BoolProperty b => b.Value.ToString(), ObjectProperty o => pcc.GetEntry(o.Value)?.InstancedFullPath, EnumProperty en => en.EnumType.Instanced + "::" + en.Value.Instanced, _ => prop.ToString() }}");
             Console.WriteLine(Describe(e));
             return 0;
         }
         if (args.Length == 3 && args[0] == "classes")
         {
-            using var pcc = MEPackageHandler.OpenMEPackage(Winner(Path.GetFullPath(args[1]), args[2]), forceLoadFromDisk: true);
+            using var pcc = MEPackageHandler.OpenMEPackage(File.Exists(args[2]) ? args[2] : Winner(Path.GetFullPath(args[1]), args[2]), forceLoadFromDisk: true);
             foreach (var g in pcc.Exports.Where(e => e.GetProperty<ArrayProperty<StructProperty>>("OutputLinks") != null)
                          .GroupBy(e => e.ClassName).OrderBy(g => g.Key))
                 Console.WriteLine($"{g.Count(),5} {g.Key}");
