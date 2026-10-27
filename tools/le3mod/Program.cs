@@ -375,6 +375,51 @@ static class Program
         return 0;
     }
 
+    // Cutscene skips (D5): non-interactive matinees play at a very high rate instead of being cut out, so every track,
+    // event and end position still applies (doors open, actors land where gameplay expects them).
+    // Mars landing (owner 2026-10-27: in-engine, dropship descent + shuttle door): BioD_ProMar_110Shuttle
+    // Initialize_And_Enter_ProMar, reached from RE_TELEPORT_TO_LEVELSTART after the level-start teleport.
+    const float FastForwardRate = 100f;
+    static readonly (string file, string[] interps)[] FastForwards =
+    [
+        ("BioD_ProMar_110Shuttle.pcc", ["TheWorld.PersistentLevel.Main_Sequence.Initialize_And_Enter_ProMar.SeqAct_Interp_1",
+                                        "TheWorld.PersistentLevel.Main_Sequence.Initialize_And_Enter_ProMar.SeqAct_Interp_2"]),
+    ];
+
+    static int Cutscenes(string bioGame, string cooked)
+    {
+        foreach (var (file, interps) in FastForwards)
+        {
+            var source = Winner(bioGame, file);
+            var outPcc = Path.Combine(cooked, file);
+            using (var pcc = MEPackageHandler.OpenMEPackage(source, forceLoadFromDisk: true))
+            {
+                foreach (var path in interps)
+                {
+                    var interp = pcc.FindExport(path);
+                    if (interp?.ClassName != "SeqAct_Interp" || interp.GetProperty<BoolProperty>("bLooping")?.Value == true)
+                    {
+                        Console.Error.WriteLine($"refusing: {path} is not a one-shot matinee in {source}");
+                        return 1;
+                    }
+                    interp.WriteProperty(new FloatProperty(FastForwardRate, "PlayRate"));
+                }
+                SavePackage(pcc, outPcc);
+            }
+            if (FixInlineBulkOffsets(source, outPcc) != 0) return 1;
+            using (var pcc = MEPackageHandler.OpenMEPackage(outPcc, forceLoadFromDisk: true))
+            {
+                foreach (var path in interps)
+                {
+                    var rate = pcc.FindExport(path)?.GetProperty<FloatProperty>("PlayRate")?.Value;
+                    Console.WriteLine($"validate: {file} {path.Split('.').Last()} PlayRate={rate}");
+                    if (rate != FastForwardRate) { Console.Error.WriteLine("validation FAILED"); return 1; }
+                }
+            }
+        }
+        return 0;
+    }
+
     static int Build(string bioGame, string staging)
     {
         if (staging.StartsWith(bioGame, StringComparison.OrdinalIgnoreCase) || staging.Contains(@"\BioGame", StringComparison.OrdinalIgnoreCase))
@@ -395,6 +440,7 @@ static class Program
         if (OpenStart(bioGame, cooked) != 0) return 1;
         if (!NoMars && Mars(bioGame, cooked) != 0) return 1;
         if (FixedSquad(bioGame, cooked) != 0) return 1;
+        if (Cutscenes(bioGame, cooked) != 0) return 1;
         // Flags copied from a vanilla single-player DLC (Leviathan) so the mount type matches.
         var template = new MountFile(Path.Combine(bioGame, "DLC", "DLC_EXP_Pack001", "CookedPCConsole", "Mount.dlc"));
         new MountFile { Game = MEGame.LE3, MountPriority = MountPriority, TLKID = NameStrRef, MountFlags = template.MountFlags }
@@ -440,7 +486,7 @@ static class Program
         File.WriteAllText(Path.Combine(tmp, "moddesc.ini"),
             "[ModManager]\r\ncmmver = 8.0\r\n\r\n[ModInfo]\r\ngame = LE3\r\nmodname = Archipelago ME3 open start (TEST)\r\n" +
             "moddesc = Test build: an imported ME2 career skips the Earth prologue and starts on the Normandy.\r\n" +
-            "modver = 0.0.8\r\nmoddev = Jerrod\r\n\r\n[CUSTOMDLC]\r\nsourcedirs = " + ModFolder + "\r\ndestdirs = " + ModFolder + "\r\n");
+            "modver = 0.0.9\r\nmoddev = Jerrod\r\n\r\n[CUSTOMDLC]\r\nsourcedirs = " + ModFolder + "\r\ndestdirs = " + ModFolder + "\r\n");
         if (Directory.Exists(modRoot)) Directory.Delete(modRoot, true);
         Directory.Move(tmp, modRoot);
         Console.WriteLine($"staged {modRoot}");
