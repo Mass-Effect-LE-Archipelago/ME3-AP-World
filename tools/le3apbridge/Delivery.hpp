@@ -9,6 +9,7 @@
 #include <stdexcept>
 #include <string>
 #include <vector>
+#include "Weapons.hpp"
 
 namespace Delivery {
 constexpr int Base = 0x4D336000; // Sparse integer-map keys, never bool-array indices.
@@ -18,7 +19,7 @@ constexpr int Marker = 0x4D334150;
 constexpr int IntelRequired = Base + 20, IntelReceived = Base + 21;
 constexpr int MaxIntel = 1000;
 using Digest = std::array<std::uint32_t, 8>;
-enum class Op { Session, Wallet, Gate, Bind, Counter, Credits, Intel };
+enum class Op { Session, Wallet, Gate, Bind, Counter, Credits, Intel, Weapon };
 struct Request {
     Op op = Op::Session;
     Digest identity{}, history{};
@@ -67,6 +68,9 @@ inline std::string parse(std::string const& text, Request& request) {
         if (!number(words[3], request.index) || request.index >= 1000000) return "ERR index";
         if (words.size() == 5 && words[4] == "COUNTER") { request.op = Op::Counter; return ""; }
         if (words.size() == 5 && words[4] == "INTEL") { request.op = Op::Intel; return ""; }
+        // WEAPON <id>: id indexes Weapons::Classes (append-only wire contract).
+        if (words.size() == 6 && words[4] == "WEAPON" && number(words[5], request.amount)
+            && request.amount < static_cast<int>(Weapons::Classes.size())) { request.op = Op::Weapon; return ""; }
         if (words.size() == 6 && words[4] == "CREDITS" && number(words[5], request.amount)
             && request.amount >= 1 && request.amount <= 1000000) { request.op = Op::Credits; return ""; }
     }
@@ -156,6 +160,18 @@ template<class Host> std::string execute(Request const& request, Host& host) {
             host.write(Base + 2, state.cursor + 1);
         } catch (...) {
             host.restoreCredits(wallet.credits);
+            host.write(Base + 2, state.cursor);
+            throw;
+        }
+    } else if (request.op == Op::Weapon) {
+        // Unlock = player variable 1. Already-owned weapons still consume the index (duplicate items are harmless).
+        int const before = host.weaponOwned(request.amount);
+        try {
+            if (!before) host.setWeaponOwned(request.amount, 1);
+            if (!host.weaponOwned(request.amount)) throw std::runtime_error("weapon_effect");
+            host.write(Base + 2, state.cursor + 1);
+        } catch (...) {
+            if (!before) host.setWeaponOwned(request.amount, 0);
             host.write(Base + 2, state.cursor);
             throw;
         }

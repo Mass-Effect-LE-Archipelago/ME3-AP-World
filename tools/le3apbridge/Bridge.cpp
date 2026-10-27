@@ -123,6 +123,38 @@ struct DeliveryHost {
         if (!LE3AP_DELIVERY_DEV) throw std::runtime_error("delivery_disabled");
         playerInventory()->Credits = value;
     }
+    // Weapon ownership is the SFXEngine player variable "SFXGameContent.<class>" (1 = owned), as a pickup records it.
+    USFXEngine* engine() {
+        auto* objects = UObject::GObjObjects;
+        if (!objects || !objects->GetData()) throw std::runtime_error("noengine");
+        for (UINT i = 0; i < objects->Count(); i++) {
+            auto* object = objects->GetData()[i];
+            if (Live(object)) if (auto* found = object->Cast<USFXEngine>()) return found;
+        }
+        throw std::runtime_error("noengine");
+    }
+    static SFXName weaponName(int id) {
+        auto const& cls = Weapons::Classes.at(static_cast<std::size_t>(id));
+        std::wstring name = L"SFXGameContent.";
+        name.append(cls.begin(), cls.end());
+        return SFXName(name.c_str(), 0, false);
+    }
+    int weaponOwned(int id) {
+        static auto* getter = UObject::FindObject<UFunction>(L"Function SFXGame.SFXEngine.GetPlayerVariable");
+        if (!getter || !(getter->FunctionFlags & 0x400)) throw std::runtime_error("no_playervar_getter");
+        struct Parameters { SFXName name; int value = 0; } parameters{weaponName(id)};
+        static_assert(sizeof(SFXName) == 8);
+        Original(engine(), getter, &parameters, nullptr);
+        return parameters.value;
+    }
+    void setWeaponOwned(int id, int value) {
+        if (!LE3AP_DELIVERY_DEV) throw std::runtime_error("delivery_disabled");
+        static auto* setter = UObject::FindObject<UFunction>(L"Function SFXGame.SFXEngine.SetPlayerVariable");
+        if (!setter || !(setter->FunctionFlags & 0x400)) throw std::runtime_error("no_playervar_setter");
+        struct Parameters { SFXName name; int value; } parameters{weaponName(id), value};
+        static_assert(sizeof(Parameters) == 12);
+        Original(engine(), setter, &parameters, nullptr);
+    }
 };
 
 #if LE3AP_DELIVERY_DEV
@@ -312,11 +344,11 @@ std::string Parse(std::string const& message, Pending& request) {
     auto const& op = request.operation;
     if (op == "PING" && !count) return "OK pong";
     if (op == "VER" && !count) return LE3AP_CAREER_TRACE ? "OK 0.3.0-career-trace"
-        : LE3AP_DELIVERY_DEV ? "OK 0.2.1-delivery-dev" : "OK 0.2.0-research";
+        : LE3AP_DELIVERY_DEV ? "OK 0.2.2-delivery-dev" : "OK 0.2.0-research";
     if (op == "CAPS" && !count && LE3AP_CAREER_TRACE)
         return "OK readonly CAREER_TRACE GETB GETBS GETI GETIS MAP GAW USES PLOTINFO DEV_SESSION DEV_WALLET";
     if (op == "CAPS" && !count) return LE3AP_DELIVERY_DEV
-        ? "OK delivery_dev GETB GETBS GETI GETIS MAP GAW USES PLOTINFO DEV_SESSION DEV_WALLET DEV_GATE DEV_BIND DEV_TXN LANDING_GATE"
+        ? "OK delivery_dev GETB GETBS GETI GETIS MAP GAW USES PLOTINFO DEV_SESSION DEV_WALLET DEV_GATE DEV_BIND DEV_TXN LANDING_GATE WEAPONS"
         : "OK readonly GETB GETBS GETI GETIS MAP GAW USES PLOTINFO DEV_SESSION DEV_WALLET";
     if (op == "HELLO" && count == 1) return request.indices[0] == 1 ? "OK 1 LE3 readonly" : "ERR protocol";
     if ((op == "MAP" || op == "GAW" || op == "PLOTINFO") && !count) return "";

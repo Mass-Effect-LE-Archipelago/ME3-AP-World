@@ -25,6 +25,10 @@ struct Host {
     }
     void adjustCredits(int amount) { ++adjustments; credits += amount; if (failGrant) ++credits; }
     void restoreCredits(int value) { credits = value; }
+    std::map<int, int> weapons;
+    bool failWeapon = false;
+    int weaponOwned(int id) { return weapons[id]; }
+    void setWeaponOwned(int id, int value) { if (!failWeapon) weapons[id] = value; }
 };
 Delivery::Request parse(std::string const& text) {
     Delivery::Request request;
@@ -85,7 +89,7 @@ int main() {
                 "DEV_SESSION extra", "DEV_TXN " + Seed + " " + History + " -1 CREDITS 1000",
                 "DEV_TXN " + Seed + " " + History + " 0 CREDITS 0",
                 "DEV_TXN " + Seed + " " + History + " 0 CREDITS 1000 extra",
-                "DEV_TXN " + Seed + " " + History + " 0 WEAPON 9"}) {
+                "DEV_TXN " + Seed + " " + History + " 0 ARMOR 9"}) {
             Delivery::Request request;
             require(!Delivery::parse(text, request).empty(), "malformed/unsupported command refused");
         }
@@ -112,6 +116,21 @@ int main() {
         Delivery::Request request;
         require(!Delivery::parse("DEV_BIND " + Seed + " " + History + " RESEARCH_ONLY 1001", request).empty(), "oversized requirement refused");
         require(!Delivery::parse("DEV_GATE extra", request).empty(), "gate query takes no arguments");
+        // Weapon unlocks: player variable per weapon class, indexed and rolled back like other items.
+        auto weapon = [](int index, int id) { return parse("DEV_TXN " + Seed + " " + History + " " + std::to_string(index) + " WEAPON " + std::to_string(id)); };
+        Host armory; Delivery::execute(bind(), armory);
+        require(Delivery::execute(weapon(0, Weapons::Predator), armory) == "OK 1 0 applied" && armory.weapons[Weapons::Predator] == 1, "predator unlocked");
+        require(Delivery::execute(weapon(0, Weapons::Predator), armory) == "OK 1 0 done", "weapon retry skipped");
+        require(Delivery::execute(weapon(1, Weapons::Predator), armory) == "OK 2 0 applied" && armory.weapons[Weapons::Predator] == 1, "duplicate weapon consumes index");
+        armory.failWeapon = true;
+        require(throws([&] { Delivery::execute(weapon(2, 25), armory); }), "weapon that does not stick is refused");
+        require(armory.weapons[25] == 0 && Delivery::load(armory).cursor == 2, "failed weapon not consumed");
+        armory.failWeapon = false; armory.failCursor = true;
+        require(throws([&] { Delivery::execute(weapon(2, 25), armory); }), "weapon commit failure surfaced");
+        require(armory.weapons[25] == 0 && Delivery::load(armory).cursor == 2, "weapon rolled back with cursor");
+        for (auto const& text : {"DEV_TXN " + Seed + " " + History + " 2 WEAPON 44", "DEV_TXN " + Seed + " " + History + " 2 WEAPON -1",
+                                 "DEV_TXN " + Seed + " " + History + " 2 WEAPON"})
+            require(!Delivery::parse(text, request).empty(), "bad weapon id refused");
         std::cout << "DeliveryTests: " << checks << " checks passed\n";
         return 0;
     } catch (std::exception const& error) { std::cerr << "FAILED: " << error.what() << '\n'; return 1; }
