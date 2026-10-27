@@ -182,6 +182,14 @@ static class Program
             .WriteMountFile(Path.Combine(cooked, "Mount.dlc"));
         HuffmanCompression.SaveToTlkFile(Path.Combine(cooked, $"{ModFolder}_INT.tlk"),
             [new TLKStringRef(NameStrRef, "Archipelago ME3 (open start test)")]);
+        // Every DLC folder carries its own PCConsoleTOC.bin; without one the game hangs at launch (seen 2026-10-27 with
+        // AutoTOCLE-v2 stalling on a hand-copied 0.0.1). Mod Manager writes it on install; we write it ourselves.
+        var dlcDir = Path.Combine(tmp, ModFolder);
+        using (var toc = TOCCreator.CreateDLCTOCForDirectory(dlcDir, MEGame.LE3))
+            File.WriteAllBytes(Path.Combine(dlcDir, "PCConsoleTOC.bin"), toc.ToArray());
+        var entries = new TOCBinFile(Path.Combine(dlcDir, "PCConsoleTOC.bin")).GetAllEntries();
+        Console.WriteLine($"validate: DLC TOC entries [{string.Join(", ", entries.Select(e => e.name))}]");
+        if (entries.Count < Directory.GetFiles(cooked).Length) { Console.Error.WriteLine("validation FAILED: TOC is missing files"); return 1; }
         File.WriteAllText(Path.Combine(tmp, "moddesc.ini"),
             "[ModManager]\r\ncmmver = 8.0\r\n\r\n[ModInfo]\r\ngame = LE3\r\nmodname = Archipelago ME3 open start (TEST)\r\n" +
             "moddesc = Test build: an imported ME2 career skips the Earth prologue and starts on the Normandy.\r\n" +
