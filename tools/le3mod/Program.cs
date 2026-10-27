@@ -149,6 +149,10 @@ static class Program
                 var ours = EntryCloner.CloneEntry(first);
                 var name = EntryCloner.CloneEntry((ExportEntry)bLink.LinkedNodes.Single());
                 name.WriteProperty(new NameProperty(FixedSquadMap, "NameValue"));
+                // Clones are not in the sequence's SequenceObjects list; unlisted ops are ignored at runtime (0.0.6
+                // still showed squad selection on Mars). Register both.
+                KismetHelper.AddObjectToSequence(ours, seq, false);  // false: keep the cloned variable links
+                KismetHelper.AddObjectToSequence(name, seq, false);
                 var vars = KismetHelper.GetVariableLinksOfNode(ours);
                 vars.Single(v => v.LinkDesc == "B").LinkedNodes = [name];
                 KismetHelper.WriteVariableLinksToNode(ours, vars);
@@ -200,7 +204,9 @@ static class Program
                 var links = KismetHelper.GetOutputLinksOfNode(ours);
                 var match = links[names.IndexOf("A == B")].Single().LinkedOp as ExportEntry;
                 var other = links[names.IndexOf("A != B")].Single().LinkedOp as ExportEntry;
-                bool ok = ours.ClassName == "SeqCond_CompareName" && string.Equals(b.GetProperty<NameProperty>("NameValue")?.Value.Instanced, FixedSquadMap, StringComparison.OrdinalIgnoreCase)  // names are case-insensitive; the package already has "Biop_ProMar"
+                var listed = seq.GetProperty<ArrayProperty<ObjectProperty>>("SequenceObjects").Select(o => o.Value).ToHashSet();
+                bool ok = listed.Contains(ours.UIndex) && listed.Contains(b.UIndex) && listed.Contains(match.UIndex)
+                          && ours.ClassName == "SeqCond_CompareName" && string.Equals(b.GetProperty<NameProperty>("NameValue")?.Value.Instanced, FixedSquadMap, StringComparison.OrdinalIgnoreCase)  // names are case-insensitive; the package already has "Biop_ProMar"
                           && a.ClassName == "SeqVar_External" && other.ClassName == "SeqCond_CompareName"
                           && (path == HenchChecks[0] ? match.GetProperty<IntProperty>("m_nIndex")?.Value == ClearSquad : match.ClassName is "SeqAct_FinishSequence" or "BioSeqAct_PMExecuteTransition");
                 Console.WriteLine($"validate: {path.Split('.').Last()} first compare = {b.GetProperty<NameProperty>("NameValue")?.Value.Instanced}; match -> {match.ObjectName.Instanced} {match.GetProperty<IntProperty>("m_nIndex")?.Value}; else -> {other.ObjectName.Instanced}");
@@ -364,7 +370,7 @@ static class Program
         File.WriteAllText(Path.Combine(tmp, "moddesc.ini"),
             "[ModManager]\r\ncmmver = 8.0\r\n\r\n[ModInfo]\r\ngame = LE3\r\nmodname = Archipelago ME3 open start (TEST)\r\n" +
             "moddesc = Test build: an imported ME2 career skips the Earth prologue and starts on the Normandy.\r\n" +
-            "modver = 0.0.6\r\nmoddev = Jerrod\r\n\r\n[CUSTOMDLC]\r\nsourcedirs = " + ModFolder + "\r\ndestdirs = " + ModFolder + "\r\n");
+            "modver = 0.0.7\r\nmoddev = Jerrod\r\n\r\n[CUSTOMDLC]\r\nsourcedirs = " + ModFolder + "\r\ndestdirs = " + ModFolder + "\r\n");
         if (Directory.Exists(modRoot)) Directory.Delete(modRoot, true);
         Directory.Move(tmp, modRoot);
         Console.WriteLine($"staged {modRoot}");
@@ -410,7 +416,9 @@ static class Program
         Console.WriteLine("source " + source);
         using var pcc = MEPackageHandler.OpenMEPackage(source, forceLoadFromDisk: true);
         // remoteEvent "*start" traces level-start events instead of a named remote event.
-        var starts = remoteEvent == "*start"
+        var starts = remoteEvent.StartsWith("class:")
+            ? pcc.Exports.Where(e => e.ClassName == remoteEvent[6..]).ToList()
+            : remoteEvent == "*start"
             ? pcc.Exports.Where(e => e.ClassName is "SeqEvent_LevelLoaded" or "SFXSeqEvt_PersistentLevelStarted" or "SFXSeqEvt_LevelIsLive" && e.Parent?.ObjectName.Instanced == "Main_Sequence").ToList()
             : pcc.Exports.Where(e => e.ClassName == "SeqEvent_RemoteEvent"
                 && e.GetProperty<NameProperty>("EventName")?.Value.Instanced == remoteEvent).ToList();
@@ -448,7 +456,7 @@ static class Program
                     }
             }
         }
-        if (remoteEvent != "*start") foreach (var area in pcc.Exports.Where(e => e.ClassName == "BioSeqAct_AreaTransition")) Up(area, 0, []);
+        if (remoteEvent != "*start" && !remoteEvent.StartsWith("class:")) foreach (var area in pcc.Exports.Where(e => e.ClassName == "BioSeqAct_AreaTransition")) Up(area, 0, []);
         return starts.Count == 0 ? 1 : 0;
     }
 
@@ -527,6 +535,15 @@ static class Program
                 foreach (var prop in e.GetProperties().Where(p => p.Name.Instanced is not ("ObjPosX" or "ObjPosY" or "ParentSequence" or "OutputLinks" or "VariableLinks" or "InputLinks" or "ObjInstanceVersion" or "m_aObjComment")))
                     Console.WriteLine($"   {prop.Name.Instanced} = {prop switch { IntProperty i => i.Value.ToString(), NameProperty n => n.Value.Instanced, StrProperty st => st.Value, BoolProperty b => b.Value.ToString(), ObjectProperty o => pcc.GetEntry(o.Value)?.InstancedFullPath, ArrayProperty<ObjectProperty> a => string.Join(",", a.Select(x => pcc.GetEntry(x.Value)?.InstancedFullPath)), _ => prop.GetType().Name }}");
             }
+            return 0;
+        }
+        if (args.Length == 4 && args[0] == "seqobjs")
+        {
+            using var pcc = MEPackageHandler.OpenMEPackage(File.Exists(args[2]) ? args[2] : Winner(Path.GetFullPath(args[1]), args[2]), forceLoadFromDisk: true);
+            var seq = pcc.FindExport(args[3]);
+            var listed = seq.GetProperty<ArrayProperty<ObjectProperty>>("SequenceObjects").Select(o => o.Value).ToHashSet();
+            foreach (var e in pcc.Exports.Where(x => x.Parent == seq))
+                Console.WriteLine($"{(listed.Contains(e.UIndex) ? "listed  " : "MISSING ")} {e.UIndex} {e.ClassName} {e.ObjectName.Instanced}");
             return 0;
         }
         if (args.Length == 4 && args[0] == "seqdump")
