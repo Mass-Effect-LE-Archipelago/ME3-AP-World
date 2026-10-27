@@ -23,3 +23,7 @@ Extension proposed by the owner the same day: a standalone desktop "options crea
 ## D4 — One standalone setup app replaces Mod Manager for players (owner, 2026-10-26)
 
 A single external .exe does everything a player needs: (a) builds and installs the game-side mod and bridge into ME3 (built from the player's own game files, so no game data is shipped), (b) writes the player YAML (and can run a local generation), (c) writes the matching ME2 import save into a new career folder, and (d) launches the game. ME3Tweaks Mod Manager is not required; the app reimplements only what we need (DLC folder copy, TOC handling, ASI loader/bridge with hash-verified install/restore). Open implementation choice: stack and how the Python world and the app share the history mapping.
+
+## D5 — Open mission order with a Predator start (owner direction, 2026-10-27)
+
+Any galaxy-map mission may come first: the career starts with only the M3 Predator, and other weapons become checks/items. Companions are planned as items (selectability), but missions with a story-fixed squad (Mars: Virmire survivor + James) force that squad and should skip the squad/armory screens. Non-interactive cutscenes without dialogue choices (relay jumps, pre-Mars approach) are to be skipped where it is safe. Implementation pending research; see CURRENT-STATUS to-do.
