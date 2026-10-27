@@ -119,6 +119,12 @@ static class Program
     const string MarsPath = "biog_galaxymap.GalaxyMap.SFXCluster_2.SFXSystem_0.BioPlanet_3";
     const int MarsConditional = 43001;
     const string MarsExpression = "(plot.bools[20552] == Bool false)";
+    // Vanilla shows and opens the Local Cluster only after Cronos Station (C2752 visible / C80 usable, both
+    // ints[10185] != 0: Mission_Completion_Order.Cat004). Ours keeps that and also opens it while Mars is unfinished.
+    // Earth stays gated by its own land conditional 78 and the bridge.
+    const string LocalClusterPath = "biog_galaxymap.GalaxyMap.SFXCluster_2";
+    const int LocalClusterConditional = 43002;
+    const string LocalClusterExpression = "((plot.ints[10185] != i0) || (plot.bools[20552] == Bool false))";
 
     static int Mars(string bioGame, string cooked)
     {
@@ -136,22 +142,37 @@ static class Program
             // Use the Earth planet's property types as the pattern for a landable mission planet.
             mars.WriteProperty(new StrProperty("BioP_ProMar", "MapName"));
             mars.WriteProperty(new IntProperty(MarsConditional, "PlanetLandCondition"));
+            var cluster = pcc.FindExport(LocalClusterPath);
+            if (cluster?.GetProperty<IntProperty>("VisibleConditional")?.Value != 2752 || cluster.GetProperty<IntProperty>("UsableConditional")?.Value != 80)
+            {
+                Console.Error.WriteLine("refusing: Local Cluster conditionals are not the vanilla 2752/80");
+                return 1;
+            }
+            cluster.WriteProperty(new IntProperty(LocalClusterConditional, "VisibleConditional"));
+            cluster.WriteProperty(new IntProperty(LocalClusterConditional, "UsableConditional"));
             using (var saved = pcc.SaveToStream(true, true, true)) File.WriteAllBytes(outPcc, saved.ToArray());
         }
         var cnd = new CNDFile { ConditionalEntries = [] };
-        var entry = new CNDFile.ConditionalEntry { ID = MarsConditional };
-        ME3ConditionalsCompiler.Compile(entry, MarsExpression);
-        cnd.ConditionalEntries.Add(entry);
+        foreach (var (id, expression) in new[] { (MarsConditional, MarsExpression), (LocalClusterConditional, LocalClusterExpression) })
+        {
+            var entry = new CNDFile.ConditionalEntry { ID = id };
+            ME3ConditionalsCompiler.Compile(entry, expression);
+            cnd.ConditionalEntries.Add(entry);
+        }
         var cndPath = Path.Combine(cooked, $"Conditionals{ModFolder}.cnd");
         cnd.ToFile(cndPath);
         using (var pcc = MEPackageHandler.OpenMEPackage(outPcc, forceLoadFromDisk: true))
         {
             var mars = pcc.FindExport(MarsPath);
-            var back = CNDFile.FromFile(cndPath).ConditionalEntries.Single();
+            var cluster = pcc.FindExport(LocalClusterPath);
+            var back = CNDFile.FromFile(cndPath).ConditionalEntries.ToDictionary(e => e.ID, e => ME3ConditionalsCompiler.Decompile(e));
             bool ok = mars?.GetProperty<StrProperty>("MapName")?.Value == "BioP_ProMar"
                 && mars.GetProperty<IntProperty>("PlanetLandCondition")?.Value == MarsConditional
-                && back.ID == MarsConditional && ME3ConditionalsCompiler.Decompile(back) == MarsExpression;
-            Console.WriteLine($"validate: Mars MapName={mars?.GetProperty<StrProperty>("MapName")?.Value} land=C{mars?.GetProperty<IntProperty>("PlanetLandCondition")?.Value}; C{back.ID} = {ME3ConditionalsCompiler.Decompile(back)}");
+                && cluster?.GetProperty<IntProperty>("VisibleConditional")?.Value == LocalClusterConditional
+                && cluster.GetProperty<IntProperty>("UsableConditional")?.Value == LocalClusterConditional
+                && back.Count == 2 && back.GetValueOrDefault(MarsConditional) == MarsExpression
+                && back.GetValueOrDefault(LocalClusterConditional) == LocalClusterExpression;
+            Console.WriteLine($"validate: Mars MapName={mars?.GetProperty<StrProperty>("MapName")?.Value} land=C{mars?.GetProperty<IntProperty>("PlanetLandCondition")?.Value}; Local Cluster C{cluster?.GetProperty<IntProperty>("VisibleConditional")?.Value}; {string.Join("; ", back.Select(kv => $"C{kv.Key} = {kv.Value}"))}");
             if (!ok) { Console.Error.WriteLine("validation FAILED; staging left unchanged"); return 1; }
         }
         Console.WriteLine($"Mars landable (galaxy source {source})");
@@ -222,7 +243,7 @@ static class Program
         File.WriteAllText(Path.Combine(tmp, "moddesc.ini"),
             "[ModManager]\r\ncmmver = 8.0\r\n\r\n[ModInfo]\r\ngame = LE3\r\nmodname = Archipelago ME3 open start (TEST)\r\n" +
             "moddesc = Test build: an imported ME2 career skips the Earth prologue and starts on the Normandy.\r\n" +
-            "modver = 0.0.2\r\nmoddev = Jerrod\r\n\r\n[CUSTOMDLC]\r\nsourcedirs = " + ModFolder + "\r\ndestdirs = " + ModFolder + "\r\n");
+            "modver = 0.0.3\r\nmoddev = Jerrod\r\n\r\n[CUSTOMDLC]\r\nsourcedirs = " + ModFolder + "\r\ndestdirs = " + ModFolder + "\r\n");
         if (Directory.Exists(modRoot)) Directory.Delete(modRoot, true);
         Directory.Move(tmp, modRoot);
         Console.WriteLine($"staged {modRoot}");
