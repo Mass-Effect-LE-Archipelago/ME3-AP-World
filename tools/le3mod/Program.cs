@@ -307,8 +307,11 @@ static class Program
         var source = File.Exists(file) ? file : Winner(bioGame, file);
         Console.WriteLine("source " + source);
         using var pcc = MEPackageHandler.OpenMEPackage(source, forceLoadFromDisk: true);
-        var starts = pcc.Exports.Where(e => e.ClassName == "SeqEvent_RemoteEvent"
-            && e.GetProperty<NameProperty>("EventName")?.Value.Instanced == remoteEvent).ToList();
+        // remoteEvent "*start" traces level-start events instead of a named remote event.
+        var starts = remoteEvent == "*start"
+            ? pcc.Exports.Where(e => e.ClassName is "SeqEvent_LevelLoaded" or "SFXSeqEvt_PersistentLevelStarted" or "SFXSeqEvt_LevelIsLive" && e.Parent?.ObjectName.Instanced == "Main_Sequence").ToList()
+            : pcc.Exports.Where(e => e.ClassName == "SeqEvent_RemoteEvent"
+                && e.GetProperty<NameProperty>("EventName")?.Value.Instanced == remoteEvent).ToList();
         var seen = new HashSet<ExportEntry>();
         void Visit(ExportEntry node, int depth)
         {
@@ -343,7 +346,7 @@ static class Program
                     }
             }
         }
-        foreach (var area in pcc.Exports.Where(e => e.ClassName == "BioSeqAct_AreaTransition")) Up(area, 0, []);
+        if (remoteEvent != "*start") foreach (var area in pcc.Exports.Where(e => e.ClassName == "BioSeqAct_AreaTransition")) Up(area, 0, []);
         return starts.Count == 0 ? 1 : 0;
     }
 
@@ -411,6 +414,17 @@ static class Program
             var e = pcc.FindExport(args[3]);
             foreach (var prop in e.GetProperties()) Console.WriteLine($"{prop.GetType().Name} {prop.Name.Instanced} = {prop switch { IntProperty i => i.Value.ToString(), NameProperty n => n.Value.Instanced, StrProperty st => st.Value, BoolProperty b => b.Value.ToString(), ObjectProperty o => pcc.GetEntry(o.Value)?.InstancedFullPath, EnumProperty en => en.EnumType.Instanced + "::" + en.Value.Instanced, _ => prop.ToString() }}");
             Console.WriteLine(Describe(e));
+            return 0;
+        }
+        if (args.Length == 4 && args[0] == "ofclass")
+        {
+            using var pcc = MEPackageHandler.OpenMEPackage(Winner(Path.GetFullPath(args[1]), args[2]), forceLoadFromDisk: true);
+            foreach (var e in pcc.Exports.Where(e => e.ClassName == args[3]))
+            {
+                Console.WriteLine(e.InstancedFullPath + " :: " + Describe(e));
+                foreach (var prop in e.GetProperties().Where(p => p.Name.Instanced is not ("ObjPosX" or "ObjPosY" or "ParentSequence" or "OutputLinks" or "VariableLinks" or "InputLinks" or "ObjInstanceVersion" or "m_aObjComment")))
+                    Console.WriteLine($"   {prop.Name.Instanced} = {prop switch { IntProperty i => i.Value.ToString(), NameProperty n => n.Value.Instanced, StrProperty st => st.Value, BoolProperty b => b.Value.ToString(), ObjectProperty o => pcc.GetEntry(o.Value)?.InstancedFullPath, ArrayProperty<ObjectProperty> a => string.Join(",", a.Select(x => pcc.GetEntry(x.Value)?.InstancedFullPath)), _ => prop.GetType().Name }}");
+            }
             return 0;
         }
         if (args.Length == 4 && args[0] == "find")
