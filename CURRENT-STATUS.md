@@ -15,7 +15,7 @@ Update 2026-10-20 (Claude Code): `build.py --career-trace` builds the observer c
 
 - Skip the mass relay jump cutscene when traveling between clusters (owner request 2026-10-27).
 - D5: start with the Predator only; other guns as checks; any planet first.
-- Mars (and other fixed-squad missions): force the story squad and skip squad selection + armory (BioP_ProMar has a 'Need Hench GUI' sequence variable to research).
+- Mars fixed squad: DONE in le3mod 0.0.7 (BioP_Nor Check_Hench_Select + squad transitions 28/9|8/62), owner-verified 2026-10-27.
 - Skip non-interactive cutscenes with no dialogue choices (e.g. Normandy/shuttle approach before Mars).
 - Companions as items: selectability via the Is_Selectable transitions (49-54, 252/253 Tali, 66/67 James).
 - Mars: verified live 2026-10-27 (0.0.4) - lands, full opening plays, Mars gives Predator + Katana, loads with Kaidan + James (Liara picked = load hang). 0.0.5 staged: Liara not selectable before Mars (transition 49).
