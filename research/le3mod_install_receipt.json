@@ -1,15 +1,15 @@
 {
-  "installed_utc": "2026-10-27T03:42:49.476217+00:00",
+  "installed_utc": "2026-10-27T23:25:28.730260+00:00",
   "method": "plain folder copy (no Mod Manager); TOC left to the installed AutoTOCLE-v2.asi",
   "owner_approval": "2026-10-26 'Go to copy into ME3 DLC folder.'",
   "target": "C:\\Steam\\steamapps\\common\\Mass Effect Legendary Edition\\Game\\ME3\\BioGame\\DLC\\DLC_MOD_ArchipelagoME3",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "files_sha256": {
     "CookedPCConsole/BioD_Nor_203CIC.pcc": "7656d6825f9296e5 (prefix)",
     "CookedPCConsole/BioD_Nor_203aGalaxyMap.pcc": "754c17e93862cfff (prefix)"
   },
   "uninstall": "delete that one folder",
-  "runtime_verified": true,
+  "runtime_verified": false,
   "history": [
     {
       "version": "0.0.1",
@@ -59,8 +59,12 @@
     {
       "version": "0.0.6",
       "outcome": "squad selection still shown on Mars: cloned compare node not in SequenceObjects"
+    },
+    {
+      "version": "0.0.7",
+      "outcome": "live: Mars forced squad works; audio pop/boom on Normandy load traced to stale inline bulk offsets"
     }
   ],
-  "note": "cloned Kismet nodes registered in SequenceObjects",
+  "note": "inline bulk offsets rewritten after save (audio banks, textures, meshes)",
   "verified": "2026-10-27 owner: Mars from Normandy skips squad select and loads with Virmire survivor + James"
 }
