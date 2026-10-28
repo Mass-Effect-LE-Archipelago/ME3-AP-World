@@ -21,6 +21,8 @@ Update 2026-10-20 (Claude Code): `build.py --career-trace` builds the observer c
 - Mars: verified live 2026-10-27 (0.0.4) - lands, full opening plays, Mars gives Predator + Katana, loads with Kaidan + James (Liara picked = load hang). 0.0.5 staged: Liara not selectable before Mars (transition 49).
 - Weapons: Normandy start has none; harmless if Mars is first, but Menae etc. are offered before Mars. Either gate pre-Mars missions (AP logic) or grant Earth's Avenger/Predator.
 - Audio pop/boom: FIXED in le3mod 0.0.8 (stale inline bulk offsets after re-save), owner-verified 2026-10-27.
+- Audio dead after a FRESH creator -> Normandy start (live run 01, 2026-10-28); a save/reload restores it. Theory: the skipped Earth intro normally resets audio. To fix in le3mod (e.g. play a loading movie / the reset on the way to BioP_Nor).
+- Mars 'SetupDebugLoad' hands out Predator/Avenger/heavy weapon when Mars starts without Earth; strip it so guns only come from items.
 
 ## User direction
 
