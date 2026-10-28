@@ -1,25 +1,29 @@
-# Mass Effect Legendary Edition 3 — experimental setup
+# Mass Effect Legendary Edition 3 setup
 
-This development build can generate seeds and evaluate cataloged source observations. It is **not a playable release**: maximum-content history initialization and the native finale gate remain unfinished. Native research identity, indexed credit delivery and duplicate suppression have been tested in-game. A receive-only AP development client is available separately from normal campaign synchronization.
+## What you need
 
-The world targets Archipelago 0.6.8 or newer. Place `mass_effect_le3.apworld` in the local `custom_worlds` directory and restart Archipelago. The game is hidden from the public game list while under development. Generate locally with the provided development YAML.
+- Mass Effect Legendary Edition (PC), with at least one **finished** ME2 LE save where Shepard survived.
+- [Archipelago](https://github.com/ArchipelagoMW/Archipelago/releases) 0.6.8 or newer.
+- `Mass Effect AP Setup.exe` (from the release zip). ME3Tweaks Mod Manager is optional.
 
-The launcher registers `ME3 Client (Experimental)`. Normal campaign synchronization deliberately remains blocked until history initialization and real mission gating exist. Research delivery support does not make an existing save a valid randomized campaign.
+## Install
 
-## Receive-only delivery testing
+Close Mass Effect 3 and the Archipelago client, run `Mass Effect AP Setup.exe`, pick **Mass Effect 3**, then:
 
-With this world importable in an Archipelago environment, launch:
+1. **Folders:** check the detected Mass Effect LE and Archipelago folders.
+2. **Install:** installs the world into Archipelago, the bridge (`LE3APBridge.asi`) and the `DLC_MOD_ArchipelagoME3` mod
+   into ME3, and an ASI loader if ME3 has none. Anything replaced is backed up; Uninstall restores it.
+3. **Options:** set your options and slot name, then Save (or Save + Generate).
 
-```text
-python -m worlds.mass_effect_le3.client --delivery-test --connect localhost:38281 --name ME3Developer
-```
+## Play
 
-This explicit mode accepts Credits1000 and Crucible Intel counters through the 0.2.0 delivery-development ASI. It sends **no location checks or goal completion**, applies no Shepard preset and unlocks no missions. Use a disposable save. Add `--bind-research-save` only to deliberately bind an unbound test save to the connected room's seed/team/slot. A previously bound save from another test seed is refused; it is never rebound. The standalone credit-test Save 61 belongs to its earlier research seed, so it will not match an arbitrary AP room. The pristine pre-binding Save 60 remains available for a later, separate AP network/game test.
+1. Open **Mass Effect LE3 Client** from the Archipelago launcher and connect to the room. On first connect it writes an
+   ME2 career for this seed (the log names it) into your ME2 save folder.
+2. Start Mass Effect 3, choose **New Career**, import that ME2 career and finish the character creator. The mod skips the
+   prologue and starts you on the Normandy. The client links that career to your slot; it never touches careers started
+   without the mod.
+3. If the game is silent when the Normandy first loads, save and reload once (known issue).
 
-Native pipe, credit delivery/retry and save storage have live evidence. The new AP receive-only mode passed tests and a real localhost server round-trip with a **fake native protocol endpoint**. A combined real-server-to-real-game run has not yet been logged. The CLI has no option to enable campaign check/goal reporting in this mode.
-
-The world catalog includes 527 stable source IDs: 423 saved-use interactions, 76 exploration recoveries, 11 story predicates and 17 Mars objective predicates. Default options select 502 checks; the heavy/special weapon interaction option adds 25. Predicates and source reachability still need runtime validation. Optional/missable pickup and exploration checks are filler-only while that audit is incomplete.
-
-The intended goal requires Crucible Intel before launching the final assault, followed by the game's final decision. Generation implements that rule; **the game does not enforce it yet**. Do not host this build for a real multiworld playthrough.
-
-Use the project's research bridge snapshot helper to validate source GUIDs, GAW asset IDs and plot predicates on a disposable test career. A read-only bridge must not be treated as proof that item delivery or history initialization works.
+Items arrive while you play. Mars is on the galaxy map from the start; Cronos Station and Earth open once you have
+the required Crucible Intel. Missed checks on finished missions can be bought at the Normandy store terminal
+("<mission> Salvage").

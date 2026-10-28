@@ -3,7 +3,7 @@
   "game_bridge": "fake; no in-game claim",
   "connected_slot": 1,
   "reported_location": 1295192168,
-  "received_index": 1,
+  "received_index": 2,
   "credits_granted": 1000,
   "finale_gate": false
 }

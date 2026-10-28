@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from Options import Choice, DefaultOnToggle, OptionSet, PerGameCommonOptions, Range, Toggle
+from Options import Choice, DefaultOnToggle, OptionGroup, OptionSet, PerGameCommonOptions, Range, Toggle
 from .data import DLC
 
 
@@ -106,3 +106,20 @@ class MassEffectLE3Options(PerGameCommonOptions):
     salvage_price: SalvagePrice
     weapon_items: WeaponItems
     enabled_dlc: EnabledDLC
+
+
+option_groups = [
+    OptionGroup("Goal", [CrucibleIntelTotal, CrucibleIntelRequired]),
+    OptionGroup("Checks", [ObjectiveChecks, CreditChecks, SupplyChecks, ArmorChecks, ModChecks, WeaponChecks,
+                           ExplorationChecks, CodexChecks]),
+    OptionGroup("Items", [WeaponItems]),
+    OptionGroup("Salvage", [Salvage, SalvagePrice]),
+    OptionGroup("DLC", [EnabledDLC]),
+]
+
+options_presets = {
+    "Story Focus": {"crucible_intel_total": 10, "crucible_intel_required": 8, "credit_checks": False,
+                    "supply_checks": False, "exploration_checks": False, "codex_checks": False},
+    "Completionist": {"weapon_checks": True, "salvage_price": "500"},
+    "Everything": {"crucible_intel_total": 24, "crucible_intel_required": 20, "weapon_checks": True},
+}

@@ -6,7 +6,7 @@ from BaseClasses import Item, ItemClassification, Location, LocationProgressType
 from worlds.AutoWorld import WebWorld, World
 
 from . import data
-from .options import MassEffectLE3Options
+from .options import MassEffectLE3Options, option_groups, options_presets
 
 
 class ME3Item(Item):
@@ -18,8 +18,10 @@ class ME3Location(Location):
 
 
 class ME3WebWorld(WebWorld):
-    tutorials = [Tutorial("Multiworld Setup Guide", "Experimental LE3 integration setup and current limitations.",
+    tutorials = [Tutorial("Multiworld Setup Guide", "Installing and playing Mass Effect Legendary Edition 3 with Archipelago.",
                           "English", "setup_en.md", "setup/en", ["APWorldMaker"])]
+    option_groups = option_groups
+    options_presets = options_presets
 
 
 def included(options: MassEffectLE3Options, entry: data.LocationData) -> bool:
@@ -34,11 +36,8 @@ def included(options: MassEffectLE3Options, entry: data.LocationData) -> bool:
 
 
 class MassEffectLE3World(World):
-    """An experimental ME3 Legendary Edition integration with source-specific pickups and war-effort recoveries.
-
-    Generation and client foundations are implemented. Native history, reward
-    transactions and finale enforcement are not ready for a playable release.
-    """
+    """Mass Effect 3 Legendary Edition: gather Crucible Intel from across the multiworld to reach Cronos Station and
+    Earth. Pickups, mission objectives, codex pages and war-asset recoveries are checks; weapons are items."""
     game = data.GAME_NAME
     web = ME3WebWorld()
     options_dataclass = MassEffectLE3Options

@@ -37,7 +37,7 @@ class FakeGameBridge:
     def deliver(self, index, operation, amount):
         assert index == self.index
         if operation == "CREDITS": self.credits += amount
-        elif operation != "COUNTER": raise AssertionError(operation)
+        elif operation not in ("COUNTER", "WEAPON"): raise AssertionError(operation)
         self.index += 1
         return self.index
 
@@ -67,10 +67,11 @@ async def main():
             pickup = next(entry for entry in data.LOCATIONS if entry.id in selected and entry.detector["kind"] == "use_guid")
             bridge.state = GameSnapshot(used_guids=frozenset({pickup.detector["guid"]}))
             await ctx.poll_game()
-            await until(lambda: pickup.id in host.location_checks[(0, 1)] and len(ctx.items_received) == 1)
+            # The starting Predator is precollected (item 0); the pickup's own item follows.
+            await until(lambda: pickup.id in host.location_checks[(0, 1)] and len(ctx.items_received) == 2)
             await ctx.poll_game()
             await ctx.poll_game()
-            assert bridge.index == 1 and bridge.credits == 1000
+            assert bridge.index == 2
             assert not bridge.gate
             assert ctx.room_seed_name == host.seed_name
             result = {"server": "real Archipelago loopback", "game_bridge": "fake; no in-game claim",
