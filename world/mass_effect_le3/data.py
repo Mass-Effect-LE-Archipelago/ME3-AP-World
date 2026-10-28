@@ -51,6 +51,15 @@ def _resolved_history() -> dict:
 HISTORY = _resolved_history()
 # The open start (le3mod) skips the Earth prologue, so its sources can never be reached. IDs stay reserved.
 SKIPPED_REGIONS = frozenset({"Earth Prologue"})
+# Missed-checks salvage (D7): missions that can't be replayed, in native salvage-slot order (append only; the mod's store
+# rows, conditionals and bools are generated from this order). Hubs, the Citadel DLC and the finale are left out.
+SALVAGE_MISSIONS = ("Mars", "Palaven", "Sur'Kesh", "Tuchanka", "Tuchanka: Turian Platoon", "Tuchanka: Bomb",
+                    "Attican Traverse", "Grissom Academy", "Eden Prime", "Thessia", "Citadel Coup", "Geth Dreadnought",
+                    "Rannoch", "Rannoch: Admiral Koris", "Ex-Cerberus Scientists",
+                    "Sanctuary", "Ardat-Yakshi Monastery", "N7: Cerberus Lab", "N7: Cerberus Fighter Base",
+                    "N7: Fuel Reactors", "N7: Communication Hub", "N7: Cerberus Abductions", "N7: Cerberus Attack",
+                    "Leviathan", "Omega")
+SALVAGE_PRICES = (0, 500, 1000, 2500, 5000)  # credits per check, by salvage_price option value
 
 
 @dataclass(frozen=True)

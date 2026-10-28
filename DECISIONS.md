@@ -37,3 +37,14 @@ transition grants after the start. Codex page ids are their plot bools (BioCodex
 grants are left out. Region: the Normandy or Citadel hub if a setter lives there, else the mission. Codex checks never
 hold progression (some come from optional conversations). Pages that a new career already has would be free checks;
 confirm with a live read at the first Normandy load.
+
+## D7 — Missed-checks salvage at the Normandy store (owner direction, 2026-10-28)
+
+Options `salvage` (default on) and `salvage_price` (free/500/1000 default/2500/5000 credits per check). Each mission
+that can't be replayed (`data.SALVAGE_MISSIONS`, 25) gets "<mission> Salvage" rows in the Normandy store terminal
+(BioD_Nor_500, one TYPE_QUEST row per price tier). A row shows while its tier bool and the mission's available bool
+are set and its bought bool is clear; buying charges the price and sets the bought bool. The client publishes
+availability (mission visited = any of its checks done, and checks left) and takes purchases with bridge 0.2.3
+`DEV_SALVAGE`, sending the lowest open location of that mission. Plot bools 26000-26084 (bought 26000+k,
+available 26040+k, tier 26080+t); conditionals cannot read the sparse int keys (LEC compiler limit 250000).
+Untested in game: nested-category store rendering a top-level quest row, and the store's markup on Normandy prices.

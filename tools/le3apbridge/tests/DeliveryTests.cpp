@@ -29,6 +29,12 @@ struct Host {
     bool failWeapon = false;
     int weaponOwned(int id) { return weapons[id]; }
     void setWeaponOwned(int id, int value) { if (!failWeapon) weapons[id] = value; }
+    std::map<int, int> bools;
+    int readBool(int index) { return bools[index]; }
+    void writeBool(int index, bool value) {
+        if (index < Delivery::BoughtBool || index >= Delivery::SalvageBoolEnd) throw std::runtime_error("bool_range");
+        bools[index] = value;
+    }
 };
 Delivery::Request parse(std::string const& text) {
     Delivery::Request request;
@@ -131,6 +137,31 @@ int main() {
         for (auto const& text : {"DEV_TXN " + Seed + " " + History + " 2 WEAPON 44", "DEV_TXN " + Seed + " " + History + " 2 WEAPON -1",
                                  "DEV_TXN " + Seed + " " + History + " 2 WEAPON"})
             require(!Delivery::parse(text, request).empty(), "bad weapon id refused");
+        {
+            Host store;
+            auto salvage = [](std::string const& tail) { return parse("DEV_SALVAGE " + Seed + " " + History + " " + tail); };
+            require(Delivery::execute(salvage("2 3 0 5"), store) == "ERR identity", "salvage needs a bound career");
+            require(store.bools.empty(), "refused salvage writes nothing");
+            Delivery::execute(bind(), store);
+            require(Delivery::execute(salvage("2 3 0 5"), store) == "OK bought", "salvage publishes caps");
+            require(store.bools[Delivery::TierBool + 2] && !store.bools[Delivery::TierBool] && !store.bools[Delivery::TierBool + 4]
+                    && store.bools[Delivery::AvailBool] && !store.bools[Delivery::AvailBool + 1]
+                    && store.bools[Delivery::AvailBool + 2] && !store.bools[Delivery::AvailBool + 3], "availability and tier written");
+            store.bools[Delivery::BoughtBool] = 1; store.bools[Delivery::BoughtBool + 2] = 1;
+            require(Delivery::execute(salvage("2 2 0 4"), store) == "OK bought 0 2", "bought missions taken");
+            require(!store.bools[Delivery::BoughtBool] && !store.bools[Delivery::BoughtBool + 2], "bought flags cleared");
+            require(throws([&] { store.writeBool(Delivery::SalvageBoolEnd, true); }), "bools past the salvage range refused");
+            require(Delivery::execute(salvage("2 2 0 4"), store) == "OK bought", "a purchase is taken once");
+            require(Delivery::load(store).cursor == 0, "salvage leaves the item cursor alone");
+            require(Delivery::execute(parse("DEV_SALVAGE " + Seed + " " + Other + " 2 1"), store) == "ERR identity", "other history refused");
+            Delivery::Request bad;
+            for (auto const& text : {"DEV_SALVAGE " + Seed + " " + History + " 5 1", "DEV_SALVAGE " + Seed + " " + History + " 2",
+                                     "DEV_SALVAGE " + Seed + " " + History + " 2 -1"})
+                require(!Delivery::parse(text, bad).empty(), "bad salvage refused");
+            std::string many = "DEV_SALVAGE " + Seed + " " + History + " 2";
+            for (int i = 0; i < 41; ++i) many += " 1";
+            require(!Delivery::parse(many, bad).empty(), "too many salvage missions refused");
+        }
         std::cout << "DeliveryTests: " << checks << " checks passed\n";
         return 0;
     } catch (std::exception const& error) { std::cerr << "FAILED: " << error.what() << '\n'; return 1; }

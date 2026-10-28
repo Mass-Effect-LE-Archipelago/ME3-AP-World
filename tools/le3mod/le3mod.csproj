@@ -17,4 +17,7 @@
       <HintPath>../../Legendary Explorer/Newtonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="salvage.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
 </Project>

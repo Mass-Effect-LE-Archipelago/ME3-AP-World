@@ -6,12 +6,13 @@ from .. import data
 
 
 class FakePipe:
-    """Native 0.2.2 delivery-dev protocol fake; does not claim engine behavior."""
+    """Native 0.2.3 delivery-dev protocol fake; does not claim engine behavior."""
     def __init__(self):
         self.identity = self.history = None
         self.cursor = self.required = self.intel = 0
         self.credits, self.weapons, self.used, self.gaw, self.bools = 0, set(), [], [], {}
-        self.caps = "delivery_dev DEV_SESSION DEV_BIND DEV_TXN DEV_GATE LANDING_GATE WEAPONS GETBS GETIS USES GAW"
+        self.caps = "delivery_dev DEV_SESSION DEV_BIND DEV_TXN DEV_GATE LANDING_GATE WEAPONS GETBS GETIS USES GAW SALVAGE"
+        self.salvage_calls, self.bought = [], []
 
     def __enter__(self): return self
     def __exit__(self, *_): pass
@@ -39,6 +40,11 @@ class FakePipe:
             if w[4] == "WEAPON": self.weapons.add(int(w[5]))
             self.cursor += 1
             return f"{self.cursor} 0 applied"
+        if w[0] == "DEV_SALVAGE":
+            assert w[1:3] == [self.identity, self.history]
+            self.salvage_calls.append((int(w[3]), [int(c) for c in w[4:]]))
+            bought, self.bought = self.bought, []
+            return " ".join(["bought"] + [str(k) for k in bought])
         if w[0] == "GETBS": return " ".join(str(int(self.bools.get(int(i), False))) for i in w[1:])
         if w[0] == "GETIS": return " ".join("0" for _ in w[1:])
         if w[0] == "USES":
@@ -84,6 +90,32 @@ class LiveBridgeTests(unittest.TestCase):
         self.pipe = old
         with self.assertRaises(UnsupportedFeature):
             synchronize(self.bridge(), self.identity, data.HISTORY, set(), [], 2)
+
+    def test_salvage_caps_and_purchase(self):
+        mars = sorted(e.id for e in data.LOCATIONS if e.region == "Mars")
+        palaven = sorted(e.id for e in data.LOCATIONS if e.region == "Palaven")
+        enabled = set(mars) | set(palaven)
+        # Not visited anywhere yet: every cap is 0. Salvage off: caps 0 as well.
+        synchronize(self.bridge(), self.identity, data.HISTORY, enabled, [], 2, frozenset(), 2)
+        self.assertEqual(self.pipe.salvage_calls[-1], (2, [0] * len(data.SALVAGE_MISSIONS)))
+        # One Mars check done: Mars offers its other checks; buying it sends the lowest open Mars location.
+        self.pipe.bought = [data.SALVAGE_MISSIONS.index("Mars")]
+        result = synchronize(self.bridge(), self.identity, data.HISTORY, enabled, [], 2, frozenset({mars[3]}), 2)
+        caps = self.pipe.salvage_calls[-1][1]
+        self.assertEqual(caps[data.SALVAGE_MISSIONS.index("Mars")], len(mars) - 1)
+        self.assertEqual(caps[data.SALVAGE_MISSIONS.index("Palaven")], 0)
+        self.assertEqual(result.locations, {mars[0]})
+        synchronize(self.bridge(), self.identity, data.HISTORY, enabled, [], 2, frozenset({mars[3]}), None)
+        self.assertEqual(self.pipe.salvage_calls[-1], (0, [0] * len(data.SALVAGE_MISSIONS)))
+
+    def test_salvage_missions_match_mod_list(self):
+        import json
+        from pathlib import Path
+        exported = Path(__file__).resolve().parents[3] / "tools/le3mod/salvage.json"
+        if exported.exists():  # source checkout only; the packaged world has no tools folder
+            self.assertEqual(json.loads(exported.read_text(encoding="utf-8")), list(data.SALVAGE_MISSIONS))
+        regions = {e.region for e in data.LOCATIONS}
+        self.assertTrue(set(data.SALVAGE_MISSIONS) <= regions)
 
     def test_earth_prologue_never_selected(self):
         self.assertTrue(any(e.region in data.SKIPPED_REGIONS for e in data.LOCATIONS))

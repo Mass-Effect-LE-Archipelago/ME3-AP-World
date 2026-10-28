@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from Options import DefaultOnToggle, OptionSet, PerGameCommonOptions, Range, Toggle
+from Options import Choice, DefaultOnToggle, OptionSet, PerGameCommonOptions, Range, Toggle
 from .data import DLC
 
 
@@ -66,6 +66,23 @@ class CodexChecks(DefaultOnToggle):
     display_name = "Codex Checks"
 
 
+class Salvage(DefaultOnToggle):
+    """Missed-checks salvage: once you've been on a mission that can't be replayed, the Normandy's store terminal sells
+    "<mission> Salvage". Each purchase sends one check you left behind on that mission."""
+    display_name = "Salvage"
+
+
+class SalvagePrice(Choice):
+    """Credits per salvaged check."""
+    display_name = "Salvage Price per Check"
+    option_free = 0
+    option_500 = 1
+    option_1000 = 2
+    option_2500 = 3
+    option_5000 = 4
+    default = 2
+
+
 class EnabledDLC(OptionSet):
     """Include mapped pickup sources in the selected official DLC campaigns."""
     display_name = "Enabled DLC"
@@ -85,5 +102,7 @@ class MassEffectLE3Options(PerGameCommonOptions):
     weapon_checks: WeaponChecks
     exploration_checks: ExplorationChecks
     codex_checks: CodexChecks
+    salvage: Salvage
+    salvage_price: SalvagePrice
     weapon_items: WeaponItems
     enabled_dlc: EnabledDLC

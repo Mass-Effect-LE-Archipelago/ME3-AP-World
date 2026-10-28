@@ -24,18 +24,21 @@ grep and nm are unavailable on this system.
 -- Looking for pthread_create in pthread - not found
 -- Found Threads: TRUE
 -- Build type: Release
--- Configuring done (3.8s)
--- Generating done (2.1s)
+-- Configuring done (3.7s)
+-- Generating done (1.1s)
 -- Build files have been written to: C:/Users/unowi/Documents/APWorldMaker/ME3 LE Randomizer/tools/le3apbridge/build-delivery
 MSBuild version 18.6.3+84d3e95b4 for .NET Framework
 
   LESDK-LE3.vcxproj -> C:\Users\unowi\Documents\APWorldMaker\ME3 LE Randomizer\tools\le3apbridge\Build\Release\LESDK-LE3.lib
   spdlog.vcxproj -> C:\Users\unowi\Documents\APWorldMaker\ME3 LE Randomizer\tools\le3apbridge\Build\Release\spdlog.lib
   Common-LE3.vcxproj -> C:\Users\unowi\Documents\APWorldMaker\ME3 LE Randomizer\tools\le3apbridge\Build\Release\Common-LE3.lib
-  Bridge.cpp
-     Creating library C:/Users/unowi/Documents/APWorldMaker/ME3 LE Randomizer/tools/le3apbridge/build-delivery/Release/LE3APBridge.lib and object C:/Users/unowi/Documents/APWorldMaker/ME3 LE Randomizer/tools/le3apbridge/build-delivery/Release/LE3APBridge.exp
   APBridge-LE3.vcxproj -> C:\Users\unowi\Documents\APWorldMaker\ME3 LE Randomizer\tools\le3apbridge\build-delivery\bin\Release\LE3APBridge.asi
 MSBuild version 18.6.3+84d3e95b4 for .NET Framework
 
+  DeliveryTests.cpp
   DeliveryTests.vcxproj -> C:\Users\unowi\Documents\APWorldMaker\ME3 LE Randomizer\tools\le3apbridge\build-delivery\Release\DeliveryTests.exe
-DeliveryTests: 35 checks passed
+MSBuild version 18.6.3+84d3e95b4 for .NET Framework
+
+  CareerTraceTests.vcxproj -> C:\Users\unowi\Documents\APWorldMaker\ME3 LE Randomizer\tools\le3apbridge\build-delivery\Release\CareerTraceTests.exe
+DeliveryTests: 75 checks passed
+19 career trace checks passed

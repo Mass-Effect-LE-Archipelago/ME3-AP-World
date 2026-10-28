@@ -311,6 +311,77 @@ static class Program
     static readonly string[] GalaxyPackages = ["BioD_Nor_203CIC.pcc", GalaxyFile];
     static bool NoMars;
 
+    // Every conditional and TLK string the DLC adds, written once by Build.
+    static readonly Dictionary<int, string> Conditionals = [];
+    static readonly Dictionary<int, string> Strings = [];
+
+    // Missed-checks salvage (D7). The Normandy store terminal (BioD_Nor_500 Normandy_Store, class
+    // SFXGameChoiceGUIData_StoreData_Normandy, local to that package) lists vanilla stores as nested rows. We append
+    // one TYPE_QUEST row per (mission k, price tier t): buying it charges the tier price and sets plot bool
+    // SalvageBool + k, which the bridge takes (DEV_SALVAGE) and the client turns into one missed check. Row (k, t) shows
+    // only while the client's published tier is t, mission k has open checks and its bought flag is clear (all plot bools).
+    // Mission order and names: salvage.json, exported from the world's data.SALVAGE_MISSIONS (a world test keeps it in step).
+    const string StoreFile = "BioD_Nor_500.pcc";
+    const string StorePath = "SFXGameContent.Default__SFXGameChoiceGUIData_StoreData_Normandy";
+    // Plot bools shared with the bridge (Delivery.hpp): bought 26000+k, available 26040+k, price tier 26080+t.
+    const int SalvageBool = 26000, SalvageAvailBool = 26040, SalvageTierBool = 26080;
+    const int SalvageConditional = 43100, SalvageNameStrRef = 43000100, SalvageDescriptionStrRef = 43000099;
+    static readonly int[] SalvagePrices = [0, 500, 1000, 2500, 5000];
+
+    static int Salvage(string bioGame, string cooked)
+    {
+        var missions = System.Text.Json.JsonSerializer.Deserialize<string[]>(File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "salvage.json")))!;
+        if (missions.Length == 0 || missions.Length > 40) { Console.Error.WriteLine("refusing: salvage.json needs 1..40 missions"); return 1; }
+        var source = Winner(bioGame, StoreFile);
+        var outPcc = Path.Combine(cooked, StoreFile);
+        int vanillaRows;
+        using (var pcc = MEPackageHandler.OpenMEPackage(source, forceLoadFromDisk: true))
+        {
+            var store = pcc.FindExport(StorePath);
+            var items = store?.GetProperty<ArrayProperty<StructProperty>>("StoreItemArray");
+            if (items == null || items.Count == 0 || items.Any(i => i.GetProp<EnumProperty>("ItemType")?.Value.Instanced != "TYPE_NESTEDCATEGORY"))
+            { Console.Error.WriteLine("refusing: Normandy store rows are not the vanilla nested categories in " + source); return 1; }
+            vanillaRows = items.Count;
+            var template = items[0];
+            Strings[SalvageDescriptionStrRef] = "Recover a check you missed on a mission you can't return to. Each purchase sends one of the checks still left there.";
+            for (int k = 0; k < missions.Length; k++)
+            {
+                Strings[SalvageNameStrRef + k] = $"{missions[k]} Salvage";
+                for (int t = 0; t < SalvagePrices.Length; t++)
+                {
+                    var row = (StructProperty)template.DeepClone();
+                    row.Properties.AddOrReplaceProp(new StrProperty("", "ItemClassName"));
+                    row.Properties.AddOrReplaceProp(new ArrayProperty<IntProperty>([new IntProperty(SalvageBool + k)], "PlotPurchaseID"));
+                    row.Properties.AddOrReplaceProp(new IntProperty(SalvagePrices[t], "BaseCost"));
+                    row.Properties.AddOrReplaceProp(new IntProperty(SalvageConditional + 5 * k + t, "PlotUnlockConditionalID"));
+                    row.GetProp<StrProperty>("SmallImage").Value = "GUI_Icons.Notifications.NT_Store_256x1286";
+                    row.GetProp<EnumProperty>("ItemType").Value = new NameReference("TYPE_QUEST");
+                    var choice = row.GetProp<StructProperty>("ChoiceEntry");
+                    choice.Properties.AddOrReplaceProp(new StringRefProperty(SalvageNameStrRef + k, "srChoiceName"));
+                    choice.Properties.AddOrReplaceProp(new StringRefProperty(SalvageDescriptionStrRef, "srChoiceDescription"));
+                    items.Add(row);
+                    Conditionals[SalvageConditional + 5 * k + t] =
+                        $"((plot.bools[{SalvageTierBool + t}] == Bool true) && ((plot.bools[{SalvageAvailBool + k}] == Bool true) && (plot.bools[{SalvageBool + k}] == Bool false)))";
+                }
+            }
+            store.WriteProperty(items);
+            SavePackage(pcc, outPcc);
+        }
+        if (FixInlineBulkOffsets(source, outPcc) != 0) return 1;
+        using (var pcc = MEPackageHandler.OpenMEPackage(outPcc, forceLoadFromDisk: true))
+        {
+            var items = pcc.FindExport(StorePath)?.GetProperty<ArrayProperty<StructProperty>>("StoreItemArray");
+            var added = items?.Skip(vanillaRows).ToList() ?? [];
+            bool ok = added.Count == missions.Length * SalvagePrices.Length && added.All(r => r.GetProp<EnumProperty>("ItemType")?.Value.Instanced == "TYPE_QUEST")
+                && added.Select(r => r.GetProp<IntProperty>("PlotUnlockConditionalID")?.Value).Distinct().Count() == added.Count
+                && added[^1].GetProp<ArrayProperty<IntProperty>>("PlotPurchaseID")?.Single().Value == SalvageBool + missions.Length - 1
+                && added[^1].GetProp<IntProperty>("BaseCost")?.Value == SalvagePrices[^1];
+            Console.WriteLine($"validate: Normandy store {vanillaRows} vanilla + {added.Count} salvage rows; last {Strings[SalvageNameStrRef + missions.Length - 1]} C{added.LastOrDefault()?.GetProp<IntProperty>("PlotUnlockConditionalID")?.Value}");
+            if (!ok) { Console.Error.WriteLine("validation FAILED: salvage rows"); return 1; }
+        }
+        return 0;
+    }
+
     static int Mars(string bioGame, string cooked)
     {
         foreach (var file in GalaxyPackages)
@@ -346,28 +417,18 @@ static class Program
             SavePackage(pcc, outPcc);
         }
         if (FixInlineBulkOffsets(source, outPcc) != 0) return 1;
-        var cnd = new CNDFile { ConditionalEntries = [] };
-        foreach (var (id, expression) in new[] { (MarsConditional, MarsExpression), (LocalClusterConditional, LocalClusterExpression) })
-        {
-            var entry = new CNDFile.ConditionalEntry { ID = id };
-            ME3ConditionalsCompiler.Compile(entry, expression);
-            cnd.ConditionalEntries.Add(entry);
-        }
-        var cndPath = Path.Combine(cooked, $"Conditionals{ModFolder}.cnd");
-        cnd.ToFile(cndPath);
+        Conditionals[MarsConditional] = MarsExpression;
+        Conditionals[LocalClusterConditional] = LocalClusterExpression;
         using (var pcc = MEPackageHandler.OpenMEPackage(outPcc, forceLoadFromDisk: true))
         {
             var mars = pcc.FindExport(MarsPath);
             var cluster = pcc.FindExport(LocalClusterPath);
-            var back = CNDFile.FromFile(cndPath).ConditionalEntries.ToDictionary(e => e.ID, e => ME3ConditionalsCompiler.Decompile(e));
             if (DiagVanilla) return 0;
             bool ok = mars?.GetProperty<StrProperty>("MapName")?.Value == "BioP_ProMar"
                 && mars.GetProperty<IntProperty>("PlanetLandCondition")?.Value == MarsConditional
                 && cluster?.GetProperty<IntProperty>("VisibleConditional")?.Value == LocalClusterConditional
-                && cluster.GetProperty<IntProperty>("UsableConditional")?.Value == LocalClusterConditional
-                && back.Count == 2 && back.GetValueOrDefault(MarsConditional) == MarsExpression
-                && back.GetValueOrDefault(LocalClusterConditional) == LocalClusterExpression;
-            Console.WriteLine($"validate: Mars MapName={mars?.GetProperty<StrProperty>("MapName")?.Value} land=C{mars?.GetProperty<IntProperty>("PlanetLandCondition")?.Value}; Local Cluster C{cluster?.GetProperty<IntProperty>("VisibleConditional")?.Value}; {string.Join("; ", back.Select(kv => $"C{kv.Key} = {kv.Value}"))}");
+                && cluster.GetProperty<IntProperty>("UsableConditional")?.Value == LocalClusterConditional;
+            Console.WriteLine($"validate: Mars MapName={mars?.GetProperty<StrProperty>("MapName")?.Value} land=C{mars?.GetProperty<IntProperty>("PlanetLandCondition")?.Value}; Local Cluster C{cluster?.GetProperty<IntProperty>("VisibleConditional")?.Value}");
             if (!ok) { Console.Error.WriteLine("validation FAILED; staging left unchanged"); return 1; }
         }
         if (DiagVanilla) { Console.WriteLine("DIAGNOSTIC build: vanilla conditionals 2744/79 on Local Cluster and Mars"); return 0; }
@@ -441,12 +502,33 @@ static class Program
         if (!NoMars && Mars(bioGame, cooked) != 0) return 1;
         if (FixedSquad(bioGame, cooked) != 0) return 1;
         if (Cutscenes(bioGame, cooked) != 0) return 1;
+        if (Salvage(bioGame, cooked) != 0) return 1;
+        // One CND for the whole DLC (LE3 loads Conditionals<DLC folder>.cnd by name); every entry must round-trip.
+        var cnd = new CNDFile { ConditionalEntries = [] };
+        foreach (var (id, expression) in Conditionals.OrderBy(kv => kv.Key))
+        {
+            var entry = new CNDFile.ConditionalEntry { ID = id };
+            ME3ConditionalsCompiler.Compile(entry, expression);
+            cnd.ConditionalEntries.Add(entry);
+        }
+        var cndPath = Path.Combine(cooked, $"Conditionals{ModFolder}.cnd");
+        cnd.ToFile(cndPath);
+        var compiled = CNDFile.FromFile(cndPath).ConditionalEntries;
+        foreach (var entry in compiled)
+        {
+            var again = new CNDFile.ConditionalEntry { ID = entry.ID };
+            ME3ConditionalsCompiler.Compile(again, ME3ConditionalsCompiler.Decompile(entry));
+            if (!Conditionals.ContainsKey(entry.ID) || !again.Data.SequenceEqual(entry.Data))
+            { Console.Error.WriteLine($"validation FAILED: conditional {entry.ID} does not round-trip"); return 1; }
+        }
+        Console.WriteLine($"validate: {compiled.Count} conditionals round-trip; e.g. " + string.Join("; ", compiled.Where(e => e.ID is MarsConditional or SalvageConditional).Select(e => $"C{e.ID} = {ME3ConditionalsCompiler.Decompile(e)}")));
+        if (compiled.Count != Conditionals.Count) { Console.Error.WriteLine("validation FAILED: conditional count"); return 1; }
         // Flags copied from a vanilla single-player DLC (Leviathan) so the mount type matches.
         var template = new MountFile(Path.Combine(bioGame, "DLC", "DLC_EXP_Pack001", "CookedPCConsole", "Mount.dlc"));
         new MountFile { Game = MEGame.LE3, MountPriority = MountPriority, TLKID = NameStrRef, MountFlags = template.MountFlags }
             .WriteMountFile(Path.Combine(cooked, "Mount.dlc"));
         HuffmanCompression.SaveToTlkFile(Path.Combine(cooked, $"{ModFolder}_INT.tlk"),
-            [new TLKStringRef(NameStrRef, "Archipelago ME3 (open start test)")]);
+            [new TLKStringRef(NameStrRef, "Archipelago ME3"), .. Strings.Select(kv => new TLKStringRef(kv.Key, kv.Value))]);
         // LE3 reports a DLC folder without its Default_<DLC>.bin config as corrupt (seen 2026-10-27). Modeled on the
         // smallest vanilla one (DLC_UPD_Patch01): the cooked path plus a DLC module number (vanilla uses 9..60).
         var coalesced = new Dictionary<string, string>
@@ -731,6 +813,24 @@ static class Program
                 Console.WriteLine(id + "\t" + (files.Select(f => f.FindDataById(id)).FirstOrDefault(x => x != null && x != "No Data") ?? "").Replace("\n", " ").Replace("\t", " "));
             return 0;
         }
+        if (args.Length == 3 && args[0] == "classscan")
+        {
+            // classscan <BioGame> <class>: every runtime-winning package (incl. _LOC_INT) with exports of that class
+            var root = Path.GetFullPath(args[1]);
+            foreach (var name in Directory.EnumerateFiles(root, "*.pcc", SearchOption.AllDirectories).Select(Path.GetFileName)
+                         .Where(n => !n.Contains("_LOC_", StringComparison.OrdinalIgnoreCase) || n.EndsWith("_LOC_INT.pcc", StringComparison.OrdinalIgnoreCase))
+                         .Distinct(StringComparer.OrdinalIgnoreCase).Order())
+            {
+                try
+                {
+                    using var pcc = MEPackageHandler.UnsafePartialLoad(Winner(root, name), e => e.ClassName == args[2]);
+                    foreach (var e in pcc.Exports.Where(e => e.ClassName == args[2]))
+                        Console.WriteLine($"{name}	{e.InstancedFullPath}	" + string.Join(" ", e.GetProperties().Where(p => p is not ArrayProperty<StructProperty> && p.Name.Instanced is not ("ObjPosX" or "ObjPosY" or "ParentSequence" or "ObjInstanceVersion")).Select(p => p.Name.Instanced + "=" + (p switch { IntProperty i => i.Value.ToString(), NameProperty n => n.Value.Instanced, ObjectProperty o => pcc.GetEntry(o.Value)?.InstancedFullPath, StrProperty st => st.Value, _ => "?" }))));
+                }
+                catch (Exception) { }
+            }
+            return 0;
+        }
         if (args.Length == 2 && args[0] == "types")
         {
             foreach (var t in typeof(MEPackageHandler).Assembly.GetTypes().Where(t => System.Text.RegularExpressions.Regex.IsMatch(t.FullName ?? "", args[1])))
@@ -756,7 +856,7 @@ static class Program
             foreach (var prop in e.GetProperties()) Console.WriteLine($"{prop.GetType().Name} {prop.Name.Instanced} = {prop switch { IntProperty i => i.Value.ToString(), NameProperty n => n.Value.Instanced, StrProperty st => st.Value, BoolProperty b => b.Value.ToString(), ObjectProperty o => pcc.GetEntry(o.Value)?.InstancedFullPath, EnumProperty en => en.EnumType.Instanced + "::" + en.Value.Instanced, _ => prop.ToString() }}");
             foreach (var arr in e.GetProperties().OfType<ArrayProperty<StructProperty>>())
                 for (int i = 0; i < arr.Count; i++)
-                    Console.WriteLine($"  {arr.Name.Instanced}[{i}] " + string.Join(" ", arr[i].Properties.Select(sp => $"{sp.Name.Instanced}={sp switch { IntProperty x => x.Value.ToString(), NameProperty x => x.Value.Instanced, StrProperty x => x.Value, BoolProperty x => x.Value.ToString(), FloatProperty x => x.Value.ToString(), StringRefProperty x => x.Value.ToString(), EnumProperty x => x.Value.Instanced, ArrayProperty<IntProperty> x => "[" + string.Join(",", x.Select(v => v.Value)) + "]", ArrayProperty<NameProperty> x => "[" + string.Join(",", x.Select(v => v.Value.Instanced)) + "]", _ => sp.GetType().Name }}")));
+                    Console.WriteLine($"  {arr.Name.Instanced}[{i}] " + string.Join(" ", arr[i].Properties.Select(sp => $"{sp.Name.Instanced}={sp switch { IntProperty x => x.Value.ToString(), NameProperty x => x.Value.Instanced, StrProperty x => x.Value, BoolProperty x => x.Value.ToString(), FloatProperty x => x.Value.ToString(), StringRefProperty x => x.Value.ToString(), EnumProperty x => x.Value.Instanced, ArrayProperty<IntProperty> x => "[" + string.Join(",", x.Select(v => v.Value)) + "]", ArrayProperty<NameProperty> x => "[" + string.Join(",", x.Select(v => v.Value.Instanced)) + "]", StructProperty x => "{" + string.Join(" ", x.Properties.Select(q => q.Name.Instanced + "=" + (q switch { IntProperty y => y.Value.ToString(), StringRefProperty y => y.Value.ToString(), NameProperty y => y.Value.Instanced, StrProperty y => y.Value, BoolProperty y => y.Value.ToString(), FloatProperty y => y.Value.ToString(), EnumProperty y => y.Value.Instanced, _ => q.GetType().Name }))) + "}", _ => sp.GetType().Name }}")));
             Console.WriteLine(Describe(e));
             return 0;
         }

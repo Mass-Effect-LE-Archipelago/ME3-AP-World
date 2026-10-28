@@ -18,12 +18,18 @@ constexpr int Marker = 0x4D334150;
 // Cerberus HQ gate fields in formerly reserved slots; zero means no gate.
 constexpr int IntelRequired = Base + 20, IntelReceived = Base + 21;
 constexpr int MaxIntel = 1000;
+// Missed-checks salvage: plot bools (conditionals cannot read the sparse int keys above 250000). The mod's store row
+// for mission k shows while TierBool + tier and AvailBool + k are set and BoughtBool + k is clear; buying sets BoughtBool + k.
+constexpr int MaxSalvage = 40, MaxTier = 4;
+constexpr int BoughtBool = 26000, AvailBool = BoughtBool + MaxSalvage, TierBool = AvailBool + MaxSalvage;
+constexpr int SalvageBoolEnd = TierBool + MaxTier + 1;
 using Digest = std::array<std::uint32_t, 8>;
-enum class Op { Session, Wallet, Gate, Bind, Counter, Credits, Intel, Weapon };
+enum class Op { Session, Wallet, Gate, Bind, Counter, Credits, Intel, Weapon, Salvage };
 struct Request {
     Op op = Op::Session;
     Digest identity{}, history{};
     int index = 0, amount = 0, required = 0;
+    std::vector<int> caps; // Salvage: tier in amount
 };
 struct State { bool bound = false; Digest identity{}, history{}; int cursor = 0, required = 0, received = 0; };
 struct Wallet { int credits, maximum; };
@@ -62,6 +68,19 @@ inline std::string parse(std::string const& text, Request& request) {
         // Optional Crucible Intel requirement for the Cerberus HQ gate; omitted means no gate.
         if (words.size() == 5 && (!number(words[4], request.required) || request.required > MaxIntel)) return "ERR requirement";
         return digest(words[1], request.identity) && digest(words[2], request.history) ? "" : "ERR digest";
+    }
+    // DEV_SALVAGE <identity> <history> <tier> <cap>...: publish caps, take the bought missions.
+    if (words.size() >= 5 && words[0] == "DEV_SALVAGE") {
+        if (!digest(words[1], request.identity) || !digest(words[2], request.history)) return "ERR digest";
+        if (!number(words[3], request.amount) || request.amount > MaxTier) return "ERR tier";
+        if (words.size() - 4 > MaxSalvage) return "ERR salvage_count";
+        for (std::size_t i = 4; i < words.size(); ++i) {
+            int cap = 0;
+            if (!number(words[i], cap) || cap > 1000) return "ERR cap";
+            request.caps.push_back(cap);
+        }
+        request.op = Op::Salvage;
+        return "";
     }
     if ((words.size() == 5 || words.size() == 6) && words[0] == "DEV_TXN") {
         if (!digest(words[1], request.identity) || !digest(words[2], request.history)) return "ERR digest";
@@ -145,6 +164,19 @@ template<class Host> std::string execute(Request const& request, Host& host) {
     }
     // Validate against the CURRENT loaded save at execution, not enqueue time.
     if (!state.bound || state.identity != request.identity || state.history != request.history) return "ERR identity";
+    if (request.op == Op::Salvage) {
+        // Availability first, so a store reopened after this step already reflects it; then take each bought flag.
+        for (int t = 0; t <= MaxTier; ++t) host.writeBool(TierBool + t, t == request.amount);
+        for (int k = 0; k < MaxSalvage; ++k)
+            host.writeBool(AvailBool + k, k < static_cast<int>(request.caps.size()) && request.caps[k] > 0);
+        std::string result = "OK bought";
+        for (int k = 0; k < static_cast<int>(request.caps.size()); ++k)
+            if (host.readBool(BoughtBool + k)) {
+                host.writeBool(BoughtBool + k, false);
+                result += " " + std::to_string(k);
+            }
+        return result;
+    }
     if (request.index < state.cursor) return "OK " + std::to_string(state.cursor) + " 0 done";
     if (request.index > state.cursor) return "ERR gap " + std::to_string(state.cursor);
     int actual = 0;

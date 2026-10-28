@@ -91,7 +91,9 @@ class ME3Context(CommonContext):
             bridge = LivePipeBridge(identity, history_digest(config["history"]), config["crucible_intel_required"],
                                     allow_bind=self.bind_new_career, connect=self.delivery_connect)
         result = await asyncio.to_thread(synchronize, bridge, identity, config["history"], selected,
-                                         [item.item for item in self.items_received], config["crucible_intel_required"])
+                                         [item.item for item in self.items_received], config["crucible_intel_required"],
+                                         frozenset(self.checked_locations | self.reported),
+                                         config.get("salvage_price") if config.get("salvage") else None)
         new = set(result.locations) - self.checked_locations - self.reported
         if new:
             await self.send_msgs([{"cmd": "LocationChecks", "locations": sorted(new)}])

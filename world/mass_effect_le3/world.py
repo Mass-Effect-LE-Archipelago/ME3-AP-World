@@ -109,6 +109,7 @@ class MassEffectLE3World(World):
                 "implementation_status": "experimental_not_playable", "history": data.HISTORY.copy(),
                 "crucible_intel_total": self.intel_total, "crucible_intel_required": self.intel_required,
                 "weapon_items": bool(self.options.weapon_items),
+                "salvage": bool(self.options.salvage), "salvage_price": self.options.salvage_price.value,
                 "enabled_dlc": sorted(self.options.enabled_dlc.value),
                 "locations": [entry.id for entry in self.selected],
                 "goal": {"kind": "bool", "index": data.GOAL_PLOT_BOOL},

@@ -11,12 +11,13 @@ from __future__ import annotations
 import re
 from typing import Callable
 
+from . import data
 from .client_core import BridgeError, GameSnapshot, IdentityMismatch, SaveSession, UnsupportedFeature
 from .delivery_client import PipeConnection
 
 HEX = re.compile(r"[0-9a-f]{64}")
 NEEDED = {"delivery_dev", "DEV_SESSION", "DEV_BIND", "DEV_TXN", "DEV_GATE", "LANDING_GATE", "WEAPONS",
-          "GETBS", "GETIS", "USES", "GAW"}
+          "GETBS", "GETIS", "USES", "GAW", "SALVAGE"}
 
 
 class LivePipeBridge:
@@ -68,6 +69,16 @@ class LivePipeBridge:
             required, received, state = pipe.request("DEV_GATE").split()
         if (state == "open") != opened:
             raise BridgeError(f"Native gate is {state} ({received}/{required}) but the server says opened={opened}")
+
+    def salvage(self, tier: int, caps: list[int]) -> list[int]:
+        """Publish salvage caps/tier and take the missions bought since the last call (one game-thread step)."""
+        if not 0 <= tier < len(data.SALVAGE_PRICES) or len(caps) != len(data.SALVAGE_MISSIONS):
+            raise ValueError("Invalid salvage request")
+        with self.connect() as pipe:
+            fields = pipe.request(f"DEV_SALVAGE {self.identity} {self.history} {tier} {' '.join(map(str, caps))}").split()
+        if not fields or fields[0] != "bought" or any(not f.isdigit() or int(f) >= len(caps) for f in fields[1:]):
+            raise BridgeError(f"Unexpected salvage reply: {' '.join(fields)}")
+        return [int(f) for f in fields[1:]]
 
     def snapshot(self, bool_indices: set[int], int_indices: set[int]) -> GameSnapshot:
         with self.connect() as pipe:
