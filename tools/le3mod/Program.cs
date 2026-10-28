@@ -887,6 +887,28 @@ static class Program
                 Console.WriteLine($"{m.Name}({string.Join(", ", m.GetParameters().Select(p => p.ParameterType.Name + " " + p.Name))})");
             return 0;
         }
+        if (args.Length == 4 && args[0] == "convo")
+        {
+            // convo <BioGame> <pkg> <tlk;tlk>: every conversation entry/reply with its text, conditional and transition
+            var tlks = args[3].Split(';').Select(f => new LegendaryExplorerCore.TLK.ME2ME3.ME2ME3TalkFile(f)).ToList();
+            string Text(int id) => tlks.Select(t => t.FindDataById(id)).FirstOrDefault(x => x != null && x != "No Data") ?? "";
+            using var pcc = MEPackageHandler.OpenMEPackage(File.Exists(args[2]) ? args[2] : Winner(Path.GetFullPath(args[1]), args[2]), forceLoadFromDisk: true);
+            foreach (var e in pcc.Exports.Where(x => x.ClassName == "BioConversation"))
+                foreach (var list in new[] { "m_EntryList", "m_ReplyList" })
+                {
+                    var nodes = e.GetProperty<ArrayProperty<StructProperty>>(list);
+                    if (nodes == null) continue;
+                    for (int i = 0; i < nodes.Count; i++)
+                    {
+                        var n = nodes[i];
+                        int Int(string name) => n.GetProp<IntProperty>(name)?.Value ?? -9;
+                        var srText = n.GetProp<StringRefProperty>("srText")?.Value ?? 0;
+                        var para = n.GetProp<StringRefProperty>("srParaphrase")?.Value ?? 0;
+                        Console.WriteLine($"{e.ObjectName.Instanced}	{list[2..^4]}[{i}]	cond={Int("nConditionalFunc")}/{Int("nConditionalParam")} fire={n.GetProp<BoolProperty>("bFireConditional")?.Value} trans={Int("nStateTransition")}/{Int("nStateTransitionParam")}	{Text(para)} | {Text(srText).Replace("\n", " ")}");
+                    }
+                }
+            return 0;
+        }
         if (args.Length == 2 && args[0] == "types")
         {
             foreach (var t in typeof(MEPackageHandler).Assembly.GetTypes().Where(t => System.Text.RegularExpressions.Regex.IsMatch(t.FullName ?? "", args[1])))
