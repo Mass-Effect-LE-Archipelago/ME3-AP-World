@@ -311,6 +311,38 @@ static class Program
     static readonly string[] GalaxyPackages = ["BioD_Nor_203CIC.pcc", GalaxyFile];
     static bool NoMars;
 
+    // Mars debug loadout (D5: the career starts with only the Predator). When Mars loads as an early mission its
+    // SetupDebugLoad sequence clears the inventory and gives Predator, Avenger, shield and the Legion heavy weapon.
+    // Ours keeps the clear, the Predator and the shield (an open-start Shepard has no other source of one).
+    const string MarsPersistent = "BioP_ProMar.pcc";
+    const string DebugInventoryPath = "TheWorld.PersistentLevel.Main_Sequence.SetupDebugLoad.SeqAct_GiveInventory_0";
+    static readonly string[] MarsLoadout = ["SFXGameContent.SFXWeapon_Pistol_Predator", "SFXGameContent.SFXShield_Energy_Player"];
+
+    static int MarsWeapons(string bioGame, string cooked)
+    {
+        var source = Winner(bioGame, MarsPersistent);
+        var outPcc = Path.Combine(cooked, MarsPersistent);
+        using (var pcc = MEPackageHandler.OpenMEPackage(source, forceLoadFromDisk: true))
+        {
+            var give = pcc.FindExport(DebugInventoryPath);
+            var list = give?.GetProperty<ArrayProperty<ObjectProperty>>("InventoryList");
+            var names = list?.Select(o => pcc.GetEntry(o.Value)?.InstancedFullPath).ToList() ?? [];
+            if (give?.ClassName != "SeqAct_GiveInventory" || names.Count != 4 || !MarsLoadout.All(names.Contains))
+            { Console.Error.WriteLine("refusing: Mars debug inventory is not the vanilla four items in " + source); return 1; }
+            give.WriteProperty(new ArrayProperty<ObjectProperty>(list.Where(o => MarsLoadout.Contains(pcc.GetEntry(o.Value)?.InstancedFullPath)), "InventoryList"));
+            SavePackage(pcc, outPcc);
+        }
+        if (FixInlineBulkOffsets(source, outPcc) != 0) return 1;
+        using (var pcc = MEPackageHandler.OpenMEPackage(outPcc, forceLoadFromDisk: true))
+        {
+            var names = pcc.FindExport(DebugInventoryPath)?.GetProperty<ArrayProperty<ObjectProperty>>("InventoryList")?
+                .Select(o => pcc.GetEntry(o.Value)?.InstancedFullPath).ToList() ?? [];
+            Console.WriteLine($"validate: Mars debug loadout = {string.Join(", ", names)}");
+            if (names.Count != 2 || !MarsLoadout.All(names.Contains)) { Console.Error.WriteLine("validation FAILED: Mars loadout"); return 1; }
+        }
+        return 0;
+    }
+
     // Every conditional and TLK string the DLC adds, written once by Build.
     static readonly Dictionary<int, string> Conditionals = [];
     static readonly Dictionary<int, string> Strings = [];
@@ -502,6 +534,7 @@ static class Program
         if (!NoMars && Mars(bioGame, cooked) != 0) return 1;
         if (FixedSquad(bioGame, cooked) != 0) return 1;
         if (Cutscenes(bioGame, cooked) != 0) return 1;
+        if (MarsWeapons(bioGame, cooked) != 0) return 1;
         if (Salvage(bioGame, cooked) != 0) return 1;
         // One CND for the whole DLC (LE3 loads Conditionals<DLC folder>.cnd by name); every entry must round-trip.
         var cnd = new CNDFile { ConditionalEntries = [] };
