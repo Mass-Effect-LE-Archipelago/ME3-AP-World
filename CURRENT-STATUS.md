@@ -2,7 +2,20 @@
 
 Update 2026-10-20 (Claude Code): `build.py --career-trace` builds the observer cleanly into `build-career` (/W4 /WX); 19 CareerTraceTests and 35 DeliveryTests pass. Pinned ASI SHA256 `5a645f7a3e623e1c3c45988043dadc13e2fe04eded1ab8fab75f23073dffce81`, copied to `build/live-original/`. `install_research.py --profile career-trace` and `career_trace_probe.py` (offline tests in `test_career_trace.py`; 12 Python tests pass with the installer tests) now exist. It is **not installed**: the live `bink2w64.dll` and `bink2w64_original.dll` were replaced on 2026-10-18 (ME3Tweaks LEBinkProxy 2.0.0.14) and a new `lemp.asi` appeared, so the receipt no longer matches and the installer correctly refuses updates until the owner approves a re-baseline. Mission gate source evidence: `research/le3_mission_gate.md`. Git: this folder has no repository of its own; it is an untracked 44 GB directory inside the APWorldMaker repo, so nothing here is committed yet.
 
-## Where things stand — 2026-10-26 (paused for the night)
+## Where things stand — 2026-10-28 (0.1.0 beta staged for the first full live test)
+
+- First live run (2026-10-27/28) proved the loop: Mars objectives and a supply cache sent checks; Crucible Intel and
+  credits arrived (build/live-run-01). Codex entries and companions were not checks then.
+- 0.1.0: codex checks (D6, 66), missed-checks salvage at the Normandy store (D7, bridge 0.2.3 DEV_SALVAGE, plot bools
+  26000-26084), Mars debug loadout trimmed to Predator + shield, AP-career marker bool 26085 set by the open start
+  (the client links only marked careers), client is live by default and writes the slot's ME2 import career itself.
+- Release: build/release-0.1.0 (tools/package_release.py) is the ME3 payload of Mass Effect AP Setup 0.4.0
+  (APWorldMaker/tools/setup, release/MassEffectAPSetup-0.4.0(.zip)); setup install tests pass for ME1/ME2/ME3.
+- Untested in game: salvage rows in the Normandy store, the marker bool, the trimmed Mars loadout, codex detection.
+- Known issue: audio can be silent on the first Normandy load of a new career; a save/reload restores it.
+- Nothing is published; the owner decides where 0.1.0 goes after the live test.
+
+## Earlier: 2026-10-26 (paused for the night)
 
 - History: D3 adopted. Seed history goes in through a generated ME2 import save (`tools/me2save`, `world/mass_effect_le3/history_save.py`). Import tests 01 and 02 passed live (40/40 flags). Player-record origin/notoriety bytes were added after test 02 and still need one live import.
 - Earth skip: `tools/le3mod` 0.0.1 (C#, LegendaryExplorerCore) rewires BioP_Char so imported careers fire Virmire-survivor + James squad transitions and load BioP_Nor. It was installed by plain folder copy into `BioGame/DLC/DLC_MOD_ArchipelagoME3` (receipt `research/le3mod_install_receipt.json`). **Not yet run in game**: next step is the owner importing a career and reporting (start OK? landed on Normandy? weapons? galaxy map?).
