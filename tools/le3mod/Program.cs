@@ -599,9 +599,9 @@ static class Program
         Console.WriteLine($"validate: DLC TOC entries [{string.Join(", ", entries.Select(e => e.name))}]");
         if (entries.Count < Directory.GetFiles(cooked).Length) { Console.Error.WriteLine("validation FAILED: TOC is missing files"); return 1; }
         File.WriteAllText(Path.Combine(tmp, "moddesc.ini"),
-            "[ModManager]\r\ncmmver = 8.0\r\n\r\n[ModInfo]\r\ngame = LE3\r\nmodname = Archipelago ME3 open start (TEST)\r\n" +
-            "moddesc = Test build: an imported ME2 career skips the Earth prologue and starts on the Normandy.\r\n" +
-            "modver = 0.0.9\r\nmoddev = Jerrod\r\n\r\n[CUSTOMDLC]\r\nsourcedirs = " + ModFolder + "\r\ndestdirs = " + ModFolder + "\r\n");
+            "[ModManager]\r\ncmmver = 8.0\r\n\r\n[ModInfo]\r\ngame = LE3\r\nmodname = Archipelago ME3\r\n" +
+            "moddesc = Archipelago multiworld support: an imported ME2 career skips the Earth prologue and starts on the Normandy; missed checks can be bought back at the Normandy store.\r\n" +
+            "modver = 0.1.0\r\nmoddev = Jerrod\r\n\r\n[CUSTOMDLC]\r\nsourcedirs = " + ModFolder + "\r\ndestdirs = " + ModFolder + "\r\n");
         if (Directory.Exists(modRoot)) Directory.Delete(modRoot, true);
         Directory.Move(tmp, modRoot);
         Console.WriteLine($"staged {modRoot}");
