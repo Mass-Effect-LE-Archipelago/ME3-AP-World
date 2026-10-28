@@ -23,6 +23,8 @@ class ME3WebWorld(WebWorld):
 
 
 def included(options: MassEffectLE3Options, entry: data.LocationData) -> bool:
+    if entry.region in data.SKIPPED_REGIONS:
+        return False
     if entry.dlc and entry.dlc not in options.enabled_dlc.value:
         return False
     switch = {"objectives": "objective_checks", "credits": "credit_checks", "supplies": "supply_checks",

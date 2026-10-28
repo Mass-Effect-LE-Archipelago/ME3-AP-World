@@ -12,7 +12,9 @@ import Utils
 
 from . import data
 from .client_core import BridgeError, UnsupportedFeature, seed_identity, synchronize
+from .client_core import history_digest
 from .delivery_client import PipeConnection, synchronize_research_delivery
+from .live_bridge import LivePipeBridge
 
 logger = logging.getLogger("ME3Client")
 
@@ -33,7 +35,9 @@ class ME3Context(CommonContext):
     items_handling = 0b111
 
     def __init__(self, server_address=None, password=None, bridge=None, *, delivery_test=False,
-                 bind_research_save=False, delivery_connect=PipeConnection):
+                 bind_research_save=False, delivery_connect=PipeConnection, live_dev=False, bind_new_career=False):
+        self.live_dev = live_dev
+        self.bind_new_career = bind_new_career
         self.delivery_test = delivery_test
         self.bind_research_save = bind_research_save
         self.delivery_connect = delivery_connect
@@ -82,7 +86,11 @@ class ME3Context(CommonContext):
                 [item.item for item in self.items_received], allow_bind=self.bind_research_save,
                 connect=self.delivery_connect)
             return  # Explicitly NO source reads, LocationChecks, goal or gate operation.
-        result = await asyncio.to_thread(synchronize, self.bridge, identity, config["history"], selected,
+        bridge = self.bridge
+        if self.live_dev:
+            bridge = LivePipeBridge(identity, history_digest(config["history"]), config["crucible_intel_required"],
+                                    allow_bind=self.bind_new_career, connect=self.delivery_connect)
+        result = await asyncio.to_thread(synchronize, bridge, identity, config["history"], selected,
                                          [item.item for item in self.items_received], config["crucible_intel_required"])
         new = set(result.locations) - self.checked_locations - self.reported
         if new:
@@ -109,7 +117,10 @@ class ME3Context(CommonContext):
 
 async def _main(args: argparse.Namespace):
     ctx = ME3Context(args.connect, args.password, delivery_test=args.delivery_test,
-                     bind_research_save=args.bind_research_save)
+                     bind_research_save=args.bind_research_save, live_dev=args.live_dev,
+                     bind_new_career=args.bind_new_career)
+    if args.live_dev:
+        logger.warning("LIVE DEVELOPMENT RUN: items, checks and goal are live on the linked career (bridge 0.2.2 delivery-dev)")
     if args.delivery_test:
         logger.warning("RESEARCH DELIVERY ONLY: no Shepard preset initialization, mission unlocks, checks or goal reporting")
     ctx.auth = args.name
@@ -132,10 +143,18 @@ def launch(*launch_args: str):
     parser.add_argument("--name", help="Archipelago slot name")
     parser.add_argument("--delivery-test", action="store_true", help="Receive items through the development bridge; never report checks/goals")
     parser.add_argument("--bind-research-save", action="store_true", help="Explicitly allow binding an unbound disposable save in delivery-test mode")
+    parser.add_argument("--live-dev", action="store_true",
+                        help="First live run: deliver items and report checks/goal through the delivery-dev bridge")
+    parser.add_argument("--bind-new-career", action="store_true",
+                        help="With --live-dev: link an unlinked career (the imported seed save) to this slot")
     parser.add_argument("url", nargs="?")
     args = handle_url_arg(parser.parse_args(launch_args or None), parser)
     if args.bind_research_save and not args.delivery_test:
         parser.error("--bind-research-save requires --delivery-test")
+    if args.bind_new_career and not args.live_dev:
+        parser.error("--bind-new-career requires --live-dev")
+    if args.live_dev and args.delivery_test:
+        parser.error("--live-dev and --delivery-test are separate modes")
     Utils.init_logging("ME3Client", exception_logger="Client")
     asyncio.run(_main(args))
 

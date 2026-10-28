@@ -10,7 +10,8 @@ from ..world import MassEffectLE3World
 
 class TestWorldGeneration(unittest.TestCase):
     def test_default_and_maximum_categories(self):
-        for options, count in (({}, 502), ({"weapon_checks": True}, 527)):
+        # 3 Earth-prologue sources are dropped: the open start skips the prologue (data.SKIPPED_REGIONS).
+        for options, count in (({}, 499), ({"weapon_checks": True}, 524)):
             with self.subTest(options=options):
                 world = setup_multiworld(MassEffectLE3World, gen_steps, 17, options)
                 self.assertEqual(len(world.get_unfilled_locations()), count)
@@ -43,6 +44,8 @@ class TestWorldGeneration(unittest.TestCase):
     def test_missables_are_excluded_from_progression(self):
         world = setup_multiworld(MassEffectLE3World, gen_steps, 5, {"weapon_checks": True})
         for entry in data.LOCATIONS:
+            if entry.region in data.SKIPPED_REGIONS:
+                continue
             if not entry.progression_safe or entry.region in data.FINAL_REGIONS:
                 self.assertEqual(world.get_location(entry.name, 1).progress_type, LocationProgressType.EXCLUDED)
 

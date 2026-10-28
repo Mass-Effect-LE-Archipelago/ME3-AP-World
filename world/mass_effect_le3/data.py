@@ -40,7 +40,17 @@ DLC = frozenset({"From Ashes", "Leviathan", "Omega", "Citadel"})
 FINAL_REGIONS = frozenset({"Cerberus Headquarters", "Earth Finale"})
 GOAL_PLOT_BOOL = 22426  # End002: Made_Final_Decision; runtime observation pending.
 SCHEMA_VERSION = 1
-HISTORY = {"preset": "maximum_content", "version": 1, "implemented_in_game": False}
+# D3: the seed's history reaches ME3 through the generated ME2 import save. Slot data carries the full resolved
+# profile so the client can bind the imported career to its digest. Custom history options are not exposed yet;
+# every seed currently uses the maximum-content preset.
+def _resolved_history() -> dict:
+    from .history_profile import resolve_history
+    return {**resolve_history("maximum_content").to_slot_data(), "implemented_in_game": True, "applied_via": "me2_import_save"}
+
+
+HISTORY = _resolved_history()
+# The open start (le3mod) skips the Earth prologue, so its sources can never be reached. IDs stay reserved.
+SKIPPED_REGIONS = frozenset({"Earth Prologue"})
 
 
 @dataclass(frozen=True)
