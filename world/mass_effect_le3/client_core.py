@@ -75,6 +75,8 @@ def observed_locations(snapshot: GameSnapshot, enabled_ids: set[int]) -> set[int
             complete = detector["asset_id"] in snapshot.gaw_assets
         elif kind == "bool":
             complete = snapshot.bools.get(detector["index"], False)
+        elif kind == "gaw_count":
+            complete = len(snapshot.gaw_assets - data.EXPLORATION_ASSET_IDS) >= detector["count"]
         elif kind == "bool_any":
             complete = any(snapshot.bools.get(index, False) for index in detector["indices"])
         elif kind == "int_positive":

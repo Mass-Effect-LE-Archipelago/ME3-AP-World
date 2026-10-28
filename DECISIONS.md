@@ -48,3 +48,13 @@ availability (mission visited = any of its checks done, and checks left) and tak
 `DEV_SALVAGE`, sending the lowest open location of that mission. Plot bools 26000-26084 (bought 26000+k,
 available 26040+k, tier 26080+t); conditionals cannot read the sparse int keys (LEC compiler limit 250000).
 Untested in game: nested-category store rendering a top-level quest row, and the store's markup on Normandy prices.
+
+## D8 — Progressive war-asset checks (owner direction, 2026-10-28)
+
+"War Asset 1..N" (option `war_asset_checks`, 0-150, default 80): check N is done once the career's war-asset list
+(SFXGAWAssetsHandler.UnlockedGAWAssets, bridge GAW) holds N assets other than the galaxy-map recoveries, which keep
+their own named checks. Any asset or upgrade counts, so choices never strand a specific check. Never progression.
+Default 80 is an estimate: the game has 268 entries, 192 outside the exploration recoveries (about 107 positive
+assets and 89 modifiers, many of them choice-exclusive or negative); a run through the priority missions with the
+maximum-content history should pass 80. Check the real count with a GAW read during the live test and retune.
+Assumes a new open-start career holds no non-exploration assets before Citadel (also to confirm live).

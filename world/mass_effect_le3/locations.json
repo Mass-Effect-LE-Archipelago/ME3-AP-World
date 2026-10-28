@@ -9623,5 +9623,2405 @@
     "source": "research/le3_codex_setters.tsv",
     "notes": "Codex page plot bool(s); granted by omg000. Needs a live false-before/true-after check.",
     "id": 1295192656
+  },
+  {
+    "key": "war_asset_count:001",
+    "name": "War Asset 1",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 1
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192657
+  },
+  {
+    "key": "war_asset_count:002",
+    "name": "War Asset 2",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 2
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192658
+  },
+  {
+    "key": "war_asset_count:003",
+    "name": "War Asset 3",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 3
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192659
+  },
+  {
+    "key": "war_asset_count:004",
+    "name": "War Asset 4",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 4
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192660
+  },
+  {
+    "key": "war_asset_count:005",
+    "name": "War Asset 5",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 5
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192661
+  },
+  {
+    "key": "war_asset_count:006",
+    "name": "War Asset 6",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 6
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192662
+  },
+  {
+    "key": "war_asset_count:007",
+    "name": "War Asset 7",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 7
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192663
+  },
+  {
+    "key": "war_asset_count:008",
+    "name": "War Asset 8",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 8
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192664
+  },
+  {
+    "key": "war_asset_count:009",
+    "name": "War Asset 9",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 9
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192665
+  },
+  {
+    "key": "war_asset_count:010",
+    "name": "War Asset 10",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 10
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192666
+  },
+  {
+    "key": "war_asset_count:011",
+    "name": "War Asset 11",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 11
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192667
+  },
+  {
+    "key": "war_asset_count:012",
+    "name": "War Asset 12",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 12
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192668
+  },
+  {
+    "key": "war_asset_count:013",
+    "name": "War Asset 13",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 13
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192669
+  },
+  {
+    "key": "war_asset_count:014",
+    "name": "War Asset 14",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 14
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192670
+  },
+  {
+    "key": "war_asset_count:015",
+    "name": "War Asset 15",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 15
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192671
+  },
+  {
+    "key": "war_asset_count:016",
+    "name": "War Asset 16",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 16
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192672
+  },
+  {
+    "key": "war_asset_count:017",
+    "name": "War Asset 17",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 17
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192673
+  },
+  {
+    "key": "war_asset_count:018",
+    "name": "War Asset 18",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 18
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192674
+  },
+  {
+    "key": "war_asset_count:019",
+    "name": "War Asset 19",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 19
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192675
+  },
+  {
+    "key": "war_asset_count:020",
+    "name": "War Asset 20",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 20
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192676
+  },
+  {
+    "key": "war_asset_count:021",
+    "name": "War Asset 21",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 21
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192677
+  },
+  {
+    "key": "war_asset_count:022",
+    "name": "War Asset 22",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 22
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192678
+  },
+  {
+    "key": "war_asset_count:023",
+    "name": "War Asset 23",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 23
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192679
+  },
+  {
+    "key": "war_asset_count:024",
+    "name": "War Asset 24",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 24
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192680
+  },
+  {
+    "key": "war_asset_count:025",
+    "name": "War Asset 25",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 25
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192681
+  },
+  {
+    "key": "war_asset_count:026",
+    "name": "War Asset 26",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 26
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192682
+  },
+  {
+    "key": "war_asset_count:027",
+    "name": "War Asset 27",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 27
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192683
+  },
+  {
+    "key": "war_asset_count:028",
+    "name": "War Asset 28",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 28
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192684
+  },
+  {
+    "key": "war_asset_count:029",
+    "name": "War Asset 29",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 29
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192685
+  },
+  {
+    "key": "war_asset_count:030",
+    "name": "War Asset 30",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 30
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192686
+  },
+  {
+    "key": "war_asset_count:031",
+    "name": "War Asset 31",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 31
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192687
+  },
+  {
+    "key": "war_asset_count:032",
+    "name": "War Asset 32",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 32
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192688
+  },
+  {
+    "key": "war_asset_count:033",
+    "name": "War Asset 33",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 33
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192689
+  },
+  {
+    "key": "war_asset_count:034",
+    "name": "War Asset 34",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 34
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192690
+  },
+  {
+    "key": "war_asset_count:035",
+    "name": "War Asset 35",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 35
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192691
+  },
+  {
+    "key": "war_asset_count:036",
+    "name": "War Asset 36",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 36
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192692
+  },
+  {
+    "key": "war_asset_count:037",
+    "name": "War Asset 37",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 37
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192693
+  },
+  {
+    "key": "war_asset_count:038",
+    "name": "War Asset 38",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 38
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192694
+  },
+  {
+    "key": "war_asset_count:039",
+    "name": "War Asset 39",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 39
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192695
+  },
+  {
+    "key": "war_asset_count:040",
+    "name": "War Asset 40",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 40
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192696
+  },
+  {
+    "key": "war_asset_count:041",
+    "name": "War Asset 41",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 41
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192697
+  },
+  {
+    "key": "war_asset_count:042",
+    "name": "War Asset 42",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 42
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192698
+  },
+  {
+    "key": "war_asset_count:043",
+    "name": "War Asset 43",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 43
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192699
+  },
+  {
+    "key": "war_asset_count:044",
+    "name": "War Asset 44",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 44
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192700
+  },
+  {
+    "key": "war_asset_count:045",
+    "name": "War Asset 45",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 45
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192701
+  },
+  {
+    "key": "war_asset_count:046",
+    "name": "War Asset 46",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 46
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192702
+  },
+  {
+    "key": "war_asset_count:047",
+    "name": "War Asset 47",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 47
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192703
+  },
+  {
+    "key": "war_asset_count:048",
+    "name": "War Asset 48",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 48
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192704
+  },
+  {
+    "key": "war_asset_count:049",
+    "name": "War Asset 49",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 49
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192705
+  },
+  {
+    "key": "war_asset_count:050",
+    "name": "War Asset 50",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 50
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192706
+  },
+  {
+    "key": "war_asset_count:051",
+    "name": "War Asset 51",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 51
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192707
+  },
+  {
+    "key": "war_asset_count:052",
+    "name": "War Asset 52",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 52
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192708
+  },
+  {
+    "key": "war_asset_count:053",
+    "name": "War Asset 53",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 53
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192709
+  },
+  {
+    "key": "war_asset_count:054",
+    "name": "War Asset 54",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 54
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192710
+  },
+  {
+    "key": "war_asset_count:055",
+    "name": "War Asset 55",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 55
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192711
+  },
+  {
+    "key": "war_asset_count:056",
+    "name": "War Asset 56",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 56
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192712
+  },
+  {
+    "key": "war_asset_count:057",
+    "name": "War Asset 57",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 57
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192713
+  },
+  {
+    "key": "war_asset_count:058",
+    "name": "War Asset 58",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 58
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192714
+  },
+  {
+    "key": "war_asset_count:059",
+    "name": "War Asset 59",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 59
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192715
+  },
+  {
+    "key": "war_asset_count:060",
+    "name": "War Asset 60",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 60
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192716
+  },
+  {
+    "key": "war_asset_count:061",
+    "name": "War Asset 61",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 61
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192717
+  },
+  {
+    "key": "war_asset_count:062",
+    "name": "War Asset 62",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 62
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192718
+  },
+  {
+    "key": "war_asset_count:063",
+    "name": "War Asset 63",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 63
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192719
+  },
+  {
+    "key": "war_asset_count:064",
+    "name": "War Asset 64",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 64
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192720
+  },
+  {
+    "key": "war_asset_count:065",
+    "name": "War Asset 65",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 65
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192721
+  },
+  {
+    "key": "war_asset_count:066",
+    "name": "War Asset 66",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 66
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192722
+  },
+  {
+    "key": "war_asset_count:067",
+    "name": "War Asset 67",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 67
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192723
+  },
+  {
+    "key": "war_asset_count:068",
+    "name": "War Asset 68",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 68
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192724
+  },
+  {
+    "key": "war_asset_count:069",
+    "name": "War Asset 69",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 69
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192725
+  },
+  {
+    "key": "war_asset_count:070",
+    "name": "War Asset 70",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 70
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192726
+  },
+  {
+    "key": "war_asset_count:071",
+    "name": "War Asset 71",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 71
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192727
+  },
+  {
+    "key": "war_asset_count:072",
+    "name": "War Asset 72",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 72
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192728
+  },
+  {
+    "key": "war_asset_count:073",
+    "name": "War Asset 73",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 73
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192729
+  },
+  {
+    "key": "war_asset_count:074",
+    "name": "War Asset 74",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 74
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192730
+  },
+  {
+    "key": "war_asset_count:075",
+    "name": "War Asset 75",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 75
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192731
+  },
+  {
+    "key": "war_asset_count:076",
+    "name": "War Asset 76",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 76
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192732
+  },
+  {
+    "key": "war_asset_count:077",
+    "name": "War Asset 77",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 77
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192733
+  },
+  {
+    "key": "war_asset_count:078",
+    "name": "War Asset 78",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 78
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192734
+  },
+  {
+    "key": "war_asset_count:079",
+    "name": "War Asset 79",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 79
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192735
+  },
+  {
+    "key": "war_asset_count:080",
+    "name": "War Asset 80",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 80
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192736
+  },
+  {
+    "key": "war_asset_count:081",
+    "name": "War Asset 81",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 81
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192737
+  },
+  {
+    "key": "war_asset_count:082",
+    "name": "War Asset 82",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 82
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192738
+  },
+  {
+    "key": "war_asset_count:083",
+    "name": "War Asset 83",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 83
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192739
+  },
+  {
+    "key": "war_asset_count:084",
+    "name": "War Asset 84",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 84
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192740
+  },
+  {
+    "key": "war_asset_count:085",
+    "name": "War Asset 85",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 85
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192741
+  },
+  {
+    "key": "war_asset_count:086",
+    "name": "War Asset 86",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 86
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192742
+  },
+  {
+    "key": "war_asset_count:087",
+    "name": "War Asset 87",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 87
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192743
+  },
+  {
+    "key": "war_asset_count:088",
+    "name": "War Asset 88",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 88
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192744
+  },
+  {
+    "key": "war_asset_count:089",
+    "name": "War Asset 89",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 89
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192745
+  },
+  {
+    "key": "war_asset_count:090",
+    "name": "War Asset 90",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 90
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192746
+  },
+  {
+    "key": "war_asset_count:091",
+    "name": "War Asset 91",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 91
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192747
+  },
+  {
+    "key": "war_asset_count:092",
+    "name": "War Asset 92",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 92
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192748
+  },
+  {
+    "key": "war_asset_count:093",
+    "name": "War Asset 93",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 93
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192749
+  },
+  {
+    "key": "war_asset_count:094",
+    "name": "War Asset 94",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 94
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192750
+  },
+  {
+    "key": "war_asset_count:095",
+    "name": "War Asset 95",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 95
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192751
+  },
+  {
+    "key": "war_asset_count:096",
+    "name": "War Asset 96",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 96
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192752
+  },
+  {
+    "key": "war_asset_count:097",
+    "name": "War Asset 97",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 97
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192753
+  },
+  {
+    "key": "war_asset_count:098",
+    "name": "War Asset 98",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 98
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192754
+  },
+  {
+    "key": "war_asset_count:099",
+    "name": "War Asset 99",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 99
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192755
+  },
+  {
+    "key": "war_asset_count:100",
+    "name": "War Asset 100",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 100
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192756
+  },
+  {
+    "key": "war_asset_count:101",
+    "name": "War Asset 101",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 101
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192757
+  },
+  {
+    "key": "war_asset_count:102",
+    "name": "War Asset 102",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 102
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192758
+  },
+  {
+    "key": "war_asset_count:103",
+    "name": "War Asset 103",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 103
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192759
+  },
+  {
+    "key": "war_asset_count:104",
+    "name": "War Asset 104",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 104
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192760
+  },
+  {
+    "key": "war_asset_count:105",
+    "name": "War Asset 105",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 105
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192761
+  },
+  {
+    "key": "war_asset_count:106",
+    "name": "War Asset 106",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 106
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192762
+  },
+  {
+    "key": "war_asset_count:107",
+    "name": "War Asset 107",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 107
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192763
+  },
+  {
+    "key": "war_asset_count:108",
+    "name": "War Asset 108",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 108
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192764
+  },
+  {
+    "key": "war_asset_count:109",
+    "name": "War Asset 109",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 109
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192765
+  },
+  {
+    "key": "war_asset_count:110",
+    "name": "War Asset 110",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 110
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192766
+  },
+  {
+    "key": "war_asset_count:111",
+    "name": "War Asset 111",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 111
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192767
+  },
+  {
+    "key": "war_asset_count:112",
+    "name": "War Asset 112",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 112
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192768
+  },
+  {
+    "key": "war_asset_count:113",
+    "name": "War Asset 113",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 113
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192769
+  },
+  {
+    "key": "war_asset_count:114",
+    "name": "War Asset 114",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 114
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192770
+  },
+  {
+    "key": "war_asset_count:115",
+    "name": "War Asset 115",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 115
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192771
+  },
+  {
+    "key": "war_asset_count:116",
+    "name": "War Asset 116",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 116
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192772
+  },
+  {
+    "key": "war_asset_count:117",
+    "name": "War Asset 117",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 117
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192773
+  },
+  {
+    "key": "war_asset_count:118",
+    "name": "War Asset 118",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 118
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192774
+  },
+  {
+    "key": "war_asset_count:119",
+    "name": "War Asset 119",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 119
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192775
+  },
+  {
+    "key": "war_asset_count:120",
+    "name": "War Asset 120",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 120
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192776
+  },
+  {
+    "key": "war_asset_count:121",
+    "name": "War Asset 121",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 121
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192777
+  },
+  {
+    "key": "war_asset_count:122",
+    "name": "War Asset 122",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 122
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192778
+  },
+  {
+    "key": "war_asset_count:123",
+    "name": "War Asset 123",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 123
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192779
+  },
+  {
+    "key": "war_asset_count:124",
+    "name": "War Asset 124",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 124
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192780
+  },
+  {
+    "key": "war_asset_count:125",
+    "name": "War Asset 125",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 125
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192781
+  },
+  {
+    "key": "war_asset_count:126",
+    "name": "War Asset 126",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 126
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192782
+  },
+  {
+    "key": "war_asset_count:127",
+    "name": "War Asset 127",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 127
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192783
+  },
+  {
+    "key": "war_asset_count:128",
+    "name": "War Asset 128",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 128
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192784
+  },
+  {
+    "key": "war_asset_count:129",
+    "name": "War Asset 129",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 129
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192785
+  },
+  {
+    "key": "war_asset_count:130",
+    "name": "War Asset 130",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 130
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192786
+  },
+  {
+    "key": "war_asset_count:131",
+    "name": "War Asset 131",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 131
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192787
+  },
+  {
+    "key": "war_asset_count:132",
+    "name": "War Asset 132",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 132
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192788
+  },
+  {
+    "key": "war_asset_count:133",
+    "name": "War Asset 133",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 133
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192789
+  },
+  {
+    "key": "war_asset_count:134",
+    "name": "War Asset 134",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 134
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192790
+  },
+  {
+    "key": "war_asset_count:135",
+    "name": "War Asset 135",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 135
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192791
+  },
+  {
+    "key": "war_asset_count:136",
+    "name": "War Asset 136",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 136
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192792
+  },
+  {
+    "key": "war_asset_count:137",
+    "name": "War Asset 137",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 137
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192793
+  },
+  {
+    "key": "war_asset_count:138",
+    "name": "War Asset 138",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 138
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192794
+  },
+  {
+    "key": "war_asset_count:139",
+    "name": "War Asset 139",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 139
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192795
+  },
+  {
+    "key": "war_asset_count:140",
+    "name": "War Asset 140",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 140
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192796
+  },
+  {
+    "key": "war_asset_count:141",
+    "name": "War Asset 141",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 141
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192797
+  },
+  {
+    "key": "war_asset_count:142",
+    "name": "War Asset 142",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 142
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192798
+  },
+  {
+    "key": "war_asset_count:143",
+    "name": "War Asset 143",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 143
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192799
+  },
+  {
+    "key": "war_asset_count:144",
+    "name": "War Asset 144",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 144
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192800
+  },
+  {
+    "key": "war_asset_count:145",
+    "name": "War Asset 145",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 145
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192801
+  },
+  {
+    "key": "war_asset_count:146",
+    "name": "War Asset 146",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 146
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192802
+  },
+  {
+    "key": "war_asset_count:147",
+    "name": "War Asset 147",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 147
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192803
+  },
+  {
+    "key": "war_asset_count:148",
+    "name": "War Asset 148",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 148
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192804
+  },
+  {
+    "key": "war_asset_count:149",
+    "name": "War Asset 149",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 149
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192805
+  },
+  {
+    "key": "war_asset_count:150",
+    "name": "War Asset 150",
+    "region": "War Assets",
+    "category": "war_assets",
+    "dlc": "",
+    "detector": {
+      "kind": "gaw_count",
+      "count": 150
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_CONFIG",
+    "source": "research/le3_gaw_assets.csv",
+    "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries.",
+    "id": 1295192806
   }
 ]

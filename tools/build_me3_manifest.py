@@ -107,7 +107,21 @@ def candidates() -> list[dict]:
             "progression_safe": True, "evidence": "DB_ONLY", "source": source["path"],
             "notes": "Named completion state; mandatory-path status and persistence require runtime validation."})
     result.extend(codex())
+    result.extend(war_asset_count())
     return result
+
+
+WAR_ASSET_COUNT_MAX = 150  # keep in step with world options.WarAssetChecks.range_end
+
+
+def war_asset_count() -> list[dict]:
+    """Progressive war-asset checks (D8): "War Asset N" is checked once the career holds N war assets other than the
+    galaxy-map recoveries (those keep their own named checks). Any asset counts, whichever choices the player made."""
+    return [{"key": f"war_asset_count:{n:03}", "name": f"War Asset {n}", "region": "War Assets", "category": "war_assets",
+             "dlc": "", "detector": {"kind": "gaw_count", "count": n}, "progression_safe": False,
+             "evidence": "PACKAGE_AND_CONFIG", "source": "research/le3_gaw_assets.csv",
+             "notes": "Counts SFXGAWAssetsHandler.UnlockedGAWAssets entries outside the exploration recoveries."}
+            for n in range(1, WAR_ASSET_COUNT_MAX + 1)]
 
 
 CODEX_DLC = {"DLC_EXP_Pack001": ("Leviathan", "Leviathan"), "DLC_EXP_Pack002": ("Omega", "Omega"),

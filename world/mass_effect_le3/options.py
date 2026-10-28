@@ -83,6 +83,16 @@ class SalvagePrice(Choice):
     default = 2
 
 
+class WarAssetChecks(Range):
+    """Progressive war-asset checks: "War Asset 1" up to this number. Each war asset or upgrade you gain (any of them,
+    whichever choices you make) moves you one step up the list. Galaxy-map recoveries have their own checks and don't
+    count here. 0 turns these off. These checks never hold progression items."""
+    display_name = "War Asset Checks"
+    range_start = 0
+    range_end = 150
+    default = 80
+
+
 class EnabledDLC(OptionSet):
     """Include mapped pickup sources in the selected official DLC campaigns."""
     display_name = "Enabled DLC"
@@ -102,6 +112,7 @@ class MassEffectLE3Options(PerGameCommonOptions):
     weapon_checks: WeaponChecks
     exploration_checks: ExplorationChecks
     codex_checks: CodexChecks
+    war_asset_checks: WarAssetChecks
     salvage: Salvage
     salvage_price: SalvagePrice
     weapon_items: WeaponItems
@@ -111,7 +122,7 @@ class MassEffectLE3Options(PerGameCommonOptions):
 option_groups = [
     OptionGroup("Goal", [CrucibleIntelTotal, CrucibleIntelRequired]),
     OptionGroup("Checks", [ObjectiveChecks, CreditChecks, SupplyChecks, ArmorChecks, ModChecks, WeaponChecks,
-                           ExplorationChecks, CodexChecks]),
+                           ExplorationChecks, CodexChecks, WarAssetChecks]),
     OptionGroup("Items", [WeaponItems]),
     OptionGroup("Salvage", [Salvage, SalvagePrice]),
     OptionGroup("DLC", [EnabledDLC]),
@@ -119,7 +130,9 @@ option_groups = [
 
 options_presets = {
     "Story Focus": {"crucible_intel_total": 10, "crucible_intel_required": 8, "credit_checks": False,
-                    "supply_checks": False, "exploration_checks": False, "codex_checks": False},
+                    "supply_checks": False, "exploration_checks": False, "codex_checks": False,
+                    "war_asset_checks": 40},
     "Completionist": {"weapon_checks": True, "salvage_price": "500"},
-    "Everything": {"crucible_intel_total": 24, "crucible_intel_required": 20, "weapon_checks": True},
+    "Everything": {"crucible_intel_total": 24, "crucible_intel_required": 20, "weapon_checks": True,
+                   "war_asset_checks": 110},
 }

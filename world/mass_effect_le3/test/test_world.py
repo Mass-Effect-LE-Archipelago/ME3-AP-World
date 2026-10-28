@@ -11,8 +11,9 @@ from ..world import MassEffectLE3World
 class TestWorldGeneration(unittest.TestCase):
     def test_default_and_maximum_categories(self):
         # 3 Earth-prologue sources are dropped: the open start skips the prologue (data.SKIPPED_REGIONS).
-        # 66 codex checks are on by default.
-        for options, count in (({}, 565), ({"weapon_checks": True}, 590), ({"codex_checks": False}, 499)):
+        # 66 codex checks and 80 progressive war-asset checks are on by default.
+        for options, count in (({}, 645), ({"weapon_checks": True}, 670), ({"codex_checks": False, "war_asset_checks": 0}, 499),
+                               ({"war_asset_checks": 150}, 715)):
             with self.subTest(options=options):
                 world = setup_multiworld(MassEffectLE3World, gen_steps, 17, options)
                 self.assertEqual(len(world.get_unfilled_locations()), count)
@@ -50,7 +51,7 @@ class TestWorldGeneration(unittest.TestCase):
             self.assertTrue(world.get_region(name, 1).can_reach(world.state))
 
     def test_missables_are_excluded_from_progression(self):
-        world = setup_multiworld(MassEffectLE3World, gen_steps, 5, {"weapon_checks": True})
+        world = setup_multiworld(MassEffectLE3World, gen_steps, 5, {"weapon_checks": True, "war_asset_checks": 150})
         for entry in data.LOCATIONS:
             if entry.region in data.SKIPPED_REGIONS:
                 continue
@@ -58,8 +59,9 @@ class TestWorldGeneration(unittest.TestCase):
                 self.assertEqual(world.get_location(entry.name, 1).progress_type, LocationProgressType.EXCLUDED)
 
     def test_option_boundaries_fill_and_reach_goal(self):
-        minimal = {key: False for key in ("objective_checks", "credit_checks", "supply_checks", "armor_checks", "mod_checks", "weapon_checks", "exploration_checks")}
+        minimal = {key: False for key in ("objective_checks", "credit_checks", "supply_checks", "armor_checks", "mod_checks", "weapon_checks", "exploration_checks", "codex_checks")}
         minimal["enabled_dlc"] = []
+        minimal["war_asset_checks"] = 0
         option_sets = [{}, {"weapon_checks": True}, minimal,
                        {"crucible_intel_total": 1, "crucible_intel_required": 24},
                        {"crucible_intel_total": 24, "crucible_intel_required": 24, "enabled_dlc": []}]

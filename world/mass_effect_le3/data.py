@@ -81,6 +81,8 @@ _manifest_text = files(__package__).joinpath("locations.json").read_text(encodin
 MANIFEST_HASH = hashlib.sha256(_manifest_text.encode("utf-8")).hexdigest()
 LOCATIONS = tuple(LocationData(**entry) for entry in json.loads(_manifest_text))
 BY_ID = {entry.id: entry for entry in LOCATIONS}
+# Galaxy-map recoveries have named checks, so the progressive "War Asset N" checks (D8) don't count them.
+EXPLORATION_ASSET_IDS = frozenset(entry.detector["asset_id"] for entry in LOCATIONS if entry.detector["kind"] == "gaw_asset")
 BY_KEY = {entry.key: entry for entry in LOCATIONS}
 LOCATION_NAME_TO_ID = {entry.name: entry.id for entry in LOCATIONS}
 LOCATION_NAME_GROUPS = {category: {entry.name for entry in LOCATIONS if entry.category == category}

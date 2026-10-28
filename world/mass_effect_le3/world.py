@@ -32,6 +32,8 @@ def included(options: MassEffectLE3Options, entry: data.LocationData) -> bool:
     switch = {"objectives": "objective_checks", "credits": "credit_checks", "supplies": "supply_checks",
               "armor": "armor_checks", "mods": "mod_checks", "weapons": "weapon_checks", "exploration": "exploration_checks",
               "codex": "codex_checks"}
+    if entry.category == "war_assets":
+        return entry.detector["count"] <= options.war_asset_checks.value
     return bool(getattr(options, switch[entry.category])) if entry.category in switch else True
 
 

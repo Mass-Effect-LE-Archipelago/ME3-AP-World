@@ -72,6 +72,10 @@ class TestClientCore(unittest.TestCase):
         self.assertEqual(observed_locations(state, {use.id}), {use.id})
         self.assertEqual(observed_locations(state, {use.id, recovery.id}), {use.id, recovery.id})
         self.assertFalse(observed_locations(GameSnapshot(), {use.id, recovery.id}))
+        second = data.BY_ID[data.LOCATION_NAME_TO_ID["War Asset 2"]]
+        explored = next(iter(data.EXPLORATION_ASSET_IDS))
+        self.assertFalse(observed_locations(GameSnapshot(gaw_assets=frozenset({explored, 9001})), {second.id}))
+        self.assertEqual(observed_locations(GameSnapshot(gaw_assets=frozenset({explored, 9001, 9002})), {second.id}), {second.id})
         rannoch = data.BY_ID[data.LOCATION_NAME_TO_ID["Codex: The Battle of Rannoch"]]
         self.assertEqual(observed_locations(GameSnapshot(bools={rannoch.detector["indices"][-1]: True}), {rannoch.id}), {rannoch.id})
         self.assertFalse(observed_locations(GameSnapshot(bools={rannoch.detector["indices"][0]: False}), {rannoch.id}))
