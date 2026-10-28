@@ -1,8 +1,8 @@
-"""Live-development ItemBridge over the native pipe (first live run, 2026-10-27).
+"""Live ItemBridge over the native pipe (first live run 2026-10-27; default client mode since 0.1.0).
 
 Implements client_core.ItemBridge with the 0.2.2 delivery-development contract:
 DEV_SESSION/DEV_BIND/DEV_TXN/DEV_GATE plus the read commands. A career is bound only
-when it is unbound AND binding was explicitly allowed; it is bound to the seed identity
+when it is unbound AND the mod's open start marked it (or binding was explicitly forced); it is bound to the seed identity
 and the slot's resolved history digest, with the slot's intel requirement for the
 Cronos Station/Earth landing gate. A career bound to anything else is refused.
 """
@@ -16,6 +16,7 @@ from .client_core import BridgeError, GameSnapshot, IdentityMismatch, SaveSessio
 from .delivery_client import PipeConnection
 
 HEX = re.compile(r"[0-9a-f]{64}")
+AP_CAREER_BOOL = 26085  # set by the mod's open start (le3mod ApCareerBool)
 NEEDED = {"delivery_dev", "DEV_SESSION", "DEV_BIND", "DEV_TXN", "DEV_GATE", "LANDING_GATE", "WEAPONS",
           "GETBS", "GETIS", "USES", "GAW", "SALVAGE"}
 
@@ -43,9 +44,11 @@ class LivePipeBridge:
                 raise UnsupportedFeature(f"Installed bridge lacks {sorted(missing)}; install bridge 0.2.2 delivery-dev")
             identity, history, cursor = self._session(pipe)
             if identity is None:
-                if not self.allow_bind:
-                    raise IdentityMismatch("This career is not linked to a seed; start the client with --bind-new-career "
-                                           "after importing the seed's ME2 save")
+                # Only careers the mod's open start marked (plot bool AP_CAREER_BOOL) are linked, unless forced.
+                marked = pipe.request(f"GETBS {AP_CAREER_BOOL}").split() == ["1"]
+                if not (marked or self.allow_bind):
+                    raise IdentityMismatch("This career wasn't started with the Archipelago mod. Start a New Career in ME3 and "
+                                           "import the Archipelago ME2 save the client created")
                 pipe.request(f"DEV_BIND {self.identity} {self.history} RESEARCH_ONLY {self.intel_required}")
                 identity, history, cursor = self._session(pipe)
             gate = pipe.request("DEV_GATE").split()

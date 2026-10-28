@@ -1,30 +1,13 @@
-"""ME2 LE .pcsav checksum: CRC-32/BZIP2 of every byte before the trailing 4-byte little-endian value.
+"""Shim: the ME2 save code lives in the world (world/mass_effect_le3/me2save/checksum.py) so the client can use it.
+Loaded as a standalone package so research scripts don't need Archipelago installed."""
+import importlib
+import importlib.util
+import sys
+from pathlib import Path
 
-Identified 2026-10-24 by matching all owner-supplied ME2 LE saves (see research/me2_save_format.md).
-"""
-from __future__ import annotations
-
-import struct
-
-_TABLE = []
-for _i in range(256):
-    _c = _i << 24
-    for _ in range(8):
-        _c = ((_c << 1) ^ 0x04C11DB7) & 0xFFFFFFFF if _c & 0x80000000 else (_c << 1) & 0xFFFFFFFF
-    _TABLE.append(_c)
-
-
-def crc32_bzip2(data: bytes) -> int:
-    crc = 0xFFFFFFFF
-    for byte in data:
-        crc = _TABLE[((crc >> 24) ^ byte) & 0xFF] ^ ((crc << 8) & 0xFFFFFFFF)
-    return crc ^ 0xFFFFFFFF
-
-
-def verify(save: bytes) -> bool:
-    return len(save) > 4 and struct.unpack_from("<I", save, len(save) - 4)[0] == crc32_bzip2(save[:-4])
-
-
-def seal(body: bytes) -> bytes:
-    """Return body plus its checksum; body must not already carry one."""
-    return body + struct.pack("<I", crc32_bzip2(body))
+if "le3_me2save" not in sys.modules:
+    _home = Path(__file__).resolve().parents[2] / "world/mass_effect_le3/me2save"
+    _spec = importlib.util.spec_from_file_location("le3_me2save", _home / "__init__.py", submodule_search_locations=[str(_home)])
+    sys.modules["le3_me2save"] = importlib.util.module_from_spec(_spec)
+    _spec.loader.exec_module(sys.modules["le3_me2save"])
+sys.modules[__name__] = importlib.import_module("le3_me2save.checksum")

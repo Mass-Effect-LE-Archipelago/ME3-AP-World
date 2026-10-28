@@ -65,10 +65,25 @@ class ME3Context(CommonContext):
                 logger.error("Unsupported ME3 slot data or a different source manifest; use the matching apworld")
                 return
             self.slot_config = config
+            if self.live_dev:
+                asyncio.create_task(self.prepare_import_save(config["history"]))
             # Server checked state is authoritative; a failed/uncertain send is
             # retried after reconnect rather than suppressed by a local ledger.
             self.reported = set(self.checked_locations)
             self._state = None
+
+    async def prepare_import_save(self, history: dict) -> None:
+        """Write this slot's ME2 import save (once per history) as a new ME2 career for the ME3 creator to import."""
+        from .me2save.import_save import ensure_import_career
+        try:
+            path, created = await asyncio.to_thread(ensure_import_career, history, history_digest(history))
+        except Exception as error:  # a missing/unreadable ME2 save must not stop the client
+            logger.warning(f"Could not write the ME2 import save: {error}. Finish ME2 LE once (or copy any finished ME2 "
+                           "save into your ME2 save folder) and reconnect.")
+            return
+        career = path.parent.name
+        logger.info(f"ME2 import career for this seed: '{career}'{' (just created)' if created else ''}. "
+                    "For a new run: ME3 > New Career > Import ME2 Career > that career.")
 
     async def poll_game(self):
         actual_seed = self.room_seed_name or getattr(self, "server_seed_name", None)
@@ -119,10 +134,8 @@ class ME3Context(CommonContext):
 
 async def _main(args: argparse.Namespace):
     ctx = ME3Context(args.connect, args.password, delivery_test=args.delivery_test,
-                     bind_research_save=args.bind_research_save, live_dev=args.live_dev,
+                     bind_research_save=args.bind_research_save, live_dev=not args.delivery_test,
                      bind_new_career=args.bind_new_career)
-    if args.live_dev:
-        logger.warning("LIVE DEVELOPMENT RUN: items, checks and goal are live on the linked career (bridge 0.2.2 delivery-dev)")
     if args.delivery_test:
         logger.warning("RESEARCH DELIVERY ONLY: no Shepard preset initialization, mission unlocks, checks or goal reporting")
     ctx.auth = args.name
@@ -141,20 +154,17 @@ async def _main(args: argparse.Namespace):
 
 
 def launch(*launch_args: str):
-    parser = get_base_parser(description="Mass Effect Legendary Edition 3 experimental AP client")
+    parser = get_base_parser(description="Mass Effect Legendary Edition 3 Archipelago client")
     parser.add_argument("--name", help="Archipelago slot name")
     parser.add_argument("--delivery-test", action="store_true", help="Receive items through the development bridge; never report checks/goals")
     parser.add_argument("--bind-research-save", action="store_true", help="Explicitly allow binding an unbound disposable save in delivery-test mode")
-    parser.add_argument("--live-dev", action="store_true",
-                        help="First live run: deliver items and report checks/goal through the delivery-dev bridge")
+    parser.add_argument("--live-dev", action="store_true", help="Accepted for older shortcuts; live play is the default")
     parser.add_argument("--bind-new-career", action="store_true",
-                        help="With --live-dev: link an unlinked career (the imported seed save) to this slot")
+                        help="Also link an unlinked career the mod did not mark (development only)")
     parser.add_argument("url", nargs="?")
     args = handle_url_arg(parser.parse_args(launch_args or None), parser)
     if args.bind_research_save and not args.delivery_test:
         parser.error("--bind-research-save requires --delivery-test")
-    if args.bind_new_career and not args.live_dev:
-        parser.error("--bind-new-career requires --live-dev")
     if args.live_dev and args.delivery_test:
         parser.error("--live-dev and --delivery-test are separate modes")
     Utils.init_logging("ME3Client", exception_logger="Client")

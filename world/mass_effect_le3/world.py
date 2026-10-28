@@ -40,7 +40,6 @@ class MassEffectLE3World(World):
     transactions and finale enforcement are not ready for a playable release.
     """
     game = data.GAME_NAME
-    hidden = True
     web = ME3WebWorld()
     options_dataclass = MassEffectLE3Options
     options: MassEffectLE3Options
@@ -106,7 +105,7 @@ class MassEffectLE3World(World):
 
     def fill_slot_data(self) -> dict:
         return {"slot_data_version": data.SCHEMA_VERSION, "client_protocol": 1, "manifest_hash": data.MANIFEST_HASH,
-                "implementation_status": "experimental_not_playable", "history": data.HISTORY.copy(),
+                "implementation_status": "beta", "history": data.HISTORY.copy(),
                 "crucible_intel_total": self.intel_total, "crucible_intel_required": self.intel_required,
                 "weapon_items": bool(self.options.weapon_items),
                 "salvage": bool(self.options.salvage), "salvage_price": self.options.salvage_price.value,

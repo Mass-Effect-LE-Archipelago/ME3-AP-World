@@ -108,6 +108,9 @@ static class Program
         else KismetHelper.CreateNewOutputLink(from, output, to);
     }
 
+    // Plot bool set on the open start (just before the Normandy transition): an Archipelago career.
+    const int ApCareerBool = 26085;
+
     static int OpenStart(string bioGame, string cooked)
     {
         var source = Winner(bioGame, "BioP_Char.pcc");
@@ -147,6 +150,14 @@ static class Program
             var kaidan = Transition(KaidanJoins);
             var james = Transition(JamesJoins);
             var liara = Transition(LiaraNotSelectable);
+            // Marks the career as an Archipelago open start; the client only links careers that have it.
+            var marker = Create("SeqAct_SetBool");
+            var markerVar = Create("BioSeqVar_StoryManagerBool");
+            markerVar.WriteProperty(new IntProperty(ApCareerBool, "m_nIndex"));
+            var trueVar = Create("SeqVar_Bool");
+            trueVar.WriteProperty(new IntProperty(1, "bValue"));
+            KismetHelper.CreateVariableLink(marker, "Target", markerVar);
+            KismetHelper.CreateVariableLink(marker, "Value", trueVar);
             var normandy = Create("BioSeqAct_AreaTransition");
             normandy.WriteProperty(new NameProperty("BioP_Nor", "AreaName"));
             links[trueIdx].Clear();
@@ -157,7 +168,8 @@ static class Program
             Link(ashley, "Out", james);
             Link(kaidan, "Out", james);
             Link(james, "Out", liara);
-            Link(liara, "Out", normandy);
+            Link(liara, "Out", marker);
+            Link(marker, "Out", normandy);
             SavePackage(pcc, outPcc);
         }
         if (FixInlineBulkOffsets(source, outPcc) != 0) return 1;
@@ -172,12 +184,16 @@ static class Program
             int Id(ExportEntry n) => n?.GetProperty<IntProperty>("m_nIndex")?.Value ?? -1;
             var a = sLinks[sNames.IndexOf("True")].Single().LinkedOp as ExportEntry;
             var k = sLinks[sNames.IndexOf("False")].Single().LinkedOp as ExportEntry;
-            var ja = Follow(a); var jk = Follow(k); var li = Follow(ja); var area = Follow(li);
+            var ja = Follow(a); var jk = Follow(k); var li = Follow(ja); var mark = Follow(li); var area = Follow(mark);
+            var markTarget = KismetHelper.GetVariableLinksOfNode(mark).Where(v => v.LinkDesc == "Target").SelectMany(v => v.LinkedNodes).OfType<ExportEntry>().SingleOrDefault();
+            var markValue = KismetHelper.GetVariableLinksOfNode(mark).Where(v => v.LinkDesc == "Value").SelectMany(v => v.LinkedNodes).OfType<ExportEntry>().SingleOrDefault();
             bool ok = survivor.ClassName == "BioSeqAct_PMCheckState" && Id(survivor) == RescuedAshBool
                 && Id(a) == AshleyJoins && Id(k) == KaidanJoins && ja == jk && Id(ja) == JamesJoins && Id(li) == LiaraNotSelectable
+                && mark.ClassName == "SeqAct_SetBool" && markTarget?.ClassName == "BioSeqVar_StoryManagerBool" && Id(markTarget) == ApCareerBool
+                && markValue?.GetProperty<IntProperty>("bValue")?.Value == 1
                 && area?.ClassName == "BioSeqAct_AreaTransition" && area.GetProperty<NameProperty>("AreaName")?.Value.Instanced == "BioP_Nor"
                 && pcc.FindExport(ProEarArea).GetProperty<NameProperty>("AreaName")?.Value.Instanced == "Biop_ProEar";
-            Console.WriteLine($"validate: ME2_Import True -> S{Id(survivor)} ? T{Id(a)} : T{Id(k)} -> T{Id(ja)} -> T{Id(li)} -> {area?.GetProperty<NameProperty>("AreaName")?.Value.Instanced}");
+            Console.WriteLine($"validate: ME2_Import True -> S{Id(survivor)} ? T{Id(a)} : T{Id(k)} -> T{Id(ja)} -> T{Id(li)} -> set B{Id(markTarget)} -> {area?.GetProperty<NameProperty>("AreaName")?.Value.Instanced}");
             if (!ok) { Console.Error.WriteLine("validation FAILED; staging left unchanged"); return 1; }
         }
         Console.WriteLine($"Earth skipped for imported careers (source {source})");
@@ -862,6 +878,13 @@ static class Program
                 }
                 catch (Exception) { }
             }
+            return 0;
+        }
+        if (args.Length == 2 && args[0] == "methods")
+        {
+            var t = typeof(MEPackageHandler).Assembly.GetType(args[1]);
+            foreach (var m in t.GetMethods().Where(m => m.IsStatic).OrderBy(m => m.Name))
+                Console.WriteLine($"{m.Name}({string.Join(", ", m.GetParameters().Select(p => p.ParameterType.Name + " " + p.Name))})");
             return 0;
         }
         if (args.Length == 2 && args[0] == "types")

@@ -81,6 +81,12 @@ class LiveBridgeTests(unittest.TestCase):
             synchronize(self.bridge(allow_bind=False), self.identity, data.HISTORY, set(), [], 2)
         self.assertIsNone(self.pipe.identity)
 
+    def test_marked_career_links_without_the_force_flag(self):
+        from ..live_bridge import AP_CAREER_BOOL
+        self.pipe.bools[AP_CAREER_BOOL] = True
+        synchronize(self.bridge(allow_bind=False), self.identity, data.HISTORY, set(), [], 2)
+        self.assertEqual((self.pipe.identity, self.pipe.required), (self.identity, 2))
+
     def test_foreign_career_and_old_bridge_refused(self):
         self.pipe.identity, self.pipe.history = "a" * 64, self.history
         with self.assertRaises(IdentityMismatch):
