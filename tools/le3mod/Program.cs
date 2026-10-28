@@ -641,6 +641,9 @@ static class Program
             using var pcc = MEPackageHandler.OpenMEPackage(File.Exists(args[2]) ? args[2] : Winner(Path.GetFullPath(args[1]), args[2]), forceLoadFromDisk: true);
             var e = pcc.FindExport(args[3]);
             foreach (var prop in e.GetProperties()) Console.WriteLine($"{prop.GetType().Name} {prop.Name.Instanced} = {prop switch { IntProperty i => i.Value.ToString(), NameProperty n => n.Value.Instanced, StrProperty st => st.Value, BoolProperty b => b.Value.ToString(), ObjectProperty o => pcc.GetEntry(o.Value)?.InstancedFullPath, EnumProperty en => en.EnumType.Instanced + "::" + en.Value.Instanced, _ => prop.ToString() }}");
+            foreach (var arr in e.GetProperties().OfType<ArrayProperty<StructProperty>>())
+                for (int i = 0; i < arr.Count; i++)
+                    Console.WriteLine($"  {arr.Name.Instanced}[{i}] " + string.Join(" ", arr[i].Properties.Select(sp => $"{sp.Name.Instanced}={sp switch { IntProperty x => x.Value.ToString(), NameProperty x => x.Value.Instanced, StrProperty x => x.Value, BoolProperty x => x.Value.ToString(), FloatProperty x => x.Value.ToString(), StringRefProperty x => x.Value.ToString(), EnumProperty x => x.Value.Instanced, ArrayProperty<IntProperty> x => "[" + string.Join(",", x.Select(v => v.Value)) + "]", ArrayProperty<NameProperty> x => "[" + string.Join(",", x.Select(v => v.Value.Instanced)) + "]", _ => sp.GetType().Name }}")));
             Console.WriteLine(Describe(e));
             return 0;
         }
@@ -652,6 +655,23 @@ static class Program
                 Console.WriteLine(e.InstancedFullPath + " :: " + Describe(e));
                 foreach (var prop in e.GetProperties().Where(p => p.Name.Instanced is not ("ObjPosX" or "ObjPosY" or "ParentSequence" or "OutputLinks" or "VariableLinks" or "InputLinks" or "ObjInstanceVersion" or "m_aObjComment")))
                     Console.WriteLine($"   {prop.Name.Instanced} = {prop switch { IntProperty i => i.Value.ToString(), NameProperty n => n.Value.Instanced, StrProperty st => st.Value, BoolProperty b => b.Value.ToString(), ObjectProperty o => pcc.GetEntry(o.Value)?.InstancedFullPath, ArrayProperty<ObjectProperty> a => string.Join(",", a.Select(x => pcc.GetEntry(x.Value)?.InstancedFullPath)), _ => prop.GetType().Name }}");
+            }
+            return 0;
+        }
+        if (args.Length == 3 && args[0] == "align")
+        {
+            // align <vanilla> <ours>: inline bulk data start (offset value) modulo 16/2048 for Wwise banks
+            foreach (var path in new[] { args[1], args[2] })
+            {
+                using var pcc = MEPackageHandler.OpenMEPackage(path, forceLoadFromDisk: true);
+                var mods = new List<string>();
+                foreach (var e in pcc.Exports.Where(x => x.ClassName == "WwiseBank").Take(12))
+                {
+                    var d = e.Data;
+                    for (int i = 0; i + 4 <= d.Length; i++)
+                        if (BitConverter.ToInt32(d, i) == e.DataOffset + i + 4) { mods.Add($"{(e.DataOffset + i + 4) % 16}/{(e.DataOffset + i + 4) % 2048}"); break; }
+                }
+                Console.WriteLine($"{Path.GetFileName(Path.GetDirectoryName(Path.GetDirectoryName(path)))}: {string.Join(" ", mods)}");
             }
             return 0;
         }
