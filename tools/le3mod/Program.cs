@@ -359,6 +359,47 @@ static class Program
         return 0;
     }
 
+    // Rannoch peace (research/le3_rannoch_peace.md): the "Nobody else dies today" lines (replies 62/81, Paragon C121) and
+    // their Renegade twins (60/79, C127) need a reputation check, and the success entries 64/82 need a peace score of 5
+    // (C156 param 5). All six point at vanilla conditional 13 (Bool true), so peace is always offered and always works.
+    const string PeaceFile = "BioD_Gth002_400Resolution_LOC_INT.pcc";
+    const string PeaceConversation = "gth002_bigchoice_m_dlg";
+    static readonly (string List, int Index, int Vanilla)[] PeaceNodes =
+        [("m_ReplyList", 60, 127), ("m_ReplyList", 62, 121), ("m_ReplyList", 79, 127), ("m_ReplyList", 81, 121),
+         ("m_EntryList", 64, 156), ("m_EntryList", 82, 156)];
+    const int AlwaysTrueConditional = 13;
+
+    static int RannochPeace(string bioGame, string cooked)
+    {
+        var source = Winner(bioGame, PeaceFile);
+        var outPcc = Path.Combine(cooked, PeaceFile);
+        using (var pcc = MEPackageHandler.OpenMEPackage(source, forceLoadFromDisk: true))
+        {
+            var convo = pcc.Exports.SingleOrDefault(e => e.ClassName == "BioConversation" && e.ObjectName.Instanced == PeaceConversation);
+            if (convo == null) { Console.Error.WriteLine("refusing: no " + PeaceConversation + " in " + source); return 1; }
+            var lists = new Dictionary<string, ArrayProperty<StructProperty>>
+                { ["m_ReplyList"] = convo.GetProperty<ArrayProperty<StructProperty>>("m_ReplyList"), ["m_EntryList"] = convo.GetProperty<ArrayProperty<StructProperty>>("m_EntryList") };
+            foreach (var (list, index, vanilla) in PeaceNodes)
+            {
+                var node = lists[list][index];
+                if (node.GetProp<IntProperty>("nConditionalFunc")?.Value != vanilla || node.GetProp<BoolProperty>("bFireConditional")?.Value != true)
+                { Console.Error.WriteLine($"refusing: {list}[{index}] is not vanilla C{vanilla}"); return 1; }
+                node.GetProp<IntProperty>("nConditionalFunc").Value = AlwaysTrueConditional;
+            }
+            foreach (var (name, list) in lists) convo.WriteProperty(list);
+            SavePackage(pcc, outPcc);
+        }
+        if (FixInlineBulkOffsets(source, outPcc) != 0) return 1;
+        using (var pcc = MEPackageHandler.OpenMEPackage(outPcc, forceLoadFromDisk: true))
+        {
+            var convo = pcc.Exports.Single(e => e.ClassName == "BioConversation" && e.ObjectName.Instanced == PeaceConversation);
+            var got = PeaceNodes.Select(n => convo.GetProperty<ArrayProperty<StructProperty>>(n.List)[n.Index].GetProp<IntProperty>("nConditionalFunc")?.Value).ToList();
+            Console.WriteLine($"validate: Rannoch peace nodes -> C{string.Join(",C", got)}");
+            if (got.Any(c => c != AlwaysTrueConditional)) { Console.Error.WriteLine("validation FAILED: Rannoch peace"); return 1; }
+        }
+        return 0;
+    }
+
     // Every conditional and TLK string the DLC adds, written once by Build.
     static readonly Dictionary<int, string> Conditionals = [];
     static readonly Dictionary<int, string> Strings = [];
@@ -552,6 +593,7 @@ static class Program
         if (Cutscenes(bioGame, cooked) != 0) return 1;
         if (MarsWeapons(bioGame, cooked) != 0) return 1;
         if (Salvage(bioGame, cooked) != 0) return 1;
+        if (RannochPeace(bioGame, cooked) != 0) return 1;
         // One CND for the whole DLC (LE3 loads Conditionals<DLC folder>.cnd by name); every entry must round-trip.
         var cnd = new CNDFile { ConditionalEntries = [] };
         foreach (var (id, expression) in Conditionals.OrderBy(kv => kv.Key))
