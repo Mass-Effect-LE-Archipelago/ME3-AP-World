@@ -600,6 +600,86 @@ static class Program
         return 0;
     }
 
+    // boolsetters <BioGame> <bools.txt> <out.tsv>: every runtime-winning package that can set one of the listed plot
+    // bools, through a plot transition (Kismet PMExecuteTransition, conversation entry/reply) or a direct Kismet
+    // SetBool on a story-manager bool. Transitions come from every mounted BioStateEventMap (base + DLC startups).
+    static int BoolSetters(string bioGame, string boolList, string output)
+    {
+        var wanted = File.ReadAllLines(boolList).Select(l => l.Trim()).Where(l => l.Length > 0).Select(int.Parse).ToHashSet();
+        var setters = new Dictionary<int, HashSet<int>>();  // transition id -> wanted bools it sets true
+        var maps = Directory.EnumerateFiles(bioGame, "*.pcc", SearchOption.AllDirectories)
+            .Where(f => Path.GetFileName(f).Equals("SFXGameInfoSP_SF.pcc", StringComparison.OrdinalIgnoreCase)
+                        || (Path.GetFileName(f).StartsWith("Startup_", StringComparison.OrdinalIgnoreCase) && f.EndsWith("_INT.pcc", StringComparison.OrdinalIgnoreCase)));
+        foreach (var f in maps)
+        {
+            using var pcc = MEPackageHandler.OpenMEPackage(f, forceLoadFromDisk: true);
+            foreach (var e in pcc.Exports.Where(e => e.ClassName == "BioStateEventMap"))
+                foreach (var ev in LegendaryExplorerCore.Unreal.BinaryConverters.ObjectBinary.From<LegendaryExplorerCore.Unreal.BinaryConverters.BioStateEventMap>(e).StateEvents)
+                    foreach (var el in ev.Elements)
+                    {
+                        int b = el switch
+                        {
+                            LegendaryExplorerCore.Unreal.BinaryConverters.BioStateEventMap.BioStateEventElementBool x when x.NewState || x.UseParam => x.GlobalBool,
+                            LegendaryExplorerCore.Unreal.BinaryConverters.BioStateEventMap.BioStateEventElementSubstate x when x.NewState || x.UseParam => x.GlobalBool,
+                            _ => -1
+                        };
+                        if (wanted.Contains(b)) (setters.TryGetValue(ev.ID, out var hs) ? hs : setters[ev.ID] = []).Add(b);
+                    }
+        }
+        Console.WriteLine($"{setters.Count} transitions set a listed bool");
+        using var w = new StreamWriter(output);
+        w.WriteLine("package	bool	via	object");
+        var names = Directory.EnumerateFiles(bioGame, "*.pcc", SearchOption.AllDirectories).Select(Path.GetFileName)
+            .Where(n => !n.Contains("_LOC_", StringComparison.OrdinalIgnoreCase) || n.EndsWith("_LOC_INT.pcc", StringComparison.OrdinalIgnoreCase)).Distinct(StringComparer.OrdinalIgnoreCase).Order().ToList();
+        int done = 0;
+        foreach (var name in names)
+        {
+            if (++done % 250 == 0) Console.WriteLine($"{done}/{names.Count}");
+            var source = Winner(bioGame, name);
+            if (source == null) continue;
+            IMEPackage pcc;
+            try
+            {
+                pcc = MEPackageHandler.UnsafePartialLoad(source, e => e.ClassName is "BioSeqAct_PMExecuteTransition" or "BioConversation" or "SeqAct_SetBool" or "BioSeqVar_StoryManagerBool");
+            }
+            catch (Exception ex) { Console.WriteLine($"skip {name}: {ex.Message}"); continue; }
+            using (pcc)
+            {
+                void Hit(int transition, string via, ExportEntry e)
+                {
+                    if (setters.TryGetValue(transition, out var bools))
+                        foreach (var b in bools) w.WriteLine($"{name}	{b}	{via} {transition}	{e.InstancedFullPath}");
+                }
+                foreach (var e in pcc.Exports)
+                {
+                    try
+                    {
+                        switch (e.ClassName)
+                        {
+                            case "BioSeqAct_PMExecuteTransition":
+                                if (e.GetProperty<IntProperty>("m_nIndex") is { } t) Hit(t.Value, "kismet", e);
+                                break;
+                            case "BioConversation":
+                                foreach (var list in new[] { "m_EntryList", "m_ReplyList" })
+                                    if (e.GetProperty<ArrayProperty<StructProperty>>(list) is { } nodes)
+                                        foreach (var n in nodes)
+                                            if (n.GetProp<IntProperty>("nStateTransition") is { Value: >= 0 } st) Hit(st.Value, "conversation", e);
+                                break;
+                            case "SeqAct_SetBool":
+                                foreach (var v in KismetHelper.GetVariableLinksOfNode(e).Where(v => v.LinkDesc == "Target"))
+                                    foreach (var x in v.LinkedNodes.OfType<ExportEntry>().Where(x => x.ClassName == "BioSeqVar_StoryManagerBool"))
+                                        if (x.GetProperty<IntProperty>("m_nIndex") is { } bi && wanted.Contains(bi.Value))
+                                            w.WriteLine($"{name}	{bi.Value}	setbool	{e.InstancedFullPath}");
+                                break;
+                        }
+                    }
+                    catch (Exception) { }
+                }
+            }
+        }
+        return 0;
+    }
+
     static int Main(string[] args)
     {
         var oodle = Environment.GetEnvironmentVariable("LE3_OODLE_DLL")
@@ -622,6 +702,39 @@ static class Program
             using var fs = File.OpenRead(args[1]);
             foreach (var (name, xml) in LegendaryExplorerCore.Coalesced.CoalescedConverter.DecompileGame3ToMemory(fs))
                 Console.WriteLine($"=== {name}\n{xml}");
+            return 0;
+        }
+        if (args.Length == 4 && args[0] == "boolsetters") return BoolSetters(Path.GetFullPath(args[1]), args[2], args[3]);
+        if (args.Length == 2 && args[0] == "sefuncs")
+        {
+            using var pcc = MEPackageHandler.OpenMEPackage(args[1], forceLoadFromDisk: true);
+            foreach (var e in pcc.Exports.Where(e => e.ClassName == "BioStateEventMap"))
+            {
+                var m = LegendaryExplorerCore.Unreal.BinaryConverters.ObjectBinary.From<LegendaryExplorerCore.Unreal.BinaryConverters.BioStateEventMap>(e);
+                Console.WriteLine($"{m.StateEvents.Count} events; " + string.Join(", ", m.StateEvents.SelectMany(v => v.Elements).GroupBy(x => x.Type).Select(g => $"{g.Key}={g.Count()}")));
+                foreach (var g in m.StateEvents.SelectMany(v => v.Elements).OfType<LegendaryExplorerCore.Unreal.BinaryConverters.BioStateEventMap.BioStateEventElementFunction>().GroupBy(f => f.ClassName.Instanced + "." + f.FunctionName.Instanced))
+                    Console.WriteLine($"  {g.Count(),5} {g.Key}");
+            }
+            foreach (var e in pcc.Exports.Where(e => e.ClassName == "BioCodexMap"))
+            {
+                var c = LegendaryExplorerCore.Unreal.BinaryConverters.ObjectBinary.From<LegendaryExplorerCore.Unreal.BinaryConverters.BioCodexMap>(e);
+                Console.WriteLine($"codex {c.Sections.Count} sections {c.Pages.Count} pages");
+                foreach (var pg in c.Pages) Console.WriteLine("  " + string.Join(" ", pg.GetType().GetFields().Concat<System.Reflection.MemberInfo>(pg.GetType().GetProperties()).Select(f => f.Name + "=" + (f is System.Reflection.FieldInfo fi ? fi.GetValue(pg) : ((System.Reflection.PropertyInfo)f).GetValue(pg)))));
+            }
+            return 0;
+        }
+        if (args.Length >= 3 && args[0] == "tlk")
+        {
+            // tlk <file.tlk>[;<file2.tlk>...] <strref>...: first file that has the string wins
+            var files = args[1].Split(';').Select(f => new LegendaryExplorerCore.TLK.ME2ME3.ME2ME3TalkFile(f)).ToList();
+            foreach (var id in args.Skip(2).Select(int.Parse))
+                Console.WriteLine(id + "\t" + (files.Select(f => f.FindDataById(id)).FirstOrDefault(x => x != null && x != "No Data") ?? "").Replace("\n", " ").Replace("\t", " "));
+            return 0;
+        }
+        if (args.Length == 2 && args[0] == "types")
+        {
+            foreach (var t in typeof(MEPackageHandler).Assembly.GetTypes().Where(t => System.Text.RegularExpressions.Regex.IsMatch(t.FullName ?? "", args[1])))
+                Console.WriteLine(t.FullName + " : " + string.Join(",", t.GetFields().Select(f => f.FieldType.Name + " " + f.Name).Concat(t.GetProperties().Select(f => f.PropertyType.Name + " " + f.Name))));
             return 0;
         }
         if (args.Length == 1 && args[0] == "api")

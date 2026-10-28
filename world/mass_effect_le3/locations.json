@@ -8430,5 +8430,1198 @@
     "source": "ME3LE Backup/BioGame/CookedPCConsole/BioD_Cat002_400Stalingrad.pcc",
     "notes": "Availability and full-inventory behavior require runtime validation; filler-only.",
     "id": 1295192590
+  },
+  {
+    "key": "codex:20741",
+    "name": "Codex: Miranda Lawson",
+    "region": "Citadel",
+    "category": "codex",
+    "dlc": "",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        20741
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by cithub. Needs a live false-before/true-after check.",
+    "id": 1295192591
+  },
+  {
+    "key": "codex:20742",
+    "name": "Codex: Jacob Taylor",
+    "region": "Ex-Cerberus Scientists",
+    "category": "codex",
+    "dlc": "",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        20742
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by cerjcb. Needs a live false-before/true-after check.",
+    "id": 1295192592
+  },
+  {
+    "key": "codex:20744",
+    "name": "Codex: Garrus Vakarian",
+    "region": "Palaven",
+    "category": "codex",
+    "dlc": "",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        20744
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by krogar. Needs a live false-before/true-after check.",
+    "id": 1295192593
+  },
+  {
+    "key": "codex:20756",
+    "name": "Codex: Dr. Mordin Solus",
+    "region": "Sur'Kesh",
+    "category": "codex",
+    "dlc": "",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        20756
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by kro001. Needs a live false-before/true-after check.",
+    "id": 1295192594
+  },
+  {
+    "key": "codex:20765",
+    "name": "Codex: EDI",
+    "region": "Normandy",
+    "category": "codex",
+    "dlc": "",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        20765
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by nor. Needs a live false-before/true-after check.",
+    "id": 1295192595
+  },
+  {
+    "key": "codex:20784",
+    "name": "Codex: Councilor Donnel Udina",
+    "region": "Citadel",
+    "category": "codex",
+    "dlc": "",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        20784,
+        20785
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by cithub. Needs a live false-before/true-after check.",
+    "id": 1295192596
+  },
+  {
+    "key": "codex:20790",
+    "name": "Codex: Cerberus",
+    "region": "Mars",
+    "category": "codex",
+    "dlc": "",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        20790
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by promar. Needs a live false-before/true-after check.",
+    "id": 1295192597
+  },
+  {
+    "key": "codex:20795",
+    "name": "Codex: Cerberus: The Illusive Man",
+    "region": "Mars",
+    "category": "codex",
+    "dlc": "",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        20795
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by promar. Needs a live false-before/true-after check.",
+    "id": 1295192598
+  },
+  {
+    "key": "codex:20806",
+    "name": "Codex: Grissom Academy",
+    "region": "Normandy",
+    "category": "codex",
+    "dlc": "",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        20806
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by nor. Needs a live false-before/true-after check.",
+    "id": 1295192599
+  },
+  {
+    "key": "codex:20808",
+    "name": "Codex: Horizon",
+    "region": "Normandy",
+    "category": "codex",
+    "dlc": "",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        20808
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by nor. Needs a live false-before/true-after check.",
+    "id": 1295192600
+  },
+  {
+    "key": "codex:20814",
+    "name": "Codex: Palaven",
+    "region": "Citadel",
+    "category": "codex",
+    "dlc": "",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        20814
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by cithub. Needs a live false-before/true-after check.",
+    "id": 1295192601
+  },
+  {
+    "key": "codex:20818",
+    "name": "Codex: Rannoch",
+    "region": "Normandy",
+    "category": "codex",
+    "dlc": "",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        20818
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by nor. Needs a live false-before/true-after check.",
+    "id": 1295192602
+  },
+  {
+    "key": "codex:20819",
+    "name": "Codex: Gellix",
+    "region": "Normandy",
+    "category": "codex",
+    "dlc": "",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        20819
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by nor. Needs a live false-before/true-after check.",
+    "id": 1295192603
+  },
+  {
+    "key": "codex:20820",
+    "name": "Codex: Lesuss",
+    "region": "Normandy",
+    "category": "codex",
+    "dlc": "",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        20820
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by nor. Needs a live false-before/true-after check.",
+    "id": 1295192604
+  },
+  {
+    "key": "codex:20821",
+    "name": "Codex: Sur'Kesh",
+    "region": "Normandy",
+    "category": "codex",
+    "dlc": "",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        20821
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by nor. Needs a live false-before/true-after check.",
+    "id": 1295192605
+  },
+  {
+    "key": "codex:20822",
+    "name": "Codex: Thessia",
+    "region": "Citadel",
+    "category": "codex",
+    "dlc": "",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        20822
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by cithub. Needs a live false-before/true-after check.",
+    "id": 1295192606
+  },
+  {
+    "key": "codex:20823",
+    "name": "Codex: Tuchanka",
+    "region": "Normandy",
+    "category": "codex",
+    "dlc": "",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        20823
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by nor. Needs a live false-before/true-after check.",
+    "id": 1295192607
+  },
+  {
+    "key": "codex:20835",
+    "name": "Codex: Reaper Variants",
+    "region": "Citadel",
+    "category": "codex",
+    "dlc": "",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        20835
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by cithub. Needs a live false-before/true-after check.",
+    "id": 1295192608
+  },
+  {
+    "key": "codex:20854",
+    "name": "Codex: UT-47A Kodiak",
+    "region": "Mars",
+    "category": "codex",
+    "dlc": "",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        20854
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by promar. Needs a live false-before/true-after check.",
+    "id": 1295192609
+  },
+  {
+    "key": "codex:20861",
+    "name": "Codex: The Crucible",
+    "region": "Normandy",
+    "category": "codex",
+    "dlc": "",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        20861
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by nor. Needs a live false-before/true-after check.",
+    "id": 1295192610
+  },
+  {
+    "key": "codex:20863",
+    "name": "Codex: The Genophage Cure",
+    "region": "Normandy",
+    "category": "codex",
+    "dlc": "",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        20863
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by nor. Needs a live false-before/true-after check.",
+    "id": 1295192611
+  },
+  {
+    "key": "codex:20868",
+    "name": "Codex: The Shroud",
+    "region": "Normandy",
+    "category": "codex",
+    "dlc": "",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        20868
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by nor. Needs a live false-before/true-after check.",
+    "id": 1295192612
+  },
+  {
+    "key": "codex:21514",
+    "name": "Codex: Dr. Karin Chakwas",
+    "region": "Citadel",
+    "category": "codex",
+    "dlc": "",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        21514
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by cithub. Needs a live false-before/true-after check.",
+    "id": 1295192613
+  },
+  {
+    "key": "codex:21515",
+    "name": "Codex: Dr. Liara T'Soni",
+    "region": "Mars",
+    "category": "codex",
+    "dlc": "",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        21515
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by promar. Needs a live false-before/true-after check.",
+    "id": 1295192614
+  },
+  {
+    "key": "codex:21517",
+    "name": "Codex: Menae",
+    "region": "Citadel",
+    "category": "codex",
+    "dlc": "",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        21517
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by cithub. Needs a live false-before/true-after check.",
+    "id": 1295192615
+  },
+  {
+    "key": "codex:21518",
+    "name": "Codex: Tali'Zorah",
+    "region": "Normandy",
+    "category": "codex",
+    "dlc": "",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        21518
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by nor. Needs a live false-before/true-after check.",
+    "id": 1295192616
+  },
+  {
+    "key": "codex:21661",
+    "name": "Codex: The Genophage",
+    "region": "Palaven",
+    "category": "codex",
+    "dlc": "",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        21661
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by krogar. Needs a live false-before/true-after check.",
+    "id": 1295192617
+  },
+  {
+    "key": "codex:21707",
+    "name": "Codex: The Fall of Earth",
+    "region": "Citadel",
+    "category": "codex",
+    "dlc": "",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        21707
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by cithub. Needs a live false-before/true-after check.",
+    "id": 1295192618
+  },
+  {
+    "key": "codex:21719",
+    "name": "Codex: The Battle of Rannoch",
+    "region": "Rannoch",
+    "category": "codex",
+    "dlc": "",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        21719,
+        21720,
+        21728
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by gth002. Needs a live false-before/true-after check.",
+    "id": 1295192619
+  },
+  {
+    "key": "codex:21722",
+    "name": "Codex: Ontarom",
+    "region": "Normandy",
+    "category": "codex",
+    "dlc": "",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        21722
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by nor. Needs a live false-before/true-after check.",
+    "id": 1295192620
+  },
+  {
+    "key": "codex:21723",
+    "name": "Codex: Sanctum",
+    "region": "Normandy",
+    "category": "codex",
+    "dlc": "",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        21723
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by nor. Needs a live false-before/true-after check.",
+    "id": 1295192621
+  },
+  {
+    "key": "codex:21724",
+    "name": "Codex: Benning",
+    "region": "Normandy",
+    "category": "codex",
+    "dlc": "",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        21724
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by nor. Needs a live false-before/true-after check.",
+    "id": 1295192622
+  },
+  {
+    "key": "codex:21725",
+    "name": "Codex: Cyone",
+    "region": "Normandy",
+    "category": "codex",
+    "dlc": "",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        21725
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by nor. Needs a live false-before/true-after check.",
+    "id": 1295192623
+  },
+  {
+    "key": "codex:21726",
+    "name": "Codex: Reaper Vulnerabilities",
+    "region": "Normandy",
+    "category": "codex",
+    "dlc": "",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        21726
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by nor. Needs a live false-before/true-after check.",
+    "id": 1295192624
+  },
+  {
+    "key": "codex:21727",
+    "name": "Codex: Reaper Capabilities",
+    "region": "Citadel",
+    "category": "codex",
+    "dlc": "",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        21727
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by cithub. Needs a live false-before/true-after check.",
+    "id": 1295192625
+  },
+  {
+    "key": "codex:21732",
+    "name": "Codex: The Fall of Taetrus",
+    "region": "Citadel",
+    "category": "codex",
+    "dlc": "",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        21732
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by cithub. Needs a live false-before/true-after check.",
+    "id": 1295192626
+  },
+  {
+    "key": "codex:21733",
+    "name": "Codex: The Battle of Palaven",
+    "region": "Palaven",
+    "category": "codex",
+    "dlc": "",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        21733
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by krogar. Needs a live false-before/true-after check.",
+    "id": 1295192627
+  },
+  {
+    "key": "codex:21734",
+    "name": "Codex: The Miracle at Palaven",
+    "region": "Normandy",
+    "category": "codex",
+    "dlc": "",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        21734
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by nor. Needs a live false-before/true-after check.",
+    "id": 1295192628
+  },
+  {
+    "key": "codex:21738",
+    "name": "Codex: The Fall of Thessia",
+    "region": "Normandy",
+    "category": "codex",
+    "dlc": "",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        21738
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by nor. Needs a live false-before/true-after check.",
+    "id": 1295192629
+  },
+  {
+    "key": "codex:21743",
+    "name": "Codex: Krogan: Ancient History",
+    "region": "Tuchanka",
+    "category": "codex",
+    "dlc": "",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        21743
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by kro002, krogar. Needs a live false-before/true-after check.",
+    "id": 1295192630
+  },
+  {
+    "key": "codex:21744",
+    "name": "Codex: Alliance News Network",
+    "region": "Citadel",
+    "category": "codex",
+    "dlc": "",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        21744
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by cithub. Needs a live false-before/true-after check.",
+    "id": 1295192631
+  },
+  {
+    "key": "codex:21745",
+    "name": "Codex: Harvesting",
+    "region": "Normandy",
+    "category": "codex",
+    "dlc": "",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        21745
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by nor. Needs a live false-before/true-after check.",
+    "id": 1295192632
+  },
+  {
+    "key": "codex:21746",
+    "name": "Codex: Desperate Measures",
+    "region": "Normandy",
+    "category": "codex",
+    "dlc": "",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        21746
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by nor. Needs a live false-before/true-after check.",
+    "id": 1295192633
+  },
+  {
+    "key": "codex:21753",
+    "name": "Codex: The Cerberus Coup",
+    "region": "Normandy",
+    "category": "codex",
+    "dlc": "",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        21753
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by nor. Needs a live false-before/true-after check.",
+    "id": 1295192634
+  },
+  {
+    "key": "codex:22000",
+    "name": "Codex: Protheans",
+    "region": "Mars",
+    "category": "codex",
+    "dlc": "",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        22000
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by promar. Needs a live false-before/true-after check.",
+    "id": 1295192635
+  },
+  {
+    "key": "codex:22011",
+    "name": "Codex: Thresher Maws",
+    "region": "Tuchanka",
+    "category": "codex",
+    "dlc": "",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        22011
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by kro002. Needs a live false-before/true-after check.",
+    "id": 1295192636
+  },
+  {
+    "key": "codex:22018",
+    "name": "Codex: Indoctrination",
+    "region": "Mars",
+    "category": "codex",
+    "dlc": "",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        22018
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by promar. Needs a live false-before/true-after check.",
+    "id": 1295192637
+  },
+  {
+    "key": "codex:22033",
+    "name": "Codex: Human Diplomatic Relations",
+    "region": "Citadel",
+    "category": "codex",
+    "dlc": "",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        22033,
+        22260
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by cithub. Needs a live false-before/true-after check.",
+    "id": 1295192638
+  },
+  {
+    "key": "codex:22034",
+    "name": "Codex: Rise of the Alliance",
+    "region": "Citadel",
+    "category": "codex",
+    "dlc": "",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        22034,
+        22261
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by cithub. Needs a live false-before/true-after check.",
+    "id": 1295192639
+  },
+  {
+    "key": "codex:22039",
+    "name": "Codex: Asari: Ardat-Yakshi",
+    "region": "Ardat-Yakshi Monastery",
+    "category": "codex",
+    "dlc": "",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        22039
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by citsam. Needs a live false-before/true-after check.",
+    "id": 1295192640
+  },
+  {
+    "key": "codex:22060",
+    "name": "Codex: Mercenaries: Eclipse",
+    "region": "Citadel",
+    "category": "codex",
+    "dlc": "",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        22060
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by cithub. Needs a live false-before/true-after check.",
+    "id": 1295192641
+  },
+  {
+    "key": "codex:22061",
+    "name": "Codex: Mercenaries: Blue Suns",
+    "region": "Citadel",
+    "category": "codex",
+    "dlc": "",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        22061
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by cithub. Needs a live false-before/true-after check.",
+    "id": 1295192642
+  },
+  {
+    "key": "codex:22062",
+    "name": "Codex: Mercenaries: The Blood Pack",
+    "region": "Citadel",
+    "category": "codex",
+    "dlc": "",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        22062
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by cithub. Needs a live false-before/true-after check.",
+    "id": 1295192643
+  },
+  {
+    "key": "codex:22068",
+    "name": "Codex: Krogan: Krogan Rebellions",
+    "region": "Palaven",
+    "category": "codex",
+    "dlc": "",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        22068
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by krogar. Needs a live false-before/true-after check.",
+    "id": 1295192644
+  },
+  {
+    "key": "codex:22281",
+    "name": "Codex: Citadel Space",
+    "region": "Citadel",
+    "category": "codex",
+    "dlc": "",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        22281
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by cithub. Needs a live false-before/true-after check.",
+    "id": 1295192645
+  },
+  {
+    "key": "codex:22282",
+    "name": "Codex: Citadel Council",
+    "region": "Citadel",
+    "category": "codex",
+    "dlc": "",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        22282
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by cithub. Needs a live false-before/true-after check.",
+    "id": 1295192646
+  },
+  {
+    "key": "codex:22807",
+    "name": "Codex: Planets and Locations: Eden Prime",
+    "region": "Eden Prime",
+    "category": "codex",
+    "dlc": "From Ashes",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        22807
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by cat001. Needs a live false-before/true-after check.",
+    "id": 1295192647
+  },
+  {
+    "key": "codex:22808",
+    "name": "Codex: Technology: Prothean Beacon",
+    "region": "Eden Prime",
+    "category": "codex",
+    "dlc": "From Ashes",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        22808
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by cat001. Needs a live false-before/true-after check.",
+    "id": 1295192648
+  },
+  {
+    "key": "codex:23609",
+    "name": "Codex: Non-Council Races: Leviathan",
+    "region": "Leviathan",
+    "category": "codex",
+    "dlc": "Leviathan",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        23609
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by nor. Needs a live false-before/true-after check.",
+    "id": 1295192649
+  },
+  {
+    "key": "codex:23924",
+    "name": "Codex: Cerberus: Rampart Mech",
+    "region": "Omega",
+    "category": "codex",
+    "dlc": "Omega",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        23924
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by omg001. Needs a live false-before/true-after check.",
+    "id": 1295192650
+  },
+  {
+    "key": "codex:23925",
+    "name": "Codex: Cerberus: General Oleg Petrovsky",
+    "region": "Omega",
+    "category": "codex",
+    "dlc": "Omega",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        23925
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by omg000. Needs a live false-before/true-after check.",
+    "id": 1295192651
+  },
+  {
+    "key": "codex:23926",
+    "name": "Codex: Aria T'Loak",
+    "region": "Omega",
+    "category": "codex",
+    "dlc": "Omega",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        23926
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by omg000. Needs a live false-before/true-after check.",
+    "id": 1295192652
+  },
+  {
+    "key": "codex:23927",
+    "name": "Codex: Nyreen Kandros",
+    "region": "Omega",
+    "category": "codex",
+    "dlc": "Omega",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        23927
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by omg02a. Needs a live false-before/true-after check.",
+    "id": 1295192653
+  },
+  {
+    "key": "codex:23928",
+    "name": "Codex: Cerberus: Adjutant",
+    "region": "Omega",
+    "category": "codex",
+    "dlc": "Omega",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        23928
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by omg003. Needs a live false-before/true-after check.",
+    "id": 1295192654
+  },
+  {
+    "key": "codex:23929",
+    "name": "Codex: Turian Cabals",
+    "region": "Omega",
+    "category": "codex",
+    "dlc": "Omega",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        23929
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by omghub. Needs a live false-before/true-after check.",
+    "id": 1295192655
+  },
+  {
+    "key": "codex:23930",
+    "name": "Codex: Cerberus Occupation of Omega",
+    "region": "Omega",
+    "category": "codex",
+    "dlc": "Omega",
+    "detector": {
+      "kind": "bool_any",
+      "indices": [
+        23930
+      ]
+    },
+    "progression_safe": false,
+    "evidence": "PACKAGE_AND_DB",
+    "source": "research/le3_codex_setters.tsv",
+    "notes": "Codex page plot bool(s); granted by omg000. Needs a live false-before/true-after check.",
+    "id": 1295192656
   }
 ]

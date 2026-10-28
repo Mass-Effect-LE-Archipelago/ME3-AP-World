@@ -72,6 +72,9 @@ class TestClientCore(unittest.TestCase):
         self.assertEqual(observed_locations(state, {use.id}), {use.id})
         self.assertEqual(observed_locations(state, {use.id, recovery.id}), {use.id, recovery.id})
         self.assertFalse(observed_locations(GameSnapshot(), {use.id, recovery.id}))
+        rannoch = data.BY_ID[data.LOCATION_NAME_TO_ID["Codex: The Battle of Rannoch"]]
+        self.assertEqual(observed_locations(GameSnapshot(bools={rannoch.detector["indices"][-1]: True}), {rannoch.id}), {rannoch.id})
+        self.assertFalse(observed_locations(GameSnapshot(bools={rannoch.detector["indices"][0]: False}), {rannoch.id}))
 
     def test_mismatched_seed_blocks_reads_and_grants(self):
         bridge = FakeBridge()

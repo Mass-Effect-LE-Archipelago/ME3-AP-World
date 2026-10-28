@@ -11,12 +11,20 @@ from ..world import MassEffectLE3World
 class TestWorldGeneration(unittest.TestCase):
     def test_default_and_maximum_categories(self):
         # 3 Earth-prologue sources are dropped: the open start skips the prologue (data.SKIPPED_REGIONS).
-        for options, count in (({}, 499), ({"weapon_checks": True}, 524)):
+        # 66 codex checks are on by default.
+        for options, count in (({}, 565), ({"weapon_checks": True}, 590), ({"codex_checks": False}, 499)):
             with self.subTest(options=options):
                 world = setup_multiworld(MassEffectLE3World, gen_steps, 17, options)
                 self.assertEqual(len(world.get_unfilled_locations()), count)
                 self.assertEqual(len(world.itempool), count)
                 self.assertEqual(len(world.worlds[1].fill_slot_data()["locations"]), count)
+
+    def test_codex_checks_never_hold_progression(self):
+        world = setup_multiworld(MassEffectLE3World, gen_steps, 5)
+        distribute_items_restrictive(world)
+        codex = [loc for loc in world.get_locations(1) if loc.name.startswith("Codex: ")]
+        self.assertEqual(len(codex), 66)
+        self.assertFalse(any(loc.item.advancement for loc in codex))
 
     def test_weapons_as_items_with_predator_start(self):
         world = setup_multiworld(MassEffectLE3World, gen_steps, 3)

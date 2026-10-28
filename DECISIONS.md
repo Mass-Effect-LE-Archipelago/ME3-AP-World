@@ -27,3 +27,13 @@ A single external .exe does everything a player needs: (a) builds and installs t
 ## D5 — Open mission order with a Predator start (owner direction, 2026-10-27)
 
 Any galaxy-map mission may come first: the career starts with only the M3 Predator, and other weapons become checks/items. Companions are planned as items (selectability), but missions with a story-fixed squad (Mars: Virmire survivor + James) force that squad and should skip the squad/armory screens. Non-interactive cutscenes without dialogue choices (relay jumps, pre-Mars approach) are to be skipped where it is safe. Implementation pending research; see CURRENT-STATUS to-do.
+
+## D6 — Codex pages as checks (owner direction, 2026-10-28)
+
+Option `codex_checks` (default on): 66 checks, one per codex page title that a vanilla conversation or Kismet plot
+transition grants after the start. Codex page ids are their plot bools (BioCodexMap); setters come from
+`le3mod boolsetters` over every runtime-winning package including the `_LOC_INT` conversation packages
+(research/le3_codex_setters.tsv). Variants of one title are one `bool_any` check; pages only the skipped Earth prologue
+grants are left out. Region: the Normandy or Citadel hub if a setter lives there, else the mission. Codex checks never
+hold progression (some come from optional conversations). Pages that a new career already has would be free checks;
+confirm with a live read at the first Normandy load.

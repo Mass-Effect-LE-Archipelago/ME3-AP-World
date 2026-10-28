@@ -60,6 +60,12 @@ class ExplorationChecks(DefaultOnToggle):
     display_name = "Exploration Recovery Checks"
 
 
+class CodexChecks(DefaultOnToggle):
+    """Include codex pages as checks: each page a conversation or mission unlocks after the start (variants of one
+    page are one check). Some come from optional conversations, so codex checks never hold progression items."""
+    display_name = "Codex Checks"
+
+
 class EnabledDLC(OptionSet):
     """Include mapped pickup sources in the selected official DLC campaigns."""
     display_name = "Enabled DLC"
@@ -78,5 +84,6 @@ class MassEffectLE3Options(PerGameCommonOptions):
     mod_checks: ModChecks
     weapon_checks: WeaponChecks
     exploration_checks: ExplorationChecks
+    codex_checks: CodexChecks
     weapon_items: WeaponItems
     enabled_dlc: EnabledDLC

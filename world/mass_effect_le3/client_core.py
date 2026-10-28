@@ -73,6 +73,8 @@ def observed_locations(snapshot: GameSnapshot, enabled_ids: set[int]) -> set[int
             complete = detector["asset_id"] in snapshot.gaw_assets
         elif kind == "bool":
             complete = snapshot.bools.get(detector["index"], False)
+        elif kind == "bool_any":
+            complete = any(snapshot.bools.get(index, False) for index in detector["indices"])
         elif kind == "int_positive":
             complete = snapshot.ints.get(detector["index"], 0) > 0
         else:
@@ -127,6 +129,7 @@ def synchronize(bridge: ItemBridge, identity: str, history: dict, enabled_ids: s
     for location_id in enabled_ids:
         detector = data.BY_ID[location_id].detector
         if detector["kind"] == "bool": bools.add(detector["index"])
+        if detector["kind"] == "bool_any": bools.update(detector["indices"])
         if detector["kind"] == "int_positive": ints.add(detector["index"])
     state = bridge.snapshot(bools, ints)
     return SyncResult(frozenset(observed_locations(state, enabled_ids)),

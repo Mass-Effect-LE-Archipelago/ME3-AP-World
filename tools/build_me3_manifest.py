@@ -9,6 +9,7 @@ import re
 
 ROOT = Path(__file__).resolve().parents[1]
 DEST = ROOT / "world/mass_effect_le3/locations.json"
+RESEARCH = ROOT / "research"
 BASE = 0x4D331000
 REGIONS = {
     "proear": ("Earth Prologue", ""), "promar": ("Mars", ""),
@@ -105,7 +106,45 @@ def candidates() -> list[dict]:
             "category": "objectives", "dlc": "", "detector": {"kind": "bool", "index": int(source["plot_id"])},
             "progression_safe": True, "evidence": "DB_ONLY", "source": source["path"],
             "notes": "Named completion state; mandatory-path status and persistence require runtime validation."})
+    result.extend(codex())
     return result
+
+
+CODEX_DLC = {"DLC_EXP_Pack001": ("Leviathan", "Leviathan"), "DLC_EXP_Pack002": ("Omega", "Omega"),
+             "DLC_HEN_PR": ("Eden Prime", "From Ashes")}
+# Where a page's setter lives decides its region; the Normandy and the Citadel hub come first (always revisitable).
+CODEX_HUBS = {"nor": "Normandy", "cithub": "Citadel", "omg000": "Omega", "omghub": "Omega"}
+
+
+def codex() -> list[dict]:
+    """Codex pages a vanilla conversation or Kismet transition grants (research/le3_codex_setters.tsv, from le3mod
+    boolsetters over every runtime-winning package; page ids from the BioCodexMaps, titles from the INT TLKs).
+    Pages with the same title are one check (any variant bool). Pages only the skipped Earth prologue grants are left
+    out. Codex pages can come from optional conversations, so they never hold progression."""
+    pages = {row[0]: row for row in (line.rstrip("\n").split("\t") for line in (RESEARCH / "le3_codex_pages.tsv").open(encoding="utf-8"))}
+    titles = dict(line.rstrip("\n").split("\t", 1) for line in (RESEARCH / "le3_codex_titles.tsv").open(encoding="utf-8"))
+    codes: dict[str, set[str]] = {}
+    for source in csv.DictReader((RESEARCH / "le3_codex_setters.tsv").open(encoding="utf-8"), delimiter="\t"):
+        code = re.match(r"(?:BioD_|BioP_|BioA_)?([A-Za-z0-9]+)_", source["package"]).group(1).lower()
+        codes.setdefault(source["bool"], set()).add(code)
+    grouped: dict[str, dict] = {}
+    for page, found in sorted(codes.items(), key=lambda item: int(item[0])):
+        found = found - {"proear"}
+        if not found:
+            continue
+        dlc_folder = pages[page][3] if len(pages[page]) > 3 else ""
+        if dlc_folder:
+            region, dlc = CODEX_DLC[dlc_folder]
+        else:
+            hub = next((CODEX_HUBS[code] for code in CODEX_HUBS if code in found), None)
+            region, dlc = hub or REGIONS[min(found)][0], "" if hub else REGIONS[min(found)][1]
+        title = titles[pages[page][1]].strip('"')
+        entry = grouped.setdefault(title, {"key": f"codex:{page}", "name": f"Codex: {title}", "region": region,
+            "category": "codex", "dlc": dlc, "detector": {"kind": "bool_any", "indices": []}, "progression_safe": False,
+            "evidence": "PACKAGE_AND_DB", "source": "research/le3_codex_setters.tsv",
+            "notes": "Codex page plot bool(s); granted by " + ", ".join(sorted(found)) + ". Needs a live false-before/true-after check."})
+        entry["detector"]["indices"].append(int(page))
+    return list(grouped.values())
 
 
 def main() -> None:
