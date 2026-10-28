@@ -83,6 +83,13 @@ class SalvagePrice(Choice):
     default = 2
 
 
+class MissionAccess(DefaultOnToggle):
+    """Side missions (Grissom Academy, the Monastery, Jacob's scientists, Attican Traverse, the N7 missions, Eden Prime,
+    Omega) open on the galaxy map when their "Mission Access" item arrives, in any order, instead of following the story.
+    Off: they follow the story as usual."""
+    display_name = "Mission Access Items"
+
+
 class WarAssetChecks(Range):
     """Progressive war-asset checks: "War Asset 1" up to this number. Each war asset or upgrade you gain (any of them,
     whichever choices you make) moves you one step up the list. Galaxy-map recoveries have their own checks and don't
@@ -116,6 +123,7 @@ class MassEffectLE3Options(PerGameCommonOptions):
     salvage: Salvage
     salvage_price: SalvagePrice
     weapon_items: WeaponItems
+    mission_access: MissionAccess
     enabled_dlc: EnabledDLC
 
 
@@ -123,7 +131,7 @@ option_groups = [
     OptionGroup("Goal", [CrucibleIntelTotal, CrucibleIntelRequired]),
     OptionGroup("Checks", [ObjectiveChecks, CreditChecks, SupplyChecks, ArmorChecks, ModChecks, WeaponChecks,
                            ExplorationChecks, CodexChecks, WarAssetChecks]),
-    OptionGroup("Items", [WeaponItems]),
+    OptionGroup("Items", [WeaponItems, MissionAccess]),
     OptionGroup("Salvage", [Salvage, SalvagePrice]),
     OptionGroup("DLC", [EnabledDLC]),
 ]

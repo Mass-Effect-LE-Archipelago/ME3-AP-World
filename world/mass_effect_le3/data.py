@@ -59,7 +59,31 @@ SALVAGE_MISSIONS = ("Mars", "Palaven", "Sur'Kesh", "Tuchanka", "Tuchanka: Turian
                     "Sanctuary", "Ardat-Yakshi Monastery", "N7: Cerberus Lab", "N7: Cerberus Fighter Base",
                     "N7: Fuel Reactors", "N7: Communication Hub", "N7: Cerberus Abductions", "N7: Cerberus Attack",
                     "Leviathan", "Omega")
-SALVAGE_PRICES = (0, 500, 1000, 2500, 5000)  # credits per check, by salvage_price option value
+SALVAGE_PRICES = (0, 500, 1000, 2500, 5000)
+# Mission access items (D9): (region, galaxy-map MapName, the mission's own completion int, extra vanilla term or "").
+# The mod replaces each planet's landing condition with "key bool && mission not done && Cronos not done" (+ extra),
+# so these missions open in any order once their item arrives. Native key index = position (append only);
+# key bool = MISSION_KEY_BOOL + index. Omega keeps its vanilla condition and ANDs the key (it starts from Aria).
+MISSION_KEY_BOOL = 26100
+MISSION_KEYS = (
+    ("Grissom Academy", "BioP_OmgJck", 10200, ""),
+    ("Ardat-Yakshi Monastery", "biop_citsam", 10195, ""),
+    ("Ex-Cerberus Scientists", "BioP_CerJcb", 10189, ""),
+    ("Attican Traverse", "BioP_KroGru", 10182, ""),
+    ("N7: Cerberus Lab", "BioP_SPCer", 10302, ""),
+    ("N7: Cerberus Fighter Base", "BioP_SPNov", 10304, ""),
+    ("N7: Fuel Reactors", "BioP_SPRctr", 10305, ""),
+    ("N7: Communication Hub", "BioP_SPDish", 10303, ""),
+    ("N7: Cerberus Abductions", "BioP_SPSlum", 10306, ""),
+    ("Eden Prime", "BioP_Cat001", 10177, "(plot.bools[20236] == Bool true)"),
+    ("Omega", "biop_omg001", 0, "vanilla"),
+)
+MISSION_KEY_ITEMS = tuple(f"Mission Access: {region}" for region, *_ in MISSION_KEYS)
+MISSION_KEY_ITEM_BASE = ITEM_BASE + 0x200
+MISSION_KEY_REGION = dict(zip(MISSION_KEY_ITEMS, (region for region, *_ in MISSION_KEYS)))
+ITEM_NAME_TO_ID.update({name: MISSION_KEY_ITEM_BASE + index for index, name in enumerate(MISSION_KEY_ITEMS)})
+MISSION_KEY_ID_TO_NATIVE = {MISSION_KEY_ITEM_BASE + index: index for index in range(len(MISSION_KEY_ITEMS))}
+PICKUP_CATEGORIES = frozenset({"supplies", "credits", "armor", "mods", "weapons"})  # credits per check, by salvage_price option value
 
 
 @dataclass(frozen=True)

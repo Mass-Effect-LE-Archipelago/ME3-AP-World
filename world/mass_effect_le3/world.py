@@ -49,10 +49,20 @@ class MassEffectLE3World(World):
     location_name_groups = data.LOCATION_NAME_GROUPS
     origin_region_name = "Campaign"
 
+    def safe(self, entry: data.LocationData) -> bool:
+        """May hold progression. With salvage on, a pickup on a mission you can't replay can still be bought back."""
+        if entry.region in data.FINAL_REGIONS:
+            return False
+        return entry.progression_safe or bool(self.options.salvage and entry.region in data.SALVAGE_MISSIONS
+                                              and entry.category in data.PICKUP_CATEGORIES)
+
     def generate_early(self) -> None:
         self.selected = tuple(entry for entry in data.LOCATIONS if included(self.options, entry))
-        safe_slots = sum(entry.progression_safe and entry.region not in data.FINAL_REGIONS for entry in self.selected)
-        capacity = max(1, safe_slots - 4)
+        regions = {entry.region for entry in self.selected}
+        # Access items for the side missions this slot has; with the option off they are precollected (always open).
+        self.mission_keys = [name for name in data.MISSION_KEY_ITEMS if data.MISSION_KEY_REGION[name] in regions]
+        safe_slots = sum(self.safe(entry) for entry in self.selected)
+        capacity = max(1, safe_slots - 4 - (len(self.mission_keys) if self.options.mission_access else 0))
         self.intel_total = min(self.options.crucible_intel_total.value, capacity)
         self.intel_required = min(self.options.crucible_intel_required.value, self.intel_total)
         if self.intel_total != self.options.crucible_intel_total.value or self.intel_required != self.options.crucible_intel_required.value:
@@ -69,10 +79,13 @@ class MassEffectLE3World(World):
             # Native story ordering has no AP-item prerequisite. These edges mean
             # eventually reachable through vanilla play; they do not skip missions.
             gate = (lambda state: state.has(data.INTEL, self.player, self.intel_required)) if name in data.FINAL_REGIONS else None
+            key = next((k for k in self.mission_keys if data.MISSION_KEY_REGION[k] == name), None)
+            if key:
+                gate = lambda state, key=key: state.has(key, self.player)
             hub.connect(region, f"Campaign -> {name}", gate)
         for entry in self.selected:
             location = ME3Location(self.player, entry.name, entry.id, regions[entry.region])
-            if not entry.progression_safe or entry.region in data.FINAL_REGIONS:
+            if not self.safe(entry):
                 location.progress_type = LocationProgressType.EXCLUDED
             regions[entry.region].locations.append(location)
         goal = ME3Location(self.player, "Defeat the Reapers", None, regions["Earth Finale"])
@@ -84,19 +97,26 @@ class MassEffectLE3World(World):
                            else ItemClassification.filler)
         # Weapons stay filler: most locations are excluded (conservative missable audit), and a weapon is never
         # required, so it may be placed anywhere. Only ~11 non-excluded slots would remain after intel otherwise.
+        if name in data.MISSION_KEY_REGION:
+            classification = ItemClassification.progression
         return ME3Item(name, classification, data.ITEM_NAME_TO_ID[name], self.player)
 
     def create_items(self) -> None:
         self.multiworld.itempool.extend(self.create_item(data.INTEL) for _ in range(self.intel_total))
+        keys = self.mission_keys if self.options.mission_access else []
+        for name in self.mission_keys:
+            if not self.options.mission_access:
+                self.multiworld.push_precollected(self.create_item(name))
+        self.multiworld.itempool.extend(self.create_item(name) for name in keys)
         weapons = []
         if self.options.weapon_items:
             self.multiworld.push_precollected(self.create_item(data.STARTING_WEAPON))
             # Weapons replace credit filler only while slots remain; never displace intel.
-            room = len(self.selected) - self.intel_total
+            room = len(self.selected) - self.intel_total - len(keys)
             weapons = [name for name in data.WEAPON_ITEMS if name != data.STARTING_WEAPON][:room]
         self.multiworld.itempool.extend(self.create_item(name) for name in weapons)
         self.multiworld.itempool.extend(self.create_item(data.CREDITS)
-                                        for _ in range(len(self.selected) - self.intel_total - len(weapons)))
+                                        for _ in range(len(self.selected) - self.intel_total - len(keys) - len(weapons)))
 
     def get_filler_item_name(self) -> str:
         return data.CREDITS
@@ -109,6 +129,7 @@ class MassEffectLE3World(World):
                 "implementation_status": "beta", "history": data.HISTORY.copy(),
                 "crucible_intel_total": self.intel_total, "crucible_intel_required": self.intel_required,
                 "weapon_items": bool(self.options.weapon_items),
+                "mission_access": bool(self.options.mission_access),
                 "salvage": bool(self.options.salvage), "salvage_price": self.options.salvage_price.value,
                 "enabled_dlc": sorted(self.options.enabled_dlc.value),
                 "locations": [entry.id for entry in self.selected],

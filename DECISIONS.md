@@ -58,3 +58,16 @@ Default 80 is an estimate: the game has 268 entries, 192 outside the exploration
 assets and 89 modifiers, many of them choice-exclusive or negative); a run through the priority missions with the
 maximum-content history should pass 80. Check the real count with a GAW read during the live test and retune.
 Assumes a new open-start career holds no non-exploration assets before Citadel (also to confirm live).
+
+## D9 — Mission access items and the Rannoch peace patch (owner direction, 2026-10-28; branch mission-keys)
+
+Non-linear play, step 1. Option `mission_access` (default on): 11 "Mission Access: <mission>" progression items
+(data.MISSION_KEYS: Grissom, Monastery, Ex-Cerberus Scientists, Attican Traverse, five N7 missions, Eden Prime,
+Omega). The mod replaces each planet's landing condition with "key bool (26100+k) && mission not done && Cronos not
+done" (Omega: vanilla visibility, key to land) and opens the planet's system/cluster conditionals while a key is held.
+Bridge 0.2.4 delivers keys as indexed `KEY <k>` items. Option off: keys are precollected, so everything opens.
+With salvage on, pickups on non-replayable missions may hold progression (they can be bought back).
+Rannoch: replies 60/62/79/81 and entries 64/82 of gth002_bigchoice point at C13, so peace is always offered and works
+(Legion still sacrifices itself, as in vanilla peace). Step 2 (arc keys: Krogan, Geth, Citadel coup) waits for
+step 1's in-game proof. N7: Cerberus Attack (SPTowr) has no galaxy-map planet; its 5 checks may be unreachable.
+Untested in game: every keyed planet landing out of story order.

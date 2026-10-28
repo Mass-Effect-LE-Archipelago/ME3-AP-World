@@ -98,10 +98,12 @@ struct DeliveryHost {
         Original(variables, getter, &parameters, nullptr);
         return parameters.value != 0;
     }
-    // Only the salvage flags (bought/available/tier) are writable.
+    // Only the salvage flags (bought/available/tier) and mission access bools are writable.
     void writeBool(int index, bool value) {
         if (!LE3AP_DELIVERY_DEV) throw std::runtime_error("delivery_disabled");
-        if (index < Delivery::BoughtBool || index >= Delivery::SalvageBoolEnd) throw std::runtime_error("bool_range");
+        bool const salvage = index >= Delivery::BoughtBool && index < Delivery::SalvageBoolEnd;
+        bool const key = index >= Delivery::KeyBool && index < Delivery::KeyBool + Delivery::MaxKeys;
+        if (!salvage && !key) throw std::runtime_error("bool_range");
         static auto* setter = UObject::FindObject<UFunction>(L"Function SFXGame.BioGlobalVariableTable.SetBool");
         if (!setter || !(setter->FunctionFlags & 0x400)) throw std::runtime_error("no_bool_setter");
         struct Parameters { int index; unsigned long value, evaluateAchievement = 0, skipProcessing = 1; } parameters{index, value ? 1ul : 0ul};
@@ -362,11 +364,11 @@ std::string Parse(std::string const& message, Pending& request) {
     auto const& op = request.operation;
     if (op == "PING" && !count) return "OK pong";
     if (op == "VER" && !count) return LE3AP_CAREER_TRACE ? "OK 0.3.0-career-trace"
-        : LE3AP_DELIVERY_DEV ? "OK 0.2.3-delivery-dev" : "OK 0.2.0-research";
+        : LE3AP_DELIVERY_DEV ? "OK 0.2.4-delivery-dev" : "OK 0.2.0-research";
     if (op == "CAPS" && !count && LE3AP_CAREER_TRACE)
         return "OK readonly CAREER_TRACE GETB GETBS GETI GETIS MAP GAW USES PLOTINFO DEV_SESSION DEV_WALLET";
     if (op == "CAPS" && !count) return LE3AP_DELIVERY_DEV
-        ? "OK delivery_dev GETB GETBS GETI GETIS MAP GAW USES PLOTINFO DEV_SESSION DEV_WALLET DEV_GATE DEV_BIND DEV_TXN LANDING_GATE WEAPONS SALVAGE"
+        ? "OK delivery_dev GETB GETBS GETI GETIS MAP GAW USES PLOTINFO DEV_SESSION DEV_WALLET DEV_GATE DEV_BIND DEV_TXN LANDING_GATE WEAPONS SALVAGE KEYS"
         : "OK readonly GETB GETBS GETI GETIS MAP GAW USES PLOTINFO DEV_SESSION DEV_WALLET";
     if (op == "HELLO" && count == 1) return request.indices[0] == 1 ? "OK 1 LE3 readonly" : "ERR protocol";
     if ((op == "MAP" || op == "GAW" || op == "PLOTINFO") && !count) return "";

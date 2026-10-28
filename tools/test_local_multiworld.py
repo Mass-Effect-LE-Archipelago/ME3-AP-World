@@ -37,7 +37,7 @@ class FakeGameBridge:
     def deliver(self, index, operation, amount):
         assert index == self.index
         if operation == "CREDITS": self.credits += amount
-        elif operation not in ("COUNTER", "WEAPON"): raise AssertionError(operation)
+        elif operation not in ("COUNTER", "WEAPON", "KEY"): raise AssertionError(operation)
         self.index += 1
         return self.index
 

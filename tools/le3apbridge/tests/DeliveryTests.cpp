@@ -30,9 +30,13 @@ struct Host {
     int weaponOwned(int id) { return weapons[id]; }
     void setWeaponOwned(int id, int value) { if (!failWeapon) weapons[id] = value; }
     std::map<int, int> bools;
+    bool failBool = false;
     int readBool(int index) { return bools[index]; }
     void writeBool(int index, bool value) {
-        if (index < Delivery::BoughtBool || index >= Delivery::SalvageBoolEnd) throw std::runtime_error("bool_range");
+        bool const salvage = index >= Delivery::BoughtBool && index < Delivery::SalvageBoolEnd;
+        bool const key = index >= Delivery::KeyBool && index < Delivery::KeyBool + Delivery::MaxKeys;
+        if (!salvage && !key) throw std::runtime_error("bool_range");
+        if (failBool) throw std::runtime_error("simulated_bool_error");
         bools[index] = value;
     }
 };
@@ -161,6 +165,18 @@ int main() {
             std::string many = "DEV_SALVAGE " + Seed + " " + History + " 2";
             for (int i = 0; i < 41; ++i) many += " 1";
             require(!Delivery::parse(many, bad).empty(), "too many salvage missions refused");
+        }
+        {
+            Host keys;
+            Delivery::execute(bind(), keys);
+            auto key = [](int index, int k) { return parse("DEV_TXN " + Seed + " " + History + " " + std::to_string(index) + " KEY " + std::to_string(k)); };
+            require(Delivery::execute(key(0, 3), keys) == "OK 1 0 applied" && keys.bools[Delivery::KeyBool + 3] == 1, "key opens its mission bool");
+            require(Delivery::execute(key(0, 3), keys) == "OK 1 0 done", "key retry skipped");
+            keys.failCursor = true;
+            require(throws([&] { Delivery::execute(key(1, 4), keys); }), "key commit failure surfaced");
+            require(keys.bools[Delivery::KeyBool + 4] == 0 && Delivery::load(keys).cursor == 1, "key rolled back with cursor");
+            Delivery::Request bad;
+            require(!Delivery::parse("DEV_TXN " + Seed + " " + History + " 1 KEY 40", bad).empty(), "key index past the range refused");
         }
         std::cout << "DeliveryTests: " << checks << " checks passed\n";
         return 0;

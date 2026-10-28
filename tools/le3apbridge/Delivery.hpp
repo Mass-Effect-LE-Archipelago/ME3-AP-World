@@ -23,8 +23,10 @@ constexpr int MaxIntel = 1000;
 constexpr int MaxSalvage = 40, MaxTier = 4;
 constexpr int BoughtBool = 26000, AvailBool = BoughtBool + MaxSalvage, TierBool = AvailBool + MaxSalvage;
 constexpr int SalvageBoolEnd = TierBool + MaxTier + 1;
+// Mission access items: KEY <k> sets plot bool KeyBool + k (the mod's galaxy-map landing conditions read it).
+constexpr int KeyBool = 26100, MaxKeys = 40;
 using Digest = std::array<std::uint32_t, 8>;
-enum class Op { Session, Wallet, Gate, Bind, Counter, Credits, Intel, Weapon, Salvage };
+enum class Op { Session, Wallet, Gate, Bind, Counter, Credits, Intel, Weapon, Salvage, Key };
 struct Request {
     Op op = Op::Session;
     Digest identity{}, history{};
@@ -90,6 +92,8 @@ inline std::string parse(std::string const& text, Request& request) {
         // WEAPON <id>: id indexes Weapons::Classes (append-only wire contract).
         if (words.size() == 6 && words[4] == "WEAPON" && number(words[5], request.amount)
             && request.amount < static_cast<int>(Weapons::Classes.size())) { request.op = Op::Weapon; return ""; }
+        if (words.size() == 6 && words[4] == "KEY" && number(words[5], request.amount) && request.amount < MaxKeys)
+        { request.op = Op::Key; return ""; }
         if (words.size() == 6 && words[4] == "CREDITS" && number(words[5], request.amount)
             && request.amount >= 1 && request.amount <= 1000000) { request.op = Op::Credits; return ""; }
     }
@@ -204,6 +208,16 @@ template<class Host> std::string execute(Request const& request, Host& host) {
             host.write(Base + 2, state.cursor + 1);
         } catch (...) {
             if (!before) host.setWeaponOwned(request.amount, 0);
+            host.write(Base + 2, state.cursor);
+            throw;
+        }
+    } else if (request.op == Op::Key) {
+        int const before = host.readBool(KeyBool + request.amount);
+        try {
+            if (!before) host.writeBool(KeyBool + request.amount, true);
+            host.write(Base + 2, state.cursor + 1);
+        } catch (...) {
+            if (!before) host.writeBool(KeyBool + request.amount, false);
             host.write(Base + 2, state.cursor);
             throw;
         }

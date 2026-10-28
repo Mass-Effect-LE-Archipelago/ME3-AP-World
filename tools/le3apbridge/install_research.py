@@ -18,9 +18,9 @@ ROOT = Path(__file__).resolve().parents[2]
 GAME = Path(r"C:\Steam\steamapps\common\Mass Effect Legendary Edition\Game\ME3")
 VANILLA_HASH = "653247e35db8d6453e83a008c805a877fd2d56a1d844282f9065ce2f34388fec"
 BRIDGE_HASH = "29ca2f8d5b247e62e5e59dffa5f860f83816c00c3505597be0ed7d5ca1d59e9b"
-# 0.2.3-delivery-dev (2026-10-28): + DEV_SALVAGE (missed-checks store flags). 0.2.2 (b0f377fd...) and 0.2.0 (0138523b...)
-# stay in build/live-original.
-DELIVERY_DEV_HASH = "4b6e35b553513fc80ecde4622290c4fcc4ff134276b50fc12e945fd3318d3a58"
+# 0.2.4-delivery-dev (2026-10-28): + KEY (mission access bools). 0.2.3 (4b6e35b5..., the 0.1.0 release) and older
+# builds stay in build/live-original.
+DELIVERY_DEV_HASH = "784f5b494afb6d5914c95833b78b1f59f4e34720930e3319ce37ed7d920d987a"
 # Read-only career observer 0.3.0, built 2026-10-20 from build.py --career-trace.
 CAREER_TRACE_HASH = "5a645f7a3e623e1c3c45988043dadc13e2fe04eded1ab8fab75f23073dffce81"
 PROFILE_DIRS = {"research": "build", "delivery-dev": "build-delivery", "career-trace": "build-career"}

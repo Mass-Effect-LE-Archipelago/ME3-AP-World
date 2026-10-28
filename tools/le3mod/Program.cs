@@ -400,6 +400,63 @@ static class Program
         return 0;
     }
 
+    // Mission access items (D9). Each keyed planet (mission_keys.json, exported from the world's data.MISSION_KEYS) lands
+    // on "key bool && mission not done && Cronos not done (&& extra)" instead of its story condition; Omega keeps its
+    // vanilla visibility and only needs the key to land. The planet's system and cluster must also show and open while
+    // the key is held, so their own conditionals become "(vanilla) || any key in them".
+    const int MissionKeyBool = 26100, MissionKeyConditional = 43300, MapAccessConditional = 43400;
+
+    static Dictionary<int, string> VanillaConditionals(string bioGame)
+    {
+        var all = new Dictionary<int, string>();
+        foreach (var file in new[] { Path.Combine(bioGame, "CookedPCConsole", "Conditionals.cnd") }
+                     .Concat(Directory.EnumerateFiles(Path.Combine(bioGame, "DLC"), "Conditionals*.cnd", SearchOption.AllDirectories)
+                         .Where(f => !f.Contains("DLC_MOD_", StringComparison.OrdinalIgnoreCase))))
+            foreach (var entry in CNDFile.FromFile(file).ConditionalEntries)
+                all.TryAdd(entry.ID, ME3ConditionalsCompiler.Decompile(entry));
+        return all;
+    }
+    static Dictionary<int, string> _vanilla;
+
+    static int MissionKeys(string bioGame, IMEPackage pcc)
+    {
+        var keys = System.Text.Json.JsonDocument.Parse(File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "mission_keys.json"))).RootElement;
+        _vanilla ??= VanillaConditionals(bioGame);
+        var planets = pcc.Exports.Where(e => e.ClassName == "BioPlanet" && !string.IsNullOrEmpty(e.GetProperty<StrProperty>("MapName")?.Value)).ToList();
+        var parentKeys = new Dictionary<ExportEntry, List<int>>();
+        for (int k = 0; k < keys.GetArrayLength(); k++)
+        {
+            var key = keys[k];
+            var map = key.GetProperty("map").GetString();
+            var planet = planets.SingleOrDefault(p => p.GetProperty<StrProperty>("MapName").Value.Equals(map, StringComparison.OrdinalIgnoreCase));
+            if (planet == null) { Console.Error.WriteLine($"refusing: no galaxy-map planet for {map}"); return 1; }
+            var keyTerm = $"(plot.bools[{MissionKeyBool + k}] == Bool true)";
+            var extra = key.GetProperty("extra").GetString();
+            var expression = extra == "vanilla" ? keyTerm
+                : $"({keyTerm} && (plot.ints[{key.GetProperty("done_int").GetInt32()}] == i0) && (plot.ints[10185] == i0){(extra.Length > 0 ? " && " + extra : "")})";
+            Conditionals[MissionKeyConditional + k] = expression;
+            planet.WriteProperty(new IntProperty(MissionKeyConditional + k, "PlanetLandCondition"));
+            for (var parent = planet.Parent as ExportEntry; parent != null && parent.ClassName is "SFXSystem" or "SFXCluster"; parent = parent.Parent as ExportEntry)
+                (parentKeys.TryGetValue(parent, out var list) ? list : parentKeys[parent] = []).Add(k);
+        }
+        int next = MapAccessConditional;
+        foreach (var (parent, ks) in parentKeys.OrderBy(kv => kv.Key.UIndex))
+            foreach (var name in new[] { "VisibleConditional", "UsableConditional" })
+            {
+                var current = parent.GetProperty<IntProperty>(name)?.Value;
+                if (current is null or 0) continue;  // no condition: always shown/usable
+                var anyKey = string.Join(" || ", ks.Select(k => $"(plot.bools[{MissionKeyBool + k}] == Bool true)"));
+                var baseExpr = Conditionals.TryGetValue(current.Value, out var ours) ? ours : _vanilla.GetValueOrDefault(current.Value);
+                if (baseExpr == null) { Console.Error.WriteLine($"refusing: {parent.InstancedFullPath} {name} C{current} not found"); return 1; }
+                var expr = $"({baseExpr} || {anyKey})";
+                var id = Conditionals.FirstOrDefault(kv => kv.Key >= MapAccessConditional && kv.Value == expr).Key;
+                if (id == 0) { id = next++; Conditionals[id] = expr; }
+                parent.WriteProperty(new IntProperty(id, name));
+            }
+        Console.WriteLine($"validate: {keys.GetArrayLength()} keyed planets; {next - MapAccessConditional} system/cluster conditionals opened by keys");
+        return 0;
+    }
+
     // Every conditional and TLK string the DLC adds, written once by Build.
     static readonly Dictionary<int, string> Conditionals = [];
     static readonly Dictionary<int, string> Strings = [];
@@ -503,6 +560,7 @@ static class Program
             cluster.WriteProperty(new IntProperty(DiagVanilla ? 2744 : LocalClusterConditional, "VisibleConditional"));
             cluster.WriteProperty(new IntProperty(DiagVanilla ? 79 : LocalClusterConditional, "UsableConditional"));
             if (DiagVanilla) mars.WriteProperty(new IntProperty(79, "PlanetLandCondition"));
+            if (MissionKeys(bioGame, pcc) != 0) return 1;
             SavePackage(pcc, outPcc);
         }
         if (FixInlineBulkOffsets(source, outPcc) != 0) return 1;
