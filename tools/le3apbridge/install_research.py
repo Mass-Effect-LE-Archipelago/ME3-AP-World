@@ -20,7 +20,7 @@ VANILLA_HASH = "653247e35db8d6453e83a008c805a877fd2d56a1d844282f9065ce2f34388fec
 BRIDGE_HASH = "29ca2f8d5b247e62e5e59dffa5f860f83816c00c3505597be0ed7d5ca1d59e9b"
 # 0.2.4-delivery-dev (2026-10-28): + KEY (mission access bools). 0.2.3 (4b6e35b5..., the 0.1.0 release) and older
 # builds stay in build/live-original.
-DELIVERY_DEV_HASH = "784f5b494afb6d5914c95833b78b1f59f4e34720930e3319ce37ed7d920d987a"
+DELIVERY_DEV_HASH = "7aded9ecc303541120939446b54bda572e286dc89a60d9e99dec451e333e7f45"  # rebuilt from db8ecb8; the first 0.2.4 build (784f5b49) was lost with its folder
 # Read-only career observer 0.3.0, built 2026-10-20 from build.py --career-trace.
 CAREER_TRACE_HASH = "5a645f7a3e623e1c3c45988043dadc13e2fe04eded1ab8fab75f23073dffce81"
 PROFILE_DIRS = {"research": "build", "delivery-dev": "build-delivery", "career-trace": "build-career"}
