@@ -19,5 +19,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="salvage.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="mission_keys.json" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 </Project>

@@ -11,7 +11,7 @@ class FakePipe:
         self.identity = self.history = None
         self.cursor = self.required = self.intel = 0
         self.credits, self.weapons, self.used, self.gaw, self.bools = 0, set(), [], [], {}
-        self.caps = "delivery_dev DEV_SESSION DEV_BIND DEV_TXN DEV_GATE LANDING_GATE WEAPONS GETBS GETIS USES GAW SALVAGE"
+        self.caps = "delivery_dev DEV_SESSION DEV_BIND DEV_TXN DEV_GATE LANDING_GATE WEAPONS GETBS GETIS USES GAW SALVAGE KEYS"
         self.salvage_calls, self.bought = [], []
 
     def __enter__(self): return self
@@ -38,6 +38,7 @@ class FakePipe:
             if w[4] == "INTEL": self.intel += 1
             if w[4] == "CREDITS": self.credits += int(w[5])
             if w[4] == "WEAPON": self.weapons.add(int(w[5]))
+            if w[4] == "KEY": self.bools[26100 + int(w[5])] = True
             self.cursor += 1
             return f"{self.cursor} 0 applied"
         if w[0] == "DEV_SALVAGE":

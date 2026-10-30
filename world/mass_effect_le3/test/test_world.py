@@ -51,12 +51,29 @@ class TestWorldGeneration(unittest.TestCase):
             self.assertTrue(world.get_region(name, 1).can_reach(world.state))
 
     def test_missables_are_excluded_from_progression(self):
-        world = setup_multiworld(MassEffectLE3World, gen_steps, 5, {"weapon_checks": True, "war_asset_checks": 150})
-        for entry in data.LOCATIONS:
-            if entry.region in data.SKIPPED_REGIONS:
-                continue
-            if not entry.progression_safe or entry.region in data.FINAL_REGIONS:
-                self.assertEqual(world.get_location(entry.name, 1).progress_type, LocationProgressType.EXCLUDED)
+        # Salvage makes a pickup on a non-replayable mission recoverable, so it may hold progression; without salvage
+        # (and always for codex, war assets, exploration and the finale) it is excluded.
+        for salvage in (True, False):
+            world = setup_multiworld(MassEffectLE3World, gen_steps, 5, {"weapon_checks": True, "war_asset_checks": 150, "salvage": salvage})
+            for entry in data.LOCATIONS:
+                if entry.region in data.SKIPPED_REGIONS:
+                    continue
+                recoverable = salvage and entry.region in data.SALVAGE_MISSIONS and entry.category in data.PICKUP_CATEGORIES
+                safe = (entry.progression_safe or recoverable) and entry.region not in data.FINAL_REGIONS
+                expected = LocationProgressType.DEFAULT if safe else LocationProgressType.EXCLUDED
+                self.assertEqual(world.get_location(entry.name, 1).progress_type, expected, entry.name)
+
+    def test_mission_access_items_gate_their_missions(self):
+        world = setup_multiworld(MassEffectLE3World, gen_steps, 7)
+        pool = [item.name for item in world.itempool]
+        self.assertEqual(sorted(n for n in pool if n in data.MISSION_KEY_REGION), sorted(data.MISSION_KEY_ITEMS))
+        grissom = world.get_region("Grissom Academy", 1)
+        self.assertFalse(grissom.can_reach(world.state))
+        world.state.collect(world.worlds[1].create_item("Mission Access: Grissom Academy"))
+        self.assertTrue(grissom.can_reach(world.state))
+        off = setup_multiworld(MassEffectLE3World, gen_steps, 7, {"mission_access": False})
+        self.assertFalse(any(item.name in data.MISSION_KEY_REGION for item in off.itempool))
+        self.assertEqual(sorted(i.name for i in off.precollected_items[1] if i.name in data.MISSION_KEY_REGION), sorted(data.MISSION_KEY_ITEMS))
 
     def test_option_boundaries_fill_and_reach_goal(self):
         minimal = {key: False for key in ("objective_checks", "credit_checks", "supply_checks", "armor_checks", "mod_checks", "weapon_checks", "exploration_checks", "codex_checks")}

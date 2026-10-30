@@ -24,21 +24,61 @@ grep and nm are unavailable on this system.
 -- Looking for pthread_create in pthread - not found
 -- Found Threads: TRUE
 -- Build type: Release
--- Configuring done (3.7s)
--- Generating done (1.1s)
+-- Configuring done (5.1s)
+-- Generating done (1.3s)
 -- Build files have been written to: C:/Users/unowi/Documents/APWorldMaker/ME3 LE Randomizer/tools/le3apbridge/build-delivery
 MSBuild version 18.6.3+84d3e95b4 for .NET Framework
 
-  LESDK-LE3.vcxproj -> C:\Users\unowi\Documents\APWorldMaker\ME3 LE Randomizer\tools\le3apbridge\Build\Release\LESDK-LE3.lib
+  1>Checking Build System
+  Building Custom Rule C:/Users/unowi/Documents/APWorldMaker/ME3 LE Randomizer/tools/vendor/LExASIs/External/spdlog/CMakeLists.txt
+  Building Custom Rule C:/Users/unowi/Documents/APWorldMaker/ME3 LE Randomizer/tools/vendor/LExASIs/External/LExSDKv2/CMakeLists.txt
+  spdlog.cpp
+  stdout_sinks.cpp
+  color_sinks.cpp
+  file_sinks.cpp
+  async.cpp
+  cfg.cpp
+  cmake_pch.cxx
+  Common.cpp
+  Init.cpp
+  Core_functions.cpp
+  Engine_functions.cpp
+  GFxUI_functions.cpp
+  GameFramework_functions.cpp
+  IpDrv_functions.cpp
+  SFXGameContentLiveKismet_functions.cpp
+  SFXGameContent_functions.cpp
+  SFXGame_functions.cpp
+  SFXOnlineFoundation_functions.cpp
+  SFXQA_functions.cpp
+  WinDrv_functions.cpp
+  WwiseAudio_functions.cpp
   spdlog.vcxproj -> C:\Users\unowi\Documents\APWorldMaker\ME3 LE Randomizer\tools\le3apbridge\Build\Release\spdlog.lib
+  LESDK-LE3.vcxproj -> C:\Users\unowi\Documents\APWorldMaker\ME3 LE Randomizer\tools\le3apbridge\Build\Release\LESDK-LE3.lib
+  Building Custom Rule C:/Users/unowi/Documents/APWorldMaker/ME3 LE Randomizer/tools/vendor/LExASIs/Common/CMakeLists.txt
+  cmake_pch.cxx
+  Base.cpp
+  Memory.cpp
+  Objects.cpp
+  ME3TweaksLogger.cpp
+  Utils.cpp
+  Mount.cpp
+  DefaultLogger.cpp
   Common-LE3.vcxproj -> C:\Users\unowi\Documents\APWorldMaker\ME3 LE Randomizer\tools\le3apbridge\Build\Release\Common-LE3.lib
+  Building Custom Rule C:/Users/unowi/Documents/APWorldMaker/ME3 LE Randomizer/tools/le3apbridge/CMakeLists.txt
+  cmake_pch.cxx
+  Bridge.cpp
+     Creating library C:/Users/unowi/Documents/APWorldMaker/ME3 LE Randomizer/tools/le3apbridge/build-delivery/Release/LE3APBridge.lib and object C:/Users/unowi/Documents/APWorldMaker/ME3 LE Randomizer/tools/le3apbridge/build-delivery/Release/LE3APBridge.exp
   APBridge-LE3.vcxproj -> C:\Users\unowi\Documents\APWorldMaker\ME3 LE Randomizer\tools\le3apbridge\build-delivery\bin\Release\LE3APBridge.asi
 MSBuild version 18.6.3+84d3e95b4 for .NET Framework
 
+  Building Custom Rule C:/Users/unowi/Documents/APWorldMaker/ME3 LE Randomizer/tools/le3apbridge/CMakeLists.txt
   DeliveryTests.cpp
   DeliveryTests.vcxproj -> C:\Users\unowi\Documents\APWorldMaker\ME3 LE Randomizer\tools\le3apbridge\build-delivery\Release\DeliveryTests.exe
 MSBuild version 18.6.3+84d3e95b4 for .NET Framework
 
+  Building Custom Rule C:/Users/unowi/Documents/APWorldMaker/ME3 LE Randomizer/tools/le3apbridge/CMakeLists.txt
+  CareerTraceTests.cpp
   CareerTraceTests.vcxproj -> C:\Users\unowi\Documents\APWorldMaker\ME3 LE Randomizer\tools\le3apbridge\build-delivery\Release\CareerTraceTests.exe
-DeliveryTests: 75 checks passed
+DeliveryTests: 80 checks passed
 19 career trace checks passed

@@ -18,7 +18,7 @@ from .delivery_client import PipeConnection
 HEX = re.compile(r"[0-9a-f]{64}")
 AP_CAREER_BOOL = 26085  # set by the mod's open start (le3mod ApCareerBool)
 NEEDED = {"delivery_dev", "DEV_SESSION", "DEV_BIND", "DEV_TXN", "DEV_GATE", "LANDING_GATE", "WEAPONS",
-          "GETBS", "GETIS", "USES", "GAW", "SALVAGE"}
+          "GETBS", "GETIS", "USES", "GAW", "SALVAGE", "KEYS"}
 
 
 class LivePipeBridge:
@@ -58,7 +58,7 @@ class LivePipeBridge:
 
     def deliver(self, index: int, operation: str, amount: int) -> int:
         command = f"DEV_TXN {self.identity} {self.history} {index} {'INTEL' if operation == 'COUNTER' else operation}"
-        if operation in ("CREDITS", "WEAPON"):
+        if operation in ("CREDITS", "WEAPON", "KEY"):
             command += f" {amount}"
         with self.connect() as pipe:
             fields = pipe.request(command).split()

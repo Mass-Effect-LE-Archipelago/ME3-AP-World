@@ -359,6 +359,107 @@ static class Program
         return 0;
     }
 
+    // Rannoch peace (research/le3_rannoch_peace.md): the "Nobody else dies today" lines (replies 62/81, Paragon C121) and
+    // their Renegade twins (60/79, C127) need a reputation check, and the success entries 64/82 need a peace score of 5
+    // (C156 param 5). All six point at vanilla conditional 13 (Bool true), so peace is always offered and always works.
+    const string PeaceFile = "BioD_Gth002_400Resolution_LOC_INT.pcc";
+    const string PeaceConversation = "gth002_bigchoice_m_dlg";
+    static readonly (string List, int Index, int Vanilla)[] PeaceNodes =
+        [("m_ReplyList", 60, 127), ("m_ReplyList", 62, 121), ("m_ReplyList", 79, 127), ("m_ReplyList", 81, 121),
+         ("m_EntryList", 64, 156), ("m_EntryList", 82, 156)];
+    const int AlwaysTrueConditional = 13;
+
+    static int RannochPeace(string bioGame, string cooked)
+    {
+        var source = Winner(bioGame, PeaceFile);
+        var outPcc = Path.Combine(cooked, PeaceFile);
+        using (var pcc = MEPackageHandler.OpenMEPackage(source, forceLoadFromDisk: true))
+        {
+            var convo = pcc.Exports.SingleOrDefault(e => e.ClassName == "BioConversation" && e.ObjectName.Instanced == PeaceConversation);
+            if (convo == null) { Console.Error.WriteLine("refusing: no " + PeaceConversation + " in " + source); return 1; }
+            var lists = new Dictionary<string, ArrayProperty<StructProperty>>
+                { ["m_ReplyList"] = convo.GetProperty<ArrayProperty<StructProperty>>("m_ReplyList"), ["m_EntryList"] = convo.GetProperty<ArrayProperty<StructProperty>>("m_EntryList") };
+            foreach (var (list, index, vanilla) in PeaceNodes)
+            {
+                var node = lists[list][index];
+                if (node.GetProp<IntProperty>("nConditionalFunc")?.Value != vanilla || node.GetProp<BoolProperty>("bFireConditional")?.Value != true)
+                { Console.Error.WriteLine($"refusing: {list}[{index}] is not vanilla C{vanilla}"); return 1; }
+                node.GetProp<IntProperty>("nConditionalFunc").Value = AlwaysTrueConditional;
+            }
+            foreach (var (name, list) in lists) convo.WriteProperty(list);
+            SavePackage(pcc, outPcc);
+        }
+        if (FixInlineBulkOffsets(source, outPcc) != 0) return 1;
+        using (var pcc = MEPackageHandler.OpenMEPackage(outPcc, forceLoadFromDisk: true))
+        {
+            var convo = pcc.Exports.Single(e => e.ClassName == "BioConversation" && e.ObjectName.Instanced == PeaceConversation);
+            var got = PeaceNodes.Select(n => convo.GetProperty<ArrayProperty<StructProperty>>(n.List)[n.Index].GetProp<IntProperty>("nConditionalFunc")?.Value).ToList();
+            Console.WriteLine($"validate: Rannoch peace nodes -> C{string.Join(",C", got)}");
+            if (got.Any(c => c != AlwaysTrueConditional)) { Console.Error.WriteLine("validation FAILED: Rannoch peace"); return 1; }
+        }
+        return 0;
+    }
+
+    // Mission access items (D9). Each keyed planet (mission_keys.json, exported from the world's data.MISSION_KEYS) lands
+    // on "key bool && mission not done && Cronos not done (&& extra)" instead of its story condition; Omega keeps its
+    // vanilla visibility and only needs the key to land. The planet's system and cluster must also show and open while
+    // the key is held, so their own conditionals become "(vanilla) || any key in them".
+    const int MissionKeyBool = 26100, MissionKeyConditional = 43300, MapAccessConditional = 43400;
+
+    static Dictionary<int, string> VanillaConditionals(string bioGame)
+    {
+        var all = new Dictionary<int, string>();
+        foreach (var file in new[] { Path.Combine(bioGame, "CookedPCConsole", "Conditionals.cnd") }
+                     .Concat(Directory.EnumerateFiles(Path.Combine(bioGame, "DLC"), "Conditionals*.cnd", SearchOption.AllDirectories)
+                         .Where(f => !f.Contains("DLC_MOD_", StringComparison.OrdinalIgnoreCase))))
+            foreach (var entry in CNDFile.FromFile(file).ConditionalEntries)
+                all.TryAdd(entry.ID, ME3ConditionalsCompiler.Decompile(entry));
+        return all;
+    }
+    static Dictionary<int, string> _vanilla;
+
+    static int MissionKeys(string bioGame, IMEPackage pcc)
+    {
+        var keys = System.Text.Json.JsonDocument.Parse(File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "mission_keys.json"))).RootElement;
+        _vanilla ??= VanillaConditionals(bioGame);
+        var planets = pcc.Exports.Where(e => e.ClassName == "BioPlanet" && !string.IsNullOrEmpty(e.GetProperty<StrProperty>("MapName")?.Value)).ToList();
+        var parentKeys = new Dictionary<ExportEntry, List<int>>();
+        for (int k = 0; k < keys.GetArrayLength(); k++)
+        {
+            var key = keys[k];
+            var map = key.GetProperty("map").GetString();
+            var planet = planets.SingleOrDefault(p => p.GetProperty<StrProperty>("MapName").Value.Equals(map, StringComparison.OrdinalIgnoreCase));
+            if (planet == null) { Console.Error.WriteLine($"refusing: no galaxy-map planet for {map}"); return 1; }
+            var keyTerm = $"(plot.bools[{MissionKeyBool + k}] == Bool true)";
+            var extra = key.GetProperty("extra").GetString();
+            var expression = extra == "vanilla" ? keyTerm
+                : $"({keyTerm} && (plot.ints[{key.GetProperty("done_int").GetInt32()}] == i0) && (plot.ints[10185] == i0){(extra.Length > 0 ? " && " + extra : "")})";
+            Conditionals[MissionKeyConditional + k] = expression;
+            planet.WriteProperty(new IntProperty(MissionKeyConditional + k, "PlanetLandCondition"));
+            // The mission label ("Priority: ..." / quest marker) shows exactly while the planet can be landed on.
+            if (planet.GetProperty<IntProperty>("PlanetPlotLabelCondition") != null)
+                planet.WriteProperty(new IntProperty(MissionKeyConditional + k, "PlanetPlotLabelCondition"));
+            for (var parent = planet.Parent as ExportEntry; parent != null && parent.ClassName is "SFXSystem" or "SFXCluster"; parent = parent.Parent as ExportEntry)
+                (parentKeys.TryGetValue(parent, out var list) ? list : parentKeys[parent] = []).Add(k);
+        }
+        int next = MapAccessConditional;
+        foreach (var (parent, ks) in parentKeys.OrderBy(kv => kv.Key.UIndex))
+            foreach (var name in new[] { "VisibleConditional", "UsableConditional" })
+            {
+                var current = parent.GetProperty<IntProperty>(name)?.Value;
+                if (current is null or 0) continue;  // no condition: always shown/usable
+                var anyKey = string.Join(" || ", ks.Select(k => $"(plot.bools[{MissionKeyBool + k}] == Bool true)"));
+                var baseExpr = Conditionals.TryGetValue(current.Value, out var ours) ? ours : _vanilla.GetValueOrDefault(current.Value);
+                if (baseExpr == null) { Console.Error.WriteLine($"refusing: {parent.InstancedFullPath} {name} C{current} not found"); return 1; }
+                var expr = $"({baseExpr} || {anyKey})";
+                var id = Conditionals.FirstOrDefault(kv => kv.Key >= MapAccessConditional && kv.Value == expr).Key;
+                if (id == 0) { id = next++; Conditionals[id] = expr; }
+                parent.WriteProperty(new IntProperty(id, name));
+            }
+        Console.WriteLine($"validate: {keys.GetArrayLength()} keyed planets; {next - MapAccessConditional} system/cluster conditionals opened by keys");
+        return 0;
+    }
+
     // Every conditional and TLK string the DLC adds, written once by Build.
     static readonly Dictionary<int, string> Conditionals = [];
     static readonly Dictionary<int, string> Strings = [];
@@ -462,6 +563,7 @@ static class Program
             cluster.WriteProperty(new IntProperty(DiagVanilla ? 2744 : LocalClusterConditional, "VisibleConditional"));
             cluster.WriteProperty(new IntProperty(DiagVanilla ? 79 : LocalClusterConditional, "UsableConditional"));
             if (DiagVanilla) mars.WriteProperty(new IntProperty(79, "PlanetLandCondition"));
+            if (MissionKeys(bioGame, pcc) != 0) return 1;
             SavePackage(pcc, outPcc);
         }
         if (FixInlineBulkOffsets(source, outPcc) != 0) return 1;
@@ -552,6 +654,7 @@ static class Program
         if (Cutscenes(bioGame, cooked) != 0) return 1;
         if (MarsWeapons(bioGame, cooked) != 0) return 1;
         if (Salvage(bioGame, cooked) != 0) return 1;
+        if (RannochPeace(bioGame, cooked) != 0) return 1;
         // One CND for the whole DLC (LE3 loads Conditionals<DLC folder>.cnd by name); every entry must round-trip.
         var cnd = new CNDFile { ConditionalEntries = [] };
         foreach (var (id, expression) in Conditionals.OrderBy(kv => kv.Key))
@@ -885,6 +988,41 @@ static class Program
             var t = typeof(MEPackageHandler).Assembly.GetType(args[1]);
             foreach (var m in t.GetMethods().Where(m => m.IsStatic).OrderBy(m => m.Name))
                 Console.WriteLine($"{m.Name}({string.Join(", ", m.GetParameters().Select(p => p.ParameterType.Name + " " + p.Name))})");
+            return 0;
+        }
+        if (args.Length == 4 && args[0] == "convo")
+        {
+            // convo <BioGame> <pkg> <tlk;tlk>: every conversation entry/reply with its text, conditional and transition
+            var tlks = args[3].Split(';').Select(f => new LegendaryExplorerCore.TLK.ME2ME3.ME2ME3TalkFile(f)).ToList();
+            string Text(int id) => tlks.Select(t => t.FindDataById(id)).FirstOrDefault(x => x != null && x != "No Data") ?? "";
+            using var pcc = MEPackageHandler.OpenMEPackage(File.Exists(args[2]) ? args[2] : Winner(Path.GetFullPath(args[1]), args[2]), forceLoadFromDisk: true);
+            foreach (var e in pcc.Exports.Where(x => x.ClassName == "BioConversation"))
+                foreach (var list in new[] { "m_EntryList", "m_ReplyList" })
+                {
+                    var nodes = e.GetProperty<ArrayProperty<StructProperty>>(list);
+                    if (nodes == null) continue;
+                    for (int i = 0; i < nodes.Count; i++)
+                    {
+                        var n = nodes[i];
+                        int Int(string name) => n.GetProp<IntProperty>(name)?.Value ?? -9;
+                        var srText = n.GetProp<StringRefProperty>("srText")?.Value ?? 0;
+                        var para = n.GetProp<StringRefProperty>("srParaphrase")?.Value ?? 0;
+                        Console.WriteLine($"{e.ObjectName.Instanced}	{list[2..^4]}[{i}]	cond={Int("nConditionalFunc")}/{Int("nConditionalParam")} fire={n.GetProp<BoolProperty>("bFireConditional")?.Value} trans={Int("nStateTransition")}/{Int("nStateTransitionParam")}	{Text(para)} | {Text(srText).Replace("\n", " ")}");
+                    }
+                }
+            return 0;
+        }
+        if (args.Length == 4 && args[0] == "galaxy")
+        {
+            // galaxy <BioGame> <pkg> <tlk>: every cluster/system/planet with its name and visibility/usable/land conditionals
+            var tlk = new LegendaryExplorerCore.TLK.ME2ME3.ME2ME3TalkFile(args[3]);
+            using var pcc = MEPackageHandler.OpenMEPackage(File.Exists(args[2]) ? args[2] : Winner(Path.GetFullPath(args[1]), args[2]), forceLoadFromDisk: true);
+            foreach (var e in pcc.Exports.Where(x => x.ClassName is "SFXCluster" or "SFXSystem" or "BioPlanet").OrderBy(x => x.InstancedFullPath))
+            {
+                int? I(string n) => e.GetProperty<IntProperty>(n)?.Value;
+                var name = e.GetProperty<StringRefProperty>("DisplayName")?.Value ?? 0;
+                Console.WriteLine($"{e.InstancedFullPath.Replace("BIOG_GalaxyMap.GalaxyMap.", "").Replace("biog_galaxymap.GalaxyMap.", "")}	{tlk.FindDataById(name)}	vis={I("VisibleConditional")} use={I("UsableConditional")} land={I("PlanetLandCondition")} map={e.GetProperty<StrProperty>("MapName")?.Value}");
+            }
             return 0;
         }
         if (args.Length == 2 && args[0] == "types")

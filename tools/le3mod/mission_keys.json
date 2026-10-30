@@ -1,0 +1,68 @@
+[
+ {
+  "region": "Grissom Academy",
+  "map": "BioP_OmgJck",
+  "done_int": 10200,
+  "extra": ""
+ },
+ {
+  "region": "Ardat-Yakshi Monastery",
+  "map": "biop_citsam",
+  "done_int": 10195,
+  "extra": ""
+ },
+ {
+  "region": "Ex-Cerberus Scientists",
+  "map": "BioP_CerJcb",
+  "done_int": 10189,
+  "extra": ""
+ },
+ {
+  "region": "Attican Traverse",
+  "map": "BioP_KroGru",
+  "done_int": 10182,
+  "extra": ""
+ },
+ {
+  "region": "N7: Cerberus Lab",
+  "map": "BioP_SPCer",
+  "done_int": 10302,
+  "extra": ""
+ },
+ {
+  "region": "N7: Cerberus Fighter Base",
+  "map": "BioP_SPNov",
+  "done_int": 10304,
+  "extra": ""
+ },
+ {
+  "region": "N7: Fuel Reactors",
+  "map": "BioP_SPRctr",
+  "done_int": 10305,
+  "extra": ""
+ },
+ {
+  "region": "N7: Communication Hub",
+  "map": "BioP_SPDish",
+  "done_int": 10303,
+  "extra": ""
+ },
+ {
+  "region": "N7: Cerberus Abductions",
+  "map": "BioP_SPSlum",
+  "done_int": 10306,
+  "extra": ""
+ },
+ {
+  "region": "Eden Prime",
+  "map": "BioP_Cat001",
+  "done_int": 10177,
+  "extra": "(plot.bools[20236] == Bool true)"
+ },
+ {
+  "region": "Omega",
+  "map": "biop_omg001",
+  "done_int": 0,
+  "extra": "vanilla"
+ }
+]
