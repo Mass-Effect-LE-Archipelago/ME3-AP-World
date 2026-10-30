@@ -436,6 +436,9 @@ static class Program
                 : $"({keyTerm} && (plot.ints[{key.GetProperty("done_int").GetInt32()}] == i0) && (plot.ints[10185] == i0){(extra.Length > 0 ? " && " + extra : "")})";
             Conditionals[MissionKeyConditional + k] = expression;
             planet.WriteProperty(new IntProperty(MissionKeyConditional + k, "PlanetLandCondition"));
+            // The mission label ("Priority: ..." / quest marker) shows exactly while the planet can be landed on.
+            if (planet.GetProperty<IntProperty>("PlanetPlotLabelCondition") != null)
+                planet.WriteProperty(new IntProperty(MissionKeyConditional + k, "PlanetPlotLabelCondition"));
             for (var parent = planet.Parent as ExportEntry; parent != null && parent.ClassName is "SFXSystem" or "SFXCluster"; parent = parent.Parent as ExportEntry)
                 (parentKeys.TryGetValue(parent, out var list) ? list : parentKeys[parent] = []).Add(k);
         }
