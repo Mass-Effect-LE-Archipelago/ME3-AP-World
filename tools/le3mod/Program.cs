@@ -1009,6 +1009,19 @@ static class Program
                 }
             return 0;
         }
+        if (args.Length == 4 && args[0] == "galaxy")
+        {
+            // galaxy <BioGame> <pkg> <tlk>: every cluster/system/planet with its name and visibility/usable/land conditionals
+            var tlk = new LegendaryExplorerCore.TLK.ME2ME3.ME2ME3TalkFile(args[3]);
+            using var pcc = MEPackageHandler.OpenMEPackage(File.Exists(args[2]) ? args[2] : Winner(Path.GetFullPath(args[1]), args[2]), forceLoadFromDisk: true);
+            foreach (var e in pcc.Exports.Where(x => x.ClassName is "SFXCluster" or "SFXSystem" or "BioPlanet").OrderBy(x => x.InstancedFullPath))
+            {
+                int? I(string n) => e.GetProperty<IntProperty>(n)?.Value;
+                var name = e.GetProperty<StringRefProperty>("DisplayName")?.Value ?? 0;
+                Console.WriteLine($"{e.InstancedFullPath.Replace("BIOG_GalaxyMap.GalaxyMap.", "").Replace("biog_galaxymap.GalaxyMap.", "")}	{tlk.FindDataById(name)}	vis={I("VisibleConditional")} use={I("UsableConditional")} land={I("PlanetLandCondition")} map={e.GetProperty<StrProperty>("MapName")?.Value}");
+            }
+            return 0;
+        }
         if (args.Length == 2 && args[0] == "types")
         {
             foreach (var t in typeof(MEPackageHandler).Assembly.GetTypes().Where(t => System.Text.RegularExpressions.Regex.IsMatch(t.FullName ?? "", args[1])))
