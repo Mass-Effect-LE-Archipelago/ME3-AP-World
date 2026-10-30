@@ -79,9 +79,11 @@ class MassEffectLE3World(World):
             # Native story ordering has no AP-item prerequisite. These edges mean
             # eventually reachable through vanilla play; they do not skip missions.
             gate = (lambda state: state.has(data.INTEL, self.player, self.intel_required)) if name in data.FINAL_REGIONS else None
-            key = next((k for k in self.mission_keys if data.MISSION_KEY_REGION[k] == name), None)
-            if key:
-                gate = lambda state, key=key: state.has(key, self.player)
+            keys = tuple(k for k in data.REGION_REQUIRES.get(name, ()) if k in self.mission_keys)
+            if keys:
+                intel = self.intel_required if name in data.FINAL_REGIONS else 0
+                gate = lambda state, keys=keys, intel=intel: (state.has_all(keys, self.player)
+                                                              and state.has(data.INTEL, self.player, intel))
             hub.connect(region, f"Campaign -> {name}", gate)
         for entry in self.selected:
             location = ME3Location(self.player, entry.name, entry.id, regions[entry.region])

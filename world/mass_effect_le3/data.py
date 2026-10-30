@@ -77,13 +77,26 @@ MISSION_KEYS = (
     ("N7: Cerberus Abductions", "BioP_SPSlum", 10306, ""),
     ("Eden Prime", "BioP_Cat001", 10177, "(plot.bools[20236] == Bool true)"),
     ("Omega", "biop_omg001", 0, "vanilla"),
+    # Story arcs (D10): the key is ANDed with the vanilla landing condition, so each arc still runs in story order.
+    ("Palaven", "BioP_KroGar", 0, "vanilla"),
+    ("Geth Dreadnought", "BioP_Gth001", 0, "vanilla"),
 )
-MISSION_KEY_ITEMS = tuple(f"Mission Access: {region}" for region, *_ in MISSION_KEYS)
+ARC_ITEMS = {"Palaven": "Story Arc: Krogan", "Geth Dreadnought": "Story Arc: Geth"}
+MISSION_KEY_ITEMS = tuple(ARC_ITEMS.get(region, f"Mission Access: {region}") for region, *_ in MISSION_KEYS)
 MISSION_KEY_ITEM_BASE = ITEM_BASE + 0x200
 MISSION_KEY_REGION = dict(zip(MISSION_KEY_ITEMS, (region for region, *_ in MISSION_KEYS)))
 ITEM_NAME_TO_ID.update({name: MISSION_KEY_ITEM_BASE + index for index, name in enumerate(MISSION_KEY_ITEMS)})
 MISSION_KEY_ID_TO_NATIVE = {MISSION_KEY_ITEM_BASE + index: index for index in range(len(MISSION_KEY_ITEMS))}
-PICKUP_CATEGORIES = frozenset({"supplies", "credits", "armor", "mods", "weapons"})  # credits per check, by salvage_price option value
+PICKUP_CATEGORIES = frozenset({"supplies", "credits", "armor", "mods", "weapons"})
+KROGAN_ARC, GETH_ARC = ARC_ITEMS["Palaven"], ARC_ITEMS["Geth Dreadnought"]
+# Items each region needs (vanilla story order between arcs: Krogan -> Citadel coup -> Geth -> Thessia -> finale).
+REGION_REQUIRES = {
+    **{region: (name,) for name, region in MISSION_KEY_REGION.items() if name not in ARC_ITEMS.values()},
+    **{region: (KROGAN_ARC,) for region in ("Palaven", "Sur'Kesh", "Tuchanka", "Tuchanka: Bomb", "Tuchanka: Turian Platoon",
+                                             "Citadel Coup")},
+    **{region: (KROGAN_ARC, GETH_ARC) for region in ("Geth Dreadnought", "Rannoch", "Rannoch: Admiral Koris", "Thessia",
+                                                     "Sanctuary", "Cerberus Headquarters", "Earth Finale")},
+}  # credits per check, by salvage_price option value
 
 
 @dataclass(frozen=True)

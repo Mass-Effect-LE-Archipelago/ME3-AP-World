@@ -401,8 +401,8 @@ static class Program
     }
 
     // Mission access items (D9). Each keyed planet (mission_keys.json, exported from the world's data.MISSION_KEYS) lands
-    // on "key bool && mission not done && Cronos not done (&& extra)" instead of its story condition; Omega keeps its
-    // vanilla visibility and only needs the key to land. The planet's system and cluster must also show and open while
+    // on "key bool && mission not done && Cronos not done (&& extra)" instead of its story condition. "vanilla" entries
+    // (Omega and the story arcs) keep their vanilla landing condition and AND the key. The planet's system and cluster must also show and open while
     // the key is held, so their own conditionals become "(vanilla) || any key in them".
     const int MissionKeyBool = 26100, MissionKeyConditional = 43300, MapAccessConditional = 43400;
 
@@ -432,7 +432,8 @@ static class Program
             if (planet == null) { Console.Error.WriteLine($"refusing: no galaxy-map planet for {map}"); return 1; }
             var keyTerm = $"(plot.bools[{MissionKeyBool + k}] == Bool true)";
             var extra = key.GetProperty("extra").GetString();
-            var expression = extra == "vanilla" ? keyTerm
+            var vanillaLand = planet.GetProperty<IntProperty>("PlanetLandCondition")?.Value ?? 0;
+            var expression = extra == "vanilla" ? $"({_vanilla[vanillaLand]} && {keyTerm})"
                 : $"({keyTerm} && (plot.ints[{key.GetProperty("done_int").GetInt32()}] == i0) && (plot.ints[10185] == i0){(extra.Length > 0 ? " && " + extra : "")})";
             Conditionals[MissionKeyConditional + k] = expression;
             planet.WriteProperty(new IntProperty(MissionKeyConditional + k, "PlanetLandCondition"));

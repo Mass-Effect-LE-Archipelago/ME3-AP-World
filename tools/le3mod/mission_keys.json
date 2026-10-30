@@ -64,5 +64,17 @@
   "map": "biop_omg001",
   "done_int": 0,
   "extra": "vanilla"
+ },
+ {
+  "region": "Palaven",
+  "map": "BioP_KroGar",
+  "done_int": 0,
+  "extra": "vanilla"
+ },
+ {
+  "region": "Geth Dreadnought",
+  "map": "BioP_Gth001",
+  "done_int": 0,
+  "extra": "vanilla"
  }
 ]

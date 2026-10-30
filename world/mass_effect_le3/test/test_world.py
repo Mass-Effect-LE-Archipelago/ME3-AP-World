@@ -42,6 +42,10 @@ class TestWorldGeneration(unittest.TestCase):
     def test_intel_opens_both_finale_regions(self):
         world = setup_multiworld(MassEffectLE3World, gen_steps, 1)
         required = world.worlds[1].intel_required
+        for arc in (data.KROGAN_ARC, data.GETH_ARC):
+            for name in data.FINAL_REGIONS:
+                self.assertFalse(world.get_region(name, 1).can_reach(world.state))
+            world.state.collect(world.worlds[1].create_item(arc))
         for _ in range(required - 1):
             world.state.collect(world.worlds[1].create_item(data.INTEL))
         for name in data.FINAL_REGIONS:
@@ -49,6 +53,15 @@ class TestWorldGeneration(unittest.TestCase):
         world.state.collect(world.worlds[1].create_item(data.INTEL))
         for name in data.FINAL_REGIONS:
             self.assertTrue(world.get_region(name, 1).can_reach(world.state))
+
+    def test_story_arcs_keep_their_order(self):
+        world = setup_multiworld(MassEffectLE3World, gen_steps, 9)
+        reach = lambda name: world.get_region(name, 1).can_reach(world.state)
+        self.assertFalse(reach("Palaven") or reach("Citadel Coup") or reach("Rannoch"))
+        world.state.collect(world.worlds[1].create_item(data.GETH_ARC))
+        self.assertFalse(reach("Geth Dreadnought"))  # the Geth arc follows the coup, which follows Tuchanka
+        world.state.collect(world.worlds[1].create_item(data.KROGAN_ARC))
+        self.assertTrue(reach("Palaven") and reach("Citadel Coup") and reach("Rannoch") and reach("Thessia"))
 
     def test_missables_are_excluded_from_progression(self):
         # Salvage makes a pickup on a non-replayable mission recoverable, so it may hold progression; without salvage

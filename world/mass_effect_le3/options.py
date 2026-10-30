@@ -86,7 +86,8 @@ class SalvagePrice(Choice):
 class MissionAccess(DefaultOnToggle):
     """Side missions (Grissom Academy, the Monastery, Jacob's scientists, Attican Traverse, the N7 missions, Eden Prime,
     Omega) open on the galaxy map when their "Mission Access" item arrives, in any order, instead of following the story.
-    Off: they follow the story as usual."""
+    The Krogan arc (Palaven, Sur'Kesh, Tuchanka) and the Geth arc (Dreadnought, Rannoch) need "Story Arc" items too;
+    the arcs keep their story order. Off: everything follows the story as usual."""
     display_name = "Mission Access Items"
 
 

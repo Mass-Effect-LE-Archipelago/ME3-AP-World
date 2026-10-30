@@ -71,3 +71,12 @@ Rannoch: replies 60/62/79/81 and entries 64/82 of gth002_bigchoice point at C13,
 (Legion still sacrifices itself, as in vanilla peace). Step 2 (arc keys: Krogan, Geth, Citadel coup) waits for
 step 1's in-game proof. N7: Cerberus Attack (SPTowr) has no galaxy-map planet; its 5 checks may be unreachable.
 Untested in game: every keyed planet landing out of story order.
+
+## D10 — Story-arc items (owner direction, 2026-10-30)
+
+"Story Arc: Krogan" (Palaven/Menae -> Sur'Kesh -> Tuchanka missions) and "Story Arc: Geth" (Dreadnought -> Rannoch)
+join the mission-access table (native keys 11 and 12, bools 26111/26112). The mod ANDs each key into the arc's first
+planet's vanilla landing condition (KroGar C159, Gth001 C51), so arcs keep their internal story order and the vanilla
+order between arcs (Krogan -> Citadel coup -> Geth -> Thessia -> Horizon -> Cronos) still holds; data.REGION_REQUIRES
+models that (Geth regions, Thessia, Sanctuary and the finale need both arc items). Real reordering between arcs needs
+Kismet work on the coup trigger and war-room intros and is not attempted. Option `mission_access` covers both.
