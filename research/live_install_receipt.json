@@ -3,7 +3,7 @@
   "status": "installed",
   "original_sha256": "653247e35db8d6453e83a008c805a877fd2d56a1d844282f9065ce2f34388fec",
   "loader_sha256": "d493e88ed8bcf726f819ff94a1c07101dbc4c062811bcfaae81b5e089cf78cb3",
-  "bridge_sha256": "b0f377fdb77ea93331e08a0df6c870665966b6acabc9cd4ba3cb2f7cd246c839",
+  "bridge_sha256": "7aded9ecc303541120939446b54bda572e286dc89a60d9e99dec451e333e7f45",
   "loader_source_commit": "1c435d8df0367642d9fc8572b67b6ae92295967e",
   "installed_utc": "2026-10-14T13:36:08.217859+00:00",
   "runtime_verified": false,
@@ -13,9 +13,10 @@
     "20b6c351d742920d94660a1531e64944eb31f04828fded025a3f8db85b676efa",
     "0138523b56a27ab9a77c1ddc638ad34f8a2d47166fdedb0ac516f331bfe8b614",
     "5a645f7a3e623e1c3c45988043dadc13e2fe04eded1ab8fab75f23073dffce81",
-    "29ca2f8d5b247e62e5e59dffa5f860f83816c00c3505597be0ed7d5ca1d59e9b"
+    "29ca2f8d5b247e62e5e59dffa5f860f83816c00c3505597be0ed7d5ca1d59e9b",
+    "b0f377fdb77ea93331e08a0df6c870665966b6acabc9cd4ba3cb2f7cd246c839"
   ],
-  "updated_utc": "2026-10-27T23:01:10.693896+00:00",
+  "updated_utc": "2026-10-29T05:02:58.380864+00:00",
   "runtime_validation": {
     "bridge_version": "0.1.2-research",
     "baseline": "research/live_baseline_01.json",
